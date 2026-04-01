@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { supabase } from '../supabase';
+import { showToast } from '../components/shared/Toast';
 import type { LocalSubmission } from '../types';
 
 const SUBMISSIONS_KEY = 'canal-tp-submissions';
@@ -39,7 +40,6 @@ export function useSubmission(participantId: string | undefined) {
 
       setSaving(true);
       try {
-        // Upsert : update si existe, insert sinon
         const { error } = await supabase
           .from('submissions')
           .upsert(
@@ -53,9 +53,11 @@ export function useSubmission(participantId: string | undefined) {
 
         if (error) {
           console.error('Erreur sauvegarde Supabase:', error);
+          showToast('Erreur de synchronisation — sauvegarde locale OK', 'warning');
         }
       } catch (err) {
         console.error('Erreur sauvegarde:', err);
+        showToast('Connexion perdue — sauvegarde locale OK', 'error');
       } finally {
         setSaving(false);
       }

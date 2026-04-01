@@ -3,7 +3,7 @@ import { Shield, Download, Eye, ArrowLeft, RefreshCw } from 'lucide-react';
 import { supabase } from '../supabase';
 import type { Participant, Submission } from '../types';
 
-const FORMATEUR_CODE = 'lecko2026';
+const FORMATEUR_CODE = import.meta.env.VITE_FORMATEUR_CODE || 'lecko2026';
 
 export function Formateur() {
   const [code, setCode] = useState('');

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { ArrowRight, Globe, Search, Check } from 'lucide-react';
+import { ArrowRight, Search, Check } from 'lucide-react';
 
 interface LoginProps {
   onLogin: (metier: string, lang: string) => void;
@@ -38,7 +38,6 @@ export function Login({ onLogin, loading }: LoginProps) {
   const [selectedMetier, setSelectedMetier] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const [lang, setLang] = useState<'fr' | 'en'>('fr');
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -69,7 +68,7 @@ export function Login({ onLogin, loading }: LoginProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedMetier) {
-      onLogin(selectedMetier, lang);
+      onLogin(selectedMetier, 'fr');
     }
   };
 
@@ -79,27 +78,15 @@ export function Login({ onLogin, loading }: LoginProps) {
       style={{ background: 'linear-gradient(180deg, #FAFBFE 0%, #EEF2FF 100%)' }}
     >
       <div className="w-full max-w-md animate-slide-up">
-        {/* Language toggle */}
-        <div className="flex justify-end mb-6">
-          <button
-            type="button"
-            onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border-default bg-surface-card text-[13px] font-body text-text-body hover:bg-surface-elevated transition-all duration-fast"
-          >
-            <Globe size={14} className="text-text-muted" />
-            {lang === 'fr' ? 'Francais' : 'English'}
-          </button>
-        </div>
-
         {/* Logo */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 mt-4">
           <div className="flex items-center justify-center gap-3 mb-5">
             <span className="text-3xl font-display font-bold text-lecko-blue tracking-tight">lecko.</span>
             <span className="text-border-default text-2xl font-light">x</span>
             <span className="text-3xl font-display font-bold text-canal-black tracking-wider">CANAL+</span>
           </div>
           <p className="text-[15px] text-text-body font-body">
-            {lang === 'fr' ? 'Formation IA / Copilot Chat' : 'AI / Copilot Chat Training'}
+            Formation IA / Copilot Chat
           </p>
           <p className="text-[13px] text-text-muted font-body mt-1">
             Session Pilote 2026
@@ -110,12 +97,10 @@ export function Login({ onLogin, loading }: LoginProps) {
         <form onSubmit={handleSubmit} className="bg-surface-card rounded-xl p-6 shadow-elevated space-y-5">
           <div>
             <p className="text-[14px] font-display font-bold text-text-on-light mb-1">
-              {lang === 'fr' ? 'Quel est votre metier ?' : 'What is your role?'}
+              Quel est votre metier ?
             </p>
             <p className="text-[13px] text-text-muted font-body mb-3">
-              {lang === 'fr'
-                ? 'Identifiez votre equipe metier pour demarrer le TP. Tapez les premieres lettres ou parcourez la liste.'
-                : 'Find your team to start the workshop. Type the first letters or browse the list.'}
+              Identifiez votre equipe metier pour demarrer le TP. Tapez les premieres lettres ou parcourez la liste.
             </p>
 
             {/* Searchable dropdown */}
@@ -147,7 +132,7 @@ export function Login({ onLogin, loading }: LoginProps) {
                     value={search}
                     onChange={(e) => { setSearch(e.target.value); setIsOpen(true); }}
                     onFocus={() => setIsOpen(true)}
-                    placeholder={lang === 'fr' ? 'Rechercher votre metier...' : 'Search your role...'}
+                    placeholder="Rechercher votre metier..."
                     className="flex-1 text-[14px] font-body text-text-on-light placeholder:text-text-muted/60 bg-transparent outline-none"
                   />
                 )}
@@ -158,7 +143,7 @@ export function Login({ onLogin, loading }: LoginProps) {
                 <div className="absolute z-20 w-full mt-1.5 bg-white border border-border-default rounded-lg shadow-floating max-h-[260px] overflow-y-auto animate-slide-up">
                   {filtered.length === 0 ? (
                     <div className="px-4 py-3 text-[13px] text-text-muted font-body">
-                      {lang === 'fr' ? 'Aucun metier trouve' : 'No role found'}
+                      Aucun metier trouve
                     </div>
                   ) : (
                     filtered.map((m) => (
@@ -187,9 +172,7 @@ export function Login({ onLogin, loading }: LoginProps) {
             disabled={!selectedMetier || loading}
             className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-md bg-surface-dark text-white font-display font-bold text-[15px] tracking-[0.01em] hover:bg-surface-dark/90 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-base"
           >
-            {loading
-              ? (lang === 'fr' ? 'Connexion...' : 'Connecting...')
-              : (lang === 'fr' ? 'Commencer la session' : 'Start session')}
+            {loading ? 'Connexion...' : 'Commencer la session'}
             {!loading && <ArrowRight size={18} />}
           </button>
         </form>

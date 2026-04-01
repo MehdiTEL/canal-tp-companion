@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+# Canal+ TP Companion
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application web interactive pour la formation **IA / Copilot Chat** — session pilote **Lecko x Canal+ 2026**.
 
-Currently, two official plugins are available:
+Guide les participants a travers 4 sprints d'exercices pratiques avec Copilot Chat, collecte leurs prompts/resultats, et fournit un tableau de bord formateur.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack technique
 
-## React Compiler
+- **React 18** + **TypeScript** + **Vite 5**
+- **Tailwind CSS 3** (PostCSS)
+- **Supabase** (persistance optionnelle, fallback localStorage)
+- **Lucide React** (icones)
+- **DM Sans** + **Source Sans 3** (typographie)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Demarrage rapide
 
-## Expanding the ESLint configuration
+```bash
+# Installer les dependances
+npm install
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# Lancer le serveur de dev
+npm run dev
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# Build production
+npm run build
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Type-check
+npx tsc --noEmit
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Variables d'environnement
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Copier `.env.example` vers `.env` et renseigner :
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Variable | Description | Requis |
+|----------|-------------|--------|
+| `VITE_SUPABASE_URL` | URL du projet Supabase | Non (fallback localStorage) |
+| `VITE_SUPABASE_ANON_KEY` | Cle anonyme Supabase | Non |
+| `VITE_FORMATEUR_CODE` | Code d'acces espace formateur | Non (defaut: `lecko2026`) |
+
+## Structure des sprints
+
+| Sprint | Duree | Contenu |
+|--------|-------|---------|
+| Echauffement | 10 min | Veille rapide sur une thematique avec Copilot Chat |
+| Sprint 1 | 25 min | Cas pratique guide en 5 etapes |
+| Sprint 2 | 30 min | Challenge collectif — 3 exercices |
+| Sprint 3 | 30 min | Conception d'un Agent Lite |
+
+Les sprints se debloquent sequentiellement : chaque sprint necessite la completion du precedent.
+
+## Deploiement
+
+L'application est configuree pour **GitHub Pages** avec le base path `/canal-tp-companion/`.
+
+```bash
+npm run build
+# Deployer le contenu de dist/
 ```
+
+## Base de donnees
+
+Le schema Supabase est dans `supabase/migrations/001_init.sql`. Il inclut :
+- Table `participants` (metier, lang, session)
+- Table `submissions` (prompts, resultats, auto-evaluation)
+- Table `feedback`
+- RLS policies pour acces public en lecture/ecriture

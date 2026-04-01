@@ -13,7 +13,7 @@ export function useTimer(durationMinutes: number) {
   const progress = 1 - totalSeconds / (durationMinutes * 60);
 
   useEffect(() => {
-    if (isRunning && totalSeconds > 0) {
+    if (isRunning) {
       intervalRef.current = setInterval(() => {
         setTotalSeconds((prev) => {
           if (prev <= 1) {
@@ -28,9 +28,10 @@ export function useTimer(durationMinutes: number) {
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
     };
-  }, [isRunning, totalSeconds]);
+  }, [isRunning]);
 
   const start = useCallback(() => {
     setIsRunning(true);

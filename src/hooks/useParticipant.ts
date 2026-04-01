@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../supabase';
+import { showToast } from '../components/shared/Toast';
 import type { Participant } from '../types';
 
 const STORAGE_KEY = 'canal-tp-participant';
@@ -52,6 +53,7 @@ export function useParticipant() {
       }
     } catch (err) {
       console.error('Erreur login:', err);
+      showToast('Connexion au serveur impossible — mode local active', 'warning');
       // Fallback local
       const p: Participant = {
         id: crypto.randomUUID(),

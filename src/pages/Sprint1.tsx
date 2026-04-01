@@ -25,7 +25,7 @@ export function Sprint1({ participantId }: Sprint1Props) {
       if (local?.completed) set.add(i);
     });
     return set;
-  }, [currentStep]);
+  }, [currentStep, getLocalData, scenario.steps]);
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">

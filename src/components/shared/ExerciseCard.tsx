@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { CheckCircle2, ChevronRight } from 'lucide-react';
 import { HintButton } from './HintButton';
 import { StarRating } from './StarRating';
@@ -41,27 +41,31 @@ export function ExerciseCard({
   const [hintsUsed, setHintsUsed] = useState(initialData?.hints_used || 0);
   const [completed, setCompleted] = useState(initialData?.completed || false);
 
-  // Auto-save debounced
+  // Stabilize onSave via ref to avoid re-triggering useEffect
+  const onSaveRef = useRef(onSave);
+  onSaveRef.current = onSave;
+
+  // Auto-save debounced — only user-editable fields in deps
   useEffect(() => {
+    if (!promptText && !resultText) return;
+
     const timeout = setTimeout(() => {
-      if (promptText || resultText) {
-        onSave({
-          sprint: sprintId,
-          exercice_id: exercise.id,
-          prompt_text: promptText,
-          result_text: resultText,
-          self_rating: selfRating,
-          hints_used: hintsUsed,
-          completed,
-        });
-      }
+      onSaveRef.current({
+        sprint: sprintId,
+        exercice_id: exercise.id,
+        prompt_text: promptText,
+        result_text: resultText,
+        self_rating: selfRating,
+        hints_used: hintsUsed,
+        completed,
+      });
     }, 1000);
     return () => clearTimeout(timeout);
-  }, [promptText, resultText, selfRating, hintsUsed, completed]);
+  }, [promptText, resultText, selfRating, hintsUsed, completed, sprintId, exercise.id]);
 
   const handleComplete = () => {
     setCompleted(true);
-    onSave({
+    onSaveRef.current({
       sprint: sprintId,
       exercice_id: exercise.id,
       prompt_text: promptText,

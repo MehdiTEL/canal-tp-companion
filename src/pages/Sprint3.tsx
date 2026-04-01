@@ -26,7 +26,7 @@ export function Sprint3({ participantId }: Sprint3Props) {
       if (local?.completed) set.add(i);
     });
     return set;
-  }, [activeExercise]);
+  }, [activeExercise, getLocalData, cu.exercises]);
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
