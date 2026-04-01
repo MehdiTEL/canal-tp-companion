@@ -1,32 +1,40 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Flame, FileText, Zap, Bot, Shield } from 'lucide-react';
+import { LayoutDashboard, Flame, FileText, Zap, Bot, Shield, Lock } from 'lucide-react';
 import { useProgress } from '../../hooks/useProgress';
 
 const navItems = [
-  { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, color: '#6B7280' },
-  { to: '/echauffement', label: 'Echauffement', icon: Flame, color: '#06B6D4' },
-  { to: '/sprint-1', label: 'Sprint 1', icon: FileText, color: '#2563EB' },
-  { to: '/sprint-2', label: 'Sprint 2', icon: Zap, color: '#F59E0B' },
-  { to: '/sprint-3', label: 'Sprint 3', icon: Bot, color: '#8B5CF6' },
+  { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, color: '#6B7280', sprintId: null },
+  { to: '/echauffement', label: 'Echauffement', icon: Flame, color: '#06B6D4', sprintId: 'echauffement' },
+  { to: '/sprint-1', label: 'Sprint 1', icon: FileText, color: '#2563EB', sprintId: 'sprint-1' },
+  { to: '/sprint-2', label: 'Sprint 2', icon: Zap, color: '#F59E0B', sprintId: 'sprint-2' },
+  { to: '/sprint-3', label: 'Sprint 3', icon: Bot, color: '#8B5CF6', sprintId: 'sprint-3' },
 ];
 
 export function Sidebar() {
-  const { getSprintCompletion, isSprintStarted } = useProgress();
-
-  const sprintMap: Record<string, string> = {
-    '/echauffement': 'echauffement',
-    '/sprint-1': 'sprint-1',
-    '/sprint-2': 'sprint-2',
-    '/sprint-3': 'sprint-3',
-  };
+  const { getSprintCompletion, isSprintStarted, isSprintUnlocked } = useProgress();
 
   return (
     <aside className="hidden lg:flex flex-col w-52 bg-surface-elevated border-r border-border-subtle h-[calc(100vh-53px)] sticky top-[53px]">
       <nav className="flex-1 py-4 px-2.5 space-y-0.5">
         {navItems.map((item) => {
-          const sprintId = sprintMap[item.to];
+          const sprintId = item.sprintId;
           const completion = sprintId ? getSprintCompletion(sprintId) : 0;
           const started = sprintId ? isSprintStarted(sprintId) : false;
+          const unlocked = sprintId ? isSprintUnlocked(sprintId) : true;
+
+          if (!unlocked) {
+            return (
+              <div
+                key={item.to}
+                className="flex items-center gap-2.5 px-3 py-2 rounded-md text-[13px] font-body text-text-muted/50 cursor-not-allowed"
+              >
+                <div className="w-7 h-7 rounded-md flex items-center justify-center shrink-0">
+                  <Lock size={14} className="text-text-muted/40" />
+                </div>
+                <span className="flex-1 truncate">{item.label}</span>
+              </div>
+            );
+          }
 
           return (
             <NavLink

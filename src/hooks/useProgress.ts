@@ -54,6 +54,19 @@ export function useProgress() {
     );
   };
 
+  const isSprintCompleted = (sprintId: string) => {
+    return getSprintCompletion(sprintId) === 1;
+  };
+
+  // Sequential unlocking: echauffement always open, each sprint requires previous completed
+  const isSprintUnlocked = (sprintId: string) => {
+    if (sprintId === 'echauffement') return true;
+    if (sprintId === 'sprint-1') return isSprintCompleted('echauffement');
+    if (sprintId === 'sprint-2') return isSprintCompleted('sprint-1');
+    if (sprintId === 'sprint-3') return isSprintCompleted('sprint-2');
+    return true;
+  };
+
   return {
     sprintProgress,
     globalProgress,
@@ -61,5 +74,7 @@ export function useProgress() {
     totalExercises,
     getSprintCompletion,
     isSprintStarted,
+    isSprintCompleted,
+    isSprintUnlocked,
   };
 }

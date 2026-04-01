@@ -29,7 +29,7 @@ export function Sprint3({ participantId }: Sprint3Props) {
   }, [activeExercise]);
 
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-3xl mx-auto space-y-6">
       <SprintHeader
         title="Sprint 3 — Agent Lite"
         color="#8B5CF6"
@@ -46,44 +46,36 @@ export function Sprint3({ participantId }: Sprint3Props) {
         {cu.title}
       </div>
 
-      {/* Side-by-side layout */}
-      <div className="flex flex-col lg:flex-row gap-6">
-        {/* Main zone */}
-        <div className="flex-1 lg:max-w-[65%] space-y-5">
-          {/* Agent Builder — only on exercise 1 */}
-          {activeExercise === 0 && <AgentBuilder />}
+      {/* Consignes — above exercises */}
+      <ConsignesPanel consignes={cu.consignes} />
 
-          {/* Stepper */}
-          <Stepper
-            steps={cu.exercises.map((_, i) => ({ id: `ex-${i}`, label: `Exercice ${i + 1}` }))}
-            currentIndex={activeExercise}
-            completedIndexes={completedIndexes}
-            color="#8B5CF6"
-            onStepClick={setActiveExercise}
-          />
+      {/* Agent Builder — only on exercise 1 */}
+      {activeExercise === 0 && <AgentBuilder />}
 
-          <div key={cu.exercises[activeExercise].id} className="animate-slide-in-right">
-            <ExerciseCard
-              exercise={cu.exercises[activeExercise]}
-              sprintId="sprint-3"
-              sprintColor="#8B5CF6"
-              initialData={getLocalData(cu.exercises[activeExercise].id)}
-              onSave={saveSubmission}
-              onComplete={() => {
-                if (activeExercise < cu.exercises.length - 1) {
-                  setActiveExercise(activeExercise + 1);
-                }
-              }}
-              showRating={true}
-              saving={saving}
-            />
-          </div>
-        </div>
+      {/* Stepper */}
+      <Stepper
+        steps={cu.exercises.map((_, i) => ({ id: `ex-${i}`, label: `Exercice ${i + 1}` }))}
+        currentIndex={activeExercise}
+        completedIndexes={completedIndexes}
+        color="#8B5CF6"
+        onStepClick={setActiveExercise}
+      />
 
-        {/* Consignes */}
-        <div className="lg:w-[35%] lg:sticky lg:top-[70px] lg:self-start">
-          <ConsignesPanel consignes={cu.consignes} />
-        </div>
+      <div key={cu.exercises[activeExercise].id} className="animate-slide-in-right">
+        <ExerciseCard
+          exercise={cu.exercises[activeExercise]}
+          sprintId="sprint-3"
+          sprintColor="#8B5CF6"
+          initialData={getLocalData(cu.exercises[activeExercise].id)}
+          onSave={saveSubmission}
+          onComplete={() => {
+            if (activeExercise < cu.exercises.length - 1) {
+              setActiveExercise(activeExercise + 1);
+            }
+          }}
+          showRating={true}
+          saving={saving}
+        />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Flame, FileText, Zap, Bot, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { Flame, FileText, Zap, Bot, ChevronRight, CheckCircle2, Lock } from 'lucide-react';
 import { useProgress } from '../hooks/useProgress';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { SessionFlow } from '../components/shared/SessionFlow';
@@ -22,6 +22,7 @@ const sprints = [
     duration: '25 min',
     icon: FileText,
     color: '#2563EB',
+    requires: 'Echauffement',
   },
   {
     id: 'sprint-2',
@@ -31,6 +32,7 @@ const sprints = [
     duration: '30 min',
     icon: Zap,
     color: '#F59E0B',
+    requires: 'Sprint 1',
   },
   {
     id: 'sprint-3',
@@ -40,12 +42,13 @@ const sprints = [
     duration: '30 min',
     icon: Bot,
     color: '#8B5CF6',
+    requires: 'Sprint 2',
   },
 ];
 
 export function Dashboard() {
   const navigate = useNavigate();
-  const { getSprintCompletion, isSprintStarted } = useProgress();
+  const { getSprintCompletion, isSprintStarted, isSprintUnlocked } = useProgress();
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -65,34 +68,50 @@ export function Dashboard() {
           const completion = getSprintCompletion(sprint.id);
           const started = isSprintStarted(sprint.id);
           const isComplete = completion === 1;
+          const unlocked = isSprintUnlocked(sprint.id);
 
           return (
             <button
               key={sprint.id}
-              onClick={() => navigate(sprint.path)}
-              className="w-full bg-surface-card rounded-xl shadow-card p-4 flex items-center gap-4 hover:shadow-elevated active:scale-[0.995] transition-all duration-base text-left group"
+              onClick={() => unlocked && navigate(sprint.path)}
+              disabled={!unlocked}
+              className={`w-full bg-surface-card rounded-xl shadow-card p-4 flex items-center gap-4 transition-all duration-base text-left group ${
+                unlocked
+                  ? 'hover:shadow-elevated active:scale-[0.995] cursor-pointer'
+                  : 'opacity-60 cursor-not-allowed'
+              }`}
               style={{
-                borderLeft: started ? `4px solid ${sprint.color}` : '4px solid transparent',
+                borderLeft: unlocked && started ? `4px solid ${sprint.color}` : '4px solid transparent',
               }}
             >
               {/* Icon */}
               <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
-                style={{ backgroundColor: `${sprint.color}12` }}
+                className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 relative"
+                style={{ backgroundColor: unlocked ? `${sprint.color}12` : '#F3F4F6' }}
               >
-                <sprint.icon size={20} style={{ color: sprint.color }} />
+                {unlocked ? (
+                  <sprint.icon size={20} style={{ color: sprint.color }} />
+                ) : (
+                  <Lock size={18} className="text-text-muted/50" />
+                )}
               </div>
 
               {/* Content */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <h2 className="font-display font-bold text-[15px] text-text-on-light tracking-tight">
+                  <h2 className={`font-display font-bold text-[15px] tracking-tight ${unlocked ? 'text-text-on-light' : 'text-text-muted'}`}>
                     {sprint.title}
                   </h2>
                   {isComplete && <CheckCircle2 size={15} className="text-success" />}
                 </div>
-                <p className="text-[13px] text-text-muted mt-0.5 font-body">{sprint.subtitle}</p>
-                {started && !isComplete && (
+                {unlocked ? (
+                  <p className="text-[13px] text-text-muted mt-0.5 font-body">{sprint.subtitle}</p>
+                ) : (
+                  <p className="text-[12px] text-text-muted/70 mt-0.5 font-body italic">
+                    Terminez l'{sprint.requires} pour debloquer
+                  </p>
+                )}
+                {started && !isComplete && unlocked && (
                   <div className="mt-2 flex items-center gap-2">
                     <div className="flex-1 h-1 bg-border-default rounded-full overflow-hidden max-w-[160px]">
                       <div
@@ -110,10 +129,14 @@ export function Dashboard() {
               {/* Duration + arrow */}
               <div className="shrink-0 flex flex-col items-end gap-1">
                 <span className="text-[11px] font-semibold text-text-muted font-body">{sprint.duration}</span>
-                <ChevronRight
-                  size={18}
-                  className="text-border-default group-hover:text-text-muted transition-colors"
-                />
+                {unlocked ? (
+                  <ChevronRight
+                    size={18}
+                    className="text-border-default group-hover:text-text-muted transition-colors"
+                  />
+                ) : (
+                  <Lock size={14} className="text-text-muted/40" />
+                )}
               </div>
             </button>
           );
