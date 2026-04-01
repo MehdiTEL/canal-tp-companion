@@ -1,0 +1,86 @@
+import { NavLink } from 'react-router-dom';
+import { LayoutDashboard, Flame, FileText, Zap, Bot, Shield } from 'lucide-react';
+import { useProgress } from '../../hooks/useProgress';
+
+const navItems = [
+  { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, color: '#6B7280' },
+  { to: '/echauffement', label: 'Echauffement', icon: Flame, color: '#06B6D4' },
+  { to: '/sprint-1', label: 'Sprint 1', icon: FileText, color: '#2563EB' },
+  { to: '/sprint-2', label: 'Sprint 2', icon: Zap, color: '#F59E0B' },
+  { to: '/sprint-3', label: 'Sprint 3', icon: Bot, color: '#8B5CF6' },
+];
+
+export function Sidebar() {
+  const { getSprintCompletion, isSprintStarted } = useProgress();
+
+  const sprintMap: Record<string, string> = {
+    '/echauffement': 'echauffement',
+    '/sprint-1': 'sprint-1',
+    '/sprint-2': 'sprint-2',
+    '/sprint-3': 'sprint-3',
+  };
+
+  return (
+    <aside className="hidden lg:flex flex-col w-52 bg-surface-elevated border-r border-border-subtle h-[calc(100vh-53px)] sticky top-[53px]">
+      <nav className="flex-1 py-4 px-2.5 space-y-0.5">
+        {navItems.map((item) => {
+          const sprintId = sprintMap[item.to];
+          const completion = sprintId ? getSprintCompletion(sprintId) : 0;
+          const started = sprintId ? isSprintStarted(sprintId) : false;
+
+          return (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) =>
+                `flex items-center gap-2.5 px-3 py-2 rounded-md text-[13px] font-body transition-all duration-fast ${
+                  isActive
+                    ? 'bg-surface-card shadow-card font-semibold text-text-on-light'
+                    : 'text-text-body hover:bg-surface-card/60'
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  <div
+                    className="w-7 h-7 rounded-md flex items-center justify-center shrink-0"
+                    style={{
+                      backgroundColor: isActive ? `${item.color}15` : 'transparent',
+                    }}
+                  >
+                    <item.icon size={16} style={{ color: item.color }} />
+                  </div>
+                  <span className="flex-1 truncate">{item.label}</span>
+                  {sprintId && started && (
+                    <span
+                      className="text-[11px] font-semibold"
+                      style={{ color: item.color }}
+                    >
+                      {Math.round(completion * 100)}%
+                    </span>
+                  )}
+                </>
+              )}
+            </NavLink>
+          );
+        })}
+      </nav>
+
+      <div className="p-2.5 border-t border-border-subtle">
+        <NavLink
+          to="/formateur"
+          className={({ isActive }) =>
+            `flex items-center gap-2.5 px-3 py-2 rounded-md text-[13px] font-body transition-all duration-fast ${
+              isActive
+                ? 'bg-surface-card shadow-card font-semibold text-text-on-light'
+                : 'text-text-muted hover:text-text-body hover:bg-surface-card/60'
+            }`
+          }
+        >
+          <Shield size={15} />
+          <span>Formateur</span>
+        </NavLink>
+      </div>
+    </aside>
+  );
+}
