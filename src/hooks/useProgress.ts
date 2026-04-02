@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import type { LocalSubmission } from '../types';
 
 const SUBMISSIONS_KEY = 'canal-tp-submissions';
@@ -29,9 +29,19 @@ function computeProgress(submissions: Record<string, LocalSubmission>) {
   return sprints;
 }
 
+const UNLOCK_CHAIN: Record<string, string> = {
+  echauffement: 'sprint-1',
+  'sprint-1': 'sprint-2',
+  'sprint-2': 'sprint-3',
+};
+
 export function useProgress() {
   const [submissions, setSubmissions] = useState(getLocalSubmissions);
   const [sprintProgress, setSprintProgress] = useState(() => computeProgress(getLocalSubmissions()));
+  const [justUnlocked, setJustUnlocked] = useState<string | null>(null);
+
+  // Track previously unlocked sprints to detect new unlocks
+  const prevUnlockedRef = useRef<Set<string>>(new Set());
 
   // Refresh from localStorage periodically (2s) and on cross-tab storage events
   useEffect(() => {
@@ -91,6 +101,29 @@ export function useProgress() {
     return true;
   }, [isSprintCompleted]);
 
+  // Detect when a new sprint gets unlocked
+  useEffect(() => {
+    const currentUnlocked = new Set<string>();
+    for (const sprintId of ['echauffement', 'sprint-1', 'sprint-2', 'sprint-3']) {
+      if (isSprintUnlocked(sprintId)) currentUnlocked.add(sprintId);
+    }
+
+    // Find newly unlocked sprint (was locked, now unlocked)
+    for (const id of currentUnlocked) {
+      if (!prevUnlockedRef.current.has(id) && id !== 'echauffement') {
+        // Also check if the previous sprint in the chain just completed
+        const prevSprint = Object.entries(UNLOCK_CHAIN).find(([, next]) => next === id)?.[0];
+        if (prevSprint && isSprintCompleted(prevSprint)) {
+          setJustUnlocked(id);
+          // Clear after animation duration
+          setTimeout(() => setJustUnlocked(null), 1500);
+        }
+      }
+    }
+
+    prevUnlockedRef.current = currentUnlocked;
+  }, [isSprintUnlocked, isSprintCompleted]);
+
   return {
     sprintProgress,
     globalProgress,
@@ -100,5 +133,6 @@ export function useProgress() {
     isSprintStarted,
     isSprintCompleted,
     isSprintUnlocked,
+    justUnlocked,
   };
 }

@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Flame, FileText, Zap, Bot, Shield, Lock } from 'lucide-react';
+import { LayoutDashboard, Flame, FileText, Zap, Bot, Shield, Lock, LockOpen } from 'lucide-react';
 import { useProgress } from '../../hooks/useProgress';
 
 const navItems = [
@@ -11,7 +11,7 @@ const navItems = [
 ];
 
 export function Sidebar() {
-  const { getSprintCompletion, isSprintStarted, isSprintUnlocked } = useProgress();
+  const { getSprintCompletion, isSprintStarted, isSprintUnlocked, justUnlocked } = useProgress();
 
   return (
     <aside className="hidden lg:flex flex-col w-52 bg-surface-elevated border-r border-border-subtle h-[calc(100vh-53px)] sticky top-[53px]">
@@ -21,6 +21,30 @@ export function Sidebar() {
           const completion = sprintId ? getSprintCompletion(sprintId) : 0;
           const started = sprintId ? isSprintStarted(sprintId) : false;
           const unlocked = sprintId ? isSprintUnlocked(sprintId) : true;
+          const isJustUnlocked = sprintId === justUnlocked;
+
+          // Just unlocked — animated transition
+          if (isJustUnlocked) {
+            return (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className="flex items-center gap-2.5 px-3 py-2 rounded-md text-[13px] font-body font-semibold text-text-on-light"
+              >
+                <div
+                  className="w-7 h-7 rounded-md flex items-center justify-center shrink-0 relative animate-unlock-glow"
+                  style={{
+                    backgroundColor: `${item.color}15`,
+                    '--unlock-color': `${item.color}60`,
+                  } as React.CSSProperties}
+                >
+                  <LockOpen size={14} className="absolute animate-unlock-shake" style={{ color: item.color }} />
+                  <item.icon size={16} className="absolute animate-unlock-appear" style={{ color: item.color }} />
+                </div>
+                <span className="flex-1 truncate">{item.label}</span>
+              </NavLink>
+            );
+          }
 
           if (!unlocked) {
             return (

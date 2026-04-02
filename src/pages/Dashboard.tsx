@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Flame, FileText, Zap, Bot, ChevronRight, CheckCircle2, Lock } from 'lucide-react';
+import { Flame, FileText, Zap, Bot, ChevronRight, CheckCircle2, Lock, LockOpen } from 'lucide-react';
 import { useProgress } from '../hooks/useProgress';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { SessionFlow } from '../components/shared/SessionFlow';
@@ -48,7 +48,7 @@ const sprints = [
 
 export function Dashboard() {
   const navigate = useNavigate();
-  const { getSprintCompletion, isSprintStarted, isSprintUnlocked } = useProgress();
+  const { getSprintCompletion, isSprintStarted, isSprintUnlocked, justUnlocked } = useProgress();
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -69,14 +69,15 @@ export function Dashboard() {
           const started = isSprintStarted(sprint.id);
           const isComplete = completion === 1;
           const unlocked = isSprintUnlocked(sprint.id);
+          const isJustUnlocked = sprint.id === justUnlocked;
 
           return (
             <button
               key={sprint.id}
-              onClick={() => unlocked && navigate(sprint.path)}
-              disabled={!unlocked}
+              onClick={() => (unlocked || isJustUnlocked) && navigate(sprint.path)}
+              disabled={!unlocked && !isJustUnlocked}
               className={`w-full bg-surface-card rounded-xl shadow-card p-4 flex items-center gap-4 transition-all duration-base text-left group ${
-                unlocked
+                unlocked || isJustUnlocked
                   ? 'hover:shadow-elevated active:scale-[0.995] cursor-pointer'
                   : 'opacity-60 cursor-not-allowed'
               }`}
@@ -86,10 +87,18 @@ export function Dashboard() {
             >
               {/* Icon */}
               <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 relative"
-                style={{ backgroundColor: unlocked ? `${sprint.color}12` : '#F3F4F6' }}
+                className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 relative ${isJustUnlocked ? 'animate-unlock-glow' : ''}`}
+                style={{
+                  backgroundColor: unlocked || isJustUnlocked ? `${sprint.color}12` : '#F3F4F6',
+                  '--unlock-color': `${sprint.color}60`,
+                } as React.CSSProperties}
               >
-                {unlocked ? (
+                {isJustUnlocked ? (
+                  <>
+                    <LockOpen size={20} className="absolute animate-unlock-shake" style={{ color: sprint.color }} />
+                    <sprint.icon size={20} className="absolute animate-unlock-appear" style={{ color: sprint.color }} />
+                  </>
+                ) : unlocked ? (
                   <sprint.icon size={20} style={{ color: sprint.color }} />
                 ) : (
                   <Lock size={18} className="text-text-muted/50" />
@@ -99,16 +108,18 @@ export function Dashboard() {
               {/* Content */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <h2 className={`font-display font-bold text-[15px] tracking-tight ${unlocked ? 'text-text-on-light' : 'text-text-muted'}`}>
+                  <h2 className={`font-display font-bold text-[15px] tracking-tight ${unlocked || isJustUnlocked ? 'text-text-on-light' : 'text-text-muted'}`}>
                     {sprint.title}
                   </h2>
                   {isComplete && <CheckCircle2 size={15} className="text-success" />}
                 </div>
-                {unlocked ? (
-                  <p className="text-[13px] text-text-muted mt-0.5 font-body">{sprint.subtitle}</p>
+                {unlocked || isJustUnlocked ? (
+                  <p className={`text-[13px] mt-0.5 font-body ${isJustUnlocked ? 'text-text-on-light font-semibold animate-fade-in' : 'text-text-muted'}`}>
+                    {isJustUnlocked ? 'Debloque ! Continuez la formation, vous pourrez y acceder apres.' : sprint.subtitle}
+                  </p>
                 ) : (
                   <p className="text-[12px] text-text-muted/70 mt-0.5 font-body italic">
-                    Terminez l'{sprint.requires} pour debloquer
+                    Terminez l&apos;{sprint.requires} pour debloquer
                   </p>
                 )}
                 {started && !isComplete && unlocked && (

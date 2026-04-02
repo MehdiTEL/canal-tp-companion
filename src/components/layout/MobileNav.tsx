@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Flame, FileText, Zap, Bot, Lock } from 'lucide-react';
+import { LayoutDashboard, Flame, FileText, Zap, Bot, Lock, LockOpen } from 'lucide-react';
 import { useProgress } from '../../hooks/useProgress';
 
 const navItems = [
@@ -11,13 +11,35 @@ const navItems = [
 ];
 
 export function MobileNav() {
-  const { isSprintUnlocked } = useProgress();
+  const { isSprintUnlocked, justUnlocked } = useProgress();
 
   return (
     <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-surface-card border-t border-border-subtle z-30">
       <div className="flex items-center justify-around py-1.5 px-1">
         {navItems.map((item) => {
           const unlocked = item.sprintId ? isSprintUnlocked(item.sprintId) : true;
+          const isJustUnlocked = item.sprintId === justUnlocked;
+
+          // Just unlocked — show animation
+          if (isJustUnlocked) {
+            return (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className="flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-lg text-[10px] font-body min-w-[52px] font-semibold"
+                style={{ color: item.color }}
+              >
+                <div
+                  className="relative w-[18px] h-[18px] animate-unlock-glow rounded-full"
+                  style={{ '--unlock-color': `${item.color}60` } as React.CSSProperties}
+                >
+                  <LockOpen size={18} className="absolute inset-0 animate-unlock-shake" style={{ color: item.color }} />
+                  <item.icon size={18} className="absolute inset-0 animate-unlock-appear" style={{ color: item.color }} />
+                </div>
+                <span>{item.label}</span>
+              </NavLink>
+            );
+          }
 
           if (!unlocked) {
             return (
