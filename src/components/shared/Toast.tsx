@@ -37,7 +37,12 @@ export function ToastContainer() {
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
   const addToast = useCallback((text: string, variant: ToastVariant = 'success') => {
-    const id = crypto.randomUUID();
+    let id: string;
+    try {
+      id = crypto.randomUUID();
+    } catch {
+      id = Math.random().toString(36).slice(2) + Date.now().toString(36);
+    }
     setToasts((prev) => [...prev, { id, text, variant }]);
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));

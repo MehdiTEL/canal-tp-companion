@@ -5,6 +5,18 @@ import type { Participant } from '../types';
 
 const STORAGE_KEY = 'canal-tp-participant';
 
+function generateId(): string {
+  try {
+    return generateId();
+  } catch {
+    // Fallback for Safari / non-secure contexts
+    return 'xxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, (c) => {
+      const r = (Math.random() * 16) | 0;
+      return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+    }) + '-' + Date.now().toString(36);
+  }
+}
+
 export function useParticipant() {
   const [participant, setParticipant] = useState<Participant | null>(null);
   const [loading, setLoading] = useState(true);
@@ -40,7 +52,7 @@ export function useParticipant() {
       } else {
         // Fallback sans Supabase
         const p: Participant = {
-          id: crypto.randomUUID(),
+          id: generateId(),
           metier,
           lang,
           session_id: 'pilote-canal-2026',
@@ -56,7 +68,7 @@ export function useParticipant() {
       showToast('Connexion au serveur impossible — mode local active', 'warning');
       // Fallback local
       const p: Participant = {
-        id: crypto.randomUUID(),
+        id: generateId(),
         metier,
         lang,
         session_id: 'pilote-canal-2026',
