@@ -79,7 +79,7 @@ export function ExerciseCard({
   };
 
   const inputClass =
-    'w-full rounded-md border border-border-default px-3 py-2.5 text-[14px] font-body text-text-on-light placeholder:text-text-muted/50 focus:outline-none focus:ring-2 focus:ring-opacity-25 focus:border-opacity-50 transition-all duration-fast resize-y min-h-[100px]';
+    'w-full rounded-md border border-border-default px-3 py-2.5 text-[14px] font-body text-text-on-light placeholder:text-text-muted/40 placeholder:italic focus:outline-none focus:ring-2 focus:ring-opacity-25 focus:border-opacity-50 transition-all duration-fast resize-y min-h-[100px]';
 
   return (
     <div
@@ -120,6 +120,13 @@ export function ExerciseCard({
           </p>
         </div>
 
+        {/* Hints — before prompt/result */}
+        <HintButton
+          hints={exercise.hints}
+          unlockedCount={hintsUsed}
+          onUnlock={() => setHintsUsed((prev) => prev + 1)}
+        />
+
         {/* Prompt input */}
         <div>
           <label className="block text-[13px] font-semibold text-text-body tracking-wide mb-1.5" htmlFor={`prompt-${exercise.id}`}>
@@ -129,7 +136,7 @@ export function ExerciseCard({
             id={`prompt-${exercise.id}`}
             value={promptText}
             onChange={(e) => setPromptText(e.target.value)}
-            placeholder="Collez ici le prompt que vous avez saisi dans Copilot Chat..."
+            placeholder="Copiez le prompt que vous avez demande a Copilot Chat..."
             rows={4}
             className={inputClass}
             style={{ '--tw-ring-color': `${sprintColor}40`, '--tw-border-opacity-color': sprintColor } as React.CSSProperties}
@@ -146,20 +153,13 @@ export function ExerciseCard({
             id={`result-${exercise.id}`}
             value={resultText}
             onChange={(e) => setResultText(e.target.value)}
-            placeholder="Collez ici le resultat de Copilot Chat..."
+            placeholder="Deposez le resultat que Copilot Chat vous a genere..."
             rows={4}
             className={inputClass}
             style={{ '--tw-ring-color': `${sprintColor}40` } as React.CSSProperties}
             aria-label="Zone de saisie du resultat"
           />
         </div>
-
-        {/* Hints */}
-        <HintButton
-          hints={exercise.hints}
-          unlockedCount={hintsUsed}
-          onUnlock={() => setHintsUsed((prev) => prev + 1)}
-        />
 
         {/* Rating + Complete */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-4 border-t border-border-subtle">

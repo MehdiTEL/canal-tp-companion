@@ -50,8 +50,6 @@ export function Sprint2({ participantId, metier }: Sprint2Props) {
         duration={sprint2Meta.duration}
         currentStep={activeExercise + 1}
         totalSteps={cu.exercises.length}
-        onBack={activeExercise > 0 ? () => setActiveExercise(activeExercise - 1) : undefined}
-        backLabel="Exercice precedent"
       />
 
       <CopilotLink color="#F59E0B" />

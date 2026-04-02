@@ -54,8 +54,6 @@ export function Sprint1({ participantId, metier }: Sprint1Props) {
         duration={sprint1Meta.duration}
         currentStep={currentStep + 1}
         totalSteps={scenario.steps.length}
-        onBack={currentStep > 0 ? () => setCurrentStep(currentStep - 1) : undefined}
-        backLabel="Etape precedente"
       />
 
       <CopilotLink color="#2563EB" />

@@ -51,8 +51,6 @@ export function Sprint3({ participantId, metier }: Sprint3Props) {
         duration={sprint3Meta.duration}
         currentStep={activeExercise + 1}
         totalSteps={cu.exercises.length}
-        onBack={activeExercise > 0 ? () => setActiveExercise(activeExercise - 1) : undefined}
-        backLabel="Exercice precedent"
       />
 
       <CopilotLink color="#8B5CF6" />
