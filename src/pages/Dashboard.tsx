@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Flame, FileText, Zap, Bot, ChevronRight, CheckCircle2, Lock, LockOpen } from 'lucide-react';
+import { Flame, FileText, Zap, Bot, ChevronRight, CheckCircle2, Lock, LockOpen, ArrowLeft } from 'lucide-react';
 import { useProgress } from '../hooks/useProgress';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { SessionFlow } from '../components/shared/SessionFlow';
@@ -46,7 +46,11 @@ const sprints = [
   },
 ];
 
-export function Dashboard() {
+interface DashboardProps {
+  onChangeMetier?: () => void;
+}
+
+export function Dashboard({ onChangeMetier }: DashboardProps) {
   const navigate = useNavigate();
   const { getSprintCompletion, isSprintStarted, isSprintUnlocked, justUnlocked } = useProgress();
 
@@ -54,12 +58,25 @@ export function Dashboard() {
     <div className="max-w-2xl mx-auto space-y-5">
       {/* Welcome banner */}
       <div className="bg-white rounded-2xl shadow-card border border-border-subtle/50 px-5 py-4">
-        <h1 className="font-display font-extrabold text-[18px] text-text-on-light tracking-tight">
-          Votre parcours IA / Copilot Chat
-        </h1>
-        <p className="text-[13px] text-text-muted font-body mt-1">
-          Suivez la formation sur Teams et completez les exercices ici. Chaque sprint se debloque en terminant le precedent.
-        </p>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="font-display font-extrabold text-[18px] text-text-on-light tracking-tight">
+              Votre parcours IA / Copilot Chat
+            </h1>
+            <p className="text-[13px] text-text-muted font-body mt-1">
+              Suivez la formation sur Teams et completez les exercices ici. Chaque sprint se debloque en terminant le precedent.
+            </p>
+          </div>
+          {onChangeMetier && (
+            <button
+              onClick={onChangeMetier}
+              className="shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border-default text-[13px] font-body font-medium text-text-body hover:bg-surface-elevated hover:border-border-strong transition-all duration-fast"
+            >
+              <ArrowLeft size={14} className="text-text-muted" />
+              Changer de metier
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Session flow diagram */}
