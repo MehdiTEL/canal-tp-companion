@@ -22,7 +22,7 @@ const sprints = [
     duration: '25 min',
     icon: FileText,
     color: '#2563EB',
-    requires: 'Echauffement',
+    requires: "l'Echauffement",
   },
   {
     id: 'sprint-2',
@@ -32,7 +32,7 @@ const sprints = [
     duration: '30 min',
     icon: Zap,
     color: '#F59E0B',
-    requires: 'Sprint 1',
+    requires: 'le Sprint 1',
   },
   {
     id: 'sprint-3',
@@ -42,7 +42,7 @@ const sprints = [
     duration: '30 min',
     icon: Bot,
     color: '#8B5CF6',
-    requires: 'Sprint 2',
+    requires: 'le Sprint 2',
   },
 ];
 
@@ -52,6 +52,16 @@ export function Dashboard() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-5">
+      {/* Welcome banner */}
+      <div className="bg-white rounded-2xl shadow-card border border-border-subtle/50 px-5 py-4">
+        <h1 className="font-display font-extrabold text-[18px] text-text-on-light tracking-tight">
+          Votre parcours IA / Copilot Chat
+        </h1>
+        <p className="text-[13px] text-text-muted font-body mt-1">
+          Suivez la formation sur Teams et completez les exercices ici. Chaque sprint se debloque en terminant le precedent.
+        </p>
+      </div>
+
       {/* Session flow diagram */}
       <div className="bg-white rounded-2xl shadow-card border border-border-subtle/50 p-4">
         <SessionFlow />
@@ -119,7 +129,7 @@ export function Dashboard() {
                   </p>
                 ) : (
                   <p className="text-[12px] text-text-muted/70 mt-0.5 font-body italic">
-                    Terminez l&apos;{sprint.requires} pour debloquer
+                    Terminez {sprint.requires} pour debloquer
                   </p>
                 )}
                 {started && !isComplete && unlocked && (

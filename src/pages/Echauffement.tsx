@@ -55,7 +55,7 @@ export function Echauffement({ participantId, metier }: EchauffementProps) {
         title="Echauffement"
         color="#06B6D4"
         duration={echauffementMeta.duration}
-        currentStep={completed ? 1 : 0}
+        currentStep={1}
         totalSteps={1}
       />
 
