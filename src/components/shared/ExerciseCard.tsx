@@ -173,7 +173,7 @@ export function ExerciseCard({
           {!completed ? (
             <button
               onClick={handleComplete}
-              disabled={!promptText.trim()}
+              disabled={!promptText.trim() || !resultText.trim()}
               className="flex items-center gap-2 px-5 py-2.5 rounded-md bg-surface-dark text-white text-[14px] font-display font-bold tracking-[0.01em] hover:bg-surface-dark/90 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-base ml-auto"
             >
               Valider et continuer
@@ -185,9 +185,9 @@ export function ExerciseCard({
               Termine
             </span>
           )}
-          {!completed && !promptText.trim() && (
+          {!completed && (!promptText.trim() || !resultText.trim()) && (
             <p className="text-[11px] text-text-muted font-body sm:hidden">
-              Saisissez un prompt pour valider
+              Saisissez un prompt et un resultat pour valider
             </p>
           )}
         </div>

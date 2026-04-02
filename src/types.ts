@@ -86,3 +86,11 @@ export interface LocalSubmission {
   hints_used: number;
   completed: boolean;
 }
+
+export interface SprintDocument {
+  id: string;
+  title: string;
+  type: 'brief' | 'mail' | 'rapport' | 'note';
+  content: string;
+  stepId: string;
+}

@@ -4,19 +4,21 @@ import { ExerciseCard } from '../components/shared/ExerciseCard';
 import { CopilotLink } from '../components/shared/CopilotLink';
 import { ConsignesPanel } from '../components/shared/ConsignesPanel';
 import { Stepper } from '../components/shared/Stepper';
-import { sprint2Data } from '../data/sprint2';
+import { sprint2Meta, sprint2ByGroup } from '../data/sprint2';
+import { getGroupForMetier } from '../data/metierGroups';
 import { useSubmission } from '../hooks/useSubmission';
 
 interface Sprint2Props {
   participantId?: string;
+  metier: string;
 }
 
-export function Sprint2({ participantId }: Sprint2Props) {
+export function Sprint2({ participantId, metier }: Sprint2Props) {
   const [activeExercise, setActiveExercise] = useState(0);
   const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
 
-  // Use the first cas d'usage directly (single cas for all metiers)
-  const cu = sprint2Data.casUsages[0];
+  const groupId = getGroupForMetier(metier);
+  const cu = sprint2ByGroup[groupId];
 
   const completedIndexes = useMemo(() => {
     const set = new Set<number>();
@@ -27,12 +29,25 @@ export function Sprint2({ participantId }: Sprint2Props) {
     return set;
   }, [activeExercise, getLocalData, cu.exercises]);
 
+  // Prevent skipping ahead
+  const maxAccessibleStep = useMemo(() => {
+    let max = 0;
+    for (let i = 0; i < cu.exercises.length; i++) {
+      if (completedIndexes.has(i)) {
+        max = i + 1;
+      } else {
+        break;
+      }
+    }
+    return max;
+  }, [completedIndexes, cu.exercises.length]);
+
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <SprintHeader
         title="Sprint 2 — Challenge collectif"
         color="#F59E0B"
-        duration={sprint2Data.duration}
+        duration={sprint2Meta.duration}
         currentStep={activeExercise + 1}
         totalSteps={cu.exercises.length}
         onBack={activeExercise > 0 ? () => setActiveExercise(activeExercise - 1) : undefined}
@@ -54,7 +69,9 @@ export function Sprint2({ participantId }: Sprint2Props) {
         currentIndex={activeExercise}
         completedIndexes={completedIndexes}
         color="#F59E0B"
-        onStepClick={setActiveExercise}
+        onStepClick={(i) => {
+          if (i <= maxAccessibleStep) setActiveExercise(i);
+        }}
       />
 
       <div key={cu.exercises[activeExercise].id} className="animate-slide-in-right">

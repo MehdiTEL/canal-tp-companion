@@ -2,19 +2,24 @@ import { useState } from 'react';
 import { SprintHeader } from '../components/shared/SprintHeader';
 import { ExerciseCard } from '../components/shared/ExerciseCard';
 import { CopilotLink } from '../components/shared/CopilotLink';
-import { echauffementData } from '../data/echauffement';
+import { echauffementMeta, echauffementByGroup } from '../data/echauffement';
+import { getGroupForMetier } from '../data/metierGroups';
 import { useSubmission } from '../hooks/useSubmission';
 import type { Exercise } from '../types';
 
 interface EchauffementProps {
   participantId?: string;
+  metier: string;
 }
 
-export function Echauffement({ participantId }: EchauffementProps) {
+export function Echauffement({ participantId, metier }: EchauffementProps) {
   const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
   const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
 
-  const themeName = echauffementData.thematiques.find(t => t.id === selectedTheme)?.label;
+  const groupId = getGroupForMetier(metier);
+  const groupData = echauffementByGroup[groupId];
+
+  const themeName = groupData.thematiques.find(t => t.id === selectedTheme)?.label;
 
   const exercise: Exercise = {
     id: 'echauffement-ex1',
@@ -22,7 +27,7 @@ export function Echauffement({ participantId }: EchauffementProps) {
     description: selectedTheme
       ? `Utilisez Copilot Chat pour explorer "${themeName}" et produire une synthese exploitable en 5 minutes.`
       : 'Selectionnez une thematique ci-dessus pour commencer.',
-    hints: echauffementData.hints,
+    hints: groupData.hints,
   };
 
   const localData = getLocalData('echauffement-ex1');
@@ -33,7 +38,7 @@ export function Echauffement({ participantId }: EchauffementProps) {
       <SprintHeader
         title="Echauffement"
         color="#06B6D4"
-        duration={echauffementData.duration}
+        duration={echauffementMeta.duration}
         currentStep={completed ? 1 : 0}
         totalSteps={1}
       />
@@ -44,7 +49,7 @@ export function Echauffement({ participantId }: EchauffementProps) {
           Consigne
         </span>
         <p className="text-[14px] text-text-body font-body leading-relaxed">
-          {echauffementData.description}
+          {groupData.description}
         </p>
       </div>
 
@@ -56,7 +61,7 @@ export function Echauffement({ participantId }: EchauffementProps) {
           Choisissez votre thematique
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {echauffementData.thematiques.map((theme) => (
+          {groupData.thematiques.map((theme) => (
             <button
               key={theme.id}
               onClick={() => setSelectedTheme(theme.id)}

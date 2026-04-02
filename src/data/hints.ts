@@ -1,7 +1,6 @@
-// Re-export all hints from their respective sprint data files
-// This file serves as a centralized reference
-
-export { echauffementData } from './echauffement';
-export { sprint1Data } from './sprint1';
-export { sprint2Data } from './sprint2';
-export { sprint3Data } from './sprint3';
+// Re-export all data from their respective sprint data files
+export { echauffementMeta, echauffementByGroup } from './echauffement';
+export { sprint1Meta, sprint1ByGroup } from './sprint1';
+export { sprint2Meta, sprint2ByGroup } from './sprint2';
+export { sprint3Meta, sprint3ByGroup } from './sprint3';
+export { metierToGroup, groupLabels, getGroupForMetier } from './metierGroups';

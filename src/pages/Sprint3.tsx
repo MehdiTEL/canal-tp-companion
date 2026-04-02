@@ -5,19 +5,21 @@ import { CopilotLink } from '../components/shared/CopilotLink';
 import { ConsignesPanel } from '../components/shared/ConsignesPanel';
 import { Stepper } from '../components/shared/Stepper';
 import { AgentBuilder } from '../components/sprint3/AgentBuilder';
-import { sprint3Data } from '../data/sprint3';
+import { sprint3Meta, sprint3ByGroup } from '../data/sprint3';
+import { getGroupForMetier } from '../data/metierGroups';
 import { useSubmission } from '../hooks/useSubmission';
 
 interface Sprint3Props {
   participantId?: string;
+  metier: string;
 }
 
-export function Sprint3({ participantId }: Sprint3Props) {
+export function Sprint3({ participantId, metier }: Sprint3Props) {
   const [activeExercise, setActiveExercise] = useState(0);
   const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
 
-  // Use the first cas d'usage directly (single cas for all metiers)
-  const cu = sprint3Data.casUsages[0];
+  const groupId = getGroupForMetier(metier);
+  const cu = sprint3ByGroup[groupId];
 
   const completedIndexes = useMemo(() => {
     const set = new Set<number>();
@@ -28,12 +30,25 @@ export function Sprint3({ participantId }: Sprint3Props) {
     return set;
   }, [activeExercise, getLocalData, cu.exercises]);
 
+  // Prevent skipping ahead
+  const maxAccessibleStep = useMemo(() => {
+    let max = 0;
+    for (let i = 0; i < cu.exercises.length; i++) {
+      if (completedIndexes.has(i)) {
+        max = i + 1;
+      } else {
+        break;
+      }
+    }
+    return max;
+  }, [completedIndexes, cu.exercises.length]);
+
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <SprintHeader
         title="Sprint 3 — Agent Lite"
         color="#8B5CF6"
-        duration={sprint3Data.duration}
+        duration={sprint3Meta.duration}
         currentStep={activeExercise + 1}
         totalSteps={cu.exercises.length}
         onBack={activeExercise > 0 ? () => setActiveExercise(activeExercise - 1) : undefined}
@@ -58,7 +73,9 @@ export function Sprint3({ participantId }: Sprint3Props) {
         currentIndex={activeExercise}
         completedIndexes={completedIndexes}
         color="#8B5CF6"
-        onStepClick={setActiveExercise}
+        onStepClick={(i) => {
+          if (i <= maxAccessibleStep) setActiveExercise(i);
+        }}
       />
 
       <div key={cu.exercises[activeExercise].id} className="animate-slide-in-right">
