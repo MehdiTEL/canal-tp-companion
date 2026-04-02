@@ -1,4 +1,4 @@
-import { LogOut, Briefcase } from 'lucide-react';
+import { Briefcase, RefreshCw } from 'lucide-react';
 import { ProgressBar } from '../shared/ProgressBar';
 
 interface HeaderProps {
@@ -25,18 +25,22 @@ export function Header({ metier, onLogout }: HeaderProps) {
         {/* User info */}
         {metier && (
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden sm:flex items-center gap-1.5 text-[13px] text-text-body font-body">
-              <Briefcase size={13} className="text-text-muted" />
-              <span className="font-semibold">{metier}</span>
-            </div>
             {onLogout && (
               <button
                 onClick={onLogout}
-                className="p-2 rounded-md hover:bg-surface-elevated text-text-muted hover:text-text-body transition-colors"
-                aria-label="Se deconnecter"
+                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[13px] text-text-body font-body hover:bg-surface-elevated transition-colors"
+                title="Changer de metier"
               >
-                <LogOut size={15} />
+                <Briefcase size={13} className="text-text-muted" />
+                <span className="font-semibold">{metier}</span>
+                <RefreshCw size={11} className="text-text-muted ml-0.5" />
               </button>
+            )}
+            {!onLogout && (
+              <div className="hidden sm:flex items-center gap-1.5 text-[13px] text-text-body font-body">
+                <Briefcase size={13} className="text-text-muted" />
+                <span className="font-semibold">{metier}</span>
+              </div>
             )}
           </div>
         )}
