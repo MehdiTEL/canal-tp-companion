@@ -14,7 +14,7 @@ export function Sidebar() {
   const { getSprintCompletion, isSprintStarted, isSprintUnlocked, justUnlocked } = useProgress();
 
   return (
-    <aside className="hidden lg:flex flex-col w-52 bg-surface-elevated border-r border-border-subtle h-[calc(100vh-53px)] sticky top-[53px]">
+    <aside className="hidden lg:flex flex-col w-52 bg-white/60 backdrop-blur-sm border-r border-border-subtle h-[calc(100vh-49px)] sticky top-[49px]">
       <nav className="flex-1 py-4 px-2.5 space-y-0.5">
         {navItems.map((item) => {
           const sprintId = item.sprintId;

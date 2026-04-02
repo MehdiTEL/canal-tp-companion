@@ -79,16 +79,16 @@ export function ExerciseCard({
   };
 
   const inputClass =
-    'w-full rounded-md border border-border-default px-3 py-2.5 text-[14px] font-body text-text-on-light placeholder:text-text-muted/40 placeholder:italic focus:outline-none focus:ring-2 focus:ring-opacity-25 focus:border-opacity-50 transition-all duration-fast resize-y min-h-[100px]';
+    'w-full rounded-lg border border-border-default bg-surface-app px-3.5 py-3 text-[14px] font-body text-text-on-light placeholder:text-text-muted/50 placeholder:italic placeholder:text-[13px] focus:outline-none focus:ring-2 focus:ring-lecko-blue/15 focus:border-lecko-blue/40 focus:bg-white transition-all duration-fast resize-y min-h-[90px]';
 
   return (
     <div
-      className={`animate-slide-up bg-surface-card rounded-xl shadow-card transition-all duration-base ${
-        completed ? 'ring-1 ring-success/30' : ''
+      className={`animate-slide-up bg-white rounded-2xl shadow-card border transition-all duration-base ${
+        completed ? 'border-success/25' : 'border-border-subtle/50'
       }`}
     >
       {/* Top color bar */}
-      <div className="h-1 rounded-t-xl" style={{ backgroundColor: completed ? '#10B981' : sprintColor }} />
+      <div className="h-1 rounded-t-2xl" style={{ backgroundColor: completed ? '#10B981' : sprintColor }} />
 
       <div className="p-5 space-y-5">
         {/* Title row */}
@@ -174,7 +174,7 @@ export function ExerciseCard({
             <button
               onClick={handleComplete}
               disabled={!promptText.trim() || !resultText.trim()}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-md bg-surface-dark text-white text-[14px] font-display font-bold tracking-[0.01em] hover:bg-surface-dark/90 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-base ml-auto"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-lecko-blue text-white text-[14px] font-display font-bold tracking-[0.01em] hover:bg-lecko-blue/90 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-base ml-auto shadow-card"
             >
               Valider et continuer
               <ChevronRight size={16} />

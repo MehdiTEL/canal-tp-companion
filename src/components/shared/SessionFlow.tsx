@@ -17,19 +17,19 @@ export function SessionFlow({ activeSprintId }: SessionFlowProps) {
         return (
           <div key={s.id} className="flex items-center flex-1 min-w-0">
             <div
-              className={`flex flex-col items-center text-center px-2 py-3 rounded-lg flex-1 min-w-[80px] transition-all duration-base ${
-                isActive ? 'bg-white shadow-card' : ''
+              className={`flex flex-col items-center text-center px-2 py-2.5 rounded-lg flex-1 min-w-[80px] transition-all duration-base ${
+                isActive ? 'bg-surface-app shadow-inner-soft' : ''
               }`}
             >
               <div
-                className="w-3 h-3 rounded-full mb-1.5"
+                className="w-2.5 h-2.5 rounded-full mb-1.5 ring-2 ring-white"
                 style={{ backgroundColor: s.color }}
               />
               <span className="text-[11px] font-display font-bold text-text-on-light truncate w-full">
                 {s.label}
               </span>
-              <span className="text-[10px] text-text-muted truncate w-full">{s.sub}</span>
-              <span className="text-[10px] font-semibold text-text-muted mt-0.5">{s.time}</span>
+              <span className="text-[10px] text-text-muted truncate w-full font-body">{s.sub}</span>
+              <span className="text-[10px] font-semibold mt-0.5 font-body" style={{ color: s.color }}>{s.time}</span>
             </div>
             {i < sprints.length - 1 && (
               <div className="w-6 h-[2px] bg-border-default shrink-0 -mx-1" />

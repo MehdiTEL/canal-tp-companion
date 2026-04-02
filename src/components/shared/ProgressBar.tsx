@@ -18,7 +18,7 @@ export function ProgressBar() {
         <span>Progression globale</span>
         <span className="font-semibold">{Math.round(globalProgress * 100)}%</span>
       </div>
-      <div className="flex h-1.5 rounded-full overflow-hidden bg-border-default">
+      <div className="flex h-2 rounded-full overflow-hidden bg-border-default/60">
         {segments.map((seg) => {
           const sp = sprintProgress[seg.id];
           if (!sp) return null;

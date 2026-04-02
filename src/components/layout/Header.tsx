@@ -8,13 +8,13 @@ interface HeaderProps {
 
 export function Header({ metier, onLogout }: HeaderProps) {
   return (
-    <header className="bg-surface-card border-b border-border-subtle sticky top-0 z-30">
-      <div className="px-4 py-3 flex items-center justify-between gap-4">
+    <header className="bg-white/80 backdrop-blur-md border-b border-border-subtle sticky top-0 z-30">
+      <div className="px-4 py-2.5 flex items-center justify-between gap-4">
         {/* Logo */}
-        <div className="flex items-center gap-2 shrink-0">
-          <span className="text-lg font-display font-bold text-lecko-blue tracking-tight">lecko.</span>
-          <span className="text-border-default text-sm font-light">x</span>
-          <span className="text-lg font-display font-bold text-canal-black tracking-wider">CANAL+</span>
+        <div className="flex items-center gap-2.5 shrink-0">
+          <span className="text-[17px] font-display font-extrabold text-lecko-blue tracking-tight leading-none">Lecko.</span>
+          <span className="text-border-strong text-[13px] font-light leading-none">×</span>
+          <span className="text-[17px] font-display font-extrabold text-canal-black tracking-[0.08em] leading-none">CANAL+</span>
         </div>
 
         {/* Progress bar */}

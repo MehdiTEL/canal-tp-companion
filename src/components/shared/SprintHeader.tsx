@@ -39,7 +39,7 @@ export function SprintHeader({
       </button>
 
       <div
-        className="rounded-xl px-5 py-4"
+        className="rounded-2xl px-5 py-4"
         style={{ backgroundColor: color }}
       >
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">

@@ -74,27 +74,27 @@ export function Login({ onLogin, loading }: LoginProps) {
 
   return (
     <div
-      className="min-h-screen bg-surface-app flex flex-col items-center justify-start p-4 pt-8 sm:pt-12"
-      style={{ background: 'linear-gradient(180deg, #FAFBFE 0%, #EEF2FF 100%)' }}
+      className="min-h-screen flex flex-col items-center justify-start p-4 pt-8 sm:pt-16"
+      style={{ background: 'linear-gradient(165deg, #FAFBFE 0%, #EBF0FF 50%, #F5F3FF 100%)' }}
     >
       <div className="w-full max-w-md animate-slide-up">
         {/* Logo */}
         <div className="text-center mb-8 mt-4">
-          <div className="flex items-center justify-center gap-3 mb-5">
-            <span className="text-3xl font-display font-bold text-lecko-blue tracking-tight">lecko.</span>
-            <span className="text-border-default text-2xl font-light">x</span>
-            <span className="text-3xl font-display font-bold text-canal-black tracking-wider">CANAL+</span>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span className="text-[32px] font-display font-extrabold text-lecko-blue tracking-tight leading-none">Lecko.</span>
+            <span className="text-border-strong text-xl font-light leading-none">×</span>
+            <span className="text-[32px] font-display font-extrabold text-canal-black tracking-[0.08em] leading-none">CANAL+</span>
           </div>
-          <p className="text-[15px] text-text-body font-body">
+          <p className="text-[15px] text-text-body font-body font-medium">
             Formation IA / Copilot Chat
           </p>
-          <p className="text-[13px] text-text-muted font-body mt-1">
+          <p className="text-[12px] text-text-muted font-body mt-1 uppercase tracking-widest font-semibold">
             Session Pilote 2026
           </p>
         </div>
 
         {/* Metier selection */}
-        <form onSubmit={handleSubmit} className="bg-surface-card rounded-xl p-6 shadow-elevated space-y-5">
+        <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 shadow-elevated border border-border-subtle/60 space-y-5">
           <div>
             <p className="text-[14px] font-display font-bold text-text-on-light mb-1">
               Quel est votre metier ?
@@ -170,7 +170,7 @@ export function Login({ onLogin, loading }: LoginProps) {
           <button
             type="submit"
             disabled={!selectedMetier || loading}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-md bg-surface-dark text-white font-display font-bold text-[15px] tracking-[0.01em] hover:bg-surface-dark/90 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-base"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-lecko-blue text-white font-display font-bold text-[15px] tracking-[0.01em] hover:bg-lecko-blue/90 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-base shadow-card"
           >
             {loading ? 'Connexion...' : 'Commencer la session'}
             {!loading && <ArrowRight size={18} />}

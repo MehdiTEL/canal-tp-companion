@@ -14,7 +14,7 @@ export function MobileNav() {
   const { isSprintUnlocked, justUnlocked } = useProgress();
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-surface-card border-t border-border-subtle z-30">
+    <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-border-subtle z-30">
       <div className="flex items-center justify-around py-1.5 px-1">
         {navItems.map((item) => {
           const unlocked = item.sprintId ? isSprintUnlocked(item.sprintId) : true;

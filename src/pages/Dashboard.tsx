@@ -51,9 +51,9 @@ export function Dashboard() {
   const { getSprintCompletion, isSprintStarted, isSprintUnlocked, justUnlocked } = useProgress();
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="max-w-2xl mx-auto space-y-5">
       {/* Session flow diagram */}
-      <div className="bg-surface-card rounded-xl shadow-card p-4">
+      <div className="bg-white rounded-2xl shadow-card border border-border-subtle/50 p-4">
         <SessionFlow />
       </div>
 
@@ -76,10 +76,10 @@ export function Dashboard() {
               key={sprint.id}
               onClick={() => (unlocked || isJustUnlocked) && navigate(sprint.path)}
               disabled={!unlocked && !isJustUnlocked}
-              className={`w-full bg-surface-card rounded-xl shadow-card p-4 flex items-center gap-4 transition-all duration-base text-left group ${
+              className={`w-full bg-white rounded-xl shadow-card border border-border-subtle/40 p-4 flex items-center gap-4 transition-all duration-base text-left group ${
                 unlocked || isJustUnlocked
-                  ? 'hover:shadow-elevated active:scale-[0.995] cursor-pointer'
-                  : 'opacity-60 cursor-not-allowed'
+                  ? 'hover:shadow-elevated hover:border-border-default active:scale-[0.995] cursor-pointer'
+                  : 'opacity-50 cursor-not-allowed'
               }`}
               style={{
                 borderLeft: unlocked && started ? `4px solid ${sprint.color}` : '4px solid transparent',

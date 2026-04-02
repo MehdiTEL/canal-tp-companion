@@ -51,9 +51,10 @@ export default {
         xl: '20px',
       },
       boxShadow: {
-        card: '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)',
-        elevated: '0 4px 12px rgba(0,0,0,0.08)',
+        card: '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)',
+        elevated: '0 4px 16px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04)',
         floating: '0 12px 40px rgba(0,0,0,0.12)',
+        'inner-soft': 'inset 0 1px 2px rgba(0,0,0,0.04)',
       },
       spacing: {
         xs: '4px',

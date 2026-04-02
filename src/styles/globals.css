@@ -4,7 +4,8 @@
 
 @layer base {
   body {
-    background-color: #FAFBFE;
+    background: linear-gradient(165deg, #FAFBFE 0%, #F5F7FF 50%, #FAFBFE 100%);
+    min-height: 100vh;
     color: #111827;
     font-family: 'Source Sans 3', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
