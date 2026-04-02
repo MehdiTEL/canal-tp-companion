@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { SprintHeader } from '../components/shared/SprintHeader';
 import { ExerciseCard } from '../components/shared/ExerciseCard';
+import { SprintRecap } from '../components/shared/SprintRecap';
 import { CopilotLink } from '../components/shared/CopilotLink';
 import { echauffementMeta, echauffementByGroup } from '../data/echauffement';
 import { getGroupForMetier } from '../data/metierGroups';
@@ -32,6 +33,21 @@ export function Echauffement({ participantId, metier }: EchauffementProps) {
 
   const localData = getLocalData('echauffement-ex1');
   const completed = localData?.completed || false;
+  const [showRecap, setShowRecap] = useState(false);
+
+  if (showRecap || (completed && !selectedTheme)) {
+    return (
+      <div className="max-w-3xl mx-auto py-8">
+        <SprintRecap
+          sprintTitle="Echauffement"
+          sprintColor="#06B6D4"
+          exercisesCompleted={1}
+          nextSprintLabel="Sprint 1 — Cas pratique"
+          message="Bien joue ! L'echauffement est termine."
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
@@ -85,6 +101,7 @@ export function Echauffement({ participantId, metier }: EchauffementProps) {
           sprintColor="#06B6D4"
           initialData={localData}
           onSave={saveSubmission}
+          onComplete={() => setShowRecap(true)}
           showRating={false}
           saving={saving}
         />

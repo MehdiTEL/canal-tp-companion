@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { SprintHeader } from '../components/shared/SprintHeader';
 import { ExerciseCard } from '../components/shared/ExerciseCard';
+import { SprintRecap } from '../components/shared/SprintRecap';
 import { CopilotLink } from '../components/shared/CopilotLink';
 import { ConsignesPanel } from '../components/shared/ConsignesPanel';
 import { Stepper } from '../components/shared/Stepper';
@@ -42,6 +43,23 @@ export function Sprint3({ participantId, metier }: Sprint3Props) {
     }
     return max;
   }, [completedIndexes, cu.exercises.length]);
+
+  const allCompleted = completedIndexes.size === cu.exercises.length;
+  const [showRecap, setShowRecap] = useState(false);
+
+  if (showRecap || allCompleted) {
+    return (
+      <div className="max-w-3xl mx-auto py-8">
+        <SprintRecap
+          sprintTitle="Sprint 3 — Agent Lite"
+          sprintColor="#8B5CF6"
+          exercisesCompleted={cu.exercises.length}
+          nextSprintLabel={null}
+          message="Felicitations ! Vous avez termine l'ensemble du parcours."
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
@@ -86,6 +104,8 @@ export function Sprint3({ participantId, metier }: Sprint3Props) {
           onComplete={() => {
             if (activeExercise < cu.exercises.length - 1) {
               setActiveExercise(activeExercise + 1);
+            } else {
+              setShowRecap(true);
             }
           }}
           showRating={true}

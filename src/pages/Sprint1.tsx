@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { SprintHeader } from '../components/shared/SprintHeader';
 import { ExerciseCard } from '../components/shared/ExerciseCard';
+import { SprintRecap } from '../components/shared/SprintRecap';
 import { CopilotLink } from '../components/shared/CopilotLink';
 import { DocumentPanel } from '../components/shared/DocumentPanel';
 import { Stepper } from '../components/shared/Stepper';
@@ -46,6 +47,22 @@ export function Sprint1({ participantId, metier }: Sprint1Props) {
     return max;
   }, [completedIndexes, scenario.steps.length]);
 
+  const allCompleted = completedIndexes.size === scenario.steps.length;
+  const [showRecap, setShowRecap] = useState(false);
+
+  if (showRecap || allCompleted) {
+    return (
+      <div className="max-w-3xl mx-auto py-8">
+        <SprintRecap
+          sprintTitle="Sprint 1 — Cas pratique"
+          sprintColor="#2563EB"
+          exercisesCompleted={scenario.steps.length}
+          nextSprintLabel="Sprint 2 — Challenge collectif"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <SprintHeader
@@ -89,6 +106,8 @@ export function Sprint1({ participantId, metier }: Sprint1Props) {
             onComplete={() => {
               if (currentStep < scenario.steps.length - 1) {
                 setCurrentStep(currentStep + 1);
+              } else {
+                setShowRecap(true);
               }
             }}
             saving={saving}
