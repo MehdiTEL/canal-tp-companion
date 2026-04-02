@@ -67,31 +67,28 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
               Suivez la formation sur Teams et completez les exercices ici. Chaque sprint se debloque en terminant le precedent.
             </p>
           </div>
-          <div className="shrink-0 flex items-center gap-2">
-            {onChangeMetier && (
-              <button
-                onClick={onChangeMetier}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border-default text-[13px] font-body font-medium text-text-body hover:bg-surface-elevated hover:border-border-strong transition-all duration-fast"
-              >
-                <ArrowLeft size={14} className="text-text-muted" />
-                Changer de metier
-              </button>
-            )}
+          {onChangeMetier && (
             <button
-              onClick={() => {
-                if (window.confirm('Remettre toute la progression a zero ? Cette action est irreversible.')) {
-                  localStorage.removeItem('canal-tp-submissions');
-                  window.location.reload();
-                }
-              }}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-red-200 text-[13px] font-body font-medium text-red-500 hover:bg-red-50 hover:border-red-300 transition-all duration-fast"
-              title="Remettre la progression a zero"
+              onClick={onChangeMetier}
+              className="shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border-default text-[13px] font-body font-medium text-text-body hover:bg-surface-elevated hover:border-border-strong transition-all duration-fast"
             >
-              <RotateCcw size={14} />
-              Reinitialiser
+              <ArrowLeft size={14} className="text-text-muted" />
+              Changer de metier
             </button>
-          </div>
+          )}
         </div>
+        <button
+          onClick={() => {
+            if (window.confirm('Remettre toute la progression a zero ? Cette action est irreversible.')) {
+              localStorage.removeItem('canal-tp-submissions');
+              window.location.reload();
+            }
+          }}
+          className="w-full mt-3 flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 border-red-200 text-[15px] font-display font-bold text-red-500 hover:bg-red-50 hover:border-red-400 active:scale-[0.98] transition-all duration-fast"
+        >
+          <RotateCcw size={18} />
+          Reinitialiser ma progression
+        </button>
       </div>
 
       {/* Session flow diagram */}
