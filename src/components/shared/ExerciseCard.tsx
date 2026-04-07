@@ -85,32 +85,35 @@ export function ExerciseCard({
   return (
     <div
       className={`animate-slide-up bg-white rounded-2xl shadow-card border transition-all duration-base ${
-        completed ? 'border-success/25' : 'border-border-subtle/50'
+        completed ? 'border-success/30 shadow-[0_0_0_1px_rgba(16,185,129,0.08)]' : 'border-border-default'
       }`}
     >
       {/* Top color bar */}
-      <div className="h-1 rounded-t-2xl" style={{ backgroundColor: completed ? '#10B981' : sprintColor }} />
+      <div
+        className="h-1.5 rounded-t-2xl transition-colors duration-base"
+        style={{ backgroundColor: completed ? '#10B981' : sprintColor }}
+      />
 
-      <div className="p-5 space-y-5">
+      <div className="p-5 sm:p-6 space-y-5">
         {/* Title row */}
         <div className="flex items-start justify-between gap-3">
-          <div>
-            <h3 className="font-display font-bold text-[18px] text-text-on-light tracking-tight">
-              {exercise.title}
-            </h3>
-          </div>
-          <div className="flex items-center gap-2 shrink-0">
-            {completed && <CheckCircle2 size={22} className="text-success" />}
-          </div>
+          <h3 className="font-display font-bold text-[18px] text-text-on-light tracking-tight leading-snug">
+            {exercise.title}
+          </h3>
+          {completed && (
+            <div className="shrink-0 animate-fade-in">
+              <CheckCircle2 size={22} className="text-success" />
+            </div>
+          )}
         </div>
 
         {/* Consigne */}
         <div
-          className="rounded-lg bg-surface-elevated border-l-[3px] px-4 py-3.5"
+          className="rounded-xl bg-surface-elevated/80 border-l-[3px] px-4 py-4"
           style={{ borderLeftColor: sprintColor }}
         >
           <span
-            className="inline-block text-[9px] font-display font-bold uppercase tracking-[0.15em] px-2 py-0.5 rounded mb-2 text-white"
+            className="inline-block text-[10px] font-display font-bold uppercase tracking-[0.15em] px-2.5 py-0.5 rounded-md mb-2.5 text-white"
             style={{ backgroundColor: sprintColor }}
           >
             {t('exercise.consigne')}
@@ -144,7 +147,7 @@ export function ExerciseCard({
           {!completed ? (
             <button
               onClick={handleComplete}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-lecko-blue text-white text-[14px] font-display font-bold tracking-[0.01em] hover:bg-lecko-blue/90 active:scale-[0.98] transition-all duration-base ml-auto shadow-card"
+              className="flex items-center gap-2 px-6 py-3 rounded-xl bg-lecko-blue text-white text-[14px] font-display font-bold tracking-[0.01em] hover:bg-lecko-blue/90 active:scale-[0.97] transition-all duration-base ml-auto shadow-elevated"
             >
               {t('exercise.complete')}
               <ChevronRight size={16} />
@@ -163,8 +166,8 @@ export function ExerciseCard({
             {!showAnswer ? (
               <button
                 onClick={() => setShowAnswer(true)}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 border-dashed transition-all duration-base active:scale-[0.98]"
-                style={{ borderColor: `${sprintColor}40`, color: sprintColor }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl border-2 border-dashed transition-all duration-base active:scale-[0.98] hover:bg-surface-elevated/50"
+                style={{ borderColor: `${sprintColor}35`, color: sprintColor }}
               >
                 <Eye size={18} />
                 <span className="font-display font-bold text-[14px]">{t('exercise.discoverAnswer')}</span>
@@ -180,21 +183,21 @@ export function ExerciseCard({
 
                 {/* Ideal prompt */}
                 {exercise.idealPrompt && (
-                  <div className="rounded-xl border overflow-hidden" style={{ borderColor: `${sprintColor}25` }}>
-                    <div className="flex items-center justify-between px-4 py-2" style={{ backgroundColor: `${sprintColor}08` }}>
+                  <div className="rounded-xl border overflow-hidden" style={{ borderColor: `${sprintColor}20` }}>
+                    <div className="flex items-center justify-between px-4 py-2.5" style={{ backgroundColor: `${sprintColor}06` }}>
                       <span className="text-[11px] font-display font-bold uppercase tracking-wider" style={{ color: sprintColor }}>
                         {t('exercise.idealPrompt')}
                       </span>
                       <button
                         onClick={() => handleCopy(exercise.idealPrompt!, 'prompt')}
-                        className="flex items-center gap-1 text-[11px] font-body px-2 py-1 rounded-md transition-colors hover:bg-white/60"
+                        className="flex items-center gap-1 text-[11px] font-body px-2.5 py-1 rounded-md transition-colors hover:bg-white/60"
                         style={{ color: copiedPrompt ? '#10B981' : sprintColor }}
                       >
                         {copiedPrompt ? <Check size={12} /> : <Copy size={12} />}
                         {copiedPrompt ? t('exercise.copied') : t('exercise.copy')}
                       </button>
                     </div>
-                    <div className="px-4 py-3 bg-surface-app">
+                    <div className="px-4 py-3.5 bg-surface-app">
                       <p className="text-[13px] font-mono text-text-body leading-relaxed whitespace-pre-wrap">
                         {exercise.idealPrompt}
                       </p>
@@ -204,21 +207,21 @@ export function ExerciseCard({
 
                 {/* Ideal result */}
                 {exercise.idealResult && (
-                  <div className="rounded-xl border overflow-hidden" style={{ borderColor: `${sprintColor}25` }}>
-                    <div className="flex items-center justify-between px-4 py-2" style={{ backgroundColor: `${sprintColor}08` }}>
+                  <div className="rounded-xl border overflow-hidden" style={{ borderColor: `${sprintColor}20` }}>
+                    <div className="flex items-center justify-between px-4 py-2.5" style={{ backgroundColor: `${sprintColor}06` }}>
                       <span className="text-[11px] font-display font-bold uppercase tracking-wider" style={{ color: sprintColor }}>
                         {t('exercise.expectedResult')}
                       </span>
                       <button
                         onClick={() => handleCopy(exercise.idealResult!, 'result')}
-                        className="flex items-center gap-1 text-[11px] font-body px-2 py-1 rounded-md transition-colors hover:bg-white/60"
+                        className="flex items-center gap-1 text-[11px] font-body px-2.5 py-1 rounded-md transition-colors hover:bg-white/60"
                         style={{ color: copiedResult ? '#10B981' : sprintColor }}
                       >
                         {copiedResult ? <Check size={12} /> : <Copy size={12} />}
                         {copiedResult ? t('exercise.copied') : t('exercise.copy')}
                       </button>
                     </div>
-                    <div className="px-4 py-3 bg-white">
+                    <div className="px-4 py-3.5 bg-white">
                       <p className="text-[13px] font-body text-text-body leading-relaxed whitespace-pre-wrap">
                         {exercise.idealResult}
                       </p>

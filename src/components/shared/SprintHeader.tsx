@@ -30,22 +30,26 @@ export function SprintHeader({
     : 0;
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 animate-slide-up">
       <button
         onClick={onBack || (() => navigate('/dashboard'))}
-        className="flex items-center gap-1.5 text-[13px] font-body text-text-muted hover:text-text-on-light transition-colors"
+        className="flex items-center gap-1.5 text-[13px] font-body text-text-muted hover:text-text-on-light transition-colors group"
       >
-        <ArrowLeft size={15} />
+        <ArrowLeft size={15} className="group-hover:-translate-x-0.5 transition-transform" />
         {onBack ? (backLabel || t('sprintHeader.backShort')) : t('sprintHeader.back')}
       </button>
 
       <div
-        className="rounded-2xl px-5 py-4"
+        className="rounded-2xl px-5 py-5 relative overflow-hidden"
         style={{ backgroundColor: color }}
       >
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        {/* Subtle decorative elements */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-12 translate-x-12" />
+        <div className="absolute bottom-0 left-0 w-20 h-20 bg-black/5 rounded-full translate-y-8 -translate-x-8" />
+
+        <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
-            <h1 className="text-xl sm:text-2xl font-display font-bold text-white tracking-[-0.02em]">
+            <h1 className="text-xl sm:text-2xl font-display font-extrabold text-white tracking-[-0.02em]">
               {title}
             </h1>
             {currentStep !== undefined && totalSteps !== undefined && (
@@ -55,13 +59,13 @@ export function SprintHeader({
             )}
           </div>
 
-          <div className="bg-white/15 backdrop-blur-sm rounded-lg px-3 py-2 [&_*]:!text-white [&_.text-text-on-light]:!text-white [&_.text-text-muted]:!text-white/60">
+          <div className="bg-white/15 backdrop-blur-sm rounded-xl px-3.5 py-2.5 [&_*]:!text-white [&_.text-text-on-light]:!text-white [&_.text-text-muted]:!text-white/60">
             <Timer durationMinutes={duration} color="white" />
           </div>
         </div>
 
         {currentStep !== undefined && totalSteps !== undefined && totalSteps > 0 && (
-          <div className="mt-3 flex items-center gap-3">
+          <div className="relative mt-4 flex items-center gap-3">
             <div className="flex-1 h-2 rounded-full bg-white/20 overflow-hidden">
               <div
                 className="h-full rounded-full bg-white transition-all duration-slow"

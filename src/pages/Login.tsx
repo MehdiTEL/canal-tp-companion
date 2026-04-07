@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, Search, Check } from 'lucide-react';
+import { ArrowRight, Search, Check, Sparkles, BookOpen, Users, Zap } from 'lucide-react';
 import i18n from '../i18n';
 import { LanguageSelector } from '../components/shared/LanguageSelector';
 
@@ -75,33 +75,60 @@ export function Login({ onLogin, loading }: LoginProps) {
   };
 
   return (
-    <div
-      className="min-h-screen flex flex-col items-center justify-start p-4 pt-8 sm:pt-16"
-      style={{ background: 'linear-gradient(165deg, #FAFBFE 0%, #EBF0FF 50%, #F5F3FF 100%)' }}
-    >
+    <div className="min-h-screen flex flex-col items-center justify-start p-4 pt-6 sm:pt-12 bg-gradient-to-b from-slate-50 via-white to-blue-50/30">
       {/* Language selector — top right */}
-      <div className="absolute top-4 right-4">
+      <div className="absolute top-4 right-4 z-10">
         <LanguageSelector />
       </div>
 
       <div className="w-full max-w-md animate-slide-up">
-        {/* Logo */}
-        <div className="text-center mb-8 mt-4">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="text-[32px] font-display font-extrabold text-lecko-blue tracking-tight leading-none">Lecko.</span>
-            <span className="text-border-strong text-xl font-light leading-none">×</span>
-            <span className="text-[32px] font-display font-extrabold text-canal-black tracking-[0.08em] leading-none">CANAL+</span>
+        {/* Logo + branding */}
+        <div className="text-center mb-6 mt-2">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <span className="text-[28px] sm:text-[32px] font-display font-extrabold text-lecko-blue tracking-tight leading-none">Lecko.</span>
+            <span className="text-border-strong text-lg font-light leading-none">×</span>
+            <span className="text-[28px] sm:text-[32px] font-display font-extrabold text-canal-black tracking-[0.08em] leading-none">CANAL+</span>
           </div>
-          <p className="text-[15px] text-text-body font-body font-medium">
-            {t('login.title')}
-          </p>
-          <p className="text-[12px] text-text-muted font-body mt-1 uppercase tracking-widest font-semibold">
+          <p className="text-[11px] text-text-muted font-body uppercase tracking-[0.2em] font-semibold">
             {t('login.session')}
           </p>
         </div>
 
-        {/* Metier selection */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 shadow-elevated border border-border-subtle/60 space-y-5">
+        {/* Hero card */}
+        <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl shadow-floating text-white mb-5">
+          <div className="absolute top-0 right-0 w-40 h-40 bg-lecko-blue/15 rounded-full blur-3xl -translate-y-8 translate-x-8" />
+          <div className="absolute bottom-0 left-0 w-28 h-28 bg-sprint-3/10 rounded-full blur-2xl translate-y-6 -translate-x-6" />
+
+          <div className="relative px-5 py-5 sm:px-6">
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles size={16} className="text-amber-400" />
+              <span className="text-[11px] font-display font-bold uppercase tracking-wider text-white/60">{t('login.subtitle')}</span>
+            </div>
+            <h1 className="font-display font-extrabold text-[20px] sm:text-[22px] tracking-tight leading-snug mb-3">
+              {t('login.title')}
+            </h1>
+            <p className="text-[13px] sm:text-[14px] text-white/60 font-body leading-relaxed mb-4">
+              {t('login.description')}
+            </p>
+
+            {/* 3 highlights */}
+            <div className="flex flex-wrap gap-2">
+              {[
+                { icon: BookOpen, label: '4 sprints' },
+                { icon: Users, label: '150 participants' },
+                { icon: Zap, label: 'Copilot Chat' },
+              ].map((item) => (
+                <span key={item.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/8 text-[11px] font-body font-medium text-white/70">
+                  <item.icon size={11} />
+                  {item.label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Metier selection form */}
+        <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-5 sm:p-6 shadow-elevated border border-border-default/60 space-y-5">
           <div>
             <p className="text-[14px] font-display font-bold text-text-on-light mb-1">
               {t('login.metierLabel')}
@@ -112,10 +139,10 @@ export function Login({ onLogin, loading }: LoginProps) {
 
             <div ref={dropdownRef} className="relative">
               <div
-                className={`flex items-center gap-2 border rounded-lg px-3 py-2.5 bg-white transition-all duration-fast cursor-text ${
+                className={`flex items-center gap-2 border rounded-xl px-3.5 py-3 bg-white transition-all duration-fast cursor-text ${
                   isOpen
-                    ? 'border-lecko-blue ring-2 ring-lecko-blue/20'
-                    : 'border-border-default hover:border-lecko-blue/40'
+                    ? 'border-lecko-blue ring-2 ring-lecko-blue/15 shadow-glow'
+                    : 'border-border-default hover:border-border-strong'
                 }`}
                 onClick={() => { setIsOpen(true); inputRef.current?.focus(); }}
               >
@@ -126,7 +153,7 @@ export function Login({ onLogin, loading }: LoginProps) {
                     <button
                       type="button"
                       onClick={(e) => { e.stopPropagation(); setSelectedMetier(null); setIsOpen(true); inputRef.current?.focus(); }}
-                      className="text-[11px] text-text-muted hover:text-text-body ml-auto"
+                      className="text-[11px] text-text-muted hover:text-text-body ml-auto transition-colors"
                     >
                       {t('login.change')}
                     </button>
@@ -145,7 +172,7 @@ export function Login({ onLogin, loading }: LoginProps) {
               </div>
 
               {isOpen && (
-                <div className="absolute z-20 w-full mt-1.5 bg-white border border-border-default rounded-lg shadow-floating max-h-[260px] overflow-y-auto animate-slide-up">
+                <div className="absolute z-20 w-full mt-2 bg-white border border-border-default rounded-xl shadow-floating max-h-[260px] overflow-y-auto animate-slide-up">
                   {filtered.length === 0 ? (
                     <div className="px-4 py-3 text-[13px] text-text-muted font-body">
                       {t('login.noResult')}
@@ -156,7 +183,7 @@ export function Login({ onLogin, loading }: LoginProps) {
                         key={m}
                         type="button"
                         onClick={() => handleSelect(m)}
-                        className={`w-full text-left px-4 py-2.5 text-[14px] font-body flex items-center justify-between gap-2 transition-colors ${
+                        className={`w-full text-left px-4 py-2.5 text-[14px] font-body flex items-center justify-between gap-2 transition-colors first:rounded-t-xl last:rounded-b-xl ${
                           selectedMetier === m
                             ? 'bg-lecko-blue/8 text-lecko-blue font-semibold'
                             : 'text-text-body hover:bg-surface-elevated'
@@ -175,14 +202,14 @@ export function Login({ onLogin, loading }: LoginProps) {
           <button
             type="submit"
             disabled={!selectedMetier || loading}
-            className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-display font-bold text-[15px] tracking-[0.01em] active:scale-[0.98] transition-all duration-base ${
+            className={`w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl font-display font-bold text-[15px] tracking-[0.01em] transition-all duration-base ${
               !selectedMetier && !loading
-                ? 'bg-border-default text-text-muted cursor-not-allowed'
-                : 'bg-lecko-blue text-white hover:bg-lecko-blue/90 shadow-card'
+                ? 'bg-surface-elevated text-text-muted cursor-not-allowed border border-border-default'
+                : 'bg-lecko-blue text-white hover:bg-lecko-blue/90 active:scale-[0.98] shadow-elevated'
             }`}
           >
             {loading ? t('login.loading') : t('login.start')}
-            {!loading && <ArrowRight size={18} />}
+            {!loading && selectedMetier && <ArrowRight size={18} />}
           </button>
         </form>
       </div>

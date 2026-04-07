@@ -10,7 +10,7 @@ interface HeaderProps {
 export function Header({ metier, onLogout }: HeaderProps) {
   const { t } = useTranslation();
   return (
-    <header className="bg-white/80 backdrop-blur-md border-b border-border-subtle sticky top-0 z-30">
+    <header className="bg-white/90 backdrop-blur-lg border-b border-border-subtle sticky top-0 z-30">
       <div className="px-4 py-2.5 flex items-center justify-between gap-4">
         {/* Logo */}
         <div className="flex items-center gap-2.5 shrink-0">
@@ -30,11 +30,11 @@ export function Header({ metier, onLogout }: HeaderProps) {
             {onLogout && (
               <button
                 onClick={onLogout}
-                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[13px] text-text-body font-body hover:bg-surface-elevated transition-colors"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[13px] text-text-body font-body hover:bg-surface-elevated transition-colors border border-transparent hover:border-border-default"
                 title={t('header.changeMetier')}
               >
                 <Briefcase size={13} className="text-text-muted" />
-                <span className="font-semibold">{metier}</span>
+                <span className="font-semibold max-w-[140px] truncate">{metier}</span>
                 <RefreshCw size={11} className="text-text-muted ml-0.5" />
               </button>
             )}

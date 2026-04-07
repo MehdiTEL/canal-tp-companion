@@ -13,13 +13,20 @@
     "session": "SESSION PILOTE 2026"
   },
   "dashboard": {
-    "title": "Tirez parti de Copilot Chat au quotidien",
-    "description": "Suivez la formation sur Teams et completez les exercices ici. Chaque sprint se debloque en terminant le precedent.",
+    "title": "Votre guide pratique Copilot Chat",
+    "subtitle": "Travaux Pratiques — Formation IA",
+    "description": "Cette application vous accompagne pas a pas dans les exercices de la formation. Suivez les sprints dans l'ordre, utilisez les documents fournis, et laissez-vous guider.",
+    "heroPoint1": "4 sprints progressifs de 10 a 30 min",
+    "heroPoint2": "Documents et consignes integres",
+    "heroPoint3": "Astuces et reponses pour chaque exercice",
     "changeMetier": "Changer de metier",
     "resetConfirm": "Remettre toute la progression a zero ? Cette action est irreversible.",
     "resetButton": "Reinitialiser ma progression",
     "justUnlocked": "Debloque ! Continuez la formation, vous pourrez y acceder apres.",
-    "lockMessage": "Terminez {{requires}} pour debloquer"
+    "lockMessage": "Terminez {{requires}} pour debloquer",
+    "yourProgress": "Votre progression",
+    "letsGo": "C'est parti !",
+    "continue": "Continuer"
   },
   "sprints": {
     "echauffement": "Echauffement",

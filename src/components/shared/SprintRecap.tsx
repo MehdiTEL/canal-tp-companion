@@ -25,21 +25,18 @@ export function SprintRecap({
 
   return (
     <div className="max-w-lg mx-auto animate-slide-up">
-      <div className="bg-white rounded-2xl shadow-elevated border border-border-subtle/50 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-elevated border border-border-default overflow-hidden">
         <div
           className="px-6 py-8 text-center relative overflow-hidden"
           style={{ backgroundColor: sprintColor }}
         >
+          {/* Decorative sparkles */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-12 translate-x-12" />
+          <div className="absolute bottom-0 left-0 w-20 h-20 bg-black/5 rounded-full translate-y-8 -translate-x-8" />
           <Sparkles
-            size={80}
-            className="absolute top-2 right-4 text-white/10 animate-pulse-soft"
+            size={60}
+            className="absolute top-3 right-6 text-white/10 animate-pulse-soft"
             strokeWidth={1}
-          />
-          <Sparkles
-            size={40}
-            className="absolute bottom-3 left-6 text-white/15 animate-pulse-soft"
-            strokeWidth={1}
-            style={{ animationDelay: '500ms' }}
           />
 
           <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm mb-4 animate-recap-trophy">
@@ -49,7 +46,7 @@ export function SprintRecap({
           <h2 className="text-2xl font-display font-extrabold text-white tracking-tight">
             {sprintTitle}
           </h2>
-          <p className="text-white/80 font-body text-[15px] mt-1">
+          <p className="text-white/70 font-body text-[15px] mt-1">
             {t('recap.completedSubtitle')}
           </p>
         </div>
@@ -89,8 +86,8 @@ export function SprintRecap({
 
           {nextSprintLabel && (
             <div
-              className="rounded-lg px-4 py-3 text-center"
-              style={{ backgroundColor: `${sprintColor}08`, border: `1px solid ${sprintColor}20` }}
+              className="rounded-xl px-4 py-3 text-center"
+              style={{ backgroundColor: `${sprintColor}08`, border: `1px solid ${sprintColor}15` }}
             >
               <p className="text-[13px] font-body text-text-body">
                 {t('recap.nextModule')}{' '}
@@ -105,7 +102,7 @@ export function SprintRecap({
           )}
 
           {nextSprintLabel === null && (
-            <div className="rounded-lg px-4 py-3 text-center bg-success/5 border border-success/20">
+            <div className="rounded-xl px-4 py-3 text-center bg-success/5 border border-success/15">
               <p className="text-[14px] font-body font-semibold text-success">
                 {t('recap.allDone')}
               </p>
@@ -115,10 +112,10 @@ export function SprintRecap({
             </div>
           )}
 
-          <div className="flex flex-col gap-2 pt-2">
+          <div className="flex flex-col gap-2.5 pt-2">
             <button
               onClick={() => navigate('/dashboard')}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-white font-display font-bold text-[15px] hover:opacity-90 active:scale-[0.98] transition-all duration-base shadow-card"
+              className="w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl text-white font-display font-bold text-[15px] hover:opacity-90 active:scale-[0.97] transition-all duration-base shadow-elevated"
               style={{ backgroundColor: sprintColor }}
             >
               <Home size={16} />
@@ -127,8 +124,8 @@ export function SprintRecap({
             {nextSprintLabel && (
               <button
                 onClick={() => navigate('/dashboard')}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border font-display font-semibold text-[14px] hover:bg-surface-elevated active:scale-[0.98] transition-all duration-base"
-                style={{ borderColor: `${sprintColor}30`, color: sprintColor }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border font-display font-semibold text-[14px] hover:bg-surface-elevated active:scale-[0.98] transition-all duration-base"
+                style={{ borderColor: `${sprintColor}25`, color: sprintColor }}
               >
                 {t('recap.seeProgress')}
                 <ArrowRight size={15} />

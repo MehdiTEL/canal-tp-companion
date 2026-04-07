@@ -13,13 +13,20 @@
     "session": "PILOT SESSION 2026"
   },
   "dashboard": {
-    "title": "Get the most out of Copilot Chat every day",
-    "description": "Follow the training on Teams and complete the exercises here. Each sprint unlocks by finishing the previous one.",
+    "title": "Your Copilot Chat Workshop Guide",
+    "subtitle": "Hands-on Exercises — AI Training",
+    "description": "This app guides you step by step through the training exercises. Follow the sprints in order, use the provided documents, and let yourself be guided.",
+    "heroPoint1": "4 progressive sprints from 10 to 30 min",
+    "heroPoint2": "Integrated documents and instructions",
+    "heroPoint3": "Hints and answers for each exercise",
     "changeMetier": "Change job role",
     "resetConfirm": "Reset all progress to zero? This action cannot be undone.",
     "resetButton": "Reset my progress",
     "justUnlocked": "Unlocked! Continue the training, you can access it after.",
-    "lockMessage": "Complete {{requires}} to unlock"
+    "lockMessage": "Complete {{requires}} to unlock",
+    "yourProgress": "Your progress",
+    "letsGo": "Let's go!",
+    "continue": "Continue"
   },
   "sprints": {
     "echauffement": "Warm-up",
