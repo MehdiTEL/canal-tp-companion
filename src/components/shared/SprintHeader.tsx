@@ -87,7 +87,11 @@ export function SprintHeader({
           </div>
 
           {subtitle && (
-            <p className="text-[14px] text-white/70 font-body mb-3">{subtitle}</p>
+            <div className="mt-2 mb-3 bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/10">
+              <p className="text-[14px] sm:text-[15px] text-white/90 font-body leading-relaxed">
+                {subtitle}
+              </p>
+            </div>
           )}
 
           {currentStep !== undefined && totalSteps !== undefined && totalSteps > 0 && (

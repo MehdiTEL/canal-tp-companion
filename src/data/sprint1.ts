@@ -16,14 +16,14 @@ export const sprint1Scenario: Scenario = {
   id: 'sprint1-soiree-studiocanal',
   title: 'Organiser une soiree en interne autour de STUDIOCANAL STORIES',
   description:
-    'Canal+ organise un evenement interne pour celebrer le lancement de STUDIOCANAL STORIES. Vous etes en charge de l\'organisation complete. Utilisez Copilot Chat pour preparer chaque etape.',
+    'Canal+ lance STUDIOCANAL STORIES, sa nouvelle plateforme de contenus originaux. Vous organisez la soiree interne du 15 mai au Rooftop Canal+ d\'Issy pour 120 collaborateurs (budget : 15-20K\u20AC). Telechargez le brief PDF ci-dessous et uploadez-le dans Copilot Chat pour travailler avec un maximum de contexte !',
   steps: [
     /* ---------- Etape 1 ---------- */
     {
       id: 'sprint1-step1',
       title: 'Brainstormer la vision de la soiree',
       description:
-        'Utilisez Copilot Chat pour generer des idees de soiree autour de STUDIOCANAL STORIES. Demandez-lui de proposer un concept, une ambiance, un theme, et les moments forts de la soiree.',
+        'Telechargez le brief PDF ci-dessous, puis uploadez-le dans Copilot Chat. Demandez-lui de proposer des concepts de soiree en s\'appuyant sur les informations du brief : contraintes, budget, contenus a projeter, ambiance souhaitee.',
       documents: [
         {
           name: 'brief-soiree-studiocanal.pdf',
@@ -37,7 +37,7 @@ export const sprint1Scenario: Scenario = {
           id: 's1-s1-hint1',
           exercice_id: 'sprint1-step1',
           index: 0,
-          text: 'Donnez du contexte : "Canal+ organise une soiree interne pour celebrer le lancement de STUDIOCANAL STORIES. Propose 3 concepts de soiree originaux avec pour chacun : le theme, l\'ambiance, 3 moments forts, et le public cible."',
+          text: 'Astuce cle : uploadez le brief PDF dans Copilot Chat ! Puis demandez : "En te basant sur ce brief, propose 3 concepts de soiree originaux avec pour chacun : le theme, l\'ambiance, 4 moments forts integrant les contenus a projeter, et le public cible. Respecte le budget de 15-20K EUR et la palette noir/or/blanc."',
         },
         {
           id: 's1-s1-hint2',
@@ -47,9 +47,9 @@ export const sprint1Scenario: Scenario = {
         },
       ],
       idealPrompt:
-        'Tu es un event planner specialise dans les evenements corporate haut de gamme pour les groupes medias. Canal+ organise une soiree interne pour celebrer STUDIOCANAL STORIES. Propose 3 concepts de soiree originaux. Pour chacun, detaille : le theme, l\'ambiance (decoration, musique, lumieres), 3 moments forts, et le public vise. Sois creatif et premium.',
+        'J\'ai uploade le brief de la soiree STUDIOCANAL STORIES dans cette conversation. En te basant sur ce document, tu es un event planner specialise dans les evenements corporate haut de gamme pour les groupes medias.\n\nPropose-moi 3 concepts de soiree originaux et coherents avec le brief. Pour chacun, detaille :\n- Le theme et le fil rouge narratif\n- L\'ambiance (decoration, musique, eclairage) en lien avec la palette noir/or/blanc du brief\n- 4 moments forts integrant les contenus a projeter mentionnes dans le brief (teasers, bande-annonce, best-of)\n- Comment le concept met en valeur les 3 contenus STUDIOCANAL STORIES : "Les Ombres du Canal", "Terre Promise" et "Voix Libres"\n- Le public vise et le dress code\n\nSois creatif, premium et realiste par rapport au budget de 15-20K EUR.',
       idealResult:
-        'Voici 3 concepts de soiree STUDIOCANAL STORIES :\n\n1. "La Nuit des Histoires" — Theme : voyage a travers les recits iconiques de STUDIOCANAL. Ambiance : projection mapping sur les murs, bande-son cinematographique, eclairages tamisees or et bleu. Moments forts : quiz immersif sur les films STUDIOCANAL, masterclass express d\'un realisateur, avant-premiere exclusive. Public : tous les collaborateurs Canal+.\n\n2. "Studio Session" — Theme : les coulisses de la creation. Ambiance : decor de studio de tournage, lumieres de plateau, clap de cinema geant. Moments forts : photo booth decor cinema, table ronde createurs/producteurs, projection de teasers inedits. Public : equipes creation, production et direction.\n\n3. "Canal Stories Club" — Theme : club prive cinematographique. Ambiance : fauteuils club, bar a cocktails thematiques, jazz/lounge. Moments forts : pitch de 3 projets STUDIOCANAL en avant-premiere, remise de prix "meilleure story", DJ set cine-musical. Public : tous collaborateurs + invites VIP.',
+        'Voici 3 concepts de soiree STUDIOCANAL STORIES, conçus a partir du brief :\n\n**CONCEPT 1 : "LA NUIT DES HISTOIRES"**\nFil rouge : un voyage a travers les recits qui nous rassemblent — du cinema au podcast, chaque histoire est un lien.\n- Ambiance : Projection mapping sur les murs du rooftop reprenant des scenes iconiques STUDIOCANAL. Palette noir/or dominante. Eclairage tamise avec spots dores sur les affiches (Paddington, Anatomie d\'une Chute...). Playlist lounge de 19h a 21h30 (BO de films STUDIOCANAL), puis DJ set cinephile.\n- Moments forts : (1) Accueil avec cocktail signature "Le STUDIOCANAL" + montage best-of en boucle sur ecran geant. (2) Avant-premiere des 3 teasers avec intro de Julie Moreau. (3) Quiz immersif "Etes-vous incollable sur nos histoires ?" sur les smartphones (Kahoot). (4) DJ set thematique avec remixes de BO celebres.\n- Mise en valeur des contenus : "Les Ombres du Canal" projete avec extinction progressive des lumieres (effet thriller). "Terre Promise" diffuse avec eclairage vert/nature. "Voix Libres" ecoute collective avec casques distribues dans un espace intimiste.\n- Dress code : Smart casual, touche doree encouragee.\n\n**CONCEPT 2 : "STUDIO SESSION — LES COULISSES"**\nFil rouge : transporter les invites dans l\'envers du decor — comment naissent les histoires STUDIOCANAL.\n- Ambiance : Decor de studio de tournage. Clap geant a l\'entree, projecteurs cinema vintage, rails de travelling en deco, fauteuils de realisateur avec le nom des invites. Palette noir mat et or chaud.\n- Moments forts : (1) Photo booth "Devenez realisateur" avec props cinema. (2) Mot de bienvenue de Thomas Martin (DG adjoint) avec projection de la bande-annonce officielle. (3) "Pitch en 3 min" : Julie Moreau presente chaque contenu comme un pitch de producteur. (4) Remise du prix "Meilleure Story Canal+" vote par les collaborateurs.\n- Mise en valeur des contenus : Chaque teaser est introduce par un "clap" reel filme en direct et projete. Effet "premiere prise" pour creer l\'emotion.\n- Dress code : Smart casual, accessoire cinema bienvenu.\n\n**CONCEPT 3 : "LE CLUB STUDIOCANAL"**\nFil rouge : un club prive ephemere ou le cinema rencontre la convivialite.\n- Ambiance : Esprit club prive cinematographique. Fauteuils club, bar a cocktails retro-eclaire, jazz live (19h-21h) puis DJ. Bougies LED sur chaque table, neons dores "STORIES" en lettres geantes.\n- Moments forts : (1) Cocktail "Les Ombres" (dark & smoky) et "Terre Promise" (green & fresh) en reference aux contenus. (2) Avant-premiere en mode "seance privee" avec pop-corn dans des cornets noirs et or. (3) Table ronde express avec les createurs (15 min). (4) Networking libre avec DJ set et bar ouvert.\n- Mise en valeur des contenus : "Voix Libres" diffuse en podcast live dans un coin "salon d\'ecoute" avec casques et fauteuils, creant une experience intimiste unique.\n- Dress code : Smart casual chic.\n\n*Budget estimatif par concept : les 3 concepts sont realisables dans l\'enveloppe de 15-20K EUR. Le concept 2 est le plus ambitieux en decoration mais peut etre optimise en reutilisant du materiel STUDIOCANAL existant.*',
     },
 
     /* ---------- Etape 2 ---------- */
@@ -73,7 +73,7 @@ export const sprint1Scenario: Scenario = {
         },
       ],
       idealPrompt:
-        'A partir du concept retenu pour la soiree STUDIOCANAL STORIES, redige un mail d\'invitation a envoyer a tous les collaborateurs Canal+. Ton : premium mais chaleureux, enthousiaste. Structure : objet de mail accrocheur, introduction captivante (3 lignes max), programme de la soiree en bullet points, informations pratiques (date : jeudi 15 mai, lieu : rooftop Canal+ Issy, horaire : 19h-23h, dress code : smart casual), et un call-to-action pour confirmer sa presence. Maximum 200 mots.',
+        'A partir du concept retenu et du brief de la soiree STUDIOCANAL STORIES (que tu as deja en contexte), redige un mail d\'invitation a envoyer a tous les collaborateurs Canal+.\n\nContraintes :\n- Ton : premium mais chaleureux, enthousiaste sans etre corporate\n- Structure : objet accrocheur, introduction captivante (3 lignes max), programme en bullet points, infos pratiques (date, lieu avec adresse complete, horaire, dress code, parking), CTA pour confirmer\n- Integre un teasing sur les avant-premieres des 3 contenus mentionnes dans le brief\n- Maximum 250 mots\n- Ajoute une touche d\'humour subtile\n- Termine par une signature engageante',
       idealResult:
         'Objet : Vous etes invites a une soiree exceptionnelle STUDIOCANAL STORIES\n\nBonjour a toutes et a tous,\n\nLe cinema, c\'est aussi une histoire d\'equipe. Et cette equipe, c\'est vous. Pour celebrer le lancement de STUDIOCANAL STORIES, nous vous convions a une soiree qui s\'annonce memorable.\n\nAu programme :\n- 19h00 : Accueil cocktail & surprises cinematographiques\n- 19h45 : Avant-premiere exclusive d\'un contenu STUDIOCANAL STORIES\n- 20h30 : Diner & quiz immersif "Etes-vous incollable sur nos films ?"\n- 21h30 : DJ set cine-musical & photo booth decor de tournage\n\nInfos pratiques :\n- Date : Jeudi 15 mai 2025\n- Lieu : Rooftop Canal+, Issy-les-Moulineaux\n- Horaire : 19h - 23h\n- Dress code : Smart casual (venez comme a une avant-premiere, pas comme a un COMEX)\n\nConfirmez votre presence avant le 9 mai en repondant a ce mail.\n\nOn a hate de partager ce moment avec vous.\n\nL\'equipe STUDIOCANAL STORIES',
     },
@@ -83,13 +83,13 @@ export const sprint1Scenario: Scenario = {
       id: 'sprint1-step3',
       title: 'Creer la checklist d\'organisation',
       description:
-        'Utilisez Copilot Chat pour generer une checklist complete d\'organisation de la soiree : logistique, traiteur, technique, communication, plan B en cas d\'imprevus.',
+        'Telechargez le fichier Excel ci-dessous et uploadez-le dans Copilot Chat. Demandez-lui de completer la checklist avec des details supplementaires, d\'ajuster les deadlines, et de verifier la coherence avec le brief. Vous pouvez aussi lui demander de generer de nouveaux items.',
       documents: [
         {
           name: 'checklist-organisation-soiree.xlsx',
           type: 'xlsx',
           path: 'documents/checklist-organisation-soiree.xlsx',
-          description: 'Modele de checklist a completer avec Copilot Chat',
+          description: 'Checklist d\'organisation detaillee (31 taches, 5 categories) — a enrichir avec Copilot Chat',
         },
       ],
       hints: [
@@ -101,7 +101,7 @@ export const sprint1Scenario: Scenario = {
         },
       ],
       idealPrompt:
-        'Genere une checklist detaillee pour organiser la soiree STUDIOCANAL STORIES au rooftop Canal+ le 15 mai. Categories obligatoires : Logistique (lieu, mobilier, decoration, signalisation), Traiteur (menu, boissons, regime alimentaire), Technique (son, video, projection, eclairage), Communication (invitations, relances, affichage interne), Plan B (meteo, no-show, incident technique). Pour chaque item : description, responsable suggere, et deadline. Format checklist avec cases a cocher.',
+        'J\'ai uploade la checklist Excel d\'organisation de la soiree STUDIOCANAL STORIES. Elle contient deja 31 taches reparties en 5 categories.\n\nAnalyse cette checklist et :\n1. Identifie les taches manquantes que tu ajouterais (au moins 5)\n2. Pour chaque tache existante, verifie que la deadline est coherente avec le planning du brief (Jour J = 15 mai)\n3. Propose un ordre de priorite pour les taches a realiser cette semaine\n4. Suggere des optimisations : taches qui peuvent etre combinees, delegations plus efficaces\n\nPresente ta reponse de maniere structuree et actionnable.',
       idealResult:
         'Checklist d\'organisation — Soiree STUDIOCANAL STORIES (15 mai)\n\nLOGISTIQUE\n[ ] Reserver le rooftop et confirmer la capacite (max 150 pers.) — Resp : Office Manager — Deadline : 15 avril\n[ ] Commander mobilier complementaire (mange-debout, fauteuils lounge) — Resp : Logistique — Deadline : 1er mai\n[ ] Prevoir decoration thematique cinema (affiches STUDIOCANAL, eclairages) — Resp : Com interne — Deadline : 10 mai\n[ ] Installer la signaletique (fleches, plan, accueil) — Resp : Logistique — Deadline : 15 mai matin\n\nTRAITEUR\n[ ] Selectionner le traiteur et valider le menu — Resp : Office Manager — Deadline : 20 avril\n[ ] Prevoir options vegetariennes, vegan, sans gluten — Resp : Traiteur — Deadline : 5 mai\n[ ] Commander boissons (cocktails signatures, soft, eau) — Resp : Traiteur — Deadline : 10 mai\n\nTECHNIQUE\n[ ] Installer systeme son pour DJ set + micro speeches — Resp : Technique — Deadline : 15 mai 14h\n[ ] Preparer projection (ecran, video-projecteur, contenu) — Resp : Technique — Deadline : 14 mai\n[ ] Tester eclairage d\'ambiance le matin du J — Resp : Technique — Deadline : 15 mai 10h\n\nCOMMUNICATION\n[ ] Envoyer les invitations (J-30) — Resp : Com interne — Deadline : 15 avril\n[ ] Relance mail (J-7) — Resp : Com interne — Deadline : 8 mai\n[ ] Affichage interne et post sur l\'intranet — Resp : Com interne — Deadline : 1er mai\n\nPLAN B\n[ ] Prevoir solution repli interieur en cas de pluie — Resp : Logistique — Deadline : 10 mai\n[ ] Prevoir +10% de nourriture pour les invites de derniere minute — Resp : Traiteur — Deadline : 13 mai\n[ ] Avoir un technicien de garde le soir de l\'evenement — Resp : Technique — Deadline : 15 mai',
     },
