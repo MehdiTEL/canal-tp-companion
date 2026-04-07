@@ -65,7 +65,7 @@ export function useParticipant() {
       return persist(createLocal());
     } catch (err) {
       console.error('Erreur login:', err);
-      showToast('Connexion au serveur impossible — mode local active', 'warning');
+      showToast('Connexion au serveur impossible — mode local activé', 'warning');
       return persist(createLocal());
     }
   }, []);

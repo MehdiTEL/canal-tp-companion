@@ -12,7 +12,7 @@
     "start": "Commencer la session",
     "session": "MODULE DE FORMATION IA / COPILOT CHAT",
     "feat1Title": "4 sprints progressifs",
-    "feat1Desc": "De 10 a 30 min, du debutant a l'avance",
+    "feat1Desc": "De 10 a 30 min, du debutant au niveau avance",
     "feat2Title": "Documents integres",
     "feat2Desc": "Tout le necessaire pour chaque exercice",
     "feat3Title": "Astuces et reponses",
@@ -230,6 +230,9 @@
   "documentDownload": {
     "title": "Documents de travail",
     "download": "Telecharger"
+  },
+  "app": {
+    "loading": "Chargement..."
   },
   "stepper": {
     "current": "En cours"

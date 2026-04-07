@@ -19,7 +19,7 @@ export const echauffementExercise: Exercise = {
   id: 'echauffement-ex1',
   title: 'Synthese sur votre thematique',
   description:
-    'Utilisez Copilot Chat pour explorer votre thematique et produire une synthese exploitable en 5 minutes. Donnez un role a Copilot, precisez le format de sortie attendu, et iterez pour affiner le resultat.',
+    'Utilisez Copilot Chat pour explorer votre thematique et produire une synthese exploitable en 10 minutes. Donnez un role a Copilot, precisez le format de sortie attendu, et iterez pour affiner le resultat.',
   hints: [
     {
       id: 'ech-hint1',

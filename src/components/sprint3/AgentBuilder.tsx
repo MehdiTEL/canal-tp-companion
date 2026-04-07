@@ -133,7 +133,7 @@ export function AgentBuilder({ onConfigChange }: AgentBuilderProps) {
               {t('agentBuilder.generatedTitle')}
             </h3>
           </div>
-          {!isEmpty && <CopyButton text={generatedPrompt} label="Copier le prompt" />}
+          {!isEmpty && <CopyButton text={generatedPrompt} label={`${t('copyButton.copy')} prompt`} />}
         </div>
         <pre className="text-[13px] text-white/80 whitespace-pre-wrap font-mono leading-relaxed max-h-64 overflow-y-auto">
           {generatedPrompt}

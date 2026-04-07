@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useParticipant } from './hooks/useParticipant';
 import { Header } from './components/layout/Header';
 import { Sidebar } from './components/layout/Sidebar';
@@ -14,12 +15,13 @@ const Sprint2 = lazy(() => import('./pages/Sprint2').then(m => ({ default: m.Spr
 const Sprint3 = lazy(() => import('./pages/Sprint3').then(m => ({ default: m.Sprint3 })));
 
 function AppContent() {
+  const { t } = useTranslation();
   const { participant, loading, login, logout } = useParticipant();
 
   if (loading) {
     return (
       <div className="min-h-screen bg-surface-app flex items-center justify-center">
-        <div className="text-text-muted text-[14px] font-body">Chargement...</div>
+        <div className="text-text-muted text-[14px] font-body">{t('app.loading')}</div>
       </div>
     );
   }
@@ -34,7 +36,7 @@ function AppContent() {
       <div className="flex">
         <Sidebar />
         <main className="flex-1 p-4 sm:p-6 pb-28 lg:pb-6">
-          <Suspense fallback={<div className="flex items-center justify-center py-20"><div className="text-text-muted text-[14px] font-body">Chargement...</div></div>}>
+          <Suspense fallback={<div className="flex items-center justify-center py-20"><div className="text-text-muted text-[14px] font-body">{t('app.loading')}</div></div>}>
             <Routes>
               <Route path="/dashboard" element={<Dashboard onChangeMetier={logout} />} />
               <Route path="/echauffement" element={<Echauffement participantId={participant.id} />} />

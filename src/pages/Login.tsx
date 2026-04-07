@@ -89,7 +89,7 @@ export function Login({ onLogin, loading }: LoginProps) {
       </div>
 
       {/* ─── LEFT PANEL — Branding + visual explanation ─── */}
-      <div className="relative lg:w-[55%] lg:min-h-screen bg-gradient-to-br from-[#1e3a5f] via-[#1a2e4a] to-[#0f1d33] px-6 py-10 sm:px-10 lg:px-14 lg:py-16 flex flex-col justify-center overflow-hidden">
+      <div className="relative lg:w-[55%] lg:min-h-screen bg-gradient-to-br from-[#1e3a5f] via-[#1a2e4a] to-[#0f1d33] px-6 py-8 sm:px-10 lg:px-14 lg:py-16 flex flex-col justify-center overflow-hidden">
         {/* Decorative shapes */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-lecko-blue/8 rounded-full blur-[120px] -translate-y-1/3 translate-x-1/4 animate-gentle-float" />
         <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-sprint-3/10 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 animate-gentle-float" style={{ animationDelay: '3s' }} />
@@ -124,8 +124,8 @@ export function Login({ onLogin, loading }: LoginProps) {
             {t('login.description')}
           </p>
 
-          {/* Feature grid — 2×2 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* Feature grid — 2×2 (hidden on small mobile to keep form visible) */}
+          <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 gap-3">
             {features.map((feat, idx) => (
               <div
                 key={feat.titleKey}

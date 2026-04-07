@@ -231,6 +231,9 @@
     "title": "Working documents",
     "download": "Download"
   },
+  "app": {
+    "loading": "Loading..."
+  },
   "stepper": {
     "current": "In progress"
   },
