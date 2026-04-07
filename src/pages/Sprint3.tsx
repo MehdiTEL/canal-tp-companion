@@ -97,6 +97,7 @@ export function Sprint3({ participantId }: Sprint3Props) {
             }
           }}
           showRating={true}
+          isLastStep={activeExercise === cu.exercises.length - 1}
         />
       </div>
     </div>

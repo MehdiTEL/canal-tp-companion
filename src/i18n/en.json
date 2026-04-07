@@ -10,7 +10,7 @@
     "change": "Change",
     "loading": "Connecting...",
     "start": "Start session",
-    "session": "PILOT SESSION 2026",
+    "session": "AI TRAINING MODULE / COPILOT CHAT",
     "feat1Title": "4 progressive sprints",
     "feat1Desc": "From 10 to 30 min, beginner to advanced",
     "feat2Title": "Built-in documents",
@@ -71,6 +71,7 @@
   "exercise": {
     "consigne": "Instructions",
     "complete": "I'm done",
+    "nextStep": "Go to next step",
     "completed": "Completed",
     "discoverAnswer": "Discover the answer",
     "expectedAnswer": "Expected answer",

@@ -23,6 +23,7 @@ interface ExerciseCardProps {
   }) => void;
   onComplete?: () => void;
   showRating?: boolean;
+  isLastStep?: boolean;
 }
 
 export function ExerciseCard({
@@ -33,6 +34,7 @@ export function ExerciseCard({
   onSave,
   onComplete,
   showRating = true,
+  isLastStep = false,
 }: ExerciseCardProps) {
   const { t } = useTranslation();
   const [selfRating, setSelfRating] = useState<number | null>(initialData?.self_rating ?? null);
@@ -150,7 +152,7 @@ export function ExerciseCard({
               className="flex items-center gap-2 px-6 py-3 rounded-xl bg-lecko-blue text-white text-[14px] font-display font-bold tracking-[0.01em] hover:bg-lecko-blue/90 hover:shadow-glow active:scale-[0.97] transition-all duration-base ml-auto shadow-elevated relative overflow-hidden group/complete"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover/complete:translate-x-[100%] transition-transform duration-700" />
-              <span className="relative">{t('exercise.complete')}</span>
+              <span className="relative">{isLastStep ? t('exercise.complete') : t('exercise.nextStep')}</span>
               <ChevronRight size={16} className="relative group-hover/complete:translate-x-0.5 transition-transform duration-base" />
             </button>
           ) : (

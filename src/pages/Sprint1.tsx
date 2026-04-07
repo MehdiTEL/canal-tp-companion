@@ -91,6 +91,7 @@ export function Sprint1({ participantId }: Sprint1Props) {
                 setCurrentStep(currentStep + 1);
               }
             }}
+            isLastStep={currentStep === scenario.steps.length - 1}
           />
         </div>
       )}

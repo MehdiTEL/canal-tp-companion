@@ -10,7 +10,7 @@
     "change": "Changer",
     "loading": "Connexion...",
     "start": "Commencer la session",
-    "session": "SESSION PILOTE 2026",
+    "session": "MODULE DE FORMATION IA / COPILOT CHAT",
     "feat1Title": "4 sprints progressifs",
     "feat1Desc": "De 10 a 30 min, du debutant a l'avance",
     "feat2Title": "Documents integres",
@@ -71,6 +71,7 @@
   "exercise": {
     "consigne": "Consigne",
     "complete": "J'ai termine",
+    "nextStep": "Passer a l'etape suivante",
     "completed": "Termine",
     "discoverAnswer": "Decouvrir la reponse",
     "expectedAnswer": "Reponse attendue",
