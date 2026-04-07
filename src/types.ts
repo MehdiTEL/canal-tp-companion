@@ -20,15 +20,6 @@ export interface Submission {
   updated_at: string;
 }
 
-export interface Feedback {
-  id: string;
-  participant_id: string;
-  sprint: string;
-  rating: number | null;
-  comment: string | null;
-  created_at: string;
-}
-
 export interface Hint {
   id: string;
   exercice_id: string;
@@ -68,16 +59,6 @@ export interface CasUsage {
   exercises: Exercise[];
 }
 
-export interface SprintData {
-  id: string;
-  title: string;
-  color: string;
-  duration: number; // minutes
-  description: string;
-}
-
-export type SprintId = 'echauffement' | 'sprint-1' | 'sprint-2' | 'sprint-3';
-
 export interface AgentConfig {
   nom: string;
   role: string;
@@ -97,10 +78,3 @@ export interface LocalSubmission {
   completed: boolean;
 }
 
-export interface SprintDocument {
-  id: string;
-  title: string;
-  type: 'brief' | 'mail' | 'rapport' | 'note';
-  content: string;
-  stepId: string;
-}

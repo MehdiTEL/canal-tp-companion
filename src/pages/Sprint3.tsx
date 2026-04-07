@@ -17,7 +17,7 @@ interface Sprint3Props {
 export function Sprint3({ participantId }: Sprint3Props) {
   const { t } = useTranslation();
   const [activeExercise, setActiveExercise] = useState(0);
-  const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
+  const { saveSubmission, getLocalData } = useSubmission(participantId);
 
   const cu = sprint3Data;
 
@@ -100,7 +100,6 @@ export function Sprint3({ participantId }: Sprint3Props) {
             }
           }}
           showRating={true}
-          saving={saving}
         />
       </div>
     </div>

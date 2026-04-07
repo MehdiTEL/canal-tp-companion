@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { supabase } from '../supabase';
 import { showToast } from '../components/shared/Toast';
 import type { LocalSubmission } from '../types';
@@ -21,8 +21,6 @@ function saveLocalSubmission(exercice_id: string, data: LocalSubmission) {
 }
 
 export function useSubmission(participantId: string | undefined) {
-  const [saving, setSaving] = useState(false);
-
   const saveSubmission = useCallback(
     async (data: {
       sprint: string;
@@ -38,7 +36,6 @@ export function useSubmission(participantId: string | undefined) {
 
       if (!participantId || !supabase) return;
 
-      setSaving(true);
       try {
         const { error } = await supabase
           .from('submissions')
@@ -58,8 +55,6 @@ export function useSubmission(participantId: string | undefined) {
       } catch (err) {
         console.error('Erreur sauvegarde:', err);
         showToast('Connection lost — saved locally', 'error');
-      } finally {
-        setSaving(false);
       }
     },
     [participantId]
@@ -74,5 +69,5 @@ export function useSubmission(participantId: string | undefined) {
     return getLocalSubmissions();
   }, []);
 
-  return { saveSubmission, getLocalData, getAllLocalSubmissions, saving };
+  return { saveSubmission, getLocalData, getAllLocalSubmissions };
 }

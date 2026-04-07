@@ -21,7 +21,7 @@ const THEME_KEY = 'canal-tp-echauffement-theme';
 export function Echauffement({ participantId }: EchauffementProps) {
   const { t } = useTranslation();
   const [selectedTheme, setSelectedTheme] = useState<string | null>(() => localStorage.getItem(THEME_KEY));
-  const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
+  const { saveSubmission, getLocalData } = useSubmission(participantId);
 
   const localData = getLocalData('echauffement-ex1');
   const completed = localData?.completed || false;
@@ -103,7 +103,6 @@ export function Echauffement({ participantId }: EchauffementProps) {
           onSave={saveSubmission}
           onComplete={() => {}}
           showRating={false}
-          saving={saving}
         />
       )}
     </div>

@@ -23,7 +23,6 @@ interface ExerciseCardProps {
   }) => void;
   onComplete?: () => void;
   showRating?: boolean;
-  saving?: boolean;
 }
 
 export function ExerciseCard({

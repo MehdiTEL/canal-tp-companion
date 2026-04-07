@@ -15,7 +15,7 @@ interface Sprint1Props {
 export function Sprint1({ participantId }: Sprint1Props) {
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(0);
-  const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
+  const { saveSubmission, getLocalData } = useSubmission(participantId);
 
   const scenario = sprint1Scenario;
   const step = scenario.steps[currentStep];
@@ -94,7 +94,6 @@ export function Sprint1({ participantId }: Sprint1Props) {
                 setCurrentStep(currentStep + 1);
               }
             }}
-            saving={saving}
           />
         </div>
       )}
