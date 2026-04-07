@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check } from 'lucide-react';
+import { Check, Lock } from 'lucide-react';
 
 interface StepperProps {
   steps: { id: string; label: string }[];
@@ -22,59 +22,72 @@ export function Stepper({ steps, currentIndex, completedIndexes, color, onStepCl
   };
 
   return (
-    <div className="flex items-center w-full">
+    <div className="bg-white rounded-xl border border-border-default shadow-card overflow-hidden">
       {steps.map((step, i) => {
         const isCompleted = completedIndexes.has(i);
         const isCurrent = i === currentIndex;
-        const isPast = i < currentIndex || isCompleted;
-        const isClickable = isPast || isCurrent;
+        const isClickable = isCompleted || isCurrent;
 
         return (
-          <div key={step.id} className="flex items-center flex-1 last:flex-none">
-            {/* Step circle + label */}
-            <button
-              onClick={() => handleClick(i, isClickable)}
-              className={`flex flex-col items-center gap-1 shrink-0 transition-all duration-base ${
-                isClickable ? 'cursor-pointer' : 'cursor-default'
-              } ${shakenIndex === i ? 'animate-shake' : ''}`}
+          <button
+            key={step.id}
+            onClick={() => handleClick(i, isClickable)}
+            className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-all duration-fast border-l-3 ${
+              isCurrent
+                ? 'bg-surface-elevated/80'
+                : isCompleted
+                  ? 'hover:bg-surface-elevated/50'
+                  : 'opacity-50'
+            } ${i > 0 ? 'border-t border-border-subtle' : ''} ${
+              isClickable ? 'cursor-pointer' : 'cursor-default'
+            } ${shakenIndex === i ? 'animate-shake' : ''}`}
+            style={{
+              borderLeftColor: isCurrent ? color : isCompleted ? `${color}60` : 'transparent',
+              borderLeftWidth: '3px',
+            }}
+          >
+            {/* Step indicator */}
+            <div
+              className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-display font-bold transition-all duration-base ${
+                isCompleted
+                  ? 'text-white'
+                  : isCurrent
+                    ? 'text-white shadow-sm'
+                    : 'bg-border-default text-text-muted'
+              }`}
+              style={{
+                backgroundColor: isCompleted || isCurrent ? color : undefined,
+              }}
             >
-              <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-display font-bold transition-all duration-slow ${
-                  isCompleted
-                    ? 'text-white'
-                    : isCurrent
-                      ? 'text-white ring-4 ring-opacity-20'
-                      : 'bg-border-default text-text-muted'
-                }`}
-                style={{
-                  backgroundColor: isCompleted || isCurrent ? color : undefined,
-                  boxShadow: isCurrent ? `0 0 0 4px ${color}20` : undefined,
-                }}
-              >
-                {isCompleted ? <Check size={14} strokeWidth={3} /> : i + 1}
-              </div>
-              <span
-                className={`text-[11px] font-body whitespace-nowrap transition-colors ${
-                  isCurrent ? 'font-semibold text-text-on-light' : 'text-text-muted'
-                }`}
-              >
-                {step.label}
-              </span>
-            </button>
+              {isCompleted ? <Check size={13} strokeWidth={3} /> : isCurrent ? i + 1 : <Lock size={11} />}
+            </div>
 
-            {/* Connector line */}
-            {i < steps.length - 1 && (
-              <div className="flex-1 h-[2px] mx-2 mt-[-18px] rounded-full bg-border-default overflow-hidden">
-                <div
-                  className="h-full rounded-full transition-all duration-slow"
-                  style={{
-                    width: isPast ? '100%' : '0%',
-                    backgroundColor: color,
-                  }}
-                />
-              </div>
+            {/* Label */}
+            <span
+              className={`text-[13px] font-body flex-1 ${
+                isCurrent
+                  ? 'font-semibold text-text-on-light'
+                  : isCompleted
+                    ? 'text-text-body'
+                    : 'text-text-muted'
+              }`}
+            >
+              {step.label}
+            </span>
+
+            {/* Status indicator */}
+            {isCompleted && (
+              <span className="text-[11px] font-body text-success font-medium">✓</span>
             )}
-          </div>
+            {isCurrent && (
+              <span
+                className="text-[10px] font-display font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white"
+                style={{ backgroundColor: color }}
+              >
+                En cours
+              </span>
+            )}
+          </button>
         );
       })}
     </div>

@@ -54,7 +54,9 @@
   "echauffement": {
     "consigne": "Instructions",
     "chooseTheme": "Choose your topic",
-    "completedMessage": "Well done! The warm-up is complete."
+    "completedMessage": "Well done! The warm-up is complete.",
+    "openCopilot": "Open Copilot Chat",
+    "doExercise": "Complete the exercise"
   },
   "sprint1": {
     "step": "Step {{n}}"

@@ -27,7 +27,7 @@ export function Sprint1({ participantId }: Sprint1Props) {
       if (local?.completed) set.add(i);
     });
     return set;
-  }, [currentStep, getLocalData, scenario.steps]);
+  }, [getLocalData, scenario.steps]);
 
   const maxAccessibleStep = useMemo(() => {
     let max = 0;
@@ -56,23 +56,20 @@ export function Sprint1({ participantId }: Sprint1Props) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="max-w-3xl mx-auto space-y-5">
       <SprintHeader
         title={t('sprints.sprint1')}
         color="#2563EB"
         duration={sprint1Meta.duration}
-        currentStep={currentStep + 1}
+        currentStep={completedIndexes.size}
         totalSteps={scenario.steps.length}
+        subtitle={scenario.description}
       />
 
       <CopilotLink color="#2563EB" />
 
-      <div className="text-[11px] font-display font-bold text-sprint-1 uppercase tracking-wider">
-        {scenario.title}
-      </div>
-
       <Stepper
-        steps={scenario.steps.map((s, i) => ({ id: s.id, label: t('sprint1.step', { n: i + 1 }) }))}
+        steps={scenario.steps.map((s, i) => ({ id: s.id, label: `${t('sprint1.step', { n: i + 1 })} — ${s.title}` }))}
         currentIndex={currentStep}
         completedIndexes={completedIndexes}
         color="#2563EB"

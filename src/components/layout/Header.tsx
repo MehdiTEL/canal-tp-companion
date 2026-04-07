@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { Briefcase, RefreshCw } from 'lucide-react';
-import { ProgressBar } from '../shared/ProgressBar';
 
 interface HeaderProps {
   metier?: string;
@@ -17,11 +16,6 @@ export function Header({ metier, onLogout }: HeaderProps) {
           <span className="text-[17px] font-display font-extrabold text-lecko-blue tracking-tight leading-none group-hover/logo:text-lecko-blue/80 transition-colors duration-base">Lecko.</span>
           <span className="text-border-strong text-[13px] font-light leading-none group-hover/logo:rotate-90 transition-transform duration-base">×</span>
           <span className="text-[17px] font-display font-extrabold text-canal-black tracking-[0.08em] leading-none group-hover/logo:text-canal-black/80 transition-colors duration-base">CANAL+</span>
-        </div>
-
-        {/* Progress bar */}
-        <div className="hidden md:block flex-1 max-w-sm">
-          <ProgressBar />
         </div>
 
         {/* User info */}

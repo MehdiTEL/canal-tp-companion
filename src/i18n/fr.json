@@ -54,7 +54,9 @@
   "echauffement": {
     "consigne": "Consigne",
     "chooseTheme": "Choisissez votre thematique",
-    "completedMessage": "Bien joue ! L'echauffement est termine."
+    "completedMessage": "Bien joue ! L'echauffement est termine.",
+    "openCopilot": "Ouvrez Copilot Chat",
+    "doExercise": "Realisez l'exercice"
   },
   "sprint1": {
     "step": "Etape {{n}}"

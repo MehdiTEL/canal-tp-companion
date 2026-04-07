@@ -27,7 +27,7 @@ export function Sprint2({ participantId }: Sprint2Props) {
       if (local?.completed) set.add(i);
     });
     return set;
-  }, [activeExercise, getLocalData, cu.exercises]);
+  }, [getLocalData, cu.exercises]);
 
   const maxAccessibleStep = useMemo(() => {
     let max = 0;
@@ -56,25 +56,22 @@ export function Sprint2({ participantId }: Sprint2Props) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="max-w-3xl mx-auto space-y-5">
       <SprintHeader
         title={t('sprints.sprint2')}
         color="#F59E0B"
         duration={sprint2Meta.duration}
-        currentStep={activeExercise + 1}
+        currentStep={completedIndexes.size}
         totalSteps={cu.exercises.length}
+        subtitle={cu.description}
       />
 
       <CopilotLink color="#F59E0B" />
 
-      <div className="text-[11px] font-display font-bold text-sprint-2 uppercase tracking-wider mb-4">
-        {cu.title}
-      </div>
-
       <ConsignesPanel consignes={cu.consignes} />
 
       <Stepper
-        steps={cu.exercises.map((_, i) => ({ id: `ex-${i}`, label: t('sprint2.exercise', { n: i + 1 }) }))}
+        steps={cu.exercises.map((ex, i) => ({ id: ex.id, label: `${t('sprint2.exercise', { n: i + 1 })} — ${ex.title}` }))}
         currentIndex={activeExercise}
         completedIndexes={completedIndexes}
         color="#F59E0B"
