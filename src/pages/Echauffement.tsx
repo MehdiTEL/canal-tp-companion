@@ -16,9 +16,11 @@ interface EchauffementProps {
   participantId?: string;
 }
 
+const THEME_KEY = 'canal-tp-echauffement-theme';
+
 export function Echauffement({ participantId }: EchauffementProps) {
   const { t } = useTranslation();
-  const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
+  const [selectedTheme, setSelectedTheme] = useState<string | null>(() => localStorage.getItem(THEME_KEY));
   const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
 
   const localData = getLocalData('echauffement-ex1');
@@ -53,7 +55,7 @@ export function Echauffement({ participantId }: EchauffementProps) {
         title={t('sprints.echauffement')}
         color="#06B6D4"
         duration={echauffementMeta.duration}
-        currentStep={1}
+        currentStep={completed ? 1 : 0}
         totalSteps={1}
       />
 
@@ -78,7 +80,7 @@ export function Echauffement({ participantId }: EchauffementProps) {
           {echauffementThematiques.map((theme) => (
             <button
               key={theme.id}
-              onClick={() => setSelectedTheme(theme.id)}
+              onClick={() => { setSelectedTheme(theme.id); localStorage.setItem(THEME_KEY, theme.id); }}
               className={`text-left px-3.5 py-2.5 rounded-md border text-[14px] font-body transition-all duration-fast active:scale-[0.98] ${
                 selectedTheme === theme.id
                   ? 'border-sprint-warmup bg-sprint-warmup/8 text-text-on-light font-semibold shadow-card'

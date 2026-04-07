@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, Search, Check } from 'lucide-react';
+import i18n from '../i18n';
 import { LanguageSelector } from '../components/shared/LanguageSelector';
 
 interface LoginProps {
@@ -69,7 +70,7 @@ export function Login({ onLogin, loading }: LoginProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedMetier) {
-      onLogin(selectedMetier, 'fr');
+      onLogin(selectedMetier, i18n.language);
     }
   };
 
@@ -95,7 +96,7 @@ export function Login({ onLogin, loading }: LoginProps) {
             {t('login.title')}
           </p>
           <p className="text-[12px] text-text-muted font-body mt-1 uppercase tracking-widest font-semibold">
-            Session Pilote 2026
+            {t('login.session')}
           </p>
         </div>
 
@@ -174,7 +175,11 @@ export function Login({ onLogin, loading }: LoginProps) {
           <button
             type="submit"
             disabled={!selectedMetier || loading}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-lecko-blue text-white font-display font-bold text-[15px] tracking-[0.01em] hover:bg-lecko-blue/90 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-base shadow-card"
+            className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-display font-bold text-[15px] tracking-[0.01em] active:scale-[0.98] transition-all duration-base ${
+              !selectedMetier && !loading
+                ? 'bg-border-default text-text-muted cursor-not-allowed'
+                : 'bg-lecko-blue text-white hover:bg-lecko-blue/90 shadow-card'
+            }`}
           >
             {loading ? t('login.loading') : t('login.start')}
             {!loading && <ArrowRight size={18} />}

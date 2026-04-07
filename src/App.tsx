@@ -34,7 +34,7 @@ function AppContent() {
       <Header metier={participant.metier} onLogout={logout} />
       <div className="flex">
         <Sidebar />
-        <main className="flex-1 p-4 sm:p-6 pb-20 lg:pb-6">
+        <main className="flex-1 p-4 sm:p-6 pb-28 lg:pb-6">
           <Suspense fallback={<div className="flex items-center justify-center py-20"><div className="text-text-muted text-[14px] font-body">Chargement...</div></div>}>
             <Routes>
               <Route path="/dashboard" element={<Dashboard onChangeMetier={logout} />} />

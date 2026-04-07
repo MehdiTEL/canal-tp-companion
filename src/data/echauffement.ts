@@ -8,7 +8,7 @@ export const echauffementMeta = {
 };
 
 export const echauffementDescription =
-  'En 5 minutes, utilisez Copilot Chat pour explorer un sujet et produire une synthese exploitable. Choisissez une thematique ci-dessous et lancez-vous !';
+  'En 10 minutes, utilisez Copilot Chat pour explorer un sujet et produire une synthese exploitable. Choisissez une thematique ci-dessous et lancez-vous !';
 
 export const echauffementThematiques = [
   { id: 'theme-ia-info', label: "L'impact de l'IA sur la maniere de s'informer" },

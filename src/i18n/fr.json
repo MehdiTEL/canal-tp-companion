@@ -9,7 +9,8 @@
     "noResult": "Aucun metier trouve",
     "change": "Changer",
     "loading": "Connexion...",
-    "start": "Commencer la session"
+    "start": "Commencer la session",
+    "session": "SESSION PILOTE 2026"
   },
   "dashboard": {
     "title": "Tirez parti de Copilot Chat au quotidien",

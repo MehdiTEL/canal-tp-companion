@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Check } from 'lucide-react';
 
 interface StepperProps {
@@ -9,6 +10,17 @@ interface StepperProps {
 }
 
 export function Stepper({ steps, currentIndex, completedIndexes, color, onStepClick }: StepperProps) {
+  const [shakenIndex, setShakenIndex] = useState<number | null>(null);
+
+  const handleClick = (i: number, isClickable: boolean) => {
+    if (isClickable) {
+      onStepClick?.(i);
+    } else {
+      setShakenIndex(i);
+      setTimeout(() => setShakenIndex(null), 500);
+    }
+  };
+
   return (
     <div className="flex items-center w-full">
       {steps.map((step, i) => {
@@ -21,11 +33,10 @@ export function Stepper({ steps, currentIndex, completedIndexes, color, onStepCl
           <div key={step.id} className="flex items-center flex-1 last:flex-none">
             {/* Step circle + label */}
             <button
-              onClick={() => isClickable && onStepClick?.(i)}
-              disabled={!isClickable}
+              onClick={() => handleClick(i, isClickable)}
               className={`flex flex-col items-center gap-1 shrink-0 transition-all duration-base ${
                 isClickable ? 'cursor-pointer' : 'cursor-default'
-              }`}
+              } ${shakenIndex === i ? 'animate-shake' : ''}`}
             >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-display font-bold transition-all duration-slow ${
