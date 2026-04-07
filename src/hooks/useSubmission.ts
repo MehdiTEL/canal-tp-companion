@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { supabase } from '../supabase';
-import { showToast } from '../components/shared/Toast';
+import { showToast } from '../components/shared/showToast';
 import { notifyProgressUpdate } from './useProgress';
 import type { LocalSubmission } from '../types';
 

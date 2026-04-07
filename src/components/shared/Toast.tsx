@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { CheckCircle2, AlertTriangle, XCircle, X } from 'lucide-react';
+import { _setAddToastFn } from './showToast';
 
 type ToastVariant = 'success' | 'warning' | 'error';
 
@@ -27,12 +28,6 @@ const ICON_COLORS: Record<ToastVariant, string> = {
   error: 'text-red-400',
 };
 
-let addToastFn: ((text: string, variant?: ToastVariant) => void) | null = null;
-
-export function showToast(text: string, variant: ToastVariant = 'success') {
-  addToastFn?.(text, variant);
-}
-
 export function ToastContainer() {
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
@@ -50,8 +45,8 @@ export function ToastContainer() {
   }, []);
 
   useEffect(() => {
-    addToastFn = addToast;
-    return () => { addToastFn = null; };
+    _setAddToastFn(addToast);
+    return () => { _setAddToastFn(null); };
   }, [addToast]);
 
   if (toasts.length === 0) return null;

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../supabase';
-import { showToast } from '../components/shared/Toast';
+import { showToast } from '../components/shared/showToast';
 import type { Participant } from '../types';
 
 const STORAGE_KEY = 'canal-tp-participant';

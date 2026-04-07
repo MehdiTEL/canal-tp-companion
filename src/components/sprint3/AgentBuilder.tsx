@@ -47,7 +47,7 @@ export function AgentBuilder({ onConfigChange }: AgentBuilderProps) {
       parts.push(`\nExemples de demandes que tu peux traiter :\n${activePrompts.map((p, i) => `${i + 1}. ${p}`).join('\n')}`);
     }
     return parts.join('\n') || t('agentBuilder.generatedEmpty');
-  }, [config]);
+  }, [config, t]);
 
   const isEmpty = !config.nom && !config.role && !config.ton && !config.instructions;
 

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Trophy, ArrowRight, Home, Sparkles } from 'lucide-react';
@@ -21,7 +22,8 @@ export function SprintRecap({
   const { t } = useTranslation();
 
   const encouragements = t('recap.encouragements', { returnObjects: true }) as string[];
-  const encouragement = message || encouragements[Math.floor(Math.random() * encouragements.length)];
+  const [randomIndex] = useState(() => Math.floor(Math.random() * 10));
+  const encouragement = message || encouragements[randomIndex % encouragements.length];
 
   return (
     <div className="max-w-lg mx-auto animate-slide-up">

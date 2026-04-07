@@ -1,10 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CheckCircle2, ChevronRight, Eye, Copy, Check } from 'lucide-react';
 import { HintButton } from './HintButton';
 import { DocumentDownload } from './DocumentDownload';
 import { StarRating } from './StarRating';
-import { showToast } from './Toast';
+import { showToast } from './showToast';
 import type { Exercise, LocalSubmission } from '../../types';
 
 interface ExerciseCardProps {
@@ -43,7 +43,7 @@ export function ExerciseCard({
   const [copiedResult, setCopiedResult] = useState(false);
 
   const onSaveRef = useRef(onSave);
-  onSaveRef.current = onSave;
+  useEffect(() => { onSaveRef.current = onSave; });
 
   const handleComplete = () => {
     setCompleted(true);
