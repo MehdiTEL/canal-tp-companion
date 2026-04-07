@@ -36,7 +36,9 @@
     "lockMessage": "Complete {{requires}} to unlock",
     "yourProgress": "Your progress",
     "letsGo": "Let's go!",
-    "continue": "Continue"
+    "continue": "Continue",
+    "goToNext": "Go to",
+    "allComplete": "Training complete!"
   },
   "sprints": {
     "echauffement": "Warm-up",

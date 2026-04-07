@@ -139,12 +139,25 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
             {nextSprint && (
               <button
                 onClick={() => navigate(nextSprint.path)}
-                className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-lecko-blue text-white font-display font-bold text-[14px] hover:bg-lecko-blue/90 hover:shadow-glow active:scale-[0.97] transition-all duration-base shadow-elevated relative overflow-hidden group/cta"
+                className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-display font-bold text-[14px] hover:opacity-90 hover:shadow-glow active:scale-[0.97] transition-all duration-base shadow-elevated relative overflow-hidden group/cta"
+                style={{ backgroundColor: nextSprint.color }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover/cta:translate-x-[100%] transition-transform duration-700" />
-                <span className="relative">{progressPercent > 0 ? t('dashboard.continue') : t('dashboard.letsGo')}</span>
+                <span className="relative">
+                  {progressPercent === 0
+                    ? t('dashboard.letsGo')
+                    : isSprintStarted(nextSprint.id)
+                      ? `${t('dashboard.continue')} — ${nextSprint.title}`
+                      : `${t('dashboard.goToNext')} ${nextSprint.title}`}
+                </span>
                 <ChevronRight size={16} className="relative group-hover/cta:translate-x-0.5 transition-transform duration-base" />
               </button>
+            )}
+            {!nextSprint && progressPercent === 100 && (
+              <div className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-success text-white font-display font-bold text-[14px] shadow-elevated">
+                <CheckCircle2 size={16} />
+                <span>{t('dashboard.allComplete')}</span>
+              </div>
             )}
           </div>
         </div>

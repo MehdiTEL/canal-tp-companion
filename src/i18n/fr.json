@@ -36,7 +36,9 @@
     "lockMessage": "Terminez {{requires}} pour debloquer",
     "yourProgress": "Votre progression",
     "letsGo": "C'est parti !",
-    "continue": "Continuer"
+    "continue": "Continuer",
+    "goToNext": "Passer au",
+    "allComplete": "Formation terminee !"
   },
   "sprints": {
     "echauffement": "Echauffement",
