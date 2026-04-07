@@ -28,6 +28,10 @@ const contenuCreationScenario: Scenario = {
       title: 'Analyser le brief de la serie',
       description:
         'Collez le brief creatif de "Sables Rouges" dans Copilot Chat et demandez-lui d\'extraire les points cles : concept, cible, ton, casting, calendrier.',
+      idealPrompt:
+        'Voici le brief creatif de la serie "Sables Rouges" pour Canal+. Analyse-le et extrais les informations cles sous forme structuree :\n1) Concept et genre, 2) Public cible principal et secondaire, 3) Ton editorial, 4) Casting envisage, 5) Calendrier de production, 6) Les 3 arguments de vente les plus forts.\nIdentifie aussi ce qui differencie cette serie des autres thrillers politiques recents.',
+      idealResult:
+        'Le resultat ideal presente un tableau structure avec les 6 categories demandees, chacune remplie avec les elements du brief.\nIl identifie la dimension franco-africaine comme differenciant majeur, mentionne le positionnement international de Canal+,\net propose une synthese en 3 phrases percutantes pour pitcher la serie rapidement.\nLes arguments de vente (casting prestigieux, realisateur en vue, co-production internationale) sont clairement hierarchises.',
       hints: [
         {
           id: 'sprint1-contenu-creation-step1-hint1',
@@ -55,6 +59,10 @@ const contenuCreationScenario: Scenario = {
       title: 'Rediger une note de pitch pour le comite editorial',
       description:
         'Demandez a Copilot de rediger une note de pitch d\'une page, structuree et percutante, destinee au comite editorial Canal+.',
+      idealPrompt:
+        'A partir de l\'analyse du brief "Sables Rouges", redige une note de pitch d\'une page pour le comite editorial Canal+.\nStructure attendue : accroche (2 lignes), synopsis (5 lignes), positionnement editorial,\npublic cible, 3 arguments cles en bullet points, comparables marche.\nTon : professionnel et enthousiaste. Ajoute un paragraphe de positionnement strategique expliquant pourquoi cette serie renforce la ligne Canal+ en 2025.',
+      idealResult:
+        'Le resultat ideal est une note de pitch complete d\'une page avec une accroche percutante qui capte l\'attention.\nLe synopsis est concis et donne envie sans tout devoiler. Le positionnement editorial s\'inscrit dans la lignee\ndes creations originales Canal+ (ZeroZeroZero, Baron Noir) tout en apportant un regard neuf.\nLes 3 arguments cles sont orientes business (recrutement de nouveaux publics, rayonnement international, ambition africaine).\nLes comparables marche sont pertinents et credibles.',
       hints: [
         {
           id: 'sprint1-contenu-creation-step2-hint1',
@@ -82,6 +90,10 @@ const contenuCreationScenario: Scenario = {
       title: 'Produire le plan de 6 slides pour la presentation',
       description:
         'Creez un plan detaille de 6 slides pour presenter la serie en reunion editoriale, avec titres et contenus par slide.',
+      idealPrompt:
+        'Propose un plan de presentation en 6 slides pour la serie "Sables Rouges" destine a une reunion editoriale Canal+.\nPour chaque slide, donne : le titre exact, 3-4 bullet points prets a copier-coller, et une note de mise en scene (visuel suggere, ratio texte/image).\nOrganise les slides en progression narrative : le contexte marche, la reponse (notre serie), la preuve (casting, equipe), l\'appel a l\'action.\nAjoute une phrase de transition entre chaque slide.',
+      idealResult:
+        'Le resultat ideal propose 6 slides avec une progression logique et narrative.\nChaque slide a un titre accrocheur, des bullet points concis et operationnels, et une suggestion visuelle.\nLes transitions entre slides sont fluides et racontent une histoire coherente.\nLa slide de titre inclut une tagline memorable, la slide finale propose des prochaines etapes concretes.\nL\'ensemble est directement exploitable pour creer le support PowerPoint.',
       hints: [
         {
           id: 'sprint1-contenu-creation-step3-hint1',
@@ -109,6 +121,10 @@ const contenuCreationScenario: Scenario = {
       title: 'Rediger les posts sociaux (Instagram + X)',
       description:
         'Demandez a Copilot de rediger les posts d\'annonce pour Instagram et X (ex-Twitter), adaptes aux codes de chaque plateforme.',
+      idealPrompt:
+        'Redige les posts d\'annonce de la serie "Sables Rouges" adaptes a chaque reseau social :\n1) Instagram : legende de 150 mots max, ton immersif et cinematographique, 5 hashtags pertinents, suggestion de visuel.\n2) X (ex-Twitter) : 280 caracteres max, ton percutant, 2 hashtags.\nAdopte le ton Canal+ : premium, audacieux, un peu decale. Evite les formulations generiques comme "Decouvrez" ou "Ne manquez pas".\nPropose 2 variantes pour chaque reseau (angle mystere et angle casting).',
+      idealResult:
+        'Le resultat ideal fournit des posts distincts et adaptes a chaque plateforme.\nLe post Instagram est immersif, evocateur, avec des hashtags pertinents (#CanalOriginal #SablesRouges #TrillerPolitique).\nLe tweet est percutant et tient dans la limite de caracteres. Le ton est conforme a l\'identite Canal+ : ni trop corporate, ni trop familier.\nLes deux variantes offrent des angles differents (mystere vs casting) pour choisir le plus engageant.\nUne suggestion de visuel accompagne chaque post.',
       hints: [
         {
           id: 'sprint1-contenu-creation-step4-hint1',
@@ -136,6 +152,10 @@ const contenuCreationScenario: Scenario = {
       title: 'Preparer le mail d\'invitation presse',
       description:
         'Redigez un mail professionnel pour inviter les journalistes a la projection presse de la serie.',
+      idealPrompt:
+        'Redige un mail d\'invitation presse pour la projection de "Sables Rouges".\nStructure : objet accrocheur (moins de 50 caracteres), formule de politesse personnalisee, 2 lignes de contexte sur la serie,\ndetails pratiques (date, lieu, horaire), mention du cocktail et de la rencontre avec l\'equipe artistique, RSVP avec deadline.\nTon : elegant et exclusif, comme une invitation privilegiee. Ajoute les conditions d\'embargo,\nle lien vers le dossier de presse et les contacts de l\'attachee de presse.',
+      idealResult:
+        'Le resultat ideal est un mail complet avec un objet qui suscite la curiosite sans ressembler a un spam.\nLe corps du mail allie elegance et efficacite : contexte rapide de la serie, details pratiques complets,\nmention de l\'embargo, lien dossier de presse, contacts presse.\nLe ton est celui d\'une invitation privilegiee et exclusive, coherent avec l\'image premium de Canal+.\nLes elements pratiques souvent oublies (accessibilite du lieu, embargo, PS incitatif) sont presents.',
       hints: [
         {
           id: 'sprint1-contenu-creation-step5-hint1',
@@ -218,6 +238,10 @@ const diffusionProgrammationScenario: Scenario = {
       title: 'Analyser le mail de la direction des programmes',
       description:
         'Collez le mail dans Copilot Chat et demandez-lui d\'extraire les contraintes, objectifs et elements cles pour construire la grille.',
+      idealPrompt:
+        'Voici le mail de la direction des programmes concernant la semaine thematique "Frissons d\'ete". Analyse-le et extrais les informations en 5 categories :\n1) Objectifs de la semaine, 2) Contraintes horaires et techniques, 3) Contenus imposes ou suggeres,\n4) Public vise, 5) Deadlines a respecter.\nIdentifie aussi les informations manquantes pour construire une grille complete, et classe les contraintes par priorite (non negociables vs souples).',
+      idealResult:
+        'Le resultat ideal presente les 5 categories clairement remplies a partir du mail.\nLes contraintes non negociables sont identifiees (samedi = point culminant, 2 Canal+ Originals minimum, droits Hereditary expires).\nLes contraintes souples sont distinguees (suggestions de mix, preferences).\nUne liste de questions a poser a la direction est proposee (quels films disponibles, budget par soiree, cibles par creneau).\nLa deadline du 10 avril pour la premiere version est mise en evidence.',
       hints: [
         {
           id: 'sprint1-diffusion-programmation-step1-hint1',
@@ -245,6 +269,10 @@ const diffusionProgrammationScenario: Scenario = {
       title: 'Construire la grille de programmation sur 7 jours',
       description:
         'Demandez a Copilot de construire une grille de programmation detaillee pour la semaine "Frissons d\'ete".',
+      idealPrompt:
+        'Construis une grille de programmation pour la semaine "Frissons d\'ete" (lundi a dimanche) au format tableau.\nColonnes : Jour | Creneau horaire | Programme | Genre | Duree | Note.\nCreneaux : prime time (21h-23h) et 2eme partie de soiree (23h15-1h).\nContraintes : 4 films + 2 soirees series + 1 soiree documentaire, au moins 2 Canal+ Originals, samedi soir = point culminant.\nPropose une progression thematique du leger au intense au fil de la semaine.',
+      idealResult:
+        'Le resultat ideal est un tableau complet de 7 jours avec 2 creneaux par jour.\nLa progression thematique est logique : comedies horrifiques en debut de semaine, thrillers en milieu, horreur intense le week-end.\nLe samedi soir presente le titre le plus fort de la semaine. Le mix est respecte (4 films, 2 soirees series, 1 documentaire).\nAu moins 2 Canal+ Originals sont places strategiquement. Les contraintes techniques (droits, Canal+ Cinema mercredi) sont respectees.\nChaque choix de programme est justifie par une logique d\'audience.',
       hints: [
         {
           id: 'sprint1-diffusion-programmation-step2-hint1',
@@ -272,6 +300,10 @@ const diffusionProgrammationScenario: Scenario = {
       title: 'Rediger les textes de presentation pour le guide des programmes',
       description:
         'Redigez les textes courts de presentation pour chaque programme de la semaine, tels qu\'ils apparaitront dans le guide Canal+.',
+      idealPrompt:
+        'Pour chaque programme de la grille "Frissons d\'ete", redige un texte de presentation au format guide des programmes Canal+ :\ntitre en gras, annee et duree entre parentheses, texte de 3 lignes max qui donne envie sans spoiler.\nPour les films deja tres connus, propose un angle decale : pourquoi le revoir en 2025, un detail de tournage meconnu.\nAjoute un chapeau editorial de 5 lignes pour introduire la semaine thematique dans son ensemble.',
+      idealResult:
+        'Le resultat ideal contient un chapeau editorial engageant qui donne le fil rouge de la semaine.\nChaque texte de presentation respecte le format guide Canal+ : titre, annee, duree, 3 lignes accrocheuses.\nLes textes evitent les synopsis generiques et proposent un angle frais, meme pour les classiques.\nLe ton est informatif et seduisant, coherent avec l\'identite Canal+.\nL\'ensemble donne envie de suivre la semaine complete, pas juste un programme isole.',
       hints: [
         {
           id: 'sprint1-diffusion-programmation-step3-hint1',
@@ -299,6 +331,10 @@ const diffusionProgrammationScenario: Scenario = {
       title: 'Preparer un support PowerPoint de coordination',
       description:
         'Creez le contenu d\'un support PowerPoint a partager avec les equipes techniques, marketing et communication pour coordonner la semaine.',
+      idealPrompt:
+        'Propose un support PowerPoint de 6 slides pour coordonner la semaine "Frissons d\'ete" avec les equipes techniques, marketing et communication.\nSlides : 1) Vue d\'ensemble et objectifs (avec KPIs : audience, part de marche, abonnes), 2) Grille synthetique,\n3) Actions marketing, 4) Planning technique (encodage, bandes-annonces), 5) Communication reseaux sociaux et newsletter,\n6) Retroplanning J-21 a J+1 avec jalons cles.\nPour chaque slide : titre + 4 bullet points max. Ajoute des indicateurs chiffres realistes.',
+      idealResult:
+        'Le resultat ideal est un plan de 6 slides operationnel et synthetique.\nChaque slide a un titre clair, des bullet points concis et des elements chiffres.\nLes KPIs sont realistes pour Canal+ (objectifs d\'audience, part de marche, engagement social).\nLe retroplanning identifie les jalons critiques (validation grille, livraison bandes-annonces, campagne sociale).\nLe support est utilisable tel quel pour briefer les differentes equipes impliquees.',
       hints: [
         {
           id: 'sprint1-diffusion-programmation-step4-hint1',
@@ -326,6 +362,10 @@ const diffusionProgrammationScenario: Scenario = {
       title: 'Rediger les messages de communication interne (mail + Teams)',
       description:
         'Redigez le mail d\'information aux equipes et le message Teams pour le canal de coordination.',
+      idealPrompt:
+        'Redige deux messages pour annoncer la semaine "Frissons d\'ete" en interne :\n1) Un mail formel aux equipes (technique, marketing, communication, programmation) : objet precis avec date, contexte en 2 lignes,\n3 actions attendues de chaque equipe, lien vers le support de coordination, date de la reunion de suivi, contacts referents.\n2) Un message Teams court (5 lignes max) pour le canal #programmation : dynamique, avec un element engageant\n(question ou sondage type "Quel est votre film d\'horreur prefere ?").',
+      idealResult:
+        'Le resultat ideal propose deux messages au ton clairement different mais au contenu coherent.\nLe mail formel est structure, actionnable (chaque equipe sait quoi faire), avec un objet precis et les contacts referents.\nLe message Teams est court, dynamique et engageant, avec une touche conviviale qui motive les equipes.\nLes deux messages couvrent les memes informations cles (planning, objectifs, prochaines etapes)\nmais adaptes au canal de communication. Le mail se termine par un call-to-action clair.',
       hints: [
         {
           id: 'sprint1-diffusion-programmation-step5-hint1',
@@ -404,6 +444,10 @@ const commercialMarketingScenario: Scenario = {
       title: 'Analyser le brief marketing',
       description:
         'Collez le brief marketing dans Copilot Chat et extrayez la cible, les objectifs business et les messages cles.',
+      idealPrompt:
+        'Voici le brief marketing de la nouvelle offre Canal+ Sport. Analyse-le et extrais les elements suivants sous forme structuree :\n1) Cible principale et secondaire (profil socio-demo + comportemental), 2) Objectifs quantitatifs (abonnes, CA, ARPU),\n3) Messages cles a faire passer, 4) Budget et timing, 5) Contraintes et interdits.\nCree aussi un persona marketing detaille de la cible principale et identifie les 3 arguments qui distinguent cette offre de beIN Sports, DAZN et Amazon Prime Video.',
+      idealResult:
+        'Le resultat ideal presente une analyse structuree du brief avec les 5 categories completees.\nLe persona marketing est concret : prenom fictif, age, habitudes de consommation sportive, freins a l\'abonnement.\nLes 3 arguments differenciants sont lies a des besoins non satisfaits de la cible (simplicite d\'une offre unique, qualite 4K, prix cross-sell).\nLes contraintes sont clairement identifiees (embargo MotoGP, charte graphique, validation juridique prix).\nLe timing est mis en perspective avec les evenements sportifs (Roland-Garros, fin Ligue 1).',
       hints: [
         {
           id: 'sprint1-commercial-marketing-step1-hint1',
@@ -431,6 +475,10 @@ const commercialMarketingScenario: Scenario = {
       title: 'Produire le plan de campagne multi-canal',
       description:
         'Demandez a Copilot de construire un plan de campagne detaille couvrant les principaux canaux d\'acquisition.',
+      idealPrompt:
+        'Construis un plan de campagne d\'acquisition multi-canal pour l\'offre Canal+ Sport avec un budget de 800K euros.\nCanaux : Digital (Meta Ads, Google Ads, YouTube), TV (spots Canal+), CRM (emailing base existante), Partenariats, Points de vente.\nPour chaque canal : objectif, message cle, format, budget indicatif, KPI de suivi.\nOrganise en 3 phases : Teasing (J-14 a J-7), Lancement (J-Jour a J+7), Conversion (J+7 a J+30).\nPresente la repartition budgetaire sous forme de tableau avec justification du ROI par canal.',
+      idealResult:
+        'Le resultat ideal est un plan de campagne complet avec la repartition budgetaire justifiee par canal.\nLes 3 phases sont clairement definies avec des objectifs distincts (notoriete, visibilite, conversion).\nChaque canal a un KPI de suivi mesurable (cout d\'acquisition, taux de clic, taux de conversion).\nLa repartition budgetaire est realiste (digital majoritaire, TV en soutien, CRM pour le cross-sell).\nLe plan s\'articule avec le calendrier sportif (Roland-Garros comme moment fort du lancement).',
       hints: [
         {
           id: 'sprint1-commercial-marketing-step2-hint1',
@@ -458,6 +506,10 @@ const commercialMarketingScenario: Scenario = {
       title: 'Creer les messages publicitaires adaptes par canal',
       description:
         'Redigez les messages publicitaires (accroches, corps de texte, CTA) adaptes a chaque canal de la campagne.',
+      idealPrompt:
+        'Redige les messages publicitaires pour Canal+ Sport adaptes a chaque canal avec les contraintes suivantes :\n- Meta Ads : accroche 125 caracteres + texte 250 caracteres + CTA\n- Google Ads : titre 30 caracteres x3 + description 90 caracteres x2\n- Emailing : objet 50 caracteres + preview 100 caracteres + corps 200 mots\nPour les Meta Ads, propose 3 variantes A/B : une axee prix, une axee contenu exclusif, une axee emotion.\nAdapte le message au moment du parcours client : decouverte, consideration, decision.',
+      idealResult:
+        'Le resultat ideal fournit des messages complets pour chaque canal, respectant strictement les limites de caracteres.\nLes 3 variantes A/B pour Meta Ads sont clairement differenciees (prix/contenu/emotion) avec un visuel suggere pour chacune.\nLes messages Google Ads sont optimises pour le SEA avec des mots-cles pertinents (sport, streaming, Ligue 1, Canal+).\nL\'emailing a un objet accrocheur, un preview incitatif et un corps structure avec CTA clair.\nLe benefice client est toujours en premiere ligne, le CTA adapte au moment du parcours.',
       hints: [
         {
           id: 'sprint1-commercial-marketing-step3-hint1',
@@ -485,6 +537,10 @@ const commercialMarketingScenario: Scenario = {
       title: 'Preparer l\'argumentaire commercial pour les equipes de vente',
       description:
         'Creez un argumentaire structure que les equipes commerciales pourront utiliser en point de vente et en appels sortants.',
+      idealPrompt:
+        'Construis un argumentaire commercial pour l\'offre Canal+ Sport en utilisant la methode CAB (Caracteristique, Avantage, Benefice client).\nListe 5 arguments avec pour chacun : la caracteristique, l\'avantage vs concurrence, le benefice concret pour le client.\nAjoute les reponses aux 3 objections les plus frequentes (prix, deja abonne ailleurs, pas assez fan de sport).\nPropose 3 scenarios de conversation type en boutique : prospect froid, client hesitant entre Canal+ et beIN, abonne existant.\nFormate le tout pour une lecture rapide sur tablette (titres courts, bullet points, chiffres en evidence).',
+      idealResult:
+        'Le resultat ideal est un argumentaire structure en methode CAB avec 5 arguments pertinents et differenciants.\nLes reponses aux objections sont concretes et convaincantes (comparatif prix, exclusivites, qualite 4K).\nLes 3 scenarios de conversation sont realistes avec phrases d\'accroche, questions de decouverte et gestion des objections.\nLe format est adapte a une utilisation en boutique : titres percutants, bullet points, pas de blocs de texte.\nUn tableau comparatif visuel avec la concurrence (beIN, DAZN, Amazon) est inclus.',
       hints: [
         {
           id: 'sprint1-commercial-marketing-step4-hint1',
@@ -512,6 +568,10 @@ const commercialMarketingScenario: Scenario = {
       title: 'Rediger le mail de lancement interne',
       description:
         'Redigez le mail de lancement interne qui annonce la campagne a toutes les equipes Canal+.',
+      idealPrompt:
+        'Redige un mail de lancement interne pour annoncer la campagne Canal+ Sport a toutes les equipes.\nStructure : objet motivant, introduction avec l\'enjeu business en 2 lignes, les 3 points cles de l\'offre,\nle planning de la campagne, ce qui est attendu de chaque equipe (vente, SAV, communication, technique),\nun objectif chiffre federateur (50 000 abonnes en 30 jours), et les contacts referents.\nTermine par les ressources disponibles : argumentaire de vente, kit de communication, FAQ, date de la formation commerciale.\nTon : federateur et dynamique.',
+      idealResult:
+        'Le resultat ideal est un mail de lancement complet qui cree de l\'elan et de l\'enthousiasme.\nL\'enjeu business est clair des les premieres lignes. L\'objectif commun (50 000 abonnes) federe les equipes.\nChaque equipe sait exactement ce qui est attendu d\'elle et ou trouver ses ressources.\nLes liens vers l\'argumentaire, le kit de communication et la FAQ sont presents.\nLe ton est dynamique sans etre excessif, professionnel tout en etant motivant.\nLa date de formation commerciale est clairement indiquee.',
       hints: [
         {
           id: 'sprint1-commercial-marketing-step5-hint1',
@@ -596,6 +656,10 @@ const techItScenario: Scenario = {
       title: 'Analyser le rapport technique et identifier les risques',
       description:
         'Collez le rapport technique dans Copilot Chat et demandez une analyse structuree des risques, dependances et points d\'attention.',
+      idealPrompt:
+        'Voici le rapport technique sur la migration du service de transcodage VOD vers AWS. Analyse-le et produis :\n1) Une matrice de risques au format tableau : Risque | Probabilite | Impact | Mitigation (minimum 6 risques).\n2) La liste de toutes les dependances techniques avec indication si elles sont bloquantes ou non.\n3) Deux syntheses : une technique de 10 lignes pour les ingenieurs (jargon autorise),\net une non-technique de 5 lignes pour le directeur IT (enjeux business, planning, budget).',
+      idealResult:
+        'Le resultat ideal contient une matrice de risques complete avec au moins 6 risques identifies, classes par probabilite et impact.\nLes mitigations proposees sont concretes et actionnables (pas de generalites).\nLes dependances (DRM, Akamai CDN, PostgreSQL, MediaTools, certificats SSL) sont toutes listees avec leur caractere bloquant.\nLa synthese technique est precise (architecture serverless, AWS MediaConvert, Lambda, S3).\nLa synthese non-technique traduit en termes business : economies de 160K euros/an, fin des pannes, scalabilite pour les pics de lancement.',
       hints: [
         {
           id: 'sprint1-tech-it-step1-hint1',
@@ -623,6 +687,10 @@ const techItScenario: Scenario = {
       title: 'Produire une synthese executive pour la direction',
       description:
         'Redigez une synthese executive d\'une page destinee au CODIR IT, avec les enjeux, le planning et la recommandation.',
+      idealPrompt:
+        'Redige une synthese executive d\'une page pour le CODIR IT sur la migration du transcodage VOD vers AWS.\nStructure : Contexte (3 lignes), Enjeu business (pourquoi migrer maintenant), Solution proposee (3 bullet points),\nPlanning macro (4 phases avec dates), Budget (investissement et economies sur 3 ans), Risques top 3, Recommandation go/no-go.\nPresente aussi un tableau comparatif de 3 options : migration complete AWS, migration hybride, statu quo avec upgrade.\nPour chaque option : avantages, inconvenients, cout, risque. Mets en evidence pourquoi la migration complete est recommandee.',
+      idealResult:
+        'Le resultat ideal est une synthese d\'une page orientee decision pour le CODIR.\nLe contexte met en evidence l\'urgence (pannes en hausse, couts croissants, parc vieillissant).\nLe ROI est chiffre : comparatif 380K euros/an actuel vs 220K euros/an sur AWS, economies cumulees sur 3 ans.\nLes 3 options sont presentees objectivement mais la recommandation est claire et argumentee.\nLe planning est realiste et tient compte de la contrainte Roland-Garros.\nLe ton est factuel, les chiffres sont en evidence, la recommandation est sans ambiguite.',
       hints: [
         {
           id: 'sprint1-tech-it-step2-hint1',
@@ -650,6 +718,10 @@ const techItScenario: Scenario = {
       title: 'Construire le plan de migration en phases',
       description:
         'Demandez a Copilot de construire un plan de migration detaille, decoupe en phases avec des jalons clairs.',
+      idealPrompt:
+        'Construis un plan de migration detaille en 4 phases pour le transcodage VOD vers AWS :\n1) Preparation (audit, provisioning, POC) — 3 semaines, 2) Migration test — 2 semaines,\n3) Migration production avec bascule progressive — 4 semaines, 4) Stabilisation et decommissionnement — 2 semaines.\nPour chaque phase : objectifs, taches cles, criteres go/no-go, equipe mobilisee, plan de rollback.\nDetaille la strategie de bascule de trafic (paliers 10%, 25%, 50%, 100%) avec metriques de monitoring et seuils d\'alerte.',
+      idealResult:
+        'Le resultat ideal est un plan de migration complet en 4 phases avec des jalons clairs et des criteres go/no-go.\nChaque phase a des objectifs mesurables, des taches concretes et des responsables identifies.\nLe plan de rollback est detaille pour chaque phase (conditions, duree, impact).\nLa strategie de bascule progressive est presentee en tableau avec paliers, metriques et seuils d\'alerte.\nLa contrainte Roland-Garros (20 mai - 10 juin) est integree dans le planning.\nLa procedure d\'escalade en cas d\'incident est definie.',
       hints: [
         {
           id: 'sprint1-tech-it-step3-hint1',
@@ -677,6 +749,10 @@ const techItScenario: Scenario = {
       title: 'Preparer la communication vers les equipes impactees',
       description:
         'Redigez les messages de communication pour informer les equipes internes impactees par la migration.',
+      idealPrompt:
+        'Redige 3 messages differents pour annoncer la migration du transcodage VOD :\n1) Pour les developpeurs : details techniques, impact sur les APIs, nouvelles procedures de deploiement (15 lignes max).\n2) Pour les equipes metier (editeurs VOD) : ce qui change concretement, planning d\'indisponibilite (15 lignes max).\n3) Pour le management : planning, budget, risques maitrises (15 lignes max).\nGenere aussi une FAQ de 8 questions-reponses couvrant les inquietudes classiques (coupure de service, changement d\'outils, securite des donnees).\nPropose un plan de communication en 4 temps (J-30, J-14, J-3, J+1).',
+      idealResult:
+        'Le resultat ideal contient 3 messages au vocabulaire adapte a chaque audience.\nLe message developpeurs est technique (endpoints API, procedures CI/CD, nouveaux outils).\nLe message metier est rassurant et concret (pas de jargon, focus sur l\'impact quotidien).\nLe message management est oriente business (economies, gains de performance, risques maitrises).\nLa FAQ anticipe les vraies inquietudes et y repond clairement.\nLe plan de communication en 4 temps est cadence logiquement avec les bons canaux pour chaque etape.',
       hints: [
         {
           id: 'sprint1-tech-it-step4-hint1',
@@ -704,6 +780,10 @@ const techItScenario: Scenario = {
       title: 'Rediger la checklist de validation pre-migration',
       description:
         'Creez une checklist exhaustive de validation a completer avant de lancer la migration en production.',
+      idealPrompt:
+        'Cree une checklist pre-migration exhaustive organisee en 6 domaines :\n1) Infrastructure (provisioning, networking, securite), 2) Application (tests, compatibilite, configuration),\n3) Donnees (backup, synchronisation, validation), 4) Monitoring (alertes, dashboards, logs),\n5) Communication (equipes informees, support pret), 6) Rollback (procedure testee, point de restauration).\nPour chaque domaine : 5 items avec case a cocher et responsable.\nAjoute les criteres go/no-go en tableau et un planning Day-1 heure par heure avec procedure d\'escalade.',
+      idealResult:
+        'Le resultat ideal est une checklist complete de 30 items (6 domaines x 5 items) avec responsable pour chaque item.\nLes criteres go/no-go sont presentes en tableau avec statut attendu, responsable et caractere bloquant.\nLe planning Day-1 est detaille heure par heure : ordre des operations, numeros de telephone d\'astreinte,\nseuils de decision pour le rollback, message de communication post-migration.\nL\'ensemble est operationnel et pret a etre utilise le jour de la migration.\nLes items couvrent tous les aspects : technique, humain, communication, securite.',
       hints: [
         {
           id: 'sprint1-tech-it-step5-hint1',
@@ -792,6 +872,10 @@ const supportCorporateScenario: Scenario = {
       title: 'Analyser le mail du directeur et comprendre le besoin',
       description:
         'Collez le mail du directeur dans Copilot Chat et demandez une analyse structuree du besoin : objectifs, contraintes, attentes.',
+      idealPrompt:
+        'Voici le mail du directeur financier adjoint concernant l\'organisation du seminaire annuel. Analyse-le et extrais :\n1) Objectifs du seminaire (explicites et implicites), 2) Date et duree, 3) Nombre de participants,\n4) Budget et contraintes specifiques, 5) Livrables attendus et deadlines.\nIdentifie les informations manquantes et liste les 5 questions prioritaires a poser au directeur.\nPropose aussi une estimation budgetaire detaillee (salle, restauration, materiel, animation, imprevus) avec fourchette basse et haute.',
+      idealResult:
+        'Le resultat ideal transforme le mail en fiche projet structuree avec tous les elements cles.\nLes objectifs implicites sont identifies (mixer les equipes, creer de la cohesion entre les poles).\nLes contraintes sont clairement listees (Nadia en conge, regimes alimentaires, DAF a bloquer, collegues de Lyon).\nLes 5 questions prioritaires sont pertinentes (choix du lieu, format visio pour Lyon, type d\'ice-breaker souhaite).\nL\'estimation budgetaire est realiste pour la region parisienne : fourchette 6 500 - 9 000 euros TTC.',
       hints: [
         {
           id: 'sprint1-support-corporate-step1-hint1',
@@ -819,6 +903,10 @@ const supportCorporateScenario: Scenario = {
       title: 'Construire le programme detaille de la journee',
       description:
         'Demandez a Copilot de construire un programme heure par heure pour le seminaire, en equilibrant contenu et convivialite.',
+      idealPrompt:
+        'Propose un programme detaille pour le seminaire de la Direction Financiere (9h-18h, 45 participants).\nFormat tableau : Horaire | Activite | Format (pleniere/atelier/pause) | Intervenant | Materiel necessaire.\nInclus : accueil cafe, bilan 2024-2025 le matin (presentations par poles + intervention DAF groupe 30 min),\nateliers en sous-groupes l\'apres-midi (digitalisation, RSE, formation IA), restitution collective, moment convivial.\nPrevois un ice-breaker en debut de journee pour mixer les equipes. Varie les formats pour maintenir l\'attention.\nAjoute une colonne "Experience participant" pour chaque moment.',
+      idealResult:
+        'Le resultat ideal est un programme complet heure par heure avec des creneaux realistes (pas de session de plus de 90 min sans pause).\nL\'ice-breaker est adapte a 45 personnes et favorise le melange des poles.\nLes 3 ateliers de l\'apres-midi sont structures (objectif, format, livrable attendu).\nLa colonne "Experience participant" montre une progression : energise le matin, collaboratif l\'apres-midi, convivial en cloture.\nLes transitions entre activites sont prevues. Le materiel necessaire est liste pour chaque moment.\nLe creneau du DAF groupe est place a un moment strategique (debut de matinee).',
       hints: [
         {
           id: 'sprint1-support-corporate-step2-hint1',
@@ -846,6 +934,10 @@ const supportCorporateScenario: Scenario = {
       title: 'Preparer le support de coordination (PowerPoint)',
       description:
         'Creez le contenu d\'un support PowerPoint de coordination a partager avec les parties prenantes internes.',
+      idealPrompt:
+        'Propose un support PowerPoint de coordination de 8 slides pour le seminaire de la Direction Financiere :\n1) Objectifs, 2) Programme de la journee, 3) Plan de salle et configuration,\n4) Intervenants et roles, 5) Menu et restauration, 6) Logistique et materiel,\n7) Retroplanning J-21 a Jour J, 8) Contacts et numeros d\'urgence.\nPour chaque slide : titre et contenu en bullet points.\nAjoute une slide RACI (Responsible, Accountable, Consulted, Informed) et une slide "Plan B" avec scenarios de contingence.',
+      idealResult:
+        'Le resultat ideal est un plan de 10 slides (8 + RACI + Plan B) complet et operationnel.\nChaque slide a un titre clair et des bullet points synthetiques. Le retroplanning identifie les jalons critiques.\nLe RACI clarifie les responsabilites entre l\'office manager, le directeur, l\'assistante et la communication.\nLe Plan B couvre les scenarios realistes (intervenant absent, probleme technique, meteo, traiteur defaillant)\navec des solutions alternatives concretes et des contacts de backup.\nL\'ensemble est partargeable tel quel avec les parties prenantes.',
       hints: [
         {
           id: 'sprint1-support-corporate-step3-hint1',
@@ -873,6 +965,10 @@ const supportCorporateScenario: Scenario = {
       title: 'Rediger les invitations (mail formel + Teams)',
       description:
         'Redigez le mail d\'invitation formel et le message Teams pour convoquer les participants au seminaire.',
+      idealPrompt:
+        'Redige deux messages d\'invitation pour le seminaire de la Direction Financiere du 12 juin :\n1) Mail Outlook formel signe par Laurent Morin : objet (propose 5 variantes), date/lieu/horaire, objectifs en 3 lignes,\nprogramme synthetique, infos pratiques (acces, parking, dress code), demande de confirmation, mention des allergies alimentaires.\n2) Message Teams decontracte (5 lignes max) pour donner envie de venir, avec un element teaser sur le programme.\nPour le mail, ajoute les informations pratiques souvent oubliees : plan d\'acces, code batiment, numero d\'urgence,\net si les participants doivent preparer quelque chose en amont.',
+      idealResult:
+        'Le resultat ideal propose un mail formel complet avec 5 variantes d\'objet pertinentes.\nLe mail contient toutes les informations pratiques necessaires (acces detaille, code batiment, contact jour J).\nLa demande de confirmation inclut le signalement des allergies et regimes alimentaires.\nLe message Teams est court, engageant et donne envie sans tout reveler du programme.\nLes deux messages ont un ton clairement different mais transmettent les memes informations essentielles.\nLa mention de preparation en amont est presente si necessaire (documents a lire, reflexions a mener).',
       hints: [
         {
           id: 'sprint1-support-corporate-step4-hint1',
@@ -900,6 +996,10 @@ const supportCorporateScenario: Scenario = {
       title: 'Produire la checklist logistique',
       description:
         'Creez une checklist logistique exhaustive pour ne rien oublier dans l\'organisation du seminaire.',
+      idealPrompt:
+        'Cree une checklist logistique exhaustive pour le seminaire, organisee en 5 periodes :\nJ-30 (reservations), J-14 (confirmations), J-7 (preparation materiel), J-1 (verification finale), Jour J (installation).\nPour chaque tache : description, responsable, statut, deadline.\nAjoute une section materiel detaillee (technique, papeterie, signalisation, restauration) avec quantites et fournisseurs.\nTermine par un planning Jour J minute par minute pour l\'equipe d\'organisation (de 7h30 a la fermeture)\navec les numeros de telephone de chaque responsable.',
+      idealResult:
+        'Le resultat ideal est une checklist complete decoupee en 5 periodes avec des taches concretes et des responsables nommes.\nLa section materiel est exhaustive (videoprojecteur, micro, adaptateurs HDMI, rallonges, badges, paperboard, fleches directionnelles).\nLes quantites sont adaptees a 45 participants. Les fournisseurs sont a completer.\nLe planning Jour J est detaille minute par minute de 7h30 (arrivee equipe) a 18h30 (depart dernier participant).\nLes numeros de telephone sont prevus pour chaque responsable.\nLa checklist est utilisable telle quelle comme outil de suivi de projet.',
       hints: [
         {
           id: 'sprint1-support-corporate-step5-hint1',
