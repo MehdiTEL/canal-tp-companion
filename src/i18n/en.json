@@ -204,6 +204,10 @@
     "noParticipants": "No participants.",
     "view": "View"
   },
+  "documentDownload": {
+    "title": "Working documents",
+    "download": "Download"
+  },
   "lang": {
     "fr": "Francais",
     "en": "English"

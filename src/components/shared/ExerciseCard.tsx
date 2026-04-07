@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CheckCircle2, ChevronRight, Eye, Copy, Check } from 'lucide-react';
 import { HintButton } from './HintButton';
+import { DocumentDownload } from './DocumentDownload';
 import { StarRating } from './StarRating';
 import { showToast } from './Toast';
 import type { Exercise, LocalSubmission } from '../../types';
@@ -119,6 +120,11 @@ export function ExerciseCard({
             {exercise.description}
           </p>
         </div>
+
+        {/* Documents */}
+        {exercise.documents && exercise.documents.length > 0 && (
+          <DocumentDownload documents={exercise.documents} color={sprintColor} />
+        )}
 
         {/* Hints */}
         <HintButton

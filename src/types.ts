@@ -36,6 +36,13 @@ export interface Hint {
   text: string;
 }
 
+export interface DocumentFile {
+  name: string;
+  type: 'pdf' | 'xlsx';
+  path: string;
+  description: string;
+}
+
 export interface Exercise {
   id: string;
   title: string;
@@ -43,6 +50,7 @@ export interface Exercise {
   hints: Hint[];
   idealPrompt?: string;
   idealResult?: string;
+  documents?: DocumentFile[];
 }
 
 export interface Scenario {

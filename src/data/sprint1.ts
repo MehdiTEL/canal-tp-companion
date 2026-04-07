@@ -24,6 +24,14 @@ export const sprint1Scenario: Scenario = {
       title: 'Brainstormer la vision de la soiree',
       description:
         'Utilisez Copilot Chat pour generer des idees de soiree autour de STUDIOCANAL STORIES. Demandez-lui de proposer un concept, une ambiance, un theme, et les moments forts de la soiree.',
+      documents: [
+        {
+          name: 'brief-soiree-studiocanal.pdf',
+          type: 'pdf',
+          path: 'documents/brief-soiree-studiocanal.pdf',
+          description: 'Brief de la soiree STUDIOCANAL STORIES — contexte, objectifs et contraintes',
+        },
+      ],
       hints: [
         {
           id: 's1-s1-hint1',
@@ -76,6 +84,14 @@ export const sprint1Scenario: Scenario = {
       title: 'Creer la checklist d\'organisation',
       description:
         'Utilisez Copilot Chat pour generer une checklist complete d\'organisation de la soiree : logistique, traiteur, technique, communication, plan B en cas d\'imprevus.',
+      documents: [
+        {
+          name: 'checklist-organisation-soiree.xlsx',
+          type: 'xlsx',
+          path: 'documents/checklist-organisation-soiree.xlsx',
+          description: 'Modele de checklist a completer avec Copilot Chat',
+        },
+      ],
       hints: [
         {
           id: 's1-s3-hint1',
