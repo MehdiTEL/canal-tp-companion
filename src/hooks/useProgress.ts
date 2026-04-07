@@ -131,7 +131,7 @@ export function useProgress() {
         const prevSprint = Object.entries(UNLOCK_CHAIN).find(([, next]) => next === id)?.[0];
         if (prevSprint && isSprintCompleted(prevSprint)) {
           setJustUnlocked(id);
-          setTimeout(() => setJustUnlocked(null), 1500);
+          setTimeout(() => setJustUnlocked(null), 5000);
         }
       }
     }

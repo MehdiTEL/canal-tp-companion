@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Flame, FileText, Zap, Bot, ChevronRight, CheckCircle2, Lock, LockOpen, RotateCcw, BookOpen, FolderOpen, Lightbulb } from 'lucide-react';
+import { Flame, FileText, Zap, Bot, ChevronRight, CheckCircle2, Lock, RotateCcw, BookOpen, FolderOpen, Lightbulb } from 'lucide-react';
 import { useProgress } from '../hooks/useProgress';
 
 interface DashboardProps {
@@ -178,12 +178,20 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
               onClick={() => (unlocked || isJustUnlocked) && navigate(sprint.path)}
               disabled={!unlocked && !isJustUnlocked}
               className={`animate-slide-up w-full bg-white rounded-xl border p-4 flex items-center gap-4 transition-all duration-base text-left group ${
-                unlocked || isJustUnlocked
-                  ? 'shadow-card hover:shadow-elevated hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.995] cursor-pointer border-border-default hover:border-border-strong'
-                  : 'opacity-45 cursor-not-allowed border-border-subtle'
+                isJustUnlocked
+                  ? 'shadow-elevated border-2 cursor-pointer animate-unlock-card'
+                  : unlocked
+                    ? 'shadow-card hover:shadow-elevated hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.995] cursor-pointer border-border-default hover:border-border-strong'
+                    : 'opacity-45 cursor-not-allowed border-border-subtle'
               }`}
               style={{
                 animationDelay: `${idx * 60}ms`,
+                ...(isJustUnlocked ? {
+                  '--unlock-color': `${sprint.color}60`,
+                  '--unlock-bg': `${sprint.color}08`,
+                  '--card-border': sprint.color,
+                  borderColor: sprint.color,
+                } as React.CSSProperties : {}),
               }}
             >
               {/* Icon */}
@@ -196,8 +204,21 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
               >
                 {isJustUnlocked ? (
                   <>
-                    <LockOpen size={20} className="absolute animate-unlock-shake" style={{ color: sprint.color }} />
+                    <Lock size={20} className="absolute animate-unlock-shake" style={{ color: sprint.color }} />
                     <sprint.icon size={20} className="absolute animate-unlock-appear" style={{ color: sprint.color }} />
+                    {/* Confetti burst particles */}
+                    {[...Array(8)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="absolute w-1.5 h-1.5 rounded-full animate-unlock-confetti"
+                        style={{
+                          backgroundColor: ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', sprint.color, '#8B5CF6'][i],
+                          left: `${50 + Math.cos((i * Math.PI * 2) / 8) * 28}%`,
+                          top: `${50 + Math.sin((i * Math.PI * 2) / 8) * 28}%`,
+                          animationDelay: `${1.5 + i * 0.06}s`,
+                        }}
+                      />
+                    ))}
                   </>
                 ) : unlocked ? (
                   <sprint.icon size={20} style={{ color: sprint.color }} />
@@ -215,8 +236,8 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
                   {isComplete && <CheckCircle2 size={16} className="text-success shrink-0" />}
                 </div>
                 {unlocked || isJustUnlocked ? (
-                  <p className={`text-[13px] mt-0.5 font-body ${isJustUnlocked ? 'text-text-on-light font-semibold animate-fade-in' : 'text-text-muted'}`}>
-                    {isJustUnlocked ? t('dashboard.justUnlocked') : sprint.subtitle}
+                  <p className={`text-[13px] mt-0.5 font-body ${isJustUnlocked ? 'font-bold animate-fade-in' : 'text-text-muted'}`} style={isJustUnlocked ? { color: sprint.color } : {}}>
+                    {isJustUnlocked ? `🔓 ${t('dashboard.justUnlocked')}` : sprint.subtitle}
                   </p>
                 ) : (
                   <p className="text-[12px] text-text-muted/70 mt-0.5 font-body italic">
