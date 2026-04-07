@@ -10,7 +10,16 @@
     "change": "Changer",
     "loading": "Connexion...",
     "start": "Commencer la session",
-    "session": "SESSION PILOTE 2026"
+    "session": "SESSION PILOTE 2026",
+    "feat1Title": "4 sprints progressifs",
+    "feat1Desc": "De 10 a 30 min, du debutant a l'avance",
+    "feat2Title": "Documents integres",
+    "feat2Desc": "Tout le necessaire pour chaque exercice",
+    "feat3Title": "Astuces et reponses",
+    "feat3Desc": "Des indices pour vous aider a progresser",
+    "feat4Title": "Copilot Chat",
+    "feat4Desc": "Apprenez a maitriser l'IA au quotidien",
+    "footer": "Aucune donnee personnelle n'est collectee. Votre progression est sauvegardee localement."
   },
   "dashboard": {
     "title": "Votre guide pratique Copilot Chat",

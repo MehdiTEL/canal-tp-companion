@@ -10,7 +10,16 @@
     "change": "Change",
     "loading": "Connecting...",
     "start": "Start session",
-    "session": "PILOT SESSION 2026"
+    "session": "PILOT SESSION 2026",
+    "feat1Title": "4 progressive sprints",
+    "feat1Desc": "From 10 to 30 min, beginner to advanced",
+    "feat2Title": "Built-in documents",
+    "feat2Desc": "Everything you need for each exercise",
+    "feat3Title": "Hints and answers",
+    "feat3Desc": "Clues to help you move forward",
+    "feat4Title": "Copilot Chat",
+    "feat4Desc": "Learn to master AI in your daily work",
+    "footer": "No personal data is collected. Your progress is saved locally."
   },
   "dashboard": {
     "title": "Your Copilot Chat Workshop Guide",

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, Search, Check, Sparkles, BookOpen, Zap } from 'lucide-react';
+import { ArrowRight, Search, Check, BookOpen, Zap, FolderOpen, Lightbulb, Sparkles } from 'lucide-react';
 import i18n from '../i18n';
 import { LanguageSelector } from '../components/shared/LanguageSelector';
 
@@ -74,89 +74,126 @@ export function Login({ onLogin, loading }: LoginProps) {
     }
   };
 
+  const features = [
+    { icon: BookOpen, titleKey: 'login.feat1Title', descKey: 'login.feat1Desc', color: '#06B6D4' },
+    { icon: FolderOpen, titleKey: 'login.feat2Title', descKey: 'login.feat2Desc', color: '#2563EB' },
+    { icon: Lightbulb, titleKey: 'login.feat3Title', descKey: 'login.feat3Desc', color: '#F59E0B' },
+    { icon: Zap, titleKey: 'login.feat4Title', descKey: 'login.feat4Desc', color: '#8B5CF6' },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start p-4 pt-6 sm:pt-12 bg-gradient-to-b from-slate-50 via-white to-blue-50/30">
-      {/* Language selector — top right */}
-      <div className="absolute top-4 right-4 z-10">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-surface-app">
+      {/* Language selector — top right, always visible */}
+      <div className="absolute top-4 right-4 z-20">
         <LanguageSelector />
       </div>
 
-      <div className="w-full max-w-md animate-slide-up">
-        {/* Logo + branding */}
-        <div className="text-center mb-6 mt-2">
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <span className="text-[28px] sm:text-[32px] font-display font-extrabold text-lecko-blue tracking-tight leading-none">Lecko.</span>
-            <span className="text-border-strong text-lg font-light leading-none">×</span>
-            <span className="text-[28px] sm:text-[32px] font-display font-extrabold text-canal-black tracking-[0.08em] leading-none">CANAL+</span>
+      {/* ─── LEFT PANEL — Branding + visual explanation ─── */}
+      <div className="relative lg:w-[55%] lg:min-h-screen bg-gradient-to-br from-[#1e3a5f] via-[#1a2e4a] to-[#0f1d33] px-6 py-10 sm:px-10 lg:px-14 lg:py-16 flex flex-col justify-center overflow-hidden">
+        {/* Decorative shapes */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-lecko-blue/8 rounded-full blur-[120px] -translate-y-1/3 translate-x-1/4 animate-gentle-float" />
+        <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-sprint-3/10 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 animate-gentle-float" style={{ animationDelay: '3s' }} />
+        <div className="absolute top-1/2 right-1/4 w-[200px] h-[200px] bg-sprint-warmup/8 rounded-full blur-[80px] animate-gentle-float" style={{ animationDelay: '5s' }} />
+
+        {/* Gradient accent line on the right edge */}
+        <div className="hidden lg:block absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-sprint-warmup via-lecko-blue to-sprint-3 opacity-40" />
+
+        <div className="relative max-w-xl mx-auto lg:mx-0 animate-slide-up">
+          {/* Logo */}
+          <div className="flex items-center gap-3 mb-8">
+            <span className="text-[28px] sm:text-[34px] font-display font-extrabold text-white tracking-tight leading-none">Lecko.</span>
+            <span className="text-white/30 text-xl font-light leading-none">×</span>
+            <span className="text-[28px] sm:text-[34px] font-display font-extrabold text-white tracking-[0.08em] leading-none">CANAL+</span>
           </div>
-          <p className="text-[11px] text-text-muted font-body uppercase tracking-[0.2em] font-semibold">
-            {t('login.session')}
+
+          {/* Session badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 mb-6">
+            <Sparkles size={13} className="text-lecko-orange" />
+            <span className="text-[11px] font-display font-bold uppercase tracking-[0.15em] text-white/70">
+              {t('login.session')}
+            </span>
+          </div>
+
+          {/* Hero title */}
+          <h1 className="font-display font-extrabold text-[32px] sm:text-[40px] lg:text-[46px] text-white tracking-tight leading-[1.1] mb-4">
+            {t('login.title')}
+          </h1>
+
+          {/* Description */}
+          <p className="text-[16px] sm:text-[18px] text-white/60 font-body leading-relaxed mb-10 max-w-lg">
+            {t('login.description')}
           </p>
-        </div>
 
-        {/* Hero card */}
-        <div className="relative overflow-hidden bg-white rounded-2xl shadow-elevated border border-border-default mb-5 hover-lift">
-          {/* Colored accent bar */}
-          <div className="h-1.5 bg-gradient-to-r from-sprint-warmup via-lecko-blue to-sprint-3" />
-
-          {/* Subtle decorative blurs */}
-          <div className="absolute top-0 right-0 w-40 h-40 bg-lecko-blue/5 rounded-full blur-3xl -translate-y-8 translate-x-8 animate-gentle-float" />
-          <div className="absolute bottom-0 left-0 w-28 h-28 bg-sprint-3/5 rounded-full blur-2xl translate-y-6 -translate-x-6 animate-gentle-float" style={{ animationDelay: '3s' }} />
-
-          <div className="relative px-5 py-5 sm:px-6">
-            <div className="flex items-center gap-2 mb-2">
-              <Sparkles size={16} className="text-lecko-orange" />
-              <span className="text-[11px] font-display font-bold uppercase tracking-wider text-text-muted">{t('login.subtitle')}</span>
-            </div>
-            <h1 className="font-display font-extrabold text-[20px] sm:text-[22px] text-text-on-light tracking-tight leading-snug mb-3">
-              {t('login.title')}
-            </h1>
-            <p className="text-[13px] sm:text-[14px] text-text-muted font-body leading-relaxed mb-4">
-              {t('login.description')}
-            </p>
-
-            {/* 3 highlights */}
-            <div className="flex flex-wrap gap-2">
-              {[
-                { icon: BookOpen, label: '4 sprints', color: '#06B6D4' },
-                { icon: Zap, label: 'Copilot Chat', color: '#8B5CF6' },
-              ].map((item) => (
-                <span key={item.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border-default text-[11px] font-body font-semibold text-text-body bg-surface-elevated/50 hover:border-border-strong hover:shadow-card transition-all duration-base cursor-default group/badge">
-                  <item.icon size={12} style={{ color: item.color }} className="group-hover/badge:scale-110 transition-transform duration-base" />
-                  {item.label}
-                </span>
-              ))}
-            </div>
+          {/* Feature grid — 2×2 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {features.map((feat, idx) => (
+              <div
+                key={feat.titleKey}
+                className="flex items-start gap-3 bg-white/[0.06] backdrop-blur-sm rounded-xl px-4 py-3.5 border border-white/[0.08] hover:bg-white/[0.10] hover:border-white/[0.15] transition-all duration-base cursor-default group/feat animate-slide-up"
+                style={{ animationDelay: `${150 + idx * 80}ms` }}
+              >
+                <div
+                  className="shrink-0 w-9 h-9 rounded-lg flex items-center justify-center group-hover/feat:scale-110 transition-transform duration-base"
+                  style={{ backgroundColor: `${feat.color}20` }}
+                >
+                  <feat.icon size={18} style={{ color: feat.color }} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-[13px] font-display font-bold text-white leading-snug">
+                    {t(feat.titleKey)}
+                  </p>
+                  <p className="text-[12px] text-white/45 font-body leading-snug mt-0.5">
+                    {t(feat.descKey)}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+      </div>
 
-        {/* Metier selection form */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-5 sm:p-6 shadow-elevated border border-border-default/60 space-y-5">
-          <div>
-            <p className="text-[14px] font-display font-bold text-text-on-light mb-1">
-              {t('login.metierLabel')}
-            </p>
-            <p className="text-[13px] text-text-muted font-body mb-3">
-              {t('login.metierHelper')}
-            </p>
+      {/* ─── RIGHT PANEL — Form ─── */}
+      <div className="flex-1 flex items-center justify-center px-6 py-10 sm:px-10 lg:px-14">
+        <div className="w-full max-w-[420px] animate-slide-up" style={{ animationDelay: '100ms' }}>
+          {/* Mobile-only: show logo above form since left panel is compact on mobile */}
+          <div className="lg:hidden text-center mb-8">
+            <div className="flex items-center justify-center gap-2.5">
+              <span className="text-[22px] font-display font-extrabold text-lecko-blue tracking-tight">Lecko.</span>
+              <span className="text-border-strong text-sm font-light">×</span>
+              <span className="text-[22px] font-display font-extrabold text-canal-black tracking-[0.08em]">CANAL+</span>
+            </div>
+          </div>
 
+          {/* Form card */}
+          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 sm:p-8 shadow-elevated border border-border-default/60 space-y-6">
+            {/* Heading */}
+            <div>
+              <h2 className="text-[22px] sm:text-[24px] font-display font-extrabold text-text-on-light tracking-tight leading-snug mb-1.5">
+                {t('login.metierLabel')}
+              </h2>
+              <p className="text-[14px] text-text-muted font-body leading-relaxed">
+                {t('login.metierHelper')}
+              </p>
+            </div>
+
+            {/* Search / Select */}
             <div ref={dropdownRef} className="relative">
               <div
-                className={`flex items-center gap-2 border rounded-xl px-3.5 py-3 bg-white transition-all duration-fast cursor-text ${
+                className={`flex items-center gap-2.5 border rounded-xl px-4 py-3.5 bg-white transition-all duration-fast cursor-text ${
                   isOpen
                     ? 'border-lecko-blue ring-2 ring-lecko-blue/15 shadow-glow'
                     : 'border-border-default hover:border-border-strong'
                 }`}
                 onClick={() => { setIsOpen(true); inputRef.current?.focus(); }}
               >
-                <Search size={16} className="text-text-muted shrink-0" />
+                <Search size={18} className="text-text-muted shrink-0" />
                 {selectedMetier && !isOpen ? (
                   <div className="flex items-center gap-2 flex-1">
-                    <span className="text-[14px] font-body font-semibold text-text-on-light">{selectedMetier}</span>
+                    <span className="text-[15px] font-body font-semibold text-text-on-light">{selectedMetier}</span>
                     <button
                       type="button"
                       onClick={(e) => { e.stopPropagation(); setSelectedMetier(null); setIsOpen(true); inputRef.current?.focus(); }}
-                      className="text-[11px] text-text-muted hover:text-text-body ml-auto transition-colors"
+                      className="text-[12px] text-text-muted hover:text-lecko-blue ml-auto transition-colors font-medium"
                     >
                       {t('login.change')}
                     </button>
@@ -169,13 +206,13 @@ export function Login({ onLogin, loading }: LoginProps) {
                     onChange={(e) => { setSearch(e.target.value); setIsOpen(true); }}
                     onFocus={() => setIsOpen(true)}
                     placeholder={t('login.metierPlaceholder')}
-                    className="flex-1 text-[14px] font-body text-text-on-light placeholder:text-text-muted/60 bg-transparent outline-none"
+                    className="flex-1 text-[15px] font-body text-text-on-light placeholder:text-text-muted/50 bg-transparent outline-none"
                   />
                 )}
               </div>
 
               {isOpen && (
-                <div className="absolute z-20 w-full mt-2 bg-white border border-border-default rounded-xl shadow-floating max-h-[260px] overflow-y-auto animate-slide-up">
+                <div className="absolute z-20 w-full mt-2 bg-white border border-border-default rounded-xl shadow-floating max-h-[280px] overflow-y-auto animate-slide-up">
                   {filtered.length === 0 ? (
                     <div className="px-4 py-3 text-[13px] text-text-muted font-body">
                       {t('login.noResult')}
@@ -200,24 +237,30 @@ export function Login({ onLogin, loading }: LoginProps) {
                 </div>
               )}
             </div>
-          </div>
 
-          <button
-            type="submit"
-            disabled={!selectedMetier || loading}
-            className={`w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl font-display font-bold text-[15px] tracking-[0.01em] transition-all duration-base relative overflow-hidden group/btn ${
-              !selectedMetier && !loading
-                ? 'bg-surface-elevated text-text-muted cursor-not-allowed border border-border-default'
-                : 'bg-lecko-blue text-white hover:bg-lecko-blue/90 hover:shadow-glow active:scale-[0.97] shadow-elevated'
-            }`}
-          >
-            {selectedMetier && !loading && (
-              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
-            )}
-            <span className="relative">{loading ? t('login.loading') : t('login.start')}</span>
-            {!loading && selectedMetier && <ArrowRight size={18} className="relative group-hover/btn:translate-x-0.5 transition-transform duration-base" />}
-          </button>
-        </form>
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={!selectedMetier || loading}
+              className={`w-full flex items-center justify-center gap-2 px-4 py-4 rounded-xl font-display font-bold text-[16px] tracking-[0.01em] transition-all duration-base relative overflow-hidden group/btn ${
+                !selectedMetier && !loading
+                  ? 'bg-surface-elevated text-text-muted cursor-not-allowed border border-border-default'
+                  : 'bg-lecko-blue text-white hover:bg-lecko-blue/90 hover:shadow-glow active:scale-[0.97] shadow-elevated'
+              }`}
+            >
+              {selectedMetier && !loading && (
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
+              )}
+              <span className="relative">{loading ? t('login.loading') : t('login.start')}</span>
+              {!loading && selectedMetier && <ArrowRight size={18} className="relative group-hover/btn:translate-x-0.5 transition-transform duration-base" />}
+            </button>
+          </form>
+
+          {/* Reassurance footer */}
+          <p className="text-center text-[12px] text-text-muted/60 font-body mt-5">
+            {t('login.footer')}
+          </p>
+        </div>
       </div>
     </div>
   );
