@@ -35,6 +35,22 @@ export function useParticipant() {
 
   const login = useCallback(async (metier: string, lang: string) => {
     setLoading(true);
+
+    const createLocal = (): Participant => ({
+      id: generateId(),
+      metier,
+      lang,
+      session_id: 'pilote-canal-2026',
+      created_at: new Date().toISOString(),
+    });
+
+    const persist = (p: Participant) => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+      setParticipant(p);
+      setLoading(false);
+      return p;
+    };
+
     try {
       if (supabase) {
         const { data, error } = await supabase
@@ -44,40 +60,13 @@ export function useParticipant() {
           .single();
 
         if (error) throw error;
-        const p = data as Participant;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
-        setParticipant(p);
-        setLoading(false);
-        return p;
-      } else {
-        // Fallback sans Supabase
-        const p: Participant = {
-          id: generateId(),
-          metier,
-          lang,
-          session_id: 'pilote-canal-2026',
-          created_at: new Date().toISOString(),
-        };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
-        setParticipant(p);
-        setLoading(false);
-        return p;
+        return persist(data as Participant);
       }
+      return persist(createLocal());
     } catch (err) {
       console.error('Erreur login:', err);
       showToast('Connexion au serveur impossible — mode local active', 'warning');
-      // Fallback local
-      const p: Participant = {
-        id: generateId(),
-        metier,
-        lang,
-        session_id: 'pilote-canal-2026',
-        created_at: new Date().toISOString(),
-      };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
-      setParticipant(p);
-      setLoading(false);
-      return p;
+      return persist(createLocal());
     }
   }, []);
 
