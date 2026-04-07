@@ -53,11 +53,11 @@ export function useSubmission(participantId: string | undefined) {
 
         if (error) {
           console.error('Erreur sauvegarde Supabase:', error);
-          showToast('Erreur de synchronisation — sauvegarde locale OK', 'warning');
+          showToast('Sync error — saved locally', 'warning');
         }
       } catch (err) {
         console.error('Erreur sauvegarde:', err);
-        showToast('Connexion perdue — sauvegarde locale OK', 'error');
+        showToast('Connection lost — saved locally', 'error');
       } finally {
         setSaving(false);
       }

@@ -1,50 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Flame, FileText, Zap, Bot, ChevronRight, CheckCircle2, Lock, LockOpen, ArrowLeft, RotateCcw } from 'lucide-react';
 import { useProgress } from '../hooks/useProgress';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { SessionFlow } from '../components/shared/SessionFlow';
-
-const sprints = [
-  {
-    id: 'echauffement',
-    path: '/echauffement',
-    title: 'Echauffement',
-    subtitle: 'Explorez un sujet avec Copilot Chat',
-    duration: '10 min',
-    icon: Flame,
-    color: '#06B6D4',
-  },
-  {
-    id: 'sprint-1',
-    path: '/sprint-1',
-    title: 'Sprint 1 — Cas pratique',
-    subtitle: 'Organiser une soiree STUDIOCANAL STORIES',
-    duration: '25 min',
-    icon: FileText,
-    color: '#2563EB',
-    requires: "l'Echauffement",
-  },
-  {
-    id: 'sprint-2',
-    path: '/sprint-2',
-    title: 'Sprint 2 — Challenge collectif',
-    subtitle: 'Preparer une reunion de lancement de projet',
-    duration: '30 min',
-    icon: Zap,
-    color: '#F59E0B',
-    requires: 'le Sprint 1',
-  },
-  {
-    id: 'sprint-3',
-    path: '/sprint-3',
-    title: 'Sprint 3 — Agent Lite',
-    subtitle: 'Concevez et testez votre propre agent IA',
-    duration: '30 min',
-    icon: Bot,
-    color: '#8B5CF6',
-    requires: 'le Sprint 2',
-  },
-];
 
 interface DashboardProps {
   onChangeMetier?: () => void;
@@ -52,7 +11,50 @@ interface DashboardProps {
 
 export function Dashboard({ onChangeMetier }: DashboardProps) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { getSprintCompletion, isSprintStarted, isSprintUnlocked, justUnlocked } = useProgress();
+
+  const sprints = [
+    {
+      id: 'echauffement',
+      path: '/echauffement',
+      title: t('sprints.echauffement'),
+      subtitle: t('sprints.echauffementSub'),
+      duration: '10 min',
+      icon: Flame,
+      color: '#06B6D4',
+    },
+    {
+      id: 'sprint-1',
+      path: '/sprint-1',
+      title: t('sprints.sprint1'),
+      subtitle: t('sprints.sprint1Sub'),
+      duration: '25 min',
+      icon: FileText,
+      color: '#2563EB',
+      requires: t('sprints.reqEchauffement'),
+    },
+    {
+      id: 'sprint-2',
+      path: '/sprint-2',
+      title: t('sprints.sprint2'),
+      subtitle: t('sprints.sprint2Sub'),
+      duration: '30 min',
+      icon: Zap,
+      color: '#F59E0B',
+      requires: t('sprints.reqSprint1'),
+    },
+    {
+      id: 'sprint-3',
+      path: '/sprint-3',
+      title: t('sprints.sprint3'),
+      subtitle: t('sprints.sprint3Sub'),
+      duration: '30 min',
+      icon: Bot,
+      color: '#8B5CF6',
+      requires: t('sprints.reqSprint2'),
+    },
+  ];
 
   return (
     <div className="max-w-2xl mx-auto space-y-5">
@@ -61,10 +63,10 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
         <div className="flex items-start justify-between gap-4">
           <div>
             <h1 className="font-display font-extrabold text-[18px] text-text-on-light tracking-tight">
-              Tirez parti de Copilot Chat au quotidien
+              {t('dashboard.title')}
             </h1>
             <p className="text-[13px] text-text-muted font-body mt-1">
-              Suivez la formation sur Teams et completez les exercices ici. Chaque sprint se debloque en terminant le precedent.
+              {t('dashboard.description')}
             </p>
           </div>
           {onChangeMetier && (
@@ -73,13 +75,13 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
               className="shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border-default text-[13px] font-body font-medium text-text-body hover:bg-surface-elevated hover:border-border-strong transition-all duration-fast"
             >
               <ArrowLeft size={14} className="text-text-muted" />
-              Changer de metier
+              {t('dashboard.changeMetier')}
             </button>
           )}
         </div>
         <button
           onClick={() => {
-            if (window.confirm('Remettre toute la progression a zero ? Cette action est irreversible.')) {
+            if (window.confirm(t('dashboard.resetConfirm'))) {
               localStorage.removeItem('canal-tp-submissions');
               window.location.reload();
             }
@@ -87,7 +89,7 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
           className="w-full mt-3 flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 border-red-200 text-[15px] font-display font-bold text-red-500 hover:bg-red-50 hover:border-red-400 active:scale-[0.98] transition-all duration-fast"
         >
           <RotateCcw size={18} />
-          Reinitialiser ma progression
+          {t('dashboard.resetButton')}
         </button>
       </div>
 
@@ -154,11 +156,11 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
                 </div>
                 {unlocked || isJustUnlocked ? (
                   <p className={`text-[13px] mt-0.5 font-body ${isJustUnlocked ? 'text-text-on-light font-semibold animate-fade-in' : 'text-text-muted'}`}>
-                    {isJustUnlocked ? 'Debloque ! Continuez la formation, vous pourrez y acceder apres.' : sprint.subtitle}
+                    {isJustUnlocked ? t('dashboard.justUnlocked') : sprint.subtitle}
                   </p>
                 ) : (
                   <p className="text-[12px] text-text-muted/70 mt-0.5 font-body italic">
-                    Terminez {sprint.requires} pour debloquer
+                    {t('dashboard.lockMessage', { requires: sprint.requires })}
                   </p>
                 )}
                 {started && !isComplete && unlocked && (

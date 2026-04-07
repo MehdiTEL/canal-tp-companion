@@ -1,0 +1,211 @@
+{
+  "login": {
+    "title": "Maitriser Copilot Chat au quotidien",
+    "subtitle": "Bienvenue dans votre parcours de decouverte de l'IA generative",
+    "description": "Cette application vous guide pas a pas dans les travaux pratiques de la formation. Choisissez votre metier pour commencer.",
+    "metierLabel": "Quel est votre metier ?",
+    "metierHelper": "Identifiez votre equipe metier pour demarrer le TP. Tapez les premieres lettres ou parcourez la liste.",
+    "metierPlaceholder": "Rechercher votre metier...",
+    "noResult": "Aucun metier trouve",
+    "change": "Changer",
+    "loading": "Connexion...",
+    "start": "Commencer la session"
+  },
+  "dashboard": {
+    "title": "Tirez parti de Copilot Chat au quotidien",
+    "description": "Suivez la formation sur Teams et completez les exercices ici. Chaque sprint se debloque en terminant le precedent.",
+    "changeMetier": "Changer de metier",
+    "resetConfirm": "Remettre toute la progression a zero ? Cette action est irreversible.",
+    "resetButton": "Reinitialiser ma progression",
+    "justUnlocked": "Debloque ! Continuez la formation, vous pourrez y acceder apres.",
+    "lockMessage": "Terminez {{requires}} pour debloquer"
+  },
+  "sprints": {
+    "echauffement": "Echauffement",
+    "sprint1": "Sprint 1 — Cas pratique",
+    "sprint2": "Sprint 2 — Challenge collectif",
+    "sprint3": "Sprint 3 — Agent Lite",
+    "echauffementSub": "Explorez un sujet avec Copilot Chat",
+    "sprint1Sub": "Organiser une soiree STUDIOCANAL STORIES",
+    "sprint2Sub": "Preparer une reunion de lancement de projet",
+    "sprint3Sub": "Concevez et testez votre propre agent IA",
+    "reqEchauffement": "l'Echauffement",
+    "reqSprint1": "le Sprint 1",
+    "reqSprint2": "le Sprint 2"
+  },
+  "echauffement": {
+    "consigne": "Consigne",
+    "chooseTheme": "Choisissez votre thematique",
+    "completedMessage": "Bien joue ! L'echauffement est termine."
+  },
+  "sprint1": {
+    "step": "Etape {{n}}"
+  },
+  "sprint2": {
+    "exercise": "Exercice {{n}}"
+  },
+  "sprint3": {
+    "step": "Etape {{n}}",
+    "completedMessage": "Felicitations ! Vous avez termine l'ensemble du parcours."
+  },
+  "exercise": {
+    "consigne": "Consigne",
+    "complete": "J'ai termine",
+    "completed": "Termine",
+    "discoverAnswer": "Decouvrir la reponse",
+    "expectedAnswer": "Reponse attendue",
+    "idealPrompt": "Prompt ideal",
+    "expectedResult": "Resultat attendu",
+    "copy": "Copier",
+    "copied": "Copie !"
+  },
+  "hints": {
+    "label": "Astuce",
+    "first": "Voir une astuce pour vous aider",
+    "another": "Voir une autre astuce",
+    "allRevealed": "Vous avez toutes les astuces pour cet exercice. A vous de jouer !"
+  },
+  "header": {
+    "changeMetier": "Changer de metier"
+  },
+  "nav": {
+    "home": "Home",
+    "echauffement": "Echauff.",
+    "sprint1": "Sprint 1",
+    "sprint2": "Sprint 2",
+    "sprint3": "Sprint 3"
+  },
+  "progress": {
+    "global": "Progression globale"
+  },
+  "sprintHeader": {
+    "back": "Retour au tableau de bord",
+    "backShort": "Retour",
+    "stepOf": "Etape {{current}} sur {{total}}"
+  },
+  "consignes": {
+    "title": "Consignes du TP",
+    "badge": "Consigne TP"
+  },
+  "copyButton": {
+    "copy": "Copier",
+    "copied": "Copie !"
+  },
+  "document": {
+    "brief": "Brief",
+    "mail": "Mail",
+    "rapport": "Rapport",
+    "note": "Note",
+    "toAnalyze": "a analyser",
+    "copiedClipboard": "Copie dans le presse-papiers !",
+    "copyForCopilot": "Copier le document pour Copilot Chat"
+  },
+  "recap": {
+    "completedSubtitle": "Termine avec succes",
+    "exercisesCompleted_one": "exercice complete",
+    "exercisesCompleted_other": "exercices completes",
+    "progression": "de progression",
+    "nextModule": "Prochain module :",
+    "nextModuleHint": "Continuez la formation sur Teams, vous pourrez y acceder ensuite.",
+    "allDone": "Formation terminee !",
+    "allDoneMessage": "Felicitations, vous avez complete l'ensemble du parcours IA / Copilot Chat.",
+    "backDashboard": "Retour au tableau de bord",
+    "seeProgress": "Voir ma progression",
+    "encouragements": ["Excellent travail !", "Bravo, bien joue !", "Tres beau parcours !", "Vous gerez !"]
+  },
+  "timer": {
+    "start": "Demarrer le chronometre",
+    "pause": "Mettre en pause",
+    "reset": "Reinitialiser"
+  },
+  "workflow": {
+    "title": "Boucle de prompting",
+    "context": "Contexte",
+    "prompt": "Prompt",
+    "result": "Resultat",
+    "iteration": "Iteration",
+    "contextDesc": "Definir le besoin",
+    "promptDesc": "Rediger le prompt",
+    "resultDesc": "Analyser la sortie",
+    "iterationDesc": "Affiner le prompt"
+  },
+  "rating": {
+    "label": "Auto-evaluation :",
+    "star_one": "etoile",
+    "star_other": "etoiles"
+  },
+  "sessionFlow": {
+    "echauffement": "Echauffement",
+    "sprint1": "Sprint 1",
+    "sprint2": "Sprint 2",
+    "sprint3": "Sprint 3",
+    "echauffementDesc": "Veille rapide",
+    "sprint1Desc": "Cas pratique",
+    "sprint2Desc": "Defi collectif",
+    "sprint3Desc": "Agent Lite"
+  },
+  "save": {
+    "saving": "Sauvegarde...",
+    "saved": "Sauvegarde",
+    "local": "Sauvegarde locale",
+    "syncError": "Erreur de synchronisation — sauvegarde locale OK",
+    "connectionLost": "Connexion perdue — sauvegarde locale OK"
+  },
+  "copilotLink": {
+    "open": "Ouvrir Copilot Chat — Nouvelle conversation"
+  },
+  "toast": {
+    "close": "Fermer"
+  },
+  "agentBuilder": {
+    "title": "Fiche Agent Builder",
+    "name": "Nom de l'agent",
+    "role": "Role / mission",
+    "rolePlaceholder": "Aider a produire des contenus promotionnels pour Canal+",
+    "roleHelp": "Decrivez en une phrase ce que fait l'agent",
+    "tone": "Ton par defaut",
+    "toneDefault": "Choisir un ton",
+    "instructions": "Instructions systeme",
+    "limits": "Limites (ce que l'agent ne doit PAS faire)",
+    "limitsPlaceholder": "Ce que l'agent ne doit jamais faire...",
+    "testPrompts": "Prompts de test (3 questions a poser)",
+    "testPromptPlaceholder": "Question de test {{n}}...",
+    "generatedTitle": "Instructions systeme generees",
+    "generatedEmpty": "Remplissez les champs pour generer les instructions systeme...",
+    "tones": {
+      "Premium": "Premium",
+      "Factuel": "Factuel",
+      "Creatif": "Creatif",
+      "Pedagogique": "Pedagogique"
+    }
+  },
+  "formateur": {
+    "title": "Espace formateur",
+    "codePlaceholder": "Code d'acces",
+    "submit": "Acceder",
+    "wrongCode": "Code incorrect",
+    "noSupabase": "Supabase n'est pas configure. Configurez les variables VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY dans le fichier .env.",
+    "back": "Retour a la liste",
+    "noSubmissions": "Aucune soumission.",
+    "prompt": "Prompt :",
+    "result": "Resultat :",
+    "participants": "{{count}} participant(s)",
+    "submissions": "{{count}} soumission(s)",
+    "refresh": "Actualiser",
+    "loading": "Chargement...",
+    "exportCsv": "Export CSV",
+    "allSprints": "Tous les sprints",
+    "allMetiers": "Tous les metiers",
+    "colMetier": "Metier",
+    "colSprints": "Sprints",
+    "colExercises": "Exercices",
+    "colHints": "Astuces",
+    "colActions": "Actions",
+    "noParticipants": "Aucun participant.",
+    "view": "Voir"
+  },
+  "lang": {
+    "fr": "Francais",
+    "en": "English"
+  }
+}

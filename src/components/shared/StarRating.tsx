@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Star } from 'lucide-react';
 
 interface StarRatingProps {
@@ -7,16 +8,18 @@ interface StarRatingProps {
 }
 
 export function StarRating({ value, onChange, label }: StarRatingProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="flex items-center gap-2">
-      {label && <span className="text-sm text-text-muted">{label}</span>}
+      {label && <span className="text-sm text-text-muted">{label || t('rating.label')}</span>}
       <div className="flex gap-1">
         {[1, 2, 3, 4, 5].map((star) => (
           <button
             key={star}
             onClick={() => onChange(star)}
             className="p-0.5 transition-colors"
-            aria-label={`${star} etoile${star > 1 ? 's' : ''}`}
+            aria-label={`${star} ${star > 1 ? t('rating.star_other') : t('rating.star_one')}`}
           >
             <Star
               size={20}

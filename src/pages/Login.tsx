@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ArrowRight, Search, Check } from 'lucide-react';
+import { LanguageSelector } from '../components/shared/LanguageSelector';
 
 interface LoginProps {
   onLogin: (metier: string, lang: string) => void;
@@ -35,20 +37,19 @@ const metiers = [
 ];
 
 export function Login({ onLogin, loading }: LoginProps) {
+  const { t } = useTranslation();
   const [selectedMetier, setSelectedMetier] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Normalize for accent-insensitive search
   const normalize = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
   const filtered = search.trim()
     ? metiers.filter((m) => normalize(m).includes(normalize(search)))
     : metiers;
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -77,6 +78,11 @@ export function Login({ onLogin, loading }: LoginProps) {
       className="min-h-screen flex flex-col items-center justify-start p-4 pt-8 sm:pt-16"
       style={{ background: 'linear-gradient(165deg, #FAFBFE 0%, #EBF0FF 50%, #F5F3FF 100%)' }}
     >
+      {/* Language selector — top right */}
+      <div className="absolute top-4 right-4">
+        <LanguageSelector />
+      </div>
+
       <div className="w-full max-w-md animate-slide-up">
         {/* Logo */}
         <div className="text-center mb-8 mt-4">
@@ -86,7 +92,7 @@ export function Login({ onLogin, loading }: LoginProps) {
             <span className="text-[32px] font-display font-extrabold text-canal-black tracking-[0.08em] leading-none">CANAL+</span>
           </div>
           <p className="text-[15px] text-text-body font-body font-medium">
-            Tirez parti de Copilot Chat au quotidien
+            {t('login.title')}
           </p>
           <p className="text-[12px] text-text-muted font-body mt-1 uppercase tracking-widest font-semibold">
             Session Pilote 2026
@@ -97,13 +103,12 @@ export function Login({ onLogin, loading }: LoginProps) {
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 shadow-elevated border border-border-subtle/60 space-y-5">
           <div>
             <p className="text-[14px] font-display font-bold text-text-on-light mb-1">
-              Quel est votre metier ?
+              {t('login.metierLabel')}
             </p>
             <p className="text-[13px] text-text-muted font-body mb-3">
-              Identifiez votre equipe metier pour demarrer le TP. Tapez les premieres lettres ou parcourez la liste.
+              {t('login.metierHelper')}
             </p>
 
-            {/* Searchable dropdown */}
             <div ref={dropdownRef} className="relative">
               <div
                 className={`flex items-center gap-2 border rounded-lg px-3 py-2.5 bg-white transition-all duration-fast cursor-text ${
@@ -122,7 +127,7 @@ export function Login({ onLogin, loading }: LoginProps) {
                       onClick={(e) => { e.stopPropagation(); setSelectedMetier(null); setIsOpen(true); inputRef.current?.focus(); }}
                       className="text-[11px] text-text-muted hover:text-text-body ml-auto"
                     >
-                      Changer
+                      {t('login.change')}
                     </button>
                   </div>
                 ) : (
@@ -132,18 +137,17 @@ export function Login({ onLogin, loading }: LoginProps) {
                     value={search}
                     onChange={(e) => { setSearch(e.target.value); setIsOpen(true); }}
                     onFocus={() => setIsOpen(true)}
-                    placeholder="Rechercher votre metier..."
+                    placeholder={t('login.metierPlaceholder')}
                     className="flex-1 text-[14px] font-body text-text-on-light placeholder:text-text-muted/60 bg-transparent outline-none"
                   />
                 )}
               </div>
 
-              {/* Dropdown list */}
               {isOpen && (
                 <div className="absolute z-20 w-full mt-1.5 bg-white border border-border-default rounded-lg shadow-floating max-h-[260px] overflow-y-auto animate-slide-up">
                   {filtered.length === 0 ? (
                     <div className="px-4 py-3 text-[13px] text-text-muted font-body">
-                      Aucun metier trouve
+                      {t('login.noResult')}
                     </div>
                   ) : (
                     filtered.map((m) => (
@@ -172,7 +176,7 @@ export function Login({ onLogin, loading }: LoginProps) {
             disabled={!selectedMetier || loading}
             className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-lecko-blue text-white font-display font-bold text-[15px] tracking-[0.01em] hover:bg-lecko-blue/90 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-base shadow-card"
           >
-            {loading ? 'Connexion...' : 'Commencer la session'}
+            {loading ? t('login.loading') : t('login.start')}
             {!loading && <ArrowRight size={18} />}
           </button>
         </form>

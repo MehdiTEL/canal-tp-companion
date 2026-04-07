@@ -1,17 +1,19 @@
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LayoutDashboard, Flame, FileText, Zap, Bot, Lock, LockOpen } from 'lucide-react';
 import { useProgress } from '../../hooks/useProgress';
 
-const navItems = [
-  { to: '/dashboard', label: 'Home', icon: LayoutDashboard, color: '#6B7280', sprintId: null },
-  { to: '/echauffement', label: 'Echauff.', icon: Flame, color: '#06B6D4', sprintId: 'echauffement' },
-  { to: '/sprint-1', label: 'Sprint 1', icon: FileText, color: '#2563EB', sprintId: 'sprint-1' },
-  { to: '/sprint-2', label: 'Sprint 2', icon: Zap, color: '#F59E0B', sprintId: 'sprint-2' },
-  { to: '/sprint-3', label: 'Sprint 3', icon: Bot, color: '#8B5CF6', sprintId: 'sprint-3' },
-];
-
 export function MobileNav() {
+  const { t } = useTranslation();
   const { isSprintUnlocked, justUnlocked } = useProgress();
+
+  const navItems = [
+    { to: '/dashboard', label: t('nav.home'), icon: LayoutDashboard, color: '#6B7280', sprintId: null },
+    { to: '/echauffement', label: t('nav.echauffement'), icon: Flame, color: '#06B6D4', sprintId: 'echauffement' },
+    { to: '/sprint-1', label: t('nav.sprint1'), icon: FileText, color: '#2563EB', sprintId: 'sprint-1' },
+    { to: '/sprint-2', label: t('nav.sprint2'), icon: Zap, color: '#F59E0B', sprintId: 'sprint-2' },
+    { to: '/sprint-3', label: t('nav.sprint3'), icon: Bot, color: '#8B5CF6', sprintId: 'sprint-3' },
+  ];
 
   return (
     <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-border-subtle z-30">

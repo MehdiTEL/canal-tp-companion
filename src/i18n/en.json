@@ -1,0 +1,211 @@
+{
+  "login": {
+    "title": "Master Copilot Chat in your daily work",
+    "subtitle": "Welcome to your generative AI discovery journey",
+    "description": "This app guides you step by step through the training exercises. Choose your job role to get started.",
+    "metierLabel": "What is your job role?",
+    "metierHelper": "Select your team role to start the workshop. Type the first letters or browse the list.",
+    "metierPlaceholder": "Search your job role...",
+    "noResult": "No job role found",
+    "change": "Change",
+    "loading": "Connecting...",
+    "start": "Start session"
+  },
+  "dashboard": {
+    "title": "Get the most out of Copilot Chat every day",
+    "description": "Follow the training on Teams and complete the exercises here. Each sprint unlocks by finishing the previous one.",
+    "changeMetier": "Change job role",
+    "resetConfirm": "Reset all progress to zero? This action cannot be undone.",
+    "resetButton": "Reset my progress",
+    "justUnlocked": "Unlocked! Continue the training, you can access it after.",
+    "lockMessage": "Complete {{requires}} to unlock"
+  },
+  "sprints": {
+    "echauffement": "Warm-up",
+    "sprint1": "Sprint 1 — Practical case",
+    "sprint2": "Sprint 2 — Team challenge",
+    "sprint3": "Sprint 3 — Agent Lite",
+    "echauffementSub": "Explore a topic with Copilot Chat",
+    "sprint1Sub": "Organize a STUDIOCANAL STORIES event",
+    "sprint2Sub": "Prepare a project kickoff meeting",
+    "sprint3Sub": "Design and test your own AI agent",
+    "reqEchauffement": "the Warm-up",
+    "reqSprint1": "Sprint 1",
+    "reqSprint2": "Sprint 2"
+  },
+  "echauffement": {
+    "consigne": "Instructions",
+    "chooseTheme": "Choose your topic",
+    "completedMessage": "Well done! The warm-up is complete."
+  },
+  "sprint1": {
+    "step": "Step {{n}}"
+  },
+  "sprint2": {
+    "exercise": "Exercise {{n}}"
+  },
+  "sprint3": {
+    "step": "Step {{n}}",
+    "completedMessage": "Congratulations! You have completed the entire course."
+  },
+  "exercise": {
+    "consigne": "Instructions",
+    "complete": "I'm done",
+    "completed": "Completed",
+    "discoverAnswer": "Discover the answer",
+    "expectedAnswer": "Expected answer",
+    "idealPrompt": "Ideal prompt",
+    "expectedResult": "Expected result",
+    "copy": "Copy",
+    "copied": "Copied!"
+  },
+  "hints": {
+    "label": "Hint",
+    "first": "See a hint to help you",
+    "another": "See another hint",
+    "allRevealed": "You have all the hints for this exercise. It's your turn!"
+  },
+  "header": {
+    "changeMetier": "Change job role"
+  },
+  "nav": {
+    "home": "Home",
+    "echauffement": "Warm-up",
+    "sprint1": "Sprint 1",
+    "sprint2": "Sprint 2",
+    "sprint3": "Sprint 3"
+  },
+  "progress": {
+    "global": "Overall progress"
+  },
+  "sprintHeader": {
+    "back": "Back to dashboard",
+    "backShort": "Back",
+    "stepOf": "Step {{current}} of {{total}}"
+  },
+  "consignes": {
+    "title": "Workshop instructions",
+    "badge": "Instructions"
+  },
+  "copyButton": {
+    "copy": "Copy",
+    "copied": "Copied!"
+  },
+  "document": {
+    "brief": "Brief",
+    "mail": "Email",
+    "rapport": "Report",
+    "note": "Note",
+    "toAnalyze": "to analyze",
+    "copiedClipboard": "Copied to clipboard!",
+    "copyForCopilot": "Copy document for Copilot Chat"
+  },
+  "recap": {
+    "completedSubtitle": "Completed successfully",
+    "exercisesCompleted_one": "exercise completed",
+    "exercisesCompleted_other": "exercises completed",
+    "progression": "progression",
+    "nextModule": "Next module:",
+    "nextModuleHint": "Continue the training on Teams, you can access it afterwards.",
+    "allDone": "Training complete!",
+    "allDoneMessage": "Congratulations, you have completed the entire AI / Copilot Chat course.",
+    "backDashboard": "Back to dashboard",
+    "seeProgress": "See my progress",
+    "encouragements": ["Excellent work!", "Great job!", "Amazing progress!", "You nailed it!"]
+  },
+  "timer": {
+    "start": "Start timer",
+    "pause": "Pause",
+    "reset": "Reset"
+  },
+  "workflow": {
+    "title": "Prompting loop",
+    "context": "Context",
+    "prompt": "Prompt",
+    "result": "Result",
+    "iteration": "Iteration",
+    "contextDesc": "Define the need",
+    "promptDesc": "Write the prompt",
+    "resultDesc": "Analyze the output",
+    "iterationDesc": "Refine the prompt"
+  },
+  "rating": {
+    "label": "Self-assessment:",
+    "star_one": "star",
+    "star_other": "stars"
+  },
+  "sessionFlow": {
+    "echauffement": "Warm-up",
+    "sprint1": "Sprint 1",
+    "sprint2": "Sprint 2",
+    "sprint3": "Sprint 3",
+    "echauffementDesc": "Quick research",
+    "sprint1Desc": "Practical case",
+    "sprint2Desc": "Team challenge",
+    "sprint3Desc": "Agent Lite"
+  },
+  "save": {
+    "saving": "Saving...",
+    "saved": "Saved",
+    "local": "Saved locally",
+    "syncError": "Sync error — saved locally",
+    "connectionLost": "Connection lost — saved locally"
+  },
+  "copilotLink": {
+    "open": "Open Copilot Chat — New conversation"
+  },
+  "toast": {
+    "close": "Close"
+  },
+  "agentBuilder": {
+    "title": "Agent Builder Card",
+    "name": "Agent name",
+    "role": "Role / mission",
+    "rolePlaceholder": "Help produce promotional content for Canal+",
+    "roleHelp": "Describe in one sentence what the agent does",
+    "tone": "Default tone",
+    "toneDefault": "Choose a tone",
+    "instructions": "System instructions",
+    "limits": "Limits (what the agent must NOT do)",
+    "limitsPlaceholder": "What the agent should never do...",
+    "testPrompts": "Test prompts (3 questions to ask)",
+    "testPromptPlaceholder": "Test question {{n}}...",
+    "generatedTitle": "Generated system instructions",
+    "generatedEmpty": "Fill in the fields to generate system instructions...",
+    "tones": {
+      "Premium": "Premium",
+      "Factuel": "Factual",
+      "Creatif": "Creative",
+      "Pedagogique": "Educational"
+    }
+  },
+  "formateur": {
+    "title": "Trainer area",
+    "codePlaceholder": "Access code",
+    "submit": "Access",
+    "wrongCode": "Wrong code",
+    "noSupabase": "Supabase is not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file.",
+    "back": "Back to list",
+    "noSubmissions": "No submissions.",
+    "prompt": "Prompt:",
+    "result": "Result:",
+    "participants": "{{count}} participant(s)",
+    "submissions": "{{count}} submission(s)",
+    "refresh": "Refresh",
+    "loading": "Loading...",
+    "exportCsv": "Export CSV",
+    "allSprints": "All sprints",
+    "allMetiers": "All job roles",
+    "colMetier": "Job role",
+    "colSprints": "Sprints",
+    "colExercises": "Exercises",
+    "colHints": "Hints",
+    "colActions": "Actions",
+    "noParticipants": "No participants.",
+    "view": "View"
+  },
+  "lang": {
+    "fr": "Francais",
+    "en": "English"
+  }
+}

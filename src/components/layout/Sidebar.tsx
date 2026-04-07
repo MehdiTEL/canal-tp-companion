@@ -1,17 +1,19 @@
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LayoutDashboard, Flame, FileText, Zap, Bot, Shield, Lock, LockOpen } from 'lucide-react';
 import { useProgress } from '../../hooks/useProgress';
 
-const navItems = [
-  { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, color: '#6B7280', sprintId: null },
-  { to: '/echauffement', label: 'Echauffement', icon: Flame, color: '#06B6D4', sprintId: 'echauffement' },
-  { to: '/sprint-1', label: 'Sprint 1', icon: FileText, color: '#2563EB', sprintId: 'sprint-1' },
-  { to: '/sprint-2', label: 'Sprint 2', icon: Zap, color: '#F59E0B', sprintId: 'sprint-2' },
-  { to: '/sprint-3', label: 'Sprint 3', icon: Bot, color: '#8B5CF6', sprintId: 'sprint-3' },
-];
-
 export function Sidebar() {
+  const { t } = useTranslation();
   const { getSprintCompletion, isSprintStarted, isSprintUnlocked, justUnlocked } = useProgress();
+
+  const navItems = [
+    { to: '/dashboard', label: t('nav.home'), icon: LayoutDashboard, color: '#6B7280', sprintId: null },
+    { to: '/echauffement', label: t('nav.echauffement'), icon: Flame, color: '#06B6D4', sprintId: 'echauffement' },
+    { to: '/sprint-1', label: t('nav.sprint1'), icon: FileText, color: '#2563EB', sprintId: 'sprint-1' },
+    { to: '/sprint-2', label: t('nav.sprint2'), icon: Zap, color: '#F59E0B', sprintId: 'sprint-2' },
+    { to: '/sprint-3', label: t('nav.sprint3'), icon: Bot, color: '#8B5CF6', sprintId: 'sprint-3' },
+  ];
 
   return (
     <aside className="hidden lg:flex flex-col w-52 bg-white/60 backdrop-blur-sm border-r border-border-subtle h-[calc(100vh-49px)] sticky top-[49px]">
@@ -110,7 +112,7 @@ export function Sidebar() {
           }
         >
           <Shield size={15} />
-          <span>Formateur</span>
+          <span>{t('formateur.title')}</span>
         </NavLink>
       </div>
     </aside>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Briefcase, RefreshCw } from 'lucide-react';
 import { ProgressBar } from '../shared/ProgressBar';
 
@@ -7,6 +8,7 @@ interface HeaderProps {
 }
 
 export function Header({ metier, onLogout }: HeaderProps) {
+  const { t } = useTranslation();
   return (
     <header className="bg-white/80 backdrop-blur-md border-b border-border-subtle sticky top-0 z-30">
       <div className="px-4 py-2.5 flex items-center justify-between gap-4">
@@ -29,7 +31,7 @@ export function Header({ metier, onLogout }: HeaderProps) {
               <button
                 onClick={onLogout}
                 className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[13px] text-text-body font-body hover:bg-surface-elevated transition-colors"
-                title="Changer de metier"
+                title={t('header.changeMetier')}
               >
                 <Briefcase size={13} className="text-text-muted" />
                 <span className="font-semibold">{metier}</span>

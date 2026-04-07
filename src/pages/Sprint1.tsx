@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SprintHeader } from '../components/shared/SprintHeader';
 import { ExerciseCard } from '../components/shared/ExerciseCard';
 import { SprintRecap } from '../components/shared/SprintRecap';
@@ -12,6 +13,7 @@ interface Sprint1Props {
 }
 
 export function Sprint1({ participantId }: Sprint1Props) {
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(0);
   const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
 
@@ -44,10 +46,10 @@ export function Sprint1({ participantId }: Sprint1Props) {
     return (
       <div className="max-w-3xl mx-auto py-8">
         <SprintRecap
-          sprintTitle="Sprint 1 — Cas pratique"
+          sprintTitle={t('sprints.sprint1')}
           sprintColor="#2563EB"
           exercisesCompleted={scenario.steps.length}
-          nextSprintLabel="Sprint 2 — Challenge collectif"
+          nextSprintLabel={t('sprints.sprint2')}
         />
       </div>
     );
@@ -56,7 +58,7 @@ export function Sprint1({ participantId }: Sprint1Props) {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <SprintHeader
-        title="Sprint 1 — Cas pratique"
+        title={t('sprints.sprint1')}
         color="#2563EB"
         duration={sprint1Meta.duration}
         currentStep={currentStep + 1}
@@ -69,9 +71,8 @@ export function Sprint1({ participantId }: Sprint1Props) {
         {scenario.title}
       </div>
 
-      {/* Stepper */}
       <Stepper
-        steps={scenario.steps.map((s, i) => ({ id: s.id, label: `Etape ${i + 1}` }))}
+        steps={scenario.steps.map((s, i) => ({ id: s.id, label: t('sprint1.step', { n: i + 1 }) }))}
         currentIndex={currentStep}
         completedIndexes={completedIndexes}
         color="#2563EB"

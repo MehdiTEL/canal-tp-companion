@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Copy, Check } from 'lucide-react';
 
 interface CopyButtonProps {
@@ -6,7 +7,8 @@ interface CopyButtonProps {
   label?: string;
 }
 
-export function CopyButton({ text, label = 'Copier' }: CopyButtonProps) {
+export function CopyButton({ text, label }: CopyButtonProps) {
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -32,7 +34,7 @@ export function CopyButton({ text, label = 'Copier' }: CopyButtonProps) {
       className="flex items-center gap-1.5 text-[12px] px-2.5 py-1.5 rounded-md border border-white/20 hover:bg-white/10 text-white/70 hover:text-white transition-all duration-fast active:scale-[0.98]"
     >
       {copied ? <Check size={12} className="text-success" /> : <Copy size={12} />}
-      {copied ? 'Copie !' : label}
+      {copied ? t('copyButton.copied') : label || t('copyButton.copy')}
     </button>
   );
 }

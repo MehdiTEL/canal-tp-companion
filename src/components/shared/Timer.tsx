@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Clock, Play, Pause, RotateCcw } from 'lucide-react';
 import { useTimer } from '../../hooks/useTimer';
 
@@ -7,6 +8,7 @@ interface TimerProps {
 }
 
 export function Timer({ durationMinutes, color }: TimerProps) {
+  const { t } = useTranslation();
   const { minutes, seconds, isRunning, hasStarted, isWarning, isExpired, progress, start, pause, reset } =
     useTimer(durationMinutes);
 
@@ -28,7 +30,6 @@ export function Timer({ durationMinutes, color }: TimerProps) {
         {displayTime}
       </span>
 
-      {/* Progress bar */}
       <div className="w-16 h-1.5 bg-border-default rounded-full overflow-hidden hidden sm:block">
         <div
           className={`h-full rounded-full transition-all duration-[1000ms] ${
@@ -46,7 +47,7 @@ export function Timer({ durationMinutes, color }: TimerProps) {
           <button
             onClick={start}
             className="p-1.5 rounded-md hover:bg-black/5 transition-colors"
-            aria-label="Demarrer le chronometre"
+            aria-label={t('timer.start')}
           >
             <Play size={14} />
           </button>
@@ -55,7 +56,7 @@ export function Timer({ durationMinutes, color }: TimerProps) {
           <button
             onClick={pause}
             className="p-1.5 rounded-md hover:bg-black/5 transition-colors"
-            aria-label="Mettre en pause"
+            aria-label={t('timer.pause')}
           >
             <Pause size={14} />
           </button>
@@ -64,7 +65,7 @@ export function Timer({ durationMinutes, color }: TimerProps) {
           <button
             onClick={reset}
             className="p-1.5 rounded-md hover:bg-black/5 transition-colors"
-            aria-label="Reinitialiser"
+            aria-label={t('timer.reset')}
           >
             <RotateCcw size={14} />
           </button>

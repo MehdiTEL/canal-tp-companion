@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SprintHeader } from '../components/shared/SprintHeader';
 import { ExerciseCard } from '../components/shared/ExerciseCard';
 import { SprintRecap } from '../components/shared/SprintRecap';
@@ -16,6 +17,7 @@ interface EchauffementProps {
 }
 
 export function Echauffement({ participantId }: EchauffementProps) {
+  const { t } = useTranslation();
   const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
   const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
 
@@ -26,11 +28,11 @@ export function Echauffement({ participantId }: EchauffementProps) {
     return (
       <div className="max-w-3xl mx-auto py-8">
         <SprintRecap
-          sprintTitle="Echauffement"
+          sprintTitle={t('sprints.echauffement')}
           sprintColor="#06B6D4"
           exercisesCompleted={1}
-          nextSprintLabel="Sprint 1 — Cas pratique"
-          message="Bien joue ! L'echauffement est termine."
+          nextSprintLabel={t('sprints.sprint1')}
+          message={t('echauffement.completedMessage')}
         />
       </div>
     );
@@ -41,14 +43,14 @@ export function Echauffement({ participantId }: EchauffementProps) {
   const exercise = {
     ...echauffementExercise,
     description: selectedTheme
-      ? `Utilisez Copilot Chat pour explorer "${themeName}" et produire une synthese exploitable en 5 minutes.`
+      ? `${t('exercise.consigne')} : ${themeName}`
       : echauffementExercise.description,
   };
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <SprintHeader
-        title="Echauffement"
+        title={t('sprints.echauffement')}
         color="#06B6D4"
         duration={echauffementMeta.duration}
         currentStep={1}
@@ -58,7 +60,7 @@ export function Echauffement({ participantId }: EchauffementProps) {
       {/* Consigne */}
       <div className="rounded-lg bg-surface-elevated border-l-[3px] border-sprint-warmup px-4 py-3.5">
         <span className="inline-block text-[9px] font-display font-bold uppercase tracking-[0.15em] px-2 py-0.5 rounded mb-2 text-white bg-sprint-warmup">
-          Consigne
+          {t('echauffement.consigne')}
         </span>
         <p className="text-[14px] text-text-body font-body leading-relaxed">
           {echauffementDescription}
@@ -70,7 +72,7 @@ export function Echauffement({ participantId }: EchauffementProps) {
       {/* Theme selection */}
       <div>
         <p className="text-[13px] font-semibold text-text-body tracking-wide mb-2.5">
-          Choisissez votre thematique
+          {t('echauffement.chooseTheme')}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {echauffementThematiques.map((theme) => (

@@ -1,15 +1,19 @@
+import { useTranslation } from 'react-i18next';
+
 interface SessionFlowProps {
   activeSprintId?: string;
 }
 
-const sprints = [
-  { id: 'echauffement', label: 'Echauffement', sub: 'Veille rapide', time: '10 min', color: '#06B6D4' },
-  { id: 'sprint-1', label: 'Sprint 1', sub: 'Cas pratique', time: '25 min', color: '#2563EB' },
-  { id: 'sprint-2', label: 'Sprint 2', sub: 'Defi collectif', time: '30 min', color: '#F59E0B' },
-  { id: 'sprint-3', label: 'Sprint 3', sub: 'Agent Lite', time: '30 min', color: '#8B5CF6' },
-];
-
 export function SessionFlow({ activeSprintId }: SessionFlowProps) {
+  const { t } = useTranslation();
+
+  const sprints = [
+    { id: 'echauffement', label: t('sessionFlow.echauffement'), sub: t('sessionFlow.echauffementDesc'), time: '10 min', color: '#06B6D4' },
+    { id: 'sprint-1', label: t('sessionFlow.sprint1'), sub: t('sessionFlow.sprint1Desc'), time: '25 min', color: '#2563EB' },
+    { id: 'sprint-2', label: t('sessionFlow.sprint2'), sub: t('sessionFlow.sprint2Desc'), time: '30 min', color: '#F59E0B' },
+    { id: 'sprint-3', label: t('sessionFlow.sprint3'), sub: t('sessionFlow.sprint3Desc'), time: '30 min', color: '#8B5CF6' },
+  ];
+
   return (
     <div className="flex items-center gap-0 w-full overflow-x-auto pb-1">
       {sprints.map((s, i) => {

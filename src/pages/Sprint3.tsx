@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SprintHeader } from '../components/shared/SprintHeader';
 import { ExerciseCard } from '../components/shared/ExerciseCard';
 import { SprintRecap } from '../components/shared/SprintRecap';
@@ -14,6 +15,7 @@ interface Sprint3Props {
 }
 
 export function Sprint3({ participantId }: Sprint3Props) {
+  const { t } = useTranslation();
   const [activeExercise, setActiveExercise] = useState(0);
   const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
 
@@ -45,11 +47,11 @@ export function Sprint3({ participantId }: Sprint3Props) {
     return (
       <div className="max-w-3xl mx-auto py-8">
         <SprintRecap
-          sprintTitle="Sprint 3 — Agent Lite"
+          sprintTitle={t('sprints.sprint3')}
           sprintColor="#8B5CF6"
           exercisesCompleted={cu.exercises.length}
           nextSprintLabel={null}
-          message="Felicitations ! Vous avez termine l'ensemble du parcours."
+          message={t('sprint3.completedMessage')}
         />
       </div>
     );
@@ -58,7 +60,7 @@ export function Sprint3({ participantId }: Sprint3Props) {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <SprintHeader
-        title="Sprint 3 — Agent Lite"
+        title={t('sprints.sprint3')}
         color="#8B5CF6"
         duration={sprint3Meta.duration}
         currentStep={activeExercise + 1}
@@ -73,11 +75,10 @@ export function Sprint3({ participantId }: Sprint3Props) {
 
       <ConsignesPanel consignes={cu.consignes} />
 
-      {/* Agent Builder — visible on exercise 3 (rédiger instructions) */}
       {activeExercise === 2 && <AgentBuilder />}
 
       <Stepper
-        steps={cu.exercises.map((_, i) => ({ id: `ex-${i}`, label: `Etape ${i + 1}` }))}
+        steps={cu.exercises.map((_, i) => ({ id: `ex-${i}`, label: t('sprint3.step', { n: i + 1 }) }))}
         currentIndex={activeExercise}
         completedIndexes={completedIndexes}
         color="#8B5CF6"

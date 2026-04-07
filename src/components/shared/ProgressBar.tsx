@@ -1,6 +1,8 @@
+import { useTranslation } from 'react-i18next';
 import { useProgress } from '../../hooks/useProgress';
 
 export function ProgressBar() {
+  const { t } = useTranslation();
   const { sprintProgress, globalProgress } = useProgress();
 
   const segments = [
@@ -15,7 +17,7 @@ export function ProgressBar() {
   return (
     <div className="space-y-1">
       <div className="flex items-center justify-between text-[11px] text-text-muted font-body">
-        <span>Progression globale</span>
+        <span>{t('progress.global')}</span>
         <span className="font-semibold">{Math.round(globalProgress * 100)}%</span>
       </div>
       <div className="flex h-2 rounded-full overflow-hidden bg-border-default/60">

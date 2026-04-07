@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FileText, ChevronDown, ChevronUp, Copy, Check } from 'lucide-react';
 import type { SprintDocument } from '../../types';
 
@@ -8,14 +9,15 @@ interface DocumentPanelProps {
 }
 
 export function DocumentPanel({ document, color = '#2563EB' }: DocumentPanelProps) {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(true);
   const [copied, setCopied] = useState(false);
 
   const typeLabels: Record<string, string> = {
-    brief: 'Brief',
-    mail: 'Mail',
-    rapport: 'Rapport',
-    note: 'Note',
+    brief: t('document.brief'),
+    mail: t('document.mail'),
+    rapport: t('document.rapport'),
+    note: t('document.note'),
   };
 
   const handleCopy = async () => {
@@ -52,7 +54,7 @@ export function DocumentPanel({ document, color = '#2563EB' }: DocumentPanelProp
               className="text-[9px] font-display font-bold uppercase tracking-[0.15em] block leading-tight"
               style={{ color }}
             >
-              {typeLabels[document.type] || 'Document'} a analyser
+              {typeLabels[document.type] || 'Document'} {t('document.toAnalyze')}
             </span>
             <span className="font-display font-bold text-[14px] text-text-on-light">
               {document.title}
@@ -81,7 +83,7 @@ export function DocumentPanel({ document, color = '#2563EB' }: DocumentPanelProp
             }}
           >
             {copied ? <Check size={12} /> : <Copy size={12} />}
-            {copied ? 'Copie dans le presse-papiers !' : 'Copier le document pour Copilot Chat'}
+            {copied ? t('document.copiedClipboard') : t('document.copyForCopilot')}
           </button>
         </div>
       )}

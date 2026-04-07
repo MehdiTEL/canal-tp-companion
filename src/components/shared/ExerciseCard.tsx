@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CheckCircle2, ChevronRight, Eye, Copy, Check } from 'lucide-react';
 import { HintButton } from './HintButton';
 import { StarRating } from './StarRating';
@@ -33,6 +34,7 @@ export function ExerciseCard({
   onComplete,
   showRating = true,
 }: ExerciseCardProps) {
+  const { t } = useTranslation();
   const [selfRating, setSelfRating] = useState<number | null>(initialData?.self_rating ?? null);
   const [hintsUsed, setHintsUsed] = useState(initialData?.hints_used || 0);
   const [completed, setCompleted] = useState(initialData?.completed || false);
@@ -54,7 +56,7 @@ export function ExerciseCard({
       hints_used: hintsUsed,
       completed: true,
     });
-    showToast(`${exercise.title} termine`);
+    showToast(`${exercise.title} — ${t('exercise.completed')}`);
     onComplete?.();
   };
 
@@ -111,7 +113,7 @@ export function ExerciseCard({
             className="inline-block text-[9px] font-display font-bold uppercase tracking-[0.15em] px-2 py-0.5 rounded mb-2 text-white"
             style={{ backgroundColor: sprintColor }}
           >
-            Consigne
+            {t('exercise.consigne')}
           </span>
           <p className="text-[14px] text-text-body font-body leading-relaxed">
             {exercise.description}
@@ -139,13 +141,13 @@ export function ExerciseCard({
               onClick={handleComplete}
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-lecko-blue text-white text-[14px] font-display font-bold tracking-[0.01em] hover:bg-lecko-blue/90 active:scale-[0.98] transition-all duration-base ml-auto shadow-card"
             >
-              J'ai termine
+              {t('exercise.complete')}
               <ChevronRight size={16} />
             </button>
           ) : (
             <span className="text-[13px] text-success font-semibold ml-auto flex items-center gap-1.5 font-body">
               <CheckCircle2 size={16} />
-              Termine
+              {t('exercise.completed')}
             </span>
           )}
         </div>
@@ -160,14 +162,14 @@ export function ExerciseCard({
                 style={{ borderColor: `${sprintColor}40`, color: sprintColor }}
               >
                 <Eye size={18} />
-                <span className="font-display font-bold text-[14px]">Decouvrir la reponse</span>
+                <span className="font-display font-bold text-[14px]">{t('exercise.discoverAnswer')}</span>
               </button>
             ) : (
               <div className="space-y-4 animate-slide-up">
                 <div className="flex items-center gap-2 mb-1">
                   <Eye size={16} style={{ color: sprintColor }} />
                   <span className="text-[13px] font-display font-bold uppercase tracking-wider" style={{ color: sprintColor }}>
-                    Reponse attendue
+                    {t('exercise.expectedAnswer')}
                   </span>
                 </div>
 
@@ -176,7 +178,7 @@ export function ExerciseCard({
                   <div className="rounded-xl border overflow-hidden" style={{ borderColor: `${sprintColor}25` }}>
                     <div className="flex items-center justify-between px-4 py-2" style={{ backgroundColor: `${sprintColor}08` }}>
                       <span className="text-[11px] font-display font-bold uppercase tracking-wider" style={{ color: sprintColor }}>
-                        Prompt ideal
+                        {t('exercise.idealPrompt')}
                       </span>
                       <button
                         onClick={() => handleCopy(exercise.idealPrompt!, 'prompt')}
@@ -184,7 +186,7 @@ export function ExerciseCard({
                         style={{ color: copiedPrompt ? '#10B981' : sprintColor }}
                       >
                         {copiedPrompt ? <Check size={12} /> : <Copy size={12} />}
-                        {copiedPrompt ? 'Copie !' : 'Copier'}
+                        {copiedPrompt ? t('exercise.copied') : t('exercise.copy')}
                       </button>
                     </div>
                     <div className="px-4 py-3 bg-surface-app">
@@ -200,7 +202,7 @@ export function ExerciseCard({
                   <div className="rounded-xl border overflow-hidden" style={{ borderColor: `${sprintColor}25` }}>
                     <div className="flex items-center justify-between px-4 py-2" style={{ backgroundColor: `${sprintColor}08` }}>
                       <span className="text-[11px] font-display font-bold uppercase tracking-wider" style={{ color: sprintColor }}>
-                        Resultat attendu
+                        {t('exercise.expectedResult')}
                       </span>
                       <button
                         onClick={() => handleCopy(exercise.idealResult!, 'result')}
@@ -208,7 +210,7 @@ export function ExerciseCard({
                         style={{ color: copiedResult ? '#10B981' : sprintColor }}
                       >
                         {copiedResult ? <Check size={12} /> : <Copy size={12} />}
-                        {copiedResult ? 'Copie !' : 'Copier'}
+                        {copiedResult ? t('exercise.copied') : t('exercise.copy')}
                       </button>
                     </div>
                     <div className="px-4 py-3 bg-white">

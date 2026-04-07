@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SprintHeader } from '../components/shared/SprintHeader';
 import { ExerciseCard } from '../components/shared/ExerciseCard';
 import { SprintRecap } from '../components/shared/SprintRecap';
@@ -13,6 +14,7 @@ interface Sprint2Props {
 }
 
 export function Sprint2({ participantId }: Sprint2Props) {
+  const { t } = useTranslation();
   const [activeExercise, setActiveExercise] = useState(0);
   const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
 
@@ -44,10 +46,10 @@ export function Sprint2({ participantId }: Sprint2Props) {
     return (
       <div className="max-w-3xl mx-auto py-8">
         <SprintRecap
-          sprintTitle="Sprint 2 — Challenge collectif"
+          sprintTitle={t('sprints.sprint2')}
           sprintColor="#F59E0B"
           exercisesCompleted={cu.exercises.length}
-          nextSprintLabel="Sprint 3 — Agent Lite"
+          nextSprintLabel={t('sprints.sprint3')}
         />
       </div>
     );
@@ -56,7 +58,7 @@ export function Sprint2({ participantId }: Sprint2Props) {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <SprintHeader
-        title="Sprint 2 — Challenge collectif"
+        title={t('sprints.sprint2')}
         color="#F59E0B"
         duration={sprint2Meta.duration}
         currentStep={activeExercise + 1}
@@ -72,7 +74,7 @@ export function Sprint2({ participantId }: Sprint2Props) {
       <ConsignesPanel consignes={cu.consignes} />
 
       <Stepper
-        steps={cu.exercises.map((_, i) => ({ id: `ex-${i}`, label: `Exercice ${i + 1}` }))}
+        steps={cu.exercises.map((_, i) => ({ id: `ex-${i}`, label: t('sprint2.exercise', { n: i + 1 }) }))}
         currentIndex={activeExercise}
         completedIndexes={completedIndexes}
         color="#F59E0B"

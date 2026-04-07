@@ -70,7 +70,7 @@ export function ToastContainer() {
             <button
               onClick={() => setToasts((prev) => prev.filter((t) => t.id !== toast.id))}
               className="ml-2 p-0.5 rounded hover:bg-white/10 transition-colors"
-              aria-label="Fermer"
+              aria-label="Close"
             >
               <X size={14} />
             </button>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { ExternalLink } from 'lucide-react';
 
 interface CopilotLinkProps {
@@ -5,6 +6,8 @@ interface CopilotLinkProps {
 }
 
 export function CopilotLink({ color }: CopilotLinkProps) {
+  const { t } = useTranslation();
+
   return (
     <a
       href="https://m365.cloud.microsoft/chat"
@@ -14,7 +17,7 @@ export function CopilotLink({ color }: CopilotLinkProps) {
       style={{ backgroundColor: color }}
     >
       <ExternalLink size={18} />
-      Ouvrir Copilot Chat — Nouvelle conversation
+      {t('copilotLink.open')}
     </a>
   );
 }

@@ -1,5 +1,6 @@
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Timer } from './Timer';
 
 interface SprintHeaderProps {
@@ -22,6 +23,7 @@ export function SprintHeader({
   backLabel,
 }: SprintHeaderProps) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const progress = currentStep !== undefined && totalSteps !== undefined && totalSteps > 0
     ? Math.round((currentStep / totalSteps) * 100)
@@ -29,13 +31,12 @@ export function SprintHeader({
 
   return (
     <div className="space-y-3">
-      {/* Back to dashboard */}
       <button
         onClick={onBack || (() => navigate('/dashboard'))}
         className="flex items-center gap-1.5 text-[13px] font-body text-text-muted hover:text-text-on-light transition-colors"
       >
         <ArrowLeft size={15} />
-        {onBack ? (backLabel || 'Retour') : 'Retour au tableau de bord'}
+        {onBack ? (backLabel || t('sprintHeader.backShort')) : t('sprintHeader.back')}
       </button>
 
       <div
@@ -49,7 +50,7 @@ export function SprintHeader({
             </h1>
             {currentStep !== undefined && totalSteps !== undefined && (
               <p className="text-[13px] text-white/70 font-body mt-0.5">
-                Etape {currentStep} sur {totalSteps}
+                {t('sprintHeader.stepOf', { current: currentStep, total: totalSteps })}
               </p>
             )}
           </div>
@@ -59,7 +60,6 @@ export function SprintHeader({
           </div>
         </div>
 
-        {/* Progress bar */}
         {currentStep !== undefined && totalSteps !== undefined && totalSteps > 0 && (
           <div className="mt-3 flex items-center gap-3">
             <div className="flex-1 h-2 rounded-full bg-white/20 overflow-hidden">

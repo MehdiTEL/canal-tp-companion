@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
 import { WorkflowSchema } from './WorkflowSchema';
 
@@ -8,12 +9,12 @@ interface ConsignesPanelProps {
   showWorkflow?: boolean;
 }
 
-export function ConsignesPanel({ consignes, title = 'Consignes du TP', showWorkflow = true }: ConsignesPanelProps) {
+export function ConsignesPanel({ consignes, title, showWorkflow = true }: ConsignesPanelProps) {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div className="space-y-3">
-      {/* Consignes */}
       <div className="rounded-xl border-2 border-lecko-blue/20 bg-white overflow-hidden shadow-card">
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -25,9 +26,9 @@ export function ConsignesPanel({ consignes, title = 'Consignes du TP', showWorkf
             </div>
             <div>
               <span className="text-[9px] font-display font-bold text-lecko-blue uppercase tracking-[0.15em] block leading-tight">
-                Consigne TP
+                {t('consignes.badge')}
               </span>
-              <span className="font-display font-bold text-[14px] text-text-on-light">{title}</span>
+              <span className="font-display font-bold text-[14px] text-text-on-light">{title || t('consignes.title')}</span>
             </div>
           </div>
           {isOpen ? (
@@ -52,7 +53,6 @@ export function ConsignesPanel({ consignes, title = 'Consignes du TP', showWorkf
         )}
       </div>
 
-      {/* Workflow schema */}
       {showWorkflow && <WorkflowSchema />}
     </div>
   );

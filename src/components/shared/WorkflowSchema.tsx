@@ -1,15 +1,19 @@
-const steps = [
-  { num: '1', label: 'Contexte', sub: 'Definir le besoin' },
-  { num: '2', label: 'Prompt', sub: 'Rediger le prompt' },
-  { num: '3', label: 'Resultat', sub: 'Analyser la sortie' },
-  { num: '4', label: 'Iteration', sub: 'Affiner le prompt' },
-];
+import { useTranslation } from 'react-i18next';
 
 export function WorkflowSchema() {
+  const { t } = useTranslation();
+
+  const steps = [
+    { num: '1', label: t('workflow.context'), sub: t('workflow.contextDesc') },
+    { num: '2', label: t('workflow.prompt'), sub: t('workflow.promptDesc') },
+    { num: '3', label: t('workflow.result'), sub: t('workflow.resultDesc') },
+    { num: '4', label: t('workflow.iteration'), sub: t('workflow.iterationDesc') },
+  ];
+
   return (
     <div className="bg-surface-elevated rounded-lg p-4">
       <p className="text-[11px] font-semibold text-text-muted uppercase tracking-wider mb-3">
-        Boucle de prompting
+        {t('workflow.title')}
       </p>
       <div className="flex items-center gap-0">
         {steps.map((step, i) => (
