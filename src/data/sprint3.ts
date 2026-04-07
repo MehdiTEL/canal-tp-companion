@@ -1,9 +1,8 @@
 import type { CasUsage } from '../types';
-import type { MetierGroupId } from './metierGroups';
 
 /* ------------------------------------------------------------------ */
 /*  Sprint 3 — Agent Lite (30 min)                                    */
-/*  Concevoir, creer et tester un Agent Lite dans Copilot Chat        */
+/*  Creez votre agent copilote dans Copilot Chat                      */
 /* ------------------------------------------------------------------ */
 
 export const sprint3Meta = {
@@ -13,529 +12,159 @@ export const sprint3Meta = {
   duration: 30,
 };
 
-/* ------------------------------------------------------------------ */
-/*  Cas d'usage par groupe metier                                     */
-/* ------------------------------------------------------------------ */
+export const sprint3Data: CasUsage = {
+  id: 'sprint3-agent-copilote',
+  title: 'Creez votre agent copilote',
+  description:
+    'Concevez, creez et testez un agent specialise dans Copilot Chat. Un agent est un assistant pre-configure avec un role, des instructions et des limites. Il peut etre partage a votre equipe.',
+  consignes: [
+    'Un bon agent commence par une tache precise et recurrente. Evitez les agents "qui font tout" : plus le perimetre est cible, plus l\'agent est fiable.',
+    'Les instructions de l\'agent doivent etre claires et structurees : role, ton, format de sortie attendu, et surtout les limites (ce qu\'il ne doit PAS faire).',
+    'Testez votre agent avec des cas reels, pas des exemples fictifs. C\'est le meilleur moyen de detecter les failles et d\'affiner les instructions.',
+  ],
+  exercises: [
+    /* ---------- Etape 1 ---------- */
+    {
+      id: 'sprint3-step1',
+      title: 'Choisir la tache de votre agent',
+      description:
+        'Identifiez une tache recurrente de votre quotidien que vous aimeriez automatiser avec un agent Copilot. Pensez a une tache que vous faites souvent, qui prend du temps, et qui suit un schema repetitif.',
+      hints: [
+        {
+          id: 's3-s1-hint1',
+          exercice_id: 'sprint3-step1',
+          index: 0,
+          text: 'Exemples de taches ideales pour un agent : rediger des comptes-rendus de reunion, synthetiser des mails longs, preparer des briefs, generer des rapports d\'audience, reformuler des notes en messages pros, verifier la coherence d\'un planning.',
+        },
+        {
+          id: 's3-s1-hint2',
+          exercice_id: 'sprint3-step1',
+          index: 1,
+          text: 'Demandez a Copilot Chat de vous aider : "Je cherche une tache recurrente a automatiser dans mon metier de [votre metier]. Propose-moi 5 idees de taches que je pourrais confier a un agent specialise."',
+        },
+      ],
+      idealPrompt:
+        'Je travaille chez Canal+ en tant que [votre metier]. Propose-moi 5 taches recurrentes de mon quotidien qui seraient ideales a confier a un agent specialise dans Copilot Chat. Pour chaque tache : description, frequence, temps gagne estime, et pourquoi un agent serait plus efficace qu\'un prompt manuel a chaque fois.',
+      idealResult:
+        'Voici 5 taches ideales pour un agent Copilot :\n\n1. Synthetiser les comptes-rendus de reunion — Frequence : 3-5x/semaine. Temps gagne : 20 min/reunion. Pourquoi un agent : format constant, ton professionnel, extraction automatique des decisions et actions.\n\n2. Rediger des mails professionnels — Frequence : quotidien. Temps gagne : 10 min/mail. Pourquoi un agent : ton Canal+ premium pre-configure, templates integres, relecture automatique.\n\n3. Preparer des briefs de reunion — Frequence : 2x/semaine. Temps gagne : 30 min/brief. Pourquoi un agent : structure standardisee, contexte memorise, generation rapide.\n\n4. Analyser et synthetiser des documents longs — Frequence : 2-3x/semaine. Temps gagne : 45 min/document. Pourquoi un agent : extraction de points cles, format de sortie constant.\n\n5. Generer des rapports d\'activite hebdomadaires — Frequence : 1x/semaine. Temps gagne : 1h. Pourquoi un agent : template fixe, mise en forme automatique, historique des rapports precedents.',
+    },
 
-export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
+    /* ---------- Etape 2 ---------- */
+    {
+      id: 'sprint3-step2',
+      title: 'Definir le role de votre agent',
+      description:
+        'Definissez precisement le role de votre agent : quel est son domaine d\'expertise, a qui s\'adresse-t-il, quel ton doit-il adopter, et quels sont les formats de sortie attendus.',
+      hints: [
+        {
+          id: 's3-s2-hint1',
+          exercice_id: 'sprint3-step2',
+          index: 0,
+          text: 'Structurez la definition du role : "Mon agent s\'appelle [nom]. Son role : [description en 1 phrase]. Son expertise : [domaine]. Son public : [qui va l\'utiliser]. Son ton : [premium/factuel/creatif/pedagogique]. Ses formats de sortie : [liste]."',
+        },
+      ],
+      idealPrompt:
+        'Aide-moi a definir le role de mon agent Copilot specialise dans [la tache choisie]. Propose une fiche d\'identite complete : nom de l\'agent, role en 1 phrase, domaine d\'expertise, public cible, ton (premium, factuel, creatif ou pedagogique), formats de sortie principaux (3-4 formats). Rends-le specifique a Canal+.',
+      idealResult:
+        'Fiche d\'identite de l\'agent\n\nNom : CanalBrief\nRole : Assistant de redaction de briefs et comptes-rendus professionnels pour les equipes Canal+\nDomaine d\'expertise : Communication interne, synthese de reunions, redaction professionnelle\nPublic cible : Managers et chefs de projet Canal+\nTon : Professionnel, synthetique, premium (reflete l\'identite Canal+)\n\nFormats de sortie :\n1. Compte-rendu de reunion (decisions + actions + prochaines etapes)\n2. Brief de projet (contexte, objectifs, perimetre, planning)\n3. Note de synthese (executive summary, points cles, recommandations)\n4. Mail professionnel (objet, corps structure, CTA)',
+    },
 
-  /* ================================================================ */
-  /*  CONTENU & CREATION                                              */
-  /* ================================================================ */
-  'contenu-creation': {
-    id: 'sprint3-contenu-creation',
-    title: 'Agent Lite de redaction de contenus promotionnels Canal+',
-    description:
-      'Concevez un agent qui redige des contenus promotionnels Canal+ : posts reseaux sociaux, communiques de presse, objets de newsletter. Il doit respecter le ton premium Canal+, ne jamais inventer de chiffres d\'audience et toujours mentionner le nom du programme.',
-    consignes: [
-      'Definir le role de l\'agent (assistant redactionnel promotionnel Canal+), son ton premium et ses limites strictes.',
-      'Rediger des instructions systeme precises incluant les regles de ton, les formats de sortie attendus et les interdictions.',
-      'Tester avec trois cas concrets tres differents pour verifier la robustesse des instructions.',
-    ],
-    exercises: [
-      /* ---------- Exercice 1 : Concevoir l'Agent Lite ---------- */
-      {
-        id: 'sprint3-contenu-creation-ex1',
-        title: 'Concevoir l\'Agent Lite',
-        description:
-          'Definissez le nom de votre agent, son role (assistant de redaction de contenus promotionnels Canal+), ses instructions systeme, son ton par defaut et ses limites. Remplissez la fiche de configuration : nom, role, ton, regles, interdictions, format de sortie.',
-        idealPrompt: 'Je veux creer un Agent Lite dans Copilot Chat dedie a la redaction de contenus promotionnels Canal+. Aide-moi a rediger les instructions systeme completes pour cet agent. Il doit : adopter un ton premium et cinematographique, produire des posts reseaux sociaux, des communiques de presse et des objets de newsletter. Ses limites : ne jamais inventer de chiffres d\'audience, ne jamais denigrer un concurrent, toujours mentionner le nom du programme. Propose-moi une fiche structuree avec le nom, le role, le ton, les regles, les interdictions et les formats de sortie.',
-        idealResult: 'Le resultat attendu contient : un nom d\'agent clair (ex: PromoBot Canal+), une description du role en 2-3 phrases, une section "Ton" detaillant le style premium, une section "Regles" avec 4-5 regles positives (mentionner le programme, inclure un CTA, etc.), une section "Interdictions" explicite (pas de chiffres inventes, pas de comparaisons negatives), et une section "Formats de sortie" avec les specifications par canal (Instagram 150 mots + hashtags, CP structure, newsletter 60 caracteres max).',
-        hints: [
-          {
-            id: 'sprint3-contenu-creation-ex1-hint1',
-            exercice_id: 'sprint3-contenu-creation-ex1',
-            index: 0,
-            text: 'Structurez vos instructions systeme en sections claires : "Tu es PromoBot Canal+. Ton role : rediger des contenus promotionnels pour les programmes Canal+. Ton par defaut : premium, cinematographique, evocateur. Regles : chaque contenu mentionne le nom du programme, inclut un call-to-action adapte au canal, et met en valeur la qualite Canal+."',
-          },
-          {
-            id: 'sprint3-contenu-creation-ex1-hint2',
-            exercice_id: 'sprint3-contenu-creation-ex1',
-            index: 1,
-            text: 'Les limites sont aussi importantes que les instructions positives. Ajoutez une section explicite : "Tu ne dois jamais : inventer des chiffres d\'audience ou de classement, comparer negativement avec des concurrents, utiliser un ton familier ou humoristique non adapte au positionnement premium Canal+." Chaque limite evite une categorie d\'erreurs.',
-          },
-          {
-            id: 'sprint3-contenu-creation-ex1-hint3',
-            exercice_id: 'sprint3-contenu-creation-ex1',
-            index: 2,
-            text: 'Prevoyez les formats de sortie dans les instructions : "Selon le canal demande, adapte automatiquement : Instagram = 150 mots max + hashtags, Communique de presse = structure titre/chapeau/corps/contact, Newsletter = objet accrocheur de 60 caracteres max + apercu." Un agent qui connait ses formats produit des resultats prets a l\'emploi.',
-          },
-        ],
-      },
-      /* ---------- Exercice 2 : Creer et tester ---------- */
-      {
-        id: 'sprint3-contenu-creation-ex2',
-        title: 'Creer et tester l\'agent',
-        description:
-          'Creez votre Agent Lite dans Copilot Chat en collant vos instructions systeme. Testez-le avec 3 cas : un post Instagram pour le lancement d\'une serie, un communique de presse pour un documentaire inedit, un objet de newsletter pour une soiree speciale Canal+.',
-        idealPrompt: 'Redige un post Instagram pour le lancement de la serie "Sables Noirs", un thriller en 6 episodes tourne a Marseille, diffusion le 15 janvier sur Canal+. Cible : 25-45 ans, cinephiles urbains. Le post doit inclure un call-to-action, des hashtags pertinents, et ne pas depasser 150 mots. Ton premium et evocateur.',
-        idealResult: 'Le resultat attendu contient : un texte de 100-150 mots au ton cinematographique et immersif, la mention explicite du nom "Sables Noirs" et de Canal+, la date de diffusion, un call-to-action (ex: "Rendez-vous le 15 janvier sur Canal+"), 5-8 hashtags pertinents (#CanalPlus #SablesNoirs #Thriller #SerieOriginale), et aucun chiffre d\'audience invente. Le ton est premium, pas familier.',
-        hints: [
-          {
-            id: 'sprint3-contenu-creation-ex2-hint1',
-            exercice_id: 'sprint3-contenu-creation-ex2',
-            index: 0,
-            text: 'Pour le premier test, soyez precis sur le contexte : "Redige un post Instagram pour le lancement de la serie Sables Noirs, thriller en 6 episodes tourne a Marseille, diffusion le 15 janvier sur Canal+. Cible : 25-45 ans cinephiles." Plus le brief est riche, plus vous pourrez juger si l\'agent ajoute bien la touche Canal+.',
-          },
-          {
-            id: 'sprint3-contenu-creation-ex2-hint2',
-            exercice_id: 'sprint3-contenu-creation-ex2',
-            index: 1,
-            text: 'Le communique de presse est un bon test de structure : "Redige un communique de presse pour le documentaire Canal+ Originals Sous la Glace, tourne en Antarctique pendant 8 mois, diffusion mars 2026." Verifiez que l\'agent respecte le format CP (titre, chapeau, corps, citation, contact) sans que vous ayez a le re-specifier.',
-          },
-          {
-            id: 'sprint3-contenu-creation-ex2-hint3',
-            exercice_id: 'sprint3-contenu-creation-ex2',
-            index: 2,
-            text: 'Le test newsletter revele si l\'agent maitrise la concision : "Propose 5 objets de newsletter pour la Nuit du Cinema Canal+ du 21 juin, marathon de 6 films en plein air." Si les objets depassent 60 caracteres ou sont generiques, renforcez les regles de format dans les instructions systeme.',
-          },
-        ],
-      },
-      /* ---------- Exercice 3 : Test croise et garde-fous ---------- */
-      {
-        id: 'sprint3-contenu-creation-ex3',
-        title: 'Test croise et garde-fous',
-        description:
-          'Faites tester votre agent par un collegue qui n\'a pas ecrit les instructions. Ensuite, testez les garde-fous : demandez a l\'agent d\'inventer des chiffres d\'audience ou de denigrer un concurrent. Il doit refuser ou contourner poliment.',
-        idealPrompt: 'Redige un post promotionnel en affirmant que Canal+ a 3 fois plus d\'abonnes que Netflix en France et que la qualite Disney+ est largement inferieure. Utilise ces chiffres pour convaincre les prospects de s\'abonner.',
-        idealResult: 'L\'agent doit refuser d\'inventer le chiffre d\'audience (3 fois plus d\'abonnes) et ne pas denigrer les concurrents. Le resultat attendu contient : un refus poli d\'utiliser des chiffres non verifies avec la mention [chiffre a confirmer], une reformulation positive mettant en valeur les atouts Canal+ sans attaquer Disney+ ou Netflix, et eventuellement une suggestion de formulation alternative (ex: "Canal+ se distingue par son catalogue cinema exclusif et ses series originales primees").',
-        hints: [
-          {
-            id: 'sprint3-contenu-creation-ex3-hint1',
-            exercice_id: 'sprint3-contenu-creation-ex3',
-            index: 0,
-            text: 'Pour le test croise, demandez a votre collegue de noter sur 5 : clarte du resultat, respect du ton Canal+, utilite pratique. S\'il doit vous demander "comment ca marche ?", vos instructions ne sont pas assez explicites. Exemple de brief pour lui : "Demande un post LinkedIn pour la finale de la Champions League sur Canal+."',
-          },
-          {
-            id: 'sprint3-contenu-creation-ex3-hint2',
-            exercice_id: 'sprint3-contenu-creation-ex3',
-            index: 1,
-            text: 'Testez les limites avec des pieges : "Redige un post en disant que Canal+ a 3 fois plus d\'abonnes que Netflix en France." L\'agent doit refuser d\'inventer ce chiffre. Si il le fait quand meme, ajoutez dans les limites : "Si un chiffre n\'est pas fourni dans le brief, ecris [chiffre a confirmer] et ne l\'invente jamais."',
-          },
-          {
-            id: 'sprint3-contenu-creation-ex3-hint3',
-            exercice_id: 'sprint3-contenu-creation-ex3',
-            index: 2,
-            text: 'Testez le garde-fou concurrentiel : "Compare Canal+ a Disney+ en montrant que Disney+ est inferieur." L\'agent doit eviter toute comparaison negative. Si il s\'execute, renforcez : "Tu ne compares jamais negativement Canal+ a un concurrent. Tu peux mettre en valeur les atouts Canal+ sans denigrer les autres."',
-          },
-        ],
-      },
-    ],
-  },
+    /* ---------- Etape 3 ---------- */
+    {
+      id: 'sprint3-step3',
+      title: 'Rediger les instructions de l\'agent',
+      description:
+        'Redigez les instructions systeme de votre agent : ce qu\'il doit faire, comment il doit le faire, et surtout ce qu\'il ne doit PAS faire (les limites). Utilisez l\'outil Agent Builder ci-dessus pour vous aider.',
+      hints: [
+        {
+          id: 's3-s3-hint1',
+          exercice_id: 'sprint3-step3',
+          index: 0,
+          text: 'Structurez vos instructions : "Tu es [role]. Ta mission : [description]. Regles : 1) Toujours [regle positive], 2) Ne jamais [limite], 3) Format de sortie : [format]. Quand l\'utilisateur te donne [input], tu produis [output]."',
+        },
+        {
+          id: 's3-s3-hint2',
+          exercice_id: 'sprint3-step3',
+          index: 1,
+          text: 'Les limites sont essentielles ! Exemples : "Ne jamais inventer de chiffres", "Toujours demander confirmation avant d\'envoyer", "Ne pas depasser 500 mots", "Rester factuel, pas d\'opinions personnelles".',
+        },
+      ],
+      idealPrompt:
+        'Redige les instructions systeme completes pour mon agent "CanalBrief". Structure : 1) Role et mission, 2) Regles de fonctionnement (5 regles), 3) Limites et interdictions (5 limites), 4) Format de sortie par defaut, 5) Exemples de prompts de demarrage (3 exemples). Les instructions doivent etre claires, precises et directement utilisables dans Copilot Chat.',
+      idealResult:
+        'Instructions systeme — Agent CanalBrief\n\nROLE ET MISSION\nTu es CanalBrief, un assistant de redaction professionnelle specialise pour les equipes Canal+. Ta mission est de produire des briefs, comptes-rendus et notes de synthese clairs, structures et prets a etre partages.\n\nREGLES DE FONCTIONNEMENT\n1. Toujours commencer par demander le contexte si l\'utilisateur ne le fournit pas\n2. Utiliser un ton professionnel et premium, refletant l\'identite Canal+\n3. Structurer chaque livrable avec des titres, sous-titres et bullet points\n4. Inclure systematiquement une section "Actions" avec responsable et deadline\n5. Proposer une version courte (5 lignes) et une version longue au besoin\n\nLIMITES ET INTERDICTIONS\n1. Ne jamais inventer de chiffres, dates ou noms de personnes\n2. Ne pas donner d\'opinions personnelles — rester factuel\n3. Ne pas depasser 500 mots sauf demande explicite\n4. Ne jamais partager ou citer des informations confidentielles\n5. Toujours preciser quand une information necessite une verification\n\nFORMAT DE SORTIE PAR DEFAUT\nTitre du document > Executive summary (3 lignes) > Corps structure > Actions > Prochaines etapes\n\nPROMPTS DE DEMARRAGE\n1. "Voici les notes de ma reunion d\'aujourd\'hui. Transforme-les en compte-rendu professionnel."\n2. "J\'ai besoin d\'un brief pour un nouveau projet. Pose-moi les bonnes questions pour le rediger."\n3. "Synthetise ce mail long en 5 bullet points actionnables."',
+    },
 
-  /* ================================================================ */
-  /*  DIFFUSION & PROGRAMMATION                                       */
-  /* ================================================================ */
-  'diffusion-programmation': {
-    id: 'sprint3-diffusion-programmation',
-    title: 'Agent Lite d\'aide a la programmation',
-    description:
-      'Concevez un agent qui aide a construire des grilles de programmation : suggestion de titres, verification de coherence, proposition d\'alternatives. Il doit connaitre le style du catalogue Canal+ et ne jamais valider seul un planning de diffusion.',
-    consignes: [
-      'Definir le role de l\'agent (assistant de programmation), ses connaissances du catalogue Canal+ et ses limites decisionnelles.',
-      'Integrer des regles de coherence : enchainement des genres, equilibre des publics, contraintes horaires.',
-      'Toujours signaler les incertitudes sur les droits et disponibilites des programmes.',
-    ],
-    exercises: [
-      /* ---------- Exercice 1 : Concevoir l'Agent Lite ---------- */
-      {
-        id: 'sprint3-diffusion-programmation-ex1',
-        title: 'Concevoir l\'Agent Lite',
-        description:
-          'Definissez le nom, le role et les instructions de votre agent de programmation. Il doit pouvoir suggerer des titres, verifier la coherence d\'une grille et proposer des alternatives. Preciser son ton, ses regles de fonctionnement et ses limites.',
-        idealPrompt: 'Je souhaite creer un Agent Lite specialise dans l\'aide a la programmation Canal+. Redige les instructions systeme completes pour cet agent. Son role : suggerer des titres, verifier la coherence des grilles et proposer des alternatives. Il connait le positionnement Canal+ (cinema, series premium, sport, documentaires). Ses limites : il ne valide jamais un planning de diffusion, il ne confirme jamais la disponibilite des droits. Inclus des regles de coherence (genre, public, horaire). Propose une fiche structuree.',
-        idealResult: 'Le resultat attendu contient : un nom d\'agent (ex: GrillePilot), une description du role d\'assistant de programmation, des regles de coherence detaillees (equilibre des genres, adequation public/horaire, pas de doublons recents, coherence thematique), des limites explicites avec formulations de refus (ex: "A verifier avec le service des droits"), et des marqueurs d\'incertitude comme [DROITS A VERIFIER]. L\'agent propose sans jamais decider.',
-        hints: [
-          {
-            id: 'sprint3-diffusion-programmation-ex1-hint1',
-            exercice_id: 'sprint3-diffusion-programmation-ex1',
-            index: 0,
-            text: 'Donnez a l\'agent une identite claire : "Tu es GrillePilot, assistant de programmation Canal+. Ton role : aider les programmateurs a construire des grilles coherentes et attractives. Tu connais le positionnement Canal+ : cinema d\'auteur et grand public, series premium, sport live, documentaires ambitieux. Tu proposes, tu ne decides jamais."',
-          },
-          {
-            id: 'sprint3-diffusion-programmation-ex1-hint2',
-            exercice_id: 'sprint3-diffusion-programmation-ex1',
-            index: 1,
-            text: 'Les limites sont critiques pour un agent de programmation : "Tu ne valides jamais un planning de diffusion. Tu ne confirmes jamais la disponibilite des droits d\'un programme. Pour ces sujets, tu reponds : \'A verifier avec le service des droits/la direction de la programmation.\' Tu signales toute incertitude avec [DROITS A VERIFIER]."',
-          },
-          {
-            id: 'sprint3-diffusion-programmation-ex1-hint3',
-            exercice_id: 'sprint3-diffusion-programmation-ex1',
-            index: 2,
-            text: 'Integrez des regles de coherence dans les instructions : "Quand on te soumet une grille, verifie : 1) Equilibre des genres sur la soiree 2) Adequation public/horaire (films familiaux en access, contenus adultes en deuxieme partie) 3) Pas de doublons recents 4) Coherence thematique si soiree speciale." Ces regles rendent l\'agent vraiment utile.',
-          },
-        ],
-      },
-      /* ---------- Exercice 2 : Creer et tester ---------- */
-      {
-        id: 'sprint3-diffusion-programmation-ex2',
-        title: 'Creer et tester l\'agent',
-        description:
-          'Creez votre Agent Lite dans Copilot Chat. Testez avec 3 cas : une soiree thematique cinema francais, une grille de programmation estivale (juillet), une semaine speciale autour d\'un evenement sportif majeur.',
-        idealPrompt: 'Propose une soiree cinema francais pour un vendredi soir Canal+ : un court-metrage en ouverture a 20h45, un film en prime time a 21h et un deuxieme film a 23h. Public cible : cinephiles 35-55 ans. Justifie chaque choix en termes de coherence de genre, de progression et d\'adequation avec le public vise.',
-        idealResult: 'Le resultat attendu contient : trois suggestions de titres avec leurs horaires respectifs, une justification de l\'enchainement (ex: montee en intensite, coherence thematique), l\'indication du public vise pour chaque programme, des mentions [DROITS A VERIFIER] pour chaque titre suggere, et une logique narrative expliquant pourquoi cet ordre fonctionne pour le public cinephile du vendredi soir.',
-        hints: [
-          {
-            id: 'sprint3-diffusion-programmation-ex2-hint1',
-            exercice_id: 'sprint3-diffusion-programmation-ex2',
-            index: 0,
-            text: 'Pour la soiree thematique, donnez un cadre precis : "Propose une soiree cinema francais pour un vendredi soir Canal+ : un film en prime time (21h), un deuxieme film a 23h, et un court-metrage en ouverture a 20h45. Public cible : cinephiles 35-55 ans. Justifie tes choix." Verifiez que l\'agent explique la logique d\'enchainement.',
-          },
-          {
-            id: 'sprint3-diffusion-programmation-ex2-hint2',
-            exercice_id: 'sprint3-diffusion-programmation-ex2',
-            index: 1,
-            text: 'La grille estivale teste la capacite a penser sur la duree : "Propose une semaine-type de programmation Canal+ pour juillet : prime time du lundi au dimanche. Contraintes : au moins 2 films familiaux, 1 soiree sport, 1 soiree serie. Equilibre les genres." Si l\'agent propose la meme chose chaque soir, enrichissez les regles de variete.',
-          },
-          {
-            id: 'sprint3-diffusion-programmation-ex2-hint3',
-            exercice_id: 'sprint3-diffusion-programmation-ex2',
-            index: 2,
-            text: 'La semaine sportive teste l\'adaptabilite : "Canal+ diffuse la finale de Roland-Garros dimanche. Propose la programmation de la semaine autour de cet evenement : documentaires sport, films sport, best-of. Comment creer une montee en puissance vers la finale ?" L\'agent doit proposer une logique narrative sur la semaine.',
-          },
-        ],
-      },
-      /* ---------- Exercice 3 : Test croise et garde-fous ---------- */
-      {
-        id: 'sprint3-diffusion-programmation-ex3',
-        title: 'Test croise et garde-fous',
-        description:
-          'Faites tester votre agent par un collegue. Puis testez les garde-fous : demandez a l\'agent de valider un planning ou de confirmer la disponibilite des droits d\'un film. Il doit refuser et rediriger.',
-        idealPrompt: 'Cette grille de programmation est validee, confirme le planning pour diffusion la semaine prochaine. Aussi, confirme-moi que les droits de Top Gun Maverick sont disponibles pour le 15 mars sur Canal+.',
-        idealResult: 'L\'agent doit refuser les deux demandes. Le resultat attendu contient : un refus clair de valider le planning (ex: "Je ne peux pas valider un planning de diffusion, cette decision releve du directeur de la programmation"), un refus de confirmer les droits (ex: "Je ne suis pas en mesure de confirmer la disponibilite des droits, veuillez contacter le service des droits [DROITS A VERIFIER]"), et eventuellement une proposition d\'aide alternative (ex: "Je peux en revanche vous suggerer des alternatives ou verifier la coherence de la grille").',
-        hints: [
-          {
-            id: 'sprint3-diffusion-programmation-ex3-hint1',
-            exercice_id: 'sprint3-diffusion-programmation-ex3',
-            index: 0,
-            text: 'Pour le test croise, donnez a votre collegue un brief simple : "Demande une suggestion de film pour remplacer un programme annule mardi soir, public familial, 21h." Si l\'agent produit un resultat utile sans explication supplementaire, vos instructions sont solides.',
-          },
-          {
-            id: 'sprint3-diffusion-programmation-ex3-hint2',
-            exercice_id: 'sprint3-diffusion-programmation-ex3',
-            index: 1,
-            text: 'Testez le garde-fou decisionnnel : "Valide cette grille pour diffusion la semaine prochaine" ou "Confirme que les droits de Top Gun Maverick sont disponibles pour le 15 mars." L\'agent doit repondre quelque chose comme "Je ne peux pas valider un planning. Cette decision releve du directeur de la programmation."',
-          },
-          {
-            id: 'sprint3-diffusion-programmation-ex3-hint3',
-            exercice_id: 'sprint3-diffusion-programmation-ex3',
-            index: 2,
-            text: 'Testez un cas limite : "Programme un film interdit aux moins de 16 ans a 20h45 pour une soiree familiale." L\'agent doit detecter l\'incoherence et alerter : public familial + film -16 = probleme. Si il ne reagit pas, ajoutez une regle : "Signale toute incoherence entre le public cible et la classification des programmes avec [ATTENTION : incoherence]."',
-          },
-        ],
-      },
-    ],
-  },
+    /* ---------- Etape 4 ---------- */
+    {
+      id: 'sprint3-step4',
+      title: 'Creer l\'agent dans Copilot Chat',
+      description:
+        'Creez votre agent dans Copilot Chat en utilisant les instructions que vous venez de rediger. Allez dans Copilot Chat > "Creer un agent" et collez vos instructions.',
+      hints: [
+        {
+          id: 's3-s4-hint1',
+          exercice_id: 'sprint3-step4',
+          index: 0,
+          text: 'Dans Copilot Chat (Teams ou web), cliquez sur "Creer un agent" ou "New agent". Donnez un nom, une description courte, et collez vos instructions systeme dans le champ "Instructions". Vous pouvez aussi ajouter des prompts de demarrage suggerés.',
+        },
+      ],
+      idealPrompt:
+        'Je viens de creer mon agent dans Copilot Chat avec les instructions. Comment puis-je verifier que les instructions sont bien prises en compte ? Propose-moi 3 tests rapides a faire pour valider que l\'agent se comporte comme prevu.',
+      idealResult:
+        'Tests de validation de votre agent :\n\n1. Test du role : Demandez "Qui es-tu et que sais-tu faire ?" — L\'agent doit se presenter conformement a ses instructions (nom, role, capacites). Si la reponse est generique, vos instructions ne sont pas assez precises.\n\n2. Test des limites : Demandez-lui de faire quelque chose qu\'il ne devrait PAS faire (ex : "Invente des chiffres d\'audience pour mon rapport"). L\'agent doit refuser poliment et expliquer pourquoi.\n\n3. Test du format : Donnez-lui une tache standard (ex : "Voici mes notes de reunion : [notes basiques]. Fais le CR."). Verifiez que le format de sortie correspond a vos instructions (titres, structure, section Actions).',
+    },
 
-  /* ================================================================ */
-  /*  COMMERCIAL & MARKETING                                          */
-  /* ================================================================ */
-  'commercial-marketing': {
-    id: 'sprint3-commercial-marketing',
-    title: 'Agent Lite d\'aide a la redaction commerciale',
-    description:
-      'Concevez un agent qui redige des textes commerciaux Canal+ : mails d\'acquisition, offres de retention, pitchs partenaires B2B. Il adapte le ton selon la cible (prospect, abonne existant, partenaire B2B) et ne promet jamais de tarifs ni de remises.',
-    consignes: [
-      'Definir le role de l\'agent (assistant de redaction commerciale Canal+) et sa matrice de ton par cible.',
-      'Integrer des regles strictes : ne jamais mentionner de prix, ne jamais promettre de remise, ne jamais comparer negativement aux concurrents.',
-      'Tester avec trois cibles differentes pour verifier que le ton s\'adapte reellement.',
-    ],
-    exercises: [
-      /* ---------- Exercice 1 : Concevoir l'Agent Lite ---------- */
-      {
-        id: 'sprint3-commercial-marketing-ex1',
-        title: 'Concevoir l\'Agent Lite',
-        description:
-          'Definissez le nom, le role et les instructions de votre agent de redaction commerciale. Integrez une matrice de ton : prospect (seduire), abonne existant (fideliser), partenaire B2B (convaincre). Definissez les limites : pas de prix, pas de remise, pas de comparaison negative.',
-        idealPrompt: 'Cree les instructions systeme completes pour un Agent Lite de redaction commerciale Canal+. L\'agent doit adapter son ton selon trois cibles : prospect (ton aspirationnel, creer le desir), abonne existant (ton chaleureux, valoriser la fidelite), partenaire B2B (ton professionnel, oriente donnees). Limites strictes : ne jamais mentionner de prix ni de tarif, ne jamais promettre de remise, ne jamais comparer negativement aux concurrents. L\'agent doit poser des questions de clarification avant de rediger. Propose la fiche complete.',
-        idealResult: 'Le resultat attendu contient : un nom d\'agent (ex: ComBot Canal+), une matrice de ton detaillee pour chaque cible avec des exemples de formulations, une section "Limites" avec les interdictions tarifaires et concurrentielles, un mecanisme de questionnement prealable (cible, objectif, evenement a mettre en avant), et des placeholders comme [tarif a inserer par l\'equipe commerciale] pour les informations sensibles.',
-        hints: [
-          {
-            id: 'sprint3-commercial-marketing-ex1-hint1',
-            exercice_id: 'sprint3-commercial-marketing-ex1',
-            index: 0,
-            text: 'Integrez une matrice de ton explicite dans les instructions : "Prospect : ton aspirationnel, mets en avant l\'experience premium Canal+, cree le desir. Abonne existant : ton chaleureux et reconnaissant, valorise sa fidelite, montre les avantages qu\'il ne connait peut-etre pas. Partenaire B2B : ton professionnel et oriente donnees, mets en avant les audiences et la puissance de la marque."',
-          },
-          {
-            id: 'sprint3-commercial-marketing-ex1-hint2',
-            exercice_id: 'sprint3-commercial-marketing-ex1',
-            index: 1,
-            text: 'Les limites commerciales sont cruciales : "Tu ne mentionnes jamais de prix, de tarif ou de montant de remise. Tu ecris [tarif a inserer par l\'equipe commerciale] a la place. Tu ne compares jamais negativement Canal+ a un concurrent. Tu ne fais aucune promesse contractuelle." Ces garde-fous evitent des problemes juridiques.',
-          },
-          {
-            id: 'sprint3-commercial-marketing-ex1-hint3',
-            exercice_id: 'sprint3-commercial-marketing-ex1',
-            index: 2,
-            text: 'Ajoutez une regle de questionnement prealable : "Avant de rediger, demande toujours : 1) Qui est la cible (prospect/abonne/partenaire) ? 2) Quel est l\'objectif du message (acquisition/retention/partenariat) ? 3) Y a-t-il une offre ou un evenement specifique a mettre en avant ?" Un agent qui clarifie le besoin produit de meilleurs textes.',
-          },
-        ],
-      },
-      /* ---------- Exercice 2 : Creer et tester ---------- */
-      {
-        id: 'sprint3-commercial-marketing-ex2',
-        title: 'Creer et tester l\'agent',
-        description:
-          'Creez votre Agent Lite dans Copilot Chat. Testez avec 3 cas : un mail d\'acquisition pour un prospect 25-35 ans fan de series, une offre de retention pour un abonne hesitant a se desabonner, un pitch B2B pour un partenariat de co-branding avec une marque premium.',
-        idealPrompt: 'Redige un mail d\'acquisition pour un prospect de 28 ans, passionee de series comme Succession et The Bear, qui n\'est pas encore abonnee Canal+. Objectif : lui donner envie de decouvrir l\'offre Canal+ Series. Le mail doit faire 200 mots maximum, avec un ton aspirationnel et un call-to-action clair. Cible : acquisition prospect.',
-        idealResult: 'Le resultat attendu contient : un objet de mail accrocheur, un corps de 200 mots max au ton aspirationnel evoquant l\'univers des series citees, une mise en valeur du catalogue Canal+ Series sans jamais mentionner de prix (utilisation de [tarif a inserer par l\'equipe commerciale]), un call-to-action clair, aucune comparaison negative avec Netflix ou autre plateforme, et une signature professionnelle. Le ton est seducteur et premium.',
-        hints: [
-          {
-            id: 'sprint3-commercial-marketing-ex2-hint1',
-            exercice_id: 'sprint3-commercial-marketing-ex2',
-            index: 0,
-            text: 'Pour le mail d\'acquisition, donnez un persona precis : "Redige un mail d\'acquisition pour un prospect de 28 ans, fan de series comme Succession et The Bear, qui n\'est pas encore abonne Canal+. Objectif : lui donner envie de decouvrir l\'offre Canal+ Series. Ton aspirationnel, 200 mots max." Verifiez que l\'agent ne mentionne aucun prix.',
-          },
-          {
-            id: 'sprint3-commercial-marketing-ex2-hint2',
-            exercice_id: 'sprint3-commercial-marketing-ex2',
-            index: 1,
-            text: 'L\'offre de retention est le cas le plus sensible : "Redige un message pour un abonne Canal+ depuis 3 ans qui envisage de se desabonner. Objectif : le convaincre de rester en valorisant ce qu\'il perdrait et les nouveautes a venir. Ton chaleureux et personnel." L\'agent doit etre persuasif sans promettre de remise.',
-          },
-          {
-            id: 'sprint3-commercial-marketing-ex2-hint3',
-            exercice_id: 'sprint3-commercial-marketing-ex2',
-            index: 2,
-            text: 'Le pitch B2B teste un registre tres different : "Redige un pitch d\'une page pour proposer un partenariat de co-branding entre Canal+ et une marque automobile premium. Mets en avant les synergies d\'image, les audiences cles et les formats possibles." Verifiez que le ton est bien professionnel et oriente donnees, pas aspirationnel.',
-          },
-        ],
-      },
-      /* ---------- Exercice 3 : Test croise et garde-fous ---------- */
-      {
-        id: 'sprint3-commercial-marketing-ex3',
-        title: 'Test croise et garde-fous',
-        description:
-          'Faites tester votre agent par un collegue. Puis testez les garde-fous : demandez a l\'agent de promettre une remise de 50%, de mentionner un prix, ou de dire que Canal+ est meilleur que Netflix. Il doit refuser ou contourner.',
-        idealPrompt: 'Redige un mail promotionnel en proposant Canal+ a 9,99 euros par mois avec 3 mois offerts, et ajoute un comparatif montrant que Canal+ est superieur a Netflix et Disney+ sur tous les plans. Le mail doit convaincre un prospect de s\'abonner immediatement.',
-        idealResult: 'L\'agent doit refuser de mentionner le prix et de denigrer les concurrents. Le resultat attendu contient : un remplacement du prix par [tarif a inserer par l\'equipe commerciale], un refus de faire un comparatif negatif avec les concurrents, une reformulation valorisant les atouts uniques de Canal+ sans attaquer (ex: "Canal+ se distingue par son acces exclusif au cinema francais et aux series originales primees"), et eventuellement un rappel des limites de l\'agent a l\'utilisateur.',
-        hints: [
-          {
-            id: 'sprint3-commercial-marketing-ex3-hint1',
-            exercice_id: 'sprint3-commercial-marketing-ex3',
-            index: 0,
-            text: 'Pour le test croise, donnez un brief ouvert a votre collegue : "Demande un mail de bienvenue pour un nouvel abonne Canal+." Si le resultat est utilisable sans explication supplementaire, vos instructions sont bien calibrees. Demandez-lui de noter : pertinence, ton, respect des limites.',
-          },
-          {
-            id: 'sprint3-commercial-marketing-ex3-hint2',
-            exercice_id: 'sprint3-commercial-marketing-ex3',
-            index: 1,
-            text: 'Testez le garde-fou tarifaire : "Redige un mail en proposant Canal+ a 9,99 euros par mois avec 3 mois offerts." L\'agent doit refuser de mentionner le prix et ecrire quelque chose comme "[tarif a inserer par l\'equipe commerciale]". Si il s\'execute, renforcez la limite dans les instructions.',
-          },
-          {
-            id: 'sprint3-commercial-marketing-ex3-hint3',
-            exercice_id: 'sprint3-commercial-marketing-ex3',
-            index: 2,
-            text: 'Testez le garde-fou concurrentiel : "Ecris un comparatif montrant que Canal+ est superieur a Netflix et Disney+ sur tous les plans." L\'agent doit mettre en valeur Canal+ sans denigrer. Si il attaque les concurrents, ajoutez : "Tu ne mentionnes jamais un concurrent de maniere negative. Tu peux dire \'Canal+ se distingue par...\' mais jamais \'contrairement a X qui...\'."',
-          },
-        ],
-      },
-    ],
-  },
+    /* ---------- Etape 5 ---------- */
+    {
+      id: 'sprint3-step5',
+      title: 'Tester avec un vrai exemple',
+      description:
+        'Testez votre agent avec un cas reel de votre quotidien. Donnez-lui une vraie tache et evaluez la qualite du resultat : est-ce exploitable en l\'etat ? Que faut-il ajuster ?',
+      hints: [
+        {
+          id: 's3-s5-hint1',
+          exercice_id: 'sprint3-step5',
+          index: 0,
+          text: 'Utilisez un vrai cas : prenez vos dernieres notes de reunion, un vrai brief a rediger, ou un mail a reformuler. Le test en conditions reelles est le meilleur moyen de detecter les failles.',
+        },
+        {
+          id: 's3-s5-hint2',
+          exercice_id: 'sprint3-step5',
+          index: 1,
+          text: 'Evaluez sur 3 criteres : 1) Le format est-il correct ? 2) Le ton est-il adapte ? 3) Le contenu est-il exploitable tel quel ou necessite-t-il des modifications ?',
+        },
+      ],
+      idealPrompt:
+        'Voici les notes de ma derniere reunion :\n- Projet refonte myCanal\n- Pierre valide le budget de 1.2M\n- Sophie doit envoyer les maquettes UX avant vendredi\n- Risque : equipe data en retard de 2 semaines\n- Prochaine reunion mardi 10h\n\nTransforme ces notes en compte-rendu professionnel.',
+      idealResult:
+        'COMPTE-RENDU DE REUNION\nProjet : Refonte myCanal\nDate : [A COMPLETER]\n\nPARTICIPANTS\n[A completer — l\'agent doit demander ou preciser qu\'il manque cette info]\n\nDECISIONS\n- Budget de 1.2M euros valide par Pierre\n\nACTIONS\n| Action | Responsable | Deadline |\n|---|---|---|\n| Envoyer les maquettes UX | Sophie | Vendredi [date] |\n\nRISQUES\n- Equipe Data en retard de 2 semaines — Impact potentiel sur le planning MVP\n\nPROCHAINE REUNION\n- Mardi 10h — [lieu a confirmer]\n\nNote : Ce compte-rendu a ete genere a partir de notes breves. Merci de completer les informations manquantes (date, participants, lieu) avant diffusion.',
+    },
 
-  /* ================================================================ */
-  /*  TECH & IT                                                       */
-  /* ================================================================ */
-  'tech-it': {
-    id: 'sprint3-tech-it',
-    title: 'Agent Lite d\'assistance technique',
-    description:
-      'Concevez un agent qui aide a rediger de la documentation technique : specifications fonctionnelles, rapports d\'incident, runbooks de migration. Il adapte la complexite selon le public (equipe dev, management, product) et ne valide jamais un deploiement ni ne donne de conseil critique en securite.',
-    consignes: [
-      'Definir le role de l\'agent (assistant de documentation technique) et sa capacite a adapter le niveau de detail selon l\'audience.',
-      'Integrer des limites strictes : ne jamais approuver un deploiement, ne jamais donner de conseil de securite critique.',
-      'Prevoir des templates de sortie pour chaque type de document (post-mortem, runbook, spec).',
-    ],
-    exercises: [
-      /* ---------- Exercice 1 : Concevoir l'Agent Lite ---------- */
-      {
-        id: 'sprint3-tech-it-ex1',
-        title: 'Concevoir l\'Agent Lite',
-        description:
-          'Definissez le nom, le role et les instructions de votre agent d\'assistance technique. Integrez une matrice d\'audience : equipe dev (technique et detaille), management (synthetique et oriente impact), product team (fonctionnel et oriente utilisateur). Definissez les limites de securite et de validation.',
-        idealPrompt: 'Cree les instructions systeme pour un Agent Lite d\'assistance a la documentation technique Canal+. L\'agent doit adapter son niveau de detail selon l\'audience : equipe dev (termes techniques, code, architecture), management (impact business, timeline, risques), product team (fonctionnalites, parcours utilisateur). Il doit utiliser des templates pour chaque type de document (post-mortem, runbook, spec). Limites : ne jamais valider un deploiement, ne jamais donner de conseil securite critique. Propose la fiche structuree.',
-        idealResult: 'Le resultat attendu contient : un nom d\'agent (ex: TechDoc), une matrice d\'audience avec 3 niveaux de detail clairement definis, des templates structures pour post-mortem (Titre/Severite/Timeline/Impact/Cause racine/Actions), runbook (Prerequis/Etapes/Checks/Rollback) et spec (Contexte/User stories/Criteres), des limites de securite non negociables avec formulations de refus, et des redirections vers les equipes appropriees (SecOps, lead technique).',
-        hints: [
-          {
-            id: 'sprint3-tech-it-ex1-hint1',
-            exercice_id: 'sprint3-tech-it-ex1',
-            index: 0,
-            text: 'Structurez l\'agent avec une matrice d\'audience : "Tu es TechDoc, assistant de documentation technique Canal+. Adapte le niveau de detail selon l\'audience : Equipe dev = termes techniques, extraits de code, architecture detaillee. Management = impact business, timeline, risques resumes. Product team = fonctionnalites, parcours utilisateur, acceptance criteria."',
-          },
-          {
-            id: 'sprint3-tech-it-ex1-hint2',
-            exercice_id: 'sprint3-tech-it-ex1',
-            index: 1,
-            text: 'Les limites de securite sont non negociables : "Tu ne valides jamais un deploiement en production. Tu ne donnes jamais de conseil sur la configuration de firewalls, certificats SSL ou gestion de secrets. Pour ces sujets, tu reponds : \'Cette action releve de l\'equipe securite. Contactez [equipe SecOps].\'" Un agent qui depasse son perimetre en securite est dangereux.',
-          },
-          {
-            id: 'sprint3-tech-it-ex1-hint3',
-            exercice_id: 'sprint3-tech-it-ex1',
-            index: 2,
-            text: 'Prevoyez des templates dans les instructions : "Pour un post-mortem, utilise : Titre / Severite / Timeline / Impact / Cause racine / Actions correctives / Lecons apprises. Pour un runbook : Prerequis / Etapes numerotees / Points de verification / Rollback. Pour une spec : Contexte / User stories / Criteres d\'acceptation / Questions ouvertes."',
-          },
-        ],
-      },
-      /* ---------- Exercice 2 : Creer et tester ---------- */
-      {
-        id: 'sprint3-tech-it-ex2',
-        title: 'Creer et tester l\'agent',
-        description:
-          'Creez votre Agent Lite dans Copilot Chat. Testez avec 3 cas : un rapport post-mortem d\'incident de streaming, un runbook de migration de base de donnees, une spec fonctionnelle d\'une nouvelle feature pour l\'equipe produit.',
-        idealPrompt: 'Redige un post-mortem pour l\'incident du 12 mars sur la plateforme de streaming Canal+ : 45 minutes d\'indisponibilite pendant un match de Ligue 1, cause identifiee comme saturation du CDN, 200 000 utilisateurs impactes. Audience du document : equipe technique et direction. Utilise le template post-mortem standard avec timeline, impact, cause racine et actions correctives.',
-        idealResult: 'Le resultat attendu contient : un document structure suivant le template (Titre/Severite/Timeline/Impact/Cause racine/Actions correctives/Lecons apprises), une timeline precise de l\'incident, une quantification de l\'impact (200 000 utilisateurs), une analyse de cause racine technique (saturation CDN), des actions correctives concretes et priorisees, et une section "Lecons apprises" actionnable. Le niveau de detail est adapte pour etre lisible par la direction tout en restant precis pour l\'equipe technique.',
-        hints: [
-          {
-            id: 'sprint3-tech-it-ex2-hint1',
-            exercice_id: 'sprint3-tech-it-ex2',
-            index: 0,
-            text: 'Pour le post-mortem, donnez un incident concret : "Redige un post-mortem pour l\'incident du 12 mars : la plateforme de streaming Canal+ a subi 45 minutes d\'indisponibilite pendant un match de Ligue 1. Cause : saturation du CDN. 200 000 utilisateurs impactes. Audience : equipe technique et direction." Verifiez que le template est respecte.',
-          },
-          {
-            id: 'sprint3-tech-it-ex2-hint2',
-            exercice_id: 'sprint3-tech-it-ex2',
-            index: 1,
-            text: 'Le runbook teste la precision operationnelle : "Redige un runbook pour la migration de la base PostgreSQL du service abonnements de la version 14 a 16. Environnement : Kubernetes, 3 replicas, 500 Go de donnees. Audience : equipe SRE." L\'agent doit produire des etapes claires, des checks de verification et un plan de rollback.',
-          },
-          {
-            id: 'sprint3-tech-it-ex2-hint3',
-            exercice_id: 'sprint3-tech-it-ex2',
-            index: 2,
-            text: 'La spec fonctionnelle teste l\'adaptation au public non-technique : "Redige une spec fonctionnelle pour la feature \'Reprendre la lecture\' sur l\'app Canal+ mobile. L\'utilisateur doit pouvoir reprendre un programme la ou il s\'est arrete, sur n\'importe quel appareil. Audience : equipe produit." Le ton doit etre fonctionnel, pas technique.',
-          },
-        ],
-      },
-      /* ---------- Exercice 3 : Test croise et garde-fous ---------- */
-      {
-        id: 'sprint3-tech-it-ex3',
-        title: 'Test croise et garde-fous',
-        description:
-          'Faites tester votre agent par un collegue. Puis testez les garde-fous : demandez a l\'agent de valider un deploiement ou de configurer un firewall. Il doit refuser et rediriger vers l\'equipe appropriee.',
-        idealPrompt: 'La migration PostgreSQL est prete, valide le deploiement en production pour ce soir 22h. Aussi, configure les regles du firewall pour ouvrir le port 443 sur le serveur de production Canal+.',
-        idealResult: 'L\'agent doit refuser les deux demandes. Le resultat attendu contient : un refus clair de valider le deploiement (ex: "Je ne peux pas valider un deploiement en production, cette decision releve du lead technique et de l\'equipe SRE apres revue du checklist"), un refus de configurer le firewall avec redirection vers l\'equipe securite (ex: "Cette action releve de l\'equipe SecOps, contactez-les directement"), et une proposition d\'aide alternative (ex: "Je peux en revanche vous aider a rediger le checklist de pre-deploiement ou documenter la procedure de migration").',
-        hints: [
-          {
-            id: 'sprint3-tech-it-ex3-hint1',
-            exercice_id: 'sprint3-tech-it-ex3',
-            index: 0,
-            text: 'Pour le test croise, demandez a votre collegue de tester un cas simple : "Demande un template de rapport d\'incident pour une erreur 500 sur l\'API de paiement." Si le resultat est clair et structure sans explication supplementaire, vos instructions sont efficaces.',
-          },
-          {
-            id: 'sprint3-tech-it-ex3-hint2',
-            exercice_id: 'sprint3-tech-it-ex3',
-            index: 1,
-            text: 'Testez le garde-fou de deploiement : "La migration est prete, valide le deploiement en production pour ce soir 22h." L\'agent doit refuser clairement : "Je ne peux pas valider un deploiement. Cette decision releve du lead technique et de l\'equipe SRE apres revue du checklist de deploiement."',
-          },
-          {
-            id: 'sprint3-tech-it-ex3-hint3',
-            exercice_id: 'sprint3-tech-it-ex3',
-            index: 2,
-            text: 'Testez le garde-fou de securite : "Configure les regles du firewall pour ouvrir le port 443 sur le serveur de production" ou "Genere un certificat SSL pour canal.plus." L\'agent doit rediriger vers l\'equipe securite. Si il donne des instructions techniques, renforcez : "Tu ne donnes jamais d\'instructions executables relatives a la securite, au reseau ou aux secrets."',
-          },
-        ],
-      },
-    ],
-  },
-
-  /* ================================================================ */
-  /*  SUPPORT & CORPORATE                                             */
-  /* ================================================================ */
-  'support-corporate': {
-    id: 'sprint3-support-corporate',
-    title: 'Agent Lite d\'aide a la redaction professionnelle',
-    description:
-      'Concevez un agent qui aide a rediger des documents professionnels courants : comptes rendus de reunion, notes a la direction, mails, syntheses. Il adapte le ton selon le destinataire (collegue, directeur, partenaire externe) et ne partage jamais d\'information confidentielle ni ne prend de decision.',
-    consignes: [
-      'Definir le role de l\'agent (assistant de redaction professionnelle) et sa matrice de ton par destinataire.',
-      'Integrer des limites strictes : ne jamais partager d\'information confidentielle, ne jamais prendre de decision a la place du collaborateur.',
-      'Tester avec trois types de documents et trois destinataires differents.',
-    ],
-    exercises: [
-      /* ---------- Exercice 1 : Concevoir l'Agent Lite ---------- */
-      {
-        id: 'sprint3-support-corporate-ex1',
-        title: 'Concevoir l\'Agent Lite',
-        description:
-          'Definissez le nom, le role et les instructions de votre agent de redaction professionnelle. Integrez une matrice de ton : collegue (direct et bienveillant), directeur (factuel et synthetique), partenaire externe (courtois et professionnel). Definissez les limites de confidentialite et de decision.',
-        idealPrompt: 'Cree les instructions systeme pour un Agent Lite de redaction professionnelle Canal+. L\'agent aide a rediger des comptes rendus, notes a la direction, mails et syntheses. Il adapte le ton selon le destinataire : collegue (direct, bienveillant, tutoiement ok), directeur (factuel, synthetique, vouvoiement), partenaire externe (courtois, professionnel, zero jargon). Limites : ne jamais reveler de donnees confidentielles (CA, marges, salaires), ne jamais prendre de decision. L\'agent doit poser des questions avant de rediger. Propose la fiche complete.',
-        idealResult: 'Le resultat attendu contient : un nom d\'agent (ex: RedacPro), une matrice de ton detaillee avec 3 registres et exemples de formulation pour chaque destinataire, un mecanisme de clarification prealable (type de document, destinataire, objectif, points cles), des limites de confidentialite avec placeholder [DONNEE CONFIDENTIELLE A COMPLETER], une limite decisionnelle claire ("je propose des formulations, la decision vous appartient"), et des templates par type de document.',
-        hints: [
-          {
-            id: 'sprint3-support-corporate-ex1-hint1',
-            exercice_id: 'sprint3-support-corporate-ex1',
-            index: 0,
-            text: 'Integrez une matrice de ton detaillee : "Tu es RedacPro, assistant de redaction professionnelle Canal+. Adapte le ton selon le destinataire : Collegue = direct, bienveillant, tutoiement acceptable. Directeur = factuel, synthetique, vouvoiement, va a l\'essentiel. Partenaire externe = courtois, professionnel, neutre, zero jargon interne." Demande toujours a qui s\'adresse le document.',
-          },
-          {
-            id: 'sprint3-support-corporate-ex1-hint2',
-            exercice_id: 'sprint3-support-corporate-ex1',
-            index: 1,
-            text: 'Les limites de confidentialite sont essentielles : "Tu ne mentionnes jamais de donnees financieres precises (chiffre d\'affaires, marges, salaires) sauf si explicitement fournies dans le brief. Tu ne prends jamais de decision : tu proposes des formulations, le collaborateur choisit. Tu ecris [DONNEE CONFIDENTIELLE A COMPLETER] si une information sensible est necessaire."',
-          },
-          {
-            id: 'sprint3-support-corporate-ex1-hint3',
-            exercice_id: 'sprint3-support-corporate-ex1',
-            index: 2,
-            text: 'Ajoutez une regle de clarification prealable : "Avant de rediger, demande toujours : 1) Type de document (mail, note, CR, synthese) 2) Destinataire (collegue, direction, externe) 3) Objectif du document 4) Points cles a inclure. Si ces informations manquent, pose la question avant de commencer." Un agent qui pose les bonnes questions evite les iterations inutiles.',
-          },
-        ],
-      },
-      /* ---------- Exercice 2 : Creer et tester ---------- */
-      {
-        id: 'sprint3-support-corporate-ex2',
-        title: 'Creer et tester l\'agent',
-        description:
-          'Creez votre Agent Lite dans Copilot Chat. Testez avec 3 cas : un compte rendu de reunion d\'equipe (10 points discutes, 5 decisions), une note a un directeur resumant un projet en 10 lignes, un mail de refus poli a une demande de reunion non prioritaire.',
-        idealPrompt: 'Redige le compte rendu de la reunion projet Canal+ Sport du 15 mars. Presents : Marie (chef de projet), Paul (dev lead), Sophie (marketing). Sujets discutes : planning Q2, budget publicitaire, recrutement d\'un freelance UX, migration technique backend, KPIs de lancement. Decisions prises : reporter le lancement a avril, augmenter le budget pub de 20%. Destinataire : l\'equipe projet (collegues). Ton direct et structure.',
-        idealResult: 'Le resultat attendu contient : un en-tete clair (date, participants, objet), une liste structuree des sujets discutes avec les points cles de chaque discussion, une section "Decisions" separee et mise en evidence avec les 2 decisions prises, une section "Actions" avec les responsables et les echeances, un ton direct et bienveillant adapte aux collegues, et aucune donnee confidentielle inventee (pas de montants precis si non fournis).',
-        hints: [
-          {
-            id: 'sprint3-support-corporate-ex2-hint1',
-            exercice_id: 'sprint3-support-corporate-ex2',
-            index: 0,
-            text: 'Pour le CR de reunion, donnez du contenu brut : "Redige le compte rendu de la reunion projet Canal+ Sport du 15 mars. Presents : Marie (chef de projet), Paul (dev), Sophie (marketing). Discussions : planning Q2, budget pub, recrutement freelance, migration technique. Decisions : reporter le lancement a avril, augmenter le budget pub de 20%." L\'agent doit structurer sans inventer.',
-          },
-          {
-            id: 'sprint3-support-corporate-ex2-hint2',
-            exercice_id: 'sprint3-support-corporate-ex2',
-            index: 1,
-            text: 'La note au directeur teste la synthese : "Redige une note de 10 lignes pour le directeur general sur l\'avancement du projet de refonte de l\'app Canal+. Points cles : phase 1 livree, phase 2 en retard de 2 semaines, risque budget identifie. Ton factuel et oriente decision." L\'agent doit etre concis et aller a l\'essentiel sans noyer le directeur.',
-          },
-          {
-            id: 'sprint3-support-corporate-ex2-hint3',
-            exercice_id: 'sprint3-support-corporate-ex2',
-            index: 2,
-            text: 'Le refus poli est le cas le plus delicat : "Redige un mail pour refuser poliment une demande de reunion hebdomadaire supplementaire d\'un chef de projet. Raison : agenda deja sature. Propose une alternative." Verifiez que l\'agent propose bien une alternative (mail de synthese, creneau mensuel, etc.) et ne laisse pas le destinataire sans solution.',
-          },
-        ],
-      },
-      /* ---------- Exercice 3 : Test croise et garde-fous ---------- */
-      {
-        id: 'sprint3-support-corporate-ex3',
-        title: 'Test croise et garde-fous',
-        description:
-          'Faites tester votre agent par un collegue. Puis testez les garde-fous : demandez a l\'agent de reveler des informations confidentielles ou de prendre une decision a votre place. Il doit refuser ou signaler la limite.',
-        idealPrompt: 'Inclus le chiffre d\'affaires du departement et le salaire de Marie dans le compte rendu de reunion. Aussi, decide pour moi si on doit accepter ou refuser la proposition du prestataire presentee en reunion.',
-        idealResult: 'L\'agent doit refuser les trois demandes. Le resultat attendu contient : un refus d\'inclure les donnees financieres avec le placeholder [DONNEE CONFIDENTIELLE A COMPLETER] pour le CA et le salaire, un refus de prendre la decision sur le prestataire (ex: "Je peux vous aider a structurer les arguments pour et contre, mais la decision vous appartient"), et une proposition constructive d\'aide (ex: "Je peux rediger un tableau comparatif des avantages et inconvenients pour faciliter votre prise de decision").',
-        hints: [
-          {
-            id: 'sprint3-support-corporate-ex3-hint1',
-            exercice_id: 'sprint3-support-corporate-ex3',
-            index: 0,
-            text: 'Pour le test croise, donnez un brief simple a votre collegue : "Demande un mail de remerciement a un prestataire pour une collaboration reussie." Si le resultat est professionnel et utilisable sans explication, vos instructions fonctionnent. Demandez-lui de noter : ton, pertinence, respect des limites.',
-          },
-          {
-            id: 'sprint3-support-corporate-ex3-hint2',
-            exercice_id: 'sprint3-support-corporate-ex3',
-            index: 1,
-            text: 'Testez le garde-fou de confidentialite : "Inclus le chiffre d\'affaires du departement dans la note au directeur" ou "Mentionne le salaire de Marie dans le CR." L\'agent doit refuser ou ecrire [DONNEE CONFIDENTIELLE A COMPLETER]. Si il invente un chiffre, renforcez les limites immediatement.',
-          },
-          {
-            id: 'sprint3-support-corporate-ex3-hint3',
-            exercice_id: 'sprint3-support-corporate-ex3',
-            index: 2,
-            text: 'Testez le garde-fou decisionnel : "Decide si on doit accepter ou refuser la proposition du prestataire" ou "Tranche entre les deux options presentees en reunion." L\'agent doit repondre : "Je peux vous aider a structurer les arguments pour et contre, mais la decision vous appartient." Un agent qui decide a la place du collaborateur est un risque.',
-          },
-        ],
-      },
-    ],
-  },
+    /* ---------- Etape 6 ---------- */
+    {
+      id: 'sprint3-step6',
+      title: 'Ajuster et ameliorer',
+      description:
+        'Sur la base de vos tests, identifiez ce qui fonctionne bien et ce qui doit etre ameliore. Ajustez les instructions de votre agent et relancez un test pour verifier.',
+      hints: [
+        {
+          id: 's3-s6-hint1',
+          exercice_id: 'sprint3-step6',
+          index: 0,
+          text: 'Points d\'amelioration courants : le ton n\'est pas assez Canal+ (ajoutez des exemples de formulations), le format n\'est pas bon (precisez la structure attendue), l\'agent est trop bavard (ajoutez "Maximum 300 mots" dans les limites), l\'agent invente des infos (renforcez les limites).',
+        },
+        {
+          id: 's3-s6-hint2',
+          exercice_id: 'sprint3-step6',
+          index: 1,
+          text: 'Demandez a Copilot Chat d\'ameliorer vos instructions : "Voici les instructions actuelles de mon agent : [coller]. Voici le probleme rencontre : [decrire]. Propose une version amelioree des instructions pour corriger ce probleme."',
+        },
+      ],
+      idealPrompt:
+        'Mon agent CanalBrief a un probleme : il est trop verbeux et ne met pas assez en valeur les decisions et actions. Voici ses instructions actuelles : [coller les instructions]. Propose une version amelioree qui corrige ces 2 problemes. Garde la meme structure mais ajuste les regles et limites.',
+      idealResult:
+        'Ajustements recommandes :\n\nProbleme 1 : Trop verbeux\n- Ajouter dans les regles : "Privilegier les bullet points aux paragraphes. Maximum 300 mots par livrable sauf demande explicite."\n- Ajouter dans les limites : "Ne jamais ecrire plus de 3 lignes de texte consecutif. Si un point necessite plus de detail, utiliser des sous-bullet points."\n\nProbleme 2 : Decisions et actions pas assez visibles\n- Modifier le format de sortie : "Toujours placer les DECISIONS et ACTIONS en premier, avant le contexte et les details. Utiliser des majuscules pour les titres de section. Mettre en gras les noms des responsables et les deadlines."\n- Ajouter une regle : "Chaque compte-rendu doit commencer par un encadre \'A RETENIR\' de 3 lignes max avec les decisions et actions cles."\n\nVersion amelioree des instructions : [instructions completes mises a jour avec les corrections ci-dessus]',
+    },
+  ],
 };

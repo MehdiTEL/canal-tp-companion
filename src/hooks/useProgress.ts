@@ -16,8 +16,8 @@ function computeProgress(submissions: Record<string, LocalSubmission>) {
   const sprints: Record<string, { total: number; completed: number }> = {
     echauffement: { total: 1, completed: 0 },
     'sprint-1': { total: 5, completed: 0 },
-    'sprint-2': { total: 3, completed: 0 },
-    'sprint-3': { total: 3, completed: 0 },
+    'sprint-2': { total: 5, completed: 0 },
+    'sprint-3': { total: 6, completed: 0 },
   };
 
   Object.values(submissions).forEach((sub) => {
@@ -82,7 +82,7 @@ export function useProgress() {
 
   const isSprintStarted = useCallback((sprintId: string) => {
     return Object.values(submissions).some(
-      (sub) => sub.sprint === sprintId && (sub.prompt_text || sub.completed)
+      (sub) => sub.sprint === sprintId && sub.completed
     );
   }, [submissions]);
 

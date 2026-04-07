@@ -3,35 +3,21 @@ import { SprintHeader } from '../components/shared/SprintHeader';
 import { ExerciseCard } from '../components/shared/ExerciseCard';
 import { SprintRecap } from '../components/shared/SprintRecap';
 import { CopilotLink } from '../components/shared/CopilotLink';
-import { echauffementMeta, echauffementByGroup } from '../data/echauffement';
-import { getGroupForMetier } from '../data/metierGroups';
+import {
+  echauffementMeta,
+  echauffementDescription,
+  echauffementThematiques,
+  echauffementExercise,
+} from '../data/echauffement';
 import { useSubmission } from '../hooks/useSubmission';
-import type { Exercise } from '../types';
 
 interface EchauffementProps {
   participantId?: string;
-  metier: string;
 }
 
-export function Echauffement({ participantId, metier }: EchauffementProps) {
+export function Echauffement({ participantId }: EchauffementProps) {
   const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
   const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
-
-  const groupId = getGroupForMetier(metier);
-  const groupData = echauffementByGroup[groupId];
-
-  const themeName = groupData.thematiques.find(t => t.id === selectedTheme)?.label;
-
-  const exercise: Exercise = {
-    id: 'echauffement-ex1',
-    title: 'Synthese sur votre thematique',
-    description: selectedTheme
-      ? `Utilisez Copilot Chat pour explorer "${themeName}" et produire une synthese exploitable en 5 minutes.`
-      : 'Selectionnez une thematique ci-dessus pour commencer.',
-    hints: groupData.hints,
-    idealPrompt: groupData.idealPrompt,
-    idealResult: groupData.idealResult,
-  };
 
   const localData = getLocalData('echauffement-ex1');
   const completed = localData?.completed || false;
@@ -50,6 +36,15 @@ export function Echauffement({ participantId, metier }: EchauffementProps) {
     );
   }
 
+  const themeName = echauffementThematiques.find(t => t.id === selectedTheme)?.label;
+
+  const exercise = {
+    ...echauffementExercise,
+    description: selectedTheme
+      ? `Utilisez Copilot Chat pour explorer "${themeName}" et produire une synthese exploitable en 5 minutes.`
+      : echauffementExercise.description,
+  };
+
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <SprintHeader
@@ -66,7 +61,7 @@ export function Echauffement({ participantId, metier }: EchauffementProps) {
           Consigne
         </span>
         <p className="text-[14px] text-text-body font-body leading-relaxed">
-          {groupData.description}
+          {echauffementDescription}
         </p>
       </div>
 
@@ -78,7 +73,7 @@ export function Echauffement({ participantId, metier }: EchauffementProps) {
           Choisissez votre thematique
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {groupData.thematiques.map((theme) => (
+          {echauffementThematiques.map((theme) => (
             <button
               key={theme.id}
               onClick={() => setSelectedTheme(theme.id)}

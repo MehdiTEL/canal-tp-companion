@@ -35,10 +35,10 @@ function AppContent() {
         <main className="flex-1 p-4 sm:p-6 pb-20 lg:pb-6">
           <Routes>
             <Route path="/dashboard" element={<Dashboard onChangeMetier={logout} />} />
-            <Route path="/echauffement" element={<Echauffement participantId={participant.id} metier={participant.metier} />} />
-            <Route path="/sprint-1" element={<Sprint1 participantId={participant.id} metier={participant.metier} />} />
-            <Route path="/sprint-2" element={<Sprint2 participantId={participant.id} metier={participant.metier} />} />
-            <Route path="/sprint-3" element={<Sprint3 participantId={participant.id} metier={participant.metier} />} />
+            <Route path="/echauffement" element={<Echauffement participantId={participant.id} />} />
+            <Route path="/sprint-1" element={<Sprint1 participantId={participant.id} />} />
+            <Route path="/sprint-2" element={<Sprint2 participantId={participant.id} />} />
+            <Route path="/sprint-3" element={<Sprint3 participantId={participant.id} />} />
             <Route path="/formateur" element={<Formateur />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>

@@ -6,21 +6,18 @@ import { CopilotLink } from '../components/shared/CopilotLink';
 import { ConsignesPanel } from '../components/shared/ConsignesPanel';
 import { Stepper } from '../components/shared/Stepper';
 import { AgentBuilder } from '../components/sprint3/AgentBuilder';
-import { sprint3Meta, sprint3ByGroup } from '../data/sprint3';
-import { getGroupForMetier } from '../data/metierGroups';
+import { sprint3Meta, sprint3Data } from '../data/sprint3';
 import { useSubmission } from '../hooks/useSubmission';
 
 interface Sprint3Props {
   participantId?: string;
-  metier: string;
 }
 
-export function Sprint3({ participantId, metier }: Sprint3Props) {
+export function Sprint3({ participantId }: Sprint3Props) {
   const [activeExercise, setActiveExercise] = useState(0);
   const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
 
-  const groupId = getGroupForMetier(metier);
-  const cu = sprint3ByGroup[groupId];
+  const cu = sprint3Data;
 
   const completedIndexes = useMemo(() => {
     const set = new Set<number>();
@@ -31,7 +28,6 @@ export function Sprint3({ participantId, metier }: Sprint3Props) {
     return set;
   }, [activeExercise, getLocalData, cu.exercises]);
 
-  // Prevent skipping ahead
   const maxAccessibleStep = useMemo(() => {
     let max = 0;
     for (let i = 0; i < cu.exercises.length; i++) {
@@ -75,15 +71,13 @@ export function Sprint3({ participantId, metier }: Sprint3Props) {
         {cu.title}
       </div>
 
-      {/* Consignes — above exercises */}
       <ConsignesPanel consignes={cu.consignes} />
 
-      {/* Agent Builder — only on exercise 1 */}
-      {activeExercise === 0 && <AgentBuilder />}
+      {/* Agent Builder — visible on exercise 3 (rédiger instructions) */}
+      {activeExercise === 2 && <AgentBuilder />}
 
-      {/* Stepper */}
       <Stepper
-        steps={cu.exercises.map((_, i) => ({ id: `ex-${i}`, label: `Exercice ${i + 1}` }))}
+        steps={cu.exercises.map((_, i) => ({ id: `ex-${i}`, label: `Etape ${i + 1}` }))}
         currentIndex={activeExercise}
         completedIndexes={completedIndexes}
         color="#8B5CF6"

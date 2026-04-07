@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { CheckCircle2, ChevronRight, Eye, Copy, Check } from 'lucide-react';
 import { HintButton } from './HintButton';
 import { StarRating } from './StarRating';
-import { SaveIndicator } from './SaveIndicator';
 import { showToast } from './Toast';
 import type { Exercise, LocalSubmission } from '../../types';
 
@@ -33,9 +32,7 @@ export function ExerciseCard({
   onSave,
   onComplete,
   showRating = true,
-  saving,
 }: ExerciseCardProps) {
-  const [promptText, setPromptText] = useState(initialData?.prompt_text || '');
   const [selfRating, setSelfRating] = useState<number | null>(initialData?.self_rating ?? null);
   const [hintsUsed, setHintsUsed] = useState(initialData?.hints_used || 0);
   const [completed, setCompleted] = useState(initialData?.completed || false);
@@ -43,40 +40,21 @@ export function ExerciseCard({
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [copiedResult, setCopiedResult] = useState(false);
 
-  // Stabilize onSave via ref to avoid re-triggering useEffect
   const onSaveRef = useRef(onSave);
   onSaveRef.current = onSave;
-
-  // Auto-save debounced
-  useEffect(() => {
-    if (!promptText) return;
-
-    const timeout = setTimeout(() => {
-      onSaveRef.current({
-        sprint: sprintId,
-        exercice_id: exercise.id,
-        prompt_text: promptText,
-        result_text: '',
-        self_rating: selfRating,
-        hints_used: hintsUsed,
-        completed,
-      });
-    }, 1000);
-    return () => clearTimeout(timeout);
-  }, [promptText, selfRating, hintsUsed, completed, sprintId, exercise.id]);
 
   const handleComplete = () => {
     setCompleted(true);
     onSaveRef.current({
       sprint: sprintId,
       exercice_id: exercise.id,
-      prompt_text: promptText,
+      prompt_text: '',
       result_text: '',
       self_rating: selfRating,
       hints_used: hintsUsed,
       completed: true,
     });
-    showToast(`${exercise.title} enregistre`);
+    showToast(`${exercise.title} termine`);
     onComplete?.();
   };
 
@@ -100,9 +78,6 @@ export function ExerciseCard({
     }
   };
 
-  const inputClass =
-    'w-full rounded-lg border border-border-default bg-surface-app px-3.5 py-3 text-[14px] font-body text-text-on-light placeholder:text-text-muted/50 placeholder:italic placeholder:text-[13px] focus:outline-none focus:ring-2 focus:ring-lecko-blue/15 focus:border-lecko-blue/40 focus:bg-white transition-all duration-fast resize-y min-h-[90px]';
-
   const hasAnswer = exercise.idealPrompt || exercise.idealResult;
 
   return (
@@ -123,12 +98,11 @@ export function ExerciseCard({
             </h3>
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            <SaveIndicator saving={saving} />
             {completed && <CheckCircle2 size={22} className="text-success" />}
           </div>
         </div>
 
-        {/* Enonce — structured with CONSIGNE badge */}
+        {/* Consigne */}
         <div
           className="rounded-lg bg-surface-elevated border-l-[3px] px-4 py-3.5"
           style={{ borderLeftColor: sprintColor }}
@@ -144,29 +118,12 @@ export function ExerciseCard({
           </p>
         </div>
 
-        {/* Hints — before prompt */}
+        {/* Hints */}
         <HintButton
           hints={exercise.hints}
           unlockedCount={hintsUsed}
           onUnlock={() => setHintsUsed((prev) => prev + 1)}
         />
-
-        {/* Prompt input */}
-        <div>
-          <label className="block text-[13px] font-semibold text-text-body tracking-wide mb-1.5" htmlFor={`prompt-${exercise.id}`}>
-            Votre prompt
-          </label>
-          <textarea
-            id={`prompt-${exercise.id}`}
-            value={promptText}
-            onChange={(e) => setPromptText(e.target.value)}
-            placeholder="Copiez le prompt que vous avez envoye a Copilot Chat..."
-            rows={4}
-            className={inputClass}
-            style={{ '--tw-ring-color': `${sprintColor}40`, '--tw-border-opacity-color': sprintColor } as React.CSSProperties}
-            aria-label="Zone de saisie du prompt"
-          />
-        </div>
 
         {/* Rating + Complete */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-4 border-t border-border-subtle">
@@ -180,10 +137,9 @@ export function ExerciseCard({
           {!completed ? (
             <button
               onClick={handleComplete}
-              disabled={!promptText.trim()}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-lecko-blue text-white text-[14px] font-display font-bold tracking-[0.01em] hover:bg-lecko-blue/90 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-base ml-auto shadow-card"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-lecko-blue text-white text-[14px] font-display font-bold tracking-[0.01em] hover:bg-lecko-blue/90 active:scale-[0.98] transition-all duration-base ml-auto shadow-card"
             >
-              Valider et continuer
+              J'ai termine
               <ChevronRight size={16} />
             </button>
           ) : (
@@ -191,11 +147,6 @@ export function ExerciseCard({
               <CheckCircle2 size={16} />
               Termine
             </span>
-          )}
-          {!completed && !promptText.trim() && (
-            <p className="text-[11px] text-text-muted font-body sm:hidden">
-              Saisissez votre prompt pour valider
-            </p>
           )}
         </div>
 

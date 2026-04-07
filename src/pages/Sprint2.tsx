@@ -5,21 +5,18 @@ import { SprintRecap } from '../components/shared/SprintRecap';
 import { CopilotLink } from '../components/shared/CopilotLink';
 import { ConsignesPanel } from '../components/shared/ConsignesPanel';
 import { Stepper } from '../components/shared/Stepper';
-import { sprint2Meta, sprint2ByGroup } from '../data/sprint2';
-import { getGroupForMetier } from '../data/metierGroups';
+import { sprint2Meta, sprint2Data } from '../data/sprint2';
 import { useSubmission } from '../hooks/useSubmission';
 
 interface Sprint2Props {
   participantId?: string;
-  metier: string;
 }
 
-export function Sprint2({ participantId, metier }: Sprint2Props) {
+export function Sprint2({ participantId }: Sprint2Props) {
   const [activeExercise, setActiveExercise] = useState(0);
   const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
 
-  const groupId = getGroupForMetier(metier);
-  const cu = sprint2ByGroup[groupId];
+  const cu = sprint2Data;
 
   const completedIndexes = useMemo(() => {
     const set = new Set<number>();
@@ -30,7 +27,6 @@ export function Sprint2({ participantId, metier }: Sprint2Props) {
     return set;
   }, [activeExercise, getLocalData, cu.exercises]);
 
-  // Prevent skipping ahead
   const maxAccessibleStep = useMemo(() => {
     let max = 0;
     for (let i = 0; i < cu.exercises.length; i++) {
@@ -73,10 +69,8 @@ export function Sprint2({ participantId, metier }: Sprint2Props) {
         {cu.title}
       </div>
 
-      {/* Consignes — above exercises */}
       <ConsignesPanel consignes={cu.consignes} />
 
-      {/* Stepper */}
       <Stepper
         steps={cu.exercises.map((_, i) => ({ id: `ex-${i}`, label: `Exercice ${i + 1}` }))}
         currentIndex={activeExercise}

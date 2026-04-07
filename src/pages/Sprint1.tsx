@@ -3,27 +3,20 @@ import { SprintHeader } from '../components/shared/SprintHeader';
 import { ExerciseCard } from '../components/shared/ExerciseCard';
 import { SprintRecap } from '../components/shared/SprintRecap';
 import { CopilotLink } from '../components/shared/CopilotLink';
-import { DocumentPanel } from '../components/shared/DocumentPanel';
 import { Stepper } from '../components/shared/Stepper';
-import { sprint1Meta, sprint1ByGroup } from '../data/sprint1';
-import { getGroupForMetier } from '../data/metierGroups';
+import { sprint1Meta, sprint1Scenario } from '../data/sprint1';
 import { useSubmission } from '../hooks/useSubmission';
 
 interface Sprint1Props {
   participantId?: string;
-  metier: string;
 }
 
-export function Sprint1({ participantId, metier }: Sprint1Props) {
+export function Sprint1({ participantId }: Sprint1Props) {
   const [currentStep, setCurrentStep] = useState(0);
   const { saveSubmission, getLocalData, saving } = useSubmission(participantId);
 
-  const groupId = getGroupForMetier(metier);
-  const { scenario, documents } = sprint1ByGroup[groupId];
+  const scenario = sprint1Scenario;
   const step = scenario.steps[currentStep];
-
-  // Documents for the current step
-  const stepDocuments = documents.filter(d => d.stepId === step.id);
 
   const completedIndexes = useMemo(() => {
     const set = new Set<number>();
@@ -34,7 +27,6 @@ export function Sprint1({ participantId, metier }: Sprint1Props) {
     return set;
   }, [currentStep, getLocalData, scenario.steps]);
 
-  // Prevent skipping ahead
   const maxAccessibleStep = useMemo(() => {
     let max = 0;
     for (let i = 0; i < scenario.steps.length; i++) {
@@ -89,12 +81,7 @@ export function Sprint1({ participantId, metier }: Sprint1Props) {
       />
 
       {step && (
-        <div key={step.id} className="animate-slide-in-right space-y-4">
-          {/* Document panel for this step */}
-          {stepDocuments.map(doc => (
-            <DocumentPanel key={doc.id} document={doc} color="#2563EB" />
-          ))}
-
+        <div key={step.id} className="animate-slide-in-right">
           <ExerciseCard
             exercise={step}
             sprintId="sprint-1"
