@@ -165,7 +165,7 @@ export function Login({ onLogin, loading }: LoginProps) {
           </div>
 
           {/* Form card */}
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 sm:p-8 shadow-elevated border border-border-default/60 space-y-6">
+          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 sm:p-8 shadow-[0_8px_40px_rgba(0,0,0,0.08),0_1px_3px_rgba(0,0,0,0.04)] border border-border-default/40 space-y-6">
             {/* Heading */}
             <div>
               <h2 className="text-[22px] sm:text-[24px] font-display font-extrabold text-text-on-light tracking-tight leading-snug mb-1.5">
@@ -179,14 +179,20 @@ export function Login({ onLogin, loading }: LoginProps) {
             {/* Search / Select */}
             <div ref={dropdownRef} className="relative">
               <div
-                className={`flex items-center gap-2.5 border rounded-xl px-4 py-3.5 bg-white transition-all duration-fast cursor-text ${
+                className={`flex items-center gap-2.5 border-2 rounded-xl px-4 py-4 bg-surface-app/50 transition-all duration-base cursor-text ${
                   isOpen
-                    ? 'border-lecko-blue ring-2 ring-lecko-blue/15 shadow-glow'
-                    : 'border-border-default hover:border-border-strong'
+                    ? 'border-lecko-blue bg-white ring-2 ring-lecko-blue/10 shadow-glow'
+                    : selectedMetier
+                      ? 'border-success/40 bg-success/[0.03]'
+                      : 'border-border-default hover:border-lecko-blue/40 hover:bg-white hover:shadow-card'
                 }`}
                 onClick={() => { setIsOpen(true); inputRef.current?.focus(); }}
               >
-                <Search size={18} className="text-text-muted shrink-0" />
+                <div className={`shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-base ${
+                  isOpen ? 'bg-lecko-blue/10' : selectedMetier ? 'bg-success/10' : 'bg-surface-elevated'
+                }`}>
+                  <Search size={16} className={`transition-colors duration-base ${isOpen ? 'text-lecko-blue' : selectedMetier ? 'text-success' : 'text-text-muted'}`} />
+                </div>
                 {selectedMetier && !isOpen ? (
                   <div className="flex items-center gap-2 flex-1">
                     <span className="text-[15px] font-body font-semibold text-text-on-light">{selectedMetier}</span>
@@ -210,6 +216,12 @@ export function Login({ onLogin, loading }: LoginProps) {
                   />
                 )}
               </div>
+
+              {!isOpen && !selectedMetier && (
+                <p className="text-[12px] text-lecko-blue/60 font-body mt-2 pl-1 animate-fade-in">
+                  ↑ {t('login.clickHint')}
+                </p>
+              )}
 
               {isOpen && (
                 <div className="absolute z-20 w-full mt-2 bg-white border border-border-default rounded-xl shadow-floating max-h-[280px] overflow-y-auto animate-slide-up">

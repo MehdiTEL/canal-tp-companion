@@ -12,7 +12,6 @@ const Echauffement = lazy(() => import('./pages/Echauffement').then(m => ({ defa
 const Sprint1 = lazy(() => import('./pages/Sprint1').then(m => ({ default: m.Sprint1 })));
 const Sprint2 = lazy(() => import('./pages/Sprint2').then(m => ({ default: m.Sprint2 })));
 const Sprint3 = lazy(() => import('./pages/Sprint3').then(m => ({ default: m.Sprint3 })));
-const Formateur = lazy(() => import('./pages/Formateur').then(m => ({ default: m.Formateur })));
 
 function AppContent() {
   const { participant, loading, login, logout } = useParticipant();
@@ -42,7 +41,6 @@ function AppContent() {
               <Route path="/sprint-1" element={<Sprint1 participantId={participant.id} />} />
               <Route path="/sprint-2" element={<Sprint2 participantId={participant.id} />} />
               <Route path="/sprint-3" element={<Sprint3 participantId={participant.id} />} />
-              <Route path="/formateur" element={<Formateur />} />
               <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
           </Suspense>

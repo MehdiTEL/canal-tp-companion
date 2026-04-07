@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { LayoutDashboard, Flame, FileText, Zap, Bot, Shield, Lock, LockOpen } from 'lucide-react';
+import { LayoutDashboard, Flame, FileText, Zap, Bot, Lock, LockOpen, RotateCcw } from 'lucide-react';
 import { useProgress } from '../../hooks/useProgress';
 
 export function Sidebar() {
@@ -101,19 +101,18 @@ export function Sidebar() {
       </nav>
 
       <div className="p-2.5 border-t border-border-subtle">
-        <NavLink
-          to="/formateur"
-          className={({ isActive }) =>
-            `flex items-center gap-2.5 px-3 py-2 rounded-md text-[13px] font-body transition-all duration-fast ${
-              isActive
-                ? 'bg-surface-card shadow-card font-semibold text-text-on-light'
-                : 'text-text-muted hover:text-text-body hover:bg-surface-card/60'
-            }`
-          }
+        <button
+          onClick={() => {
+            if (window.confirm(t('dashboard.resetConfirm'))) {
+              localStorage.removeItem('canal-tp-submissions');
+              window.location.reload();
+            }
+          }}
+          className="flex items-center gap-2.5 px-3 py-2 rounded-md text-[12px] font-body text-text-muted hover:text-red-500 hover:bg-red-50 transition-all duration-fast w-full"
         >
-          <Shield size={15} />
-          <span>{t('formateur.title')}</span>
-        </NavLink>
+          <RotateCcw size={13} />
+          <span>{t('dashboard.resetButton')}</span>
+        </button>
       </div>
     </aside>
   );
