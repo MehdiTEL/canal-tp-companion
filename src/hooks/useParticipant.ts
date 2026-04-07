@@ -7,7 +7,7 @@ const STORAGE_KEY = 'canal-tp-participant';
 
 function generateId(): string {
   try {
-    return generateId();
+    return crypto.randomUUID();
   } catch {
     // Fallback for Safari / non-secure contexts
     return 'xxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, (c) => {
