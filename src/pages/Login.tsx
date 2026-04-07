@@ -86,7 +86,7 @@ export function Login({ onLogin, loading }: LoginProps) {
             <span className="text-[32px] font-display font-extrabold text-canal-black tracking-[0.08em] leading-none">CANAL+</span>
           </div>
           <p className="text-[15px] text-text-body font-body font-medium">
-            Formation IA / Copilot Chat
+            Tirez parti de Copilot Chat au quotidien
           </p>
           <p className="text-[12px] text-text-muted font-body mt-1 uppercase tracking-widest font-semibold">
             Session Pilote 2026

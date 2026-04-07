@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { CheckCircle2, ChevronRight } from 'lucide-react';
+import { CheckCircle2, ChevronRight, Eye, Copy, Check } from 'lucide-react';
 import { HintButton } from './HintButton';
 import { StarRating } from './StarRating';
 import { SaveIndicator } from './SaveIndicator';
@@ -36,32 +36,34 @@ export function ExerciseCard({
   saving,
 }: ExerciseCardProps) {
   const [promptText, setPromptText] = useState(initialData?.prompt_text || '');
-  const [resultText, setResultText] = useState(initialData?.result_text || '');
   const [selfRating, setSelfRating] = useState<number | null>(initialData?.self_rating ?? null);
   const [hintsUsed, setHintsUsed] = useState(initialData?.hints_used || 0);
   const [completed, setCompleted] = useState(initialData?.completed || false);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [copiedPrompt, setCopiedPrompt] = useState(false);
+  const [copiedResult, setCopiedResult] = useState(false);
 
   // Stabilize onSave via ref to avoid re-triggering useEffect
   const onSaveRef = useRef(onSave);
   onSaveRef.current = onSave;
 
-  // Auto-save debounced — only user-editable fields in deps
+  // Auto-save debounced
   useEffect(() => {
-    if (!promptText && !resultText) return;
+    if (!promptText) return;
 
     const timeout = setTimeout(() => {
       onSaveRef.current({
         sprint: sprintId,
         exercice_id: exercise.id,
         prompt_text: promptText,
-        result_text: resultText,
+        result_text: '',
         self_rating: selfRating,
         hints_used: hintsUsed,
         completed,
       });
     }, 1000);
     return () => clearTimeout(timeout);
-  }, [promptText, resultText, selfRating, hintsUsed, completed, sprintId, exercise.id]);
+  }, [promptText, selfRating, hintsUsed, completed, sprintId, exercise.id]);
 
   const handleComplete = () => {
     setCompleted(true);
@@ -69,7 +71,7 @@ export function ExerciseCard({
       sprint: sprintId,
       exercice_id: exercise.id,
       prompt_text: promptText,
-      result_text: resultText,
+      result_text: '',
       self_rating: selfRating,
       hints_used: hintsUsed,
       completed: true,
@@ -78,8 +80,30 @@ export function ExerciseCard({
     onComplete?.();
   };
 
+  const handleCopy = async (text: string, type: 'prompt' | 'result') => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    }
+    if (type === 'prompt') {
+      setCopiedPrompt(true);
+      setTimeout(() => setCopiedPrompt(false), 2000);
+    } else {
+      setCopiedResult(true);
+      setTimeout(() => setCopiedResult(false), 2000);
+    }
+  };
+
   const inputClass =
     'w-full rounded-lg border border-border-default bg-surface-app px-3.5 py-3 text-[14px] font-body text-text-on-light placeholder:text-text-muted/50 placeholder:italic placeholder:text-[13px] focus:outline-none focus:ring-2 focus:ring-lecko-blue/15 focus:border-lecko-blue/40 focus:bg-white transition-all duration-fast resize-y min-h-[90px]';
+
+  const hasAnswer = exercise.idealPrompt || exercise.idealResult;
 
   return (
     <div
@@ -120,7 +144,7 @@ export function ExerciseCard({
           </p>
         </div>
 
-        {/* Hints — before prompt/result */}
+        {/* Hints — before prompt */}
         <HintButton
           hints={exercise.hints}
           unlockedCount={hintsUsed}
@@ -136,28 +160,11 @@ export function ExerciseCard({
             id={`prompt-${exercise.id}`}
             value={promptText}
             onChange={(e) => setPromptText(e.target.value)}
-            placeholder="Copiez le prompt que vous avez demande a Copilot Chat..."
+            placeholder="Copiez le prompt que vous avez envoye a Copilot Chat..."
             rows={4}
             className={inputClass}
             style={{ '--tw-ring-color': `${sprintColor}40`, '--tw-border-opacity-color': sprintColor } as React.CSSProperties}
             aria-label="Zone de saisie du prompt"
-          />
-        </div>
-
-        {/* Result input */}
-        <div>
-          <label className="block text-[13px] font-semibold text-text-body tracking-wide mb-1.5" htmlFor={`result-${exercise.id}`}>
-            Resultat obtenu
-          </label>
-          <textarea
-            id={`result-${exercise.id}`}
-            value={resultText}
-            onChange={(e) => setResultText(e.target.value)}
-            placeholder="Deposez le resultat que Copilot Chat vous a genere..."
-            rows={4}
-            className={inputClass}
-            style={{ '--tw-ring-color': `${sprintColor}40` } as React.CSSProperties}
-            aria-label="Zone de saisie du resultat"
           />
         </div>
 
@@ -173,7 +180,7 @@ export function ExerciseCard({
           {!completed ? (
             <button
               onClick={handleComplete}
-              disabled={!promptText.trim() || !resultText.trim()}
+              disabled={!promptText.trim()}
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-lecko-blue text-white text-[14px] font-display font-bold tracking-[0.01em] hover:bg-lecko-blue/90 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-base ml-auto shadow-card"
             >
               Valider et continuer
@@ -185,12 +192,85 @@ export function ExerciseCard({
               Termine
             </span>
           )}
-          {!completed && (!promptText.trim() || !resultText.trim()) && (
+          {!completed && !promptText.trim() && (
             <p className="text-[11px] text-text-muted font-body sm:hidden">
-              Saisissez un prompt et un resultat pour valider
+              Saisissez votre prompt pour valider
             </p>
           )}
         </div>
+
+        {/* Discover the answer — unlockable after completion */}
+        {completed && hasAnswer && (
+          <div className="pt-2">
+            {!showAnswer ? (
+              <button
+                onClick={() => setShowAnswer(true)}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 border-dashed transition-all duration-base active:scale-[0.98]"
+                style={{ borderColor: `${sprintColor}40`, color: sprintColor }}
+              >
+                <Eye size={18} />
+                <span className="font-display font-bold text-[14px]">Decouvrir la reponse</span>
+              </button>
+            ) : (
+              <div className="space-y-4 animate-slide-up">
+                <div className="flex items-center gap-2 mb-1">
+                  <Eye size={16} style={{ color: sprintColor }} />
+                  <span className="text-[13px] font-display font-bold uppercase tracking-wider" style={{ color: sprintColor }}>
+                    Reponse attendue
+                  </span>
+                </div>
+
+                {/* Ideal prompt */}
+                {exercise.idealPrompt && (
+                  <div className="rounded-xl border overflow-hidden" style={{ borderColor: `${sprintColor}25` }}>
+                    <div className="flex items-center justify-between px-4 py-2" style={{ backgroundColor: `${sprintColor}08` }}>
+                      <span className="text-[11px] font-display font-bold uppercase tracking-wider" style={{ color: sprintColor }}>
+                        Prompt ideal
+                      </span>
+                      <button
+                        onClick={() => handleCopy(exercise.idealPrompt!, 'prompt')}
+                        className="flex items-center gap-1 text-[11px] font-body px-2 py-1 rounded-md transition-colors hover:bg-white/60"
+                        style={{ color: copiedPrompt ? '#10B981' : sprintColor }}
+                      >
+                        {copiedPrompt ? <Check size={12} /> : <Copy size={12} />}
+                        {copiedPrompt ? 'Copie !' : 'Copier'}
+                      </button>
+                    </div>
+                    <div className="px-4 py-3 bg-surface-app">
+                      <p className="text-[13px] font-mono text-text-body leading-relaxed whitespace-pre-wrap">
+                        {exercise.idealPrompt}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Ideal result */}
+                {exercise.idealResult && (
+                  <div className="rounded-xl border overflow-hidden" style={{ borderColor: `${sprintColor}25` }}>
+                    <div className="flex items-center justify-between px-4 py-2" style={{ backgroundColor: `${sprintColor}08` }}>
+                      <span className="text-[11px] font-display font-bold uppercase tracking-wider" style={{ color: sprintColor }}>
+                        Resultat attendu
+                      </span>
+                      <button
+                        onClick={() => handleCopy(exercise.idealResult!, 'result')}
+                        className="flex items-center gap-1 text-[11px] font-body px-2 py-1 rounded-md transition-colors hover:bg-white/60"
+                        style={{ color: copiedResult ? '#10B981' : sprintColor }}
+                      >
+                        {copiedResult ? <Check size={12} /> : <Copy size={12} />}
+                        {copiedResult ? 'Copie !' : 'Copier'}
+                      </button>
+                    </div>
+                    <div className="px-4 py-3 bg-white">
+                      <p className="text-[13px] font-body text-text-body leading-relaxed whitespace-pre-wrap">
+                        {exercise.idealResult}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -29,6 +29,8 @@ export function Echauffement({ participantId, metier }: EchauffementProps) {
       ? `Utilisez Copilot Chat pour explorer "${themeName}" et produire une synthese exploitable en 5 minutes.`
       : 'Selectionnez une thematique ci-dessus pour commencer.',
     hints: groupData.hints,
+    idealPrompt: groupData.idealPrompt,
+    idealResult: groupData.idealResult,
   };
 
   const localData = getLocalData('echauffement-ex1');

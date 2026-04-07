@@ -61,7 +61,7 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
         <div className="flex items-start justify-between gap-4">
           <div>
             <h1 className="font-display font-extrabold text-[18px] text-text-on-light tracking-tight">
-              Votre parcours IA / Copilot Chat
+              Tirez parti de Copilot Chat au quotidien
             </h1>
             <p className="text-[13px] text-text-muted font-body mt-1">
               Suivez la formation sur Teams et completez les exercices ici. Chaque sprint se debloque en terminant le precedent.

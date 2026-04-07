@@ -41,6 +41,8 @@ export interface Exercise {
   title: string;
   description: string;
   hints: Hint[];
+  idealPrompt?: string;
+  idealResult?: string;
 }
 
 export interface Scenario {
