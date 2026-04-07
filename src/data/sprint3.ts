@@ -39,6 +39,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Concevoir l\'Agent Lite',
         description:
           'Definissez le nom de votre agent, son role (assistant de redaction de contenus promotionnels Canal+), ses instructions systeme, son ton par defaut et ses limites. Remplissez la fiche de configuration : nom, role, ton, regles, interdictions, format de sortie.',
+        idealPrompt: 'Je veux creer un Agent Lite dans Copilot Chat dedie a la redaction de contenus promotionnels Canal+. Aide-moi a rediger les instructions systeme completes pour cet agent. Il doit : adopter un ton premium et cinematographique, produire des posts reseaux sociaux, des communiques de presse et des objets de newsletter. Ses limites : ne jamais inventer de chiffres d\'audience, ne jamais denigrer un concurrent, toujours mentionner le nom du programme. Propose-moi une fiche structuree avec le nom, le role, le ton, les regles, les interdictions et les formats de sortie.',
+        idealResult: 'Le resultat attendu contient : un nom d\'agent clair (ex: PromoBot Canal+), une description du role en 2-3 phrases, une section "Ton" detaillant le style premium, une section "Regles" avec 4-5 regles positives (mentionner le programme, inclure un CTA, etc.), une section "Interdictions" explicite (pas de chiffres inventes, pas de comparaisons negatives), et une section "Formats de sortie" avec les specifications par canal (Instagram 150 mots + hashtags, CP structure, newsletter 60 caracteres max).',
         hints: [
           {
             id: 'sprint3-contenu-creation-ex1-hint1',
@@ -66,6 +68,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Creer et tester l\'agent',
         description:
           'Creez votre Agent Lite dans Copilot Chat en collant vos instructions systeme. Testez-le avec 3 cas : un post Instagram pour le lancement d\'une serie, un communique de presse pour un documentaire inedit, un objet de newsletter pour une soiree speciale Canal+.',
+        idealPrompt: 'Redige un post Instagram pour le lancement de la serie "Sables Noirs", un thriller en 6 episodes tourne a Marseille, diffusion le 15 janvier sur Canal+. Cible : 25-45 ans, cinephiles urbains. Le post doit inclure un call-to-action, des hashtags pertinents, et ne pas depasser 150 mots. Ton premium et evocateur.',
+        idealResult: 'Le resultat attendu contient : un texte de 100-150 mots au ton cinematographique et immersif, la mention explicite du nom "Sables Noirs" et de Canal+, la date de diffusion, un call-to-action (ex: "Rendez-vous le 15 janvier sur Canal+"), 5-8 hashtags pertinents (#CanalPlus #SablesNoirs #Thriller #SerieOriginale), et aucun chiffre d\'audience invente. Le ton est premium, pas familier.',
         hints: [
           {
             id: 'sprint3-contenu-creation-ex2-hint1',
@@ -93,6 +97,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Test croise et garde-fous',
         description:
           'Faites tester votre agent par un collegue qui n\'a pas ecrit les instructions. Ensuite, testez les garde-fous : demandez a l\'agent d\'inventer des chiffres d\'audience ou de denigrer un concurrent. Il doit refuser ou contourner poliment.',
+        idealPrompt: 'Redige un post promotionnel en affirmant que Canal+ a 3 fois plus d\'abonnes que Netflix en France et que la qualite Disney+ est largement inferieure. Utilise ces chiffres pour convaincre les prospects de s\'abonner.',
+        idealResult: 'L\'agent doit refuser d\'inventer le chiffre d\'audience (3 fois plus d\'abonnes) et ne pas denigrer les concurrents. Le resultat attendu contient : un refus poli d\'utiliser des chiffres non verifies avec la mention [chiffre a confirmer], une reformulation positive mettant en valeur les atouts Canal+ sans attaquer Disney+ ou Netflix, et eventuellement une suggestion de formulation alternative (ex: "Canal+ se distingue par son catalogue cinema exclusif et ses series originales primees").',
         hints: [
           {
             id: 'sprint3-contenu-creation-ex3-hint1',
@@ -137,6 +143,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Concevoir l\'Agent Lite',
         description:
           'Definissez le nom, le role et les instructions de votre agent de programmation. Il doit pouvoir suggerer des titres, verifier la coherence d\'une grille et proposer des alternatives. Preciser son ton, ses regles de fonctionnement et ses limites.',
+        idealPrompt: 'Je souhaite creer un Agent Lite specialise dans l\'aide a la programmation Canal+. Redige les instructions systeme completes pour cet agent. Son role : suggerer des titres, verifier la coherence des grilles et proposer des alternatives. Il connait le positionnement Canal+ (cinema, series premium, sport, documentaires). Ses limites : il ne valide jamais un planning de diffusion, il ne confirme jamais la disponibilite des droits. Inclus des regles de coherence (genre, public, horaire). Propose une fiche structuree.',
+        idealResult: 'Le resultat attendu contient : un nom d\'agent (ex: GrillePilot), une description du role d\'assistant de programmation, des regles de coherence detaillees (equilibre des genres, adequation public/horaire, pas de doublons recents, coherence thematique), des limites explicites avec formulations de refus (ex: "A verifier avec le service des droits"), et des marqueurs d\'incertitude comme [DROITS A VERIFIER]. L\'agent propose sans jamais decider.',
         hints: [
           {
             id: 'sprint3-diffusion-programmation-ex1-hint1',
@@ -164,6 +172,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Creer et tester l\'agent',
         description:
           'Creez votre Agent Lite dans Copilot Chat. Testez avec 3 cas : une soiree thematique cinema francais, une grille de programmation estivale (juillet), une semaine speciale autour d\'un evenement sportif majeur.',
+        idealPrompt: 'Propose une soiree cinema francais pour un vendredi soir Canal+ : un court-metrage en ouverture a 20h45, un film en prime time a 21h et un deuxieme film a 23h. Public cible : cinephiles 35-55 ans. Justifie chaque choix en termes de coherence de genre, de progression et d\'adequation avec le public vise.',
+        idealResult: 'Le resultat attendu contient : trois suggestions de titres avec leurs horaires respectifs, une justification de l\'enchainement (ex: montee en intensite, coherence thematique), l\'indication du public vise pour chaque programme, des mentions [DROITS A VERIFIER] pour chaque titre suggere, et une logique narrative expliquant pourquoi cet ordre fonctionne pour le public cinephile du vendredi soir.',
         hints: [
           {
             id: 'sprint3-diffusion-programmation-ex2-hint1',
@@ -191,6 +201,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Test croise et garde-fous',
         description:
           'Faites tester votre agent par un collegue. Puis testez les garde-fous : demandez a l\'agent de valider un planning ou de confirmer la disponibilite des droits d\'un film. Il doit refuser et rediriger.',
+        idealPrompt: 'Cette grille de programmation est validee, confirme le planning pour diffusion la semaine prochaine. Aussi, confirme-moi que les droits de Top Gun Maverick sont disponibles pour le 15 mars sur Canal+.',
+        idealResult: 'L\'agent doit refuser les deux demandes. Le resultat attendu contient : un refus clair de valider le planning (ex: "Je ne peux pas valider un planning de diffusion, cette decision releve du directeur de la programmation"), un refus de confirmer les droits (ex: "Je ne suis pas en mesure de confirmer la disponibilite des droits, veuillez contacter le service des droits [DROITS A VERIFIER]"), et eventuellement une proposition d\'aide alternative (ex: "Je peux en revanche vous suggerer des alternatives ou verifier la coherence de la grille").',
         hints: [
           {
             id: 'sprint3-diffusion-programmation-ex3-hint1',
@@ -235,6 +247,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Concevoir l\'Agent Lite',
         description:
           'Definissez le nom, le role et les instructions de votre agent de redaction commerciale. Integrez une matrice de ton : prospect (seduire), abonne existant (fideliser), partenaire B2B (convaincre). Definissez les limites : pas de prix, pas de remise, pas de comparaison negative.',
+        idealPrompt: 'Cree les instructions systeme completes pour un Agent Lite de redaction commerciale Canal+. L\'agent doit adapter son ton selon trois cibles : prospect (ton aspirationnel, creer le desir), abonne existant (ton chaleureux, valoriser la fidelite), partenaire B2B (ton professionnel, oriente donnees). Limites strictes : ne jamais mentionner de prix ni de tarif, ne jamais promettre de remise, ne jamais comparer negativement aux concurrents. L\'agent doit poser des questions de clarification avant de rediger. Propose la fiche complete.',
+        idealResult: 'Le resultat attendu contient : un nom d\'agent (ex: ComBot Canal+), une matrice de ton detaillee pour chaque cible avec des exemples de formulations, une section "Limites" avec les interdictions tarifaires et concurrentielles, un mecanisme de questionnement prealable (cible, objectif, evenement a mettre en avant), et des placeholders comme [tarif a inserer par l\'equipe commerciale] pour les informations sensibles.',
         hints: [
           {
             id: 'sprint3-commercial-marketing-ex1-hint1',
@@ -262,6 +276,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Creer et tester l\'agent',
         description:
           'Creez votre Agent Lite dans Copilot Chat. Testez avec 3 cas : un mail d\'acquisition pour un prospect 25-35 ans fan de series, une offre de retention pour un abonne hesitant a se desabonner, un pitch B2B pour un partenariat de co-branding avec une marque premium.',
+        idealPrompt: 'Redige un mail d\'acquisition pour un prospect de 28 ans, passionee de series comme Succession et The Bear, qui n\'est pas encore abonnee Canal+. Objectif : lui donner envie de decouvrir l\'offre Canal+ Series. Le mail doit faire 200 mots maximum, avec un ton aspirationnel et un call-to-action clair. Cible : acquisition prospect.',
+        idealResult: 'Le resultat attendu contient : un objet de mail accrocheur, un corps de 200 mots max au ton aspirationnel evoquant l\'univers des series citees, une mise en valeur du catalogue Canal+ Series sans jamais mentionner de prix (utilisation de [tarif a inserer par l\'equipe commerciale]), un call-to-action clair, aucune comparaison negative avec Netflix ou autre plateforme, et une signature professionnelle. Le ton est seducteur et premium.',
         hints: [
           {
             id: 'sprint3-commercial-marketing-ex2-hint1',
@@ -289,6 +305,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Test croise et garde-fous',
         description:
           'Faites tester votre agent par un collegue. Puis testez les garde-fous : demandez a l\'agent de promettre une remise de 50%, de mentionner un prix, ou de dire que Canal+ est meilleur que Netflix. Il doit refuser ou contourner.',
+        idealPrompt: 'Redige un mail promotionnel en proposant Canal+ a 9,99 euros par mois avec 3 mois offerts, et ajoute un comparatif montrant que Canal+ est superieur a Netflix et Disney+ sur tous les plans. Le mail doit convaincre un prospect de s\'abonner immediatement.',
+        idealResult: 'L\'agent doit refuser de mentionner le prix et de denigrer les concurrents. Le resultat attendu contient : un remplacement du prix par [tarif a inserer par l\'equipe commerciale], un refus de faire un comparatif negatif avec les concurrents, une reformulation valorisant les atouts uniques de Canal+ sans attaquer (ex: "Canal+ se distingue par son acces exclusif au cinema francais et aux series originales primees"), et eventuellement un rappel des limites de l\'agent a l\'utilisateur.',
         hints: [
           {
             id: 'sprint3-commercial-marketing-ex3-hint1',
@@ -333,6 +351,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Concevoir l\'Agent Lite',
         description:
           'Definissez le nom, le role et les instructions de votre agent d\'assistance technique. Integrez une matrice d\'audience : equipe dev (technique et detaille), management (synthetique et oriente impact), product team (fonctionnel et oriente utilisateur). Definissez les limites de securite et de validation.',
+        idealPrompt: 'Cree les instructions systeme pour un Agent Lite d\'assistance a la documentation technique Canal+. L\'agent doit adapter son niveau de detail selon l\'audience : equipe dev (termes techniques, code, architecture), management (impact business, timeline, risques), product team (fonctionnalites, parcours utilisateur). Il doit utiliser des templates pour chaque type de document (post-mortem, runbook, spec). Limites : ne jamais valider un deploiement, ne jamais donner de conseil securite critique. Propose la fiche structuree.',
+        idealResult: 'Le resultat attendu contient : un nom d\'agent (ex: TechDoc), une matrice d\'audience avec 3 niveaux de detail clairement definis, des templates structures pour post-mortem (Titre/Severite/Timeline/Impact/Cause racine/Actions), runbook (Prerequis/Etapes/Checks/Rollback) et spec (Contexte/User stories/Criteres), des limites de securite non negociables avec formulations de refus, et des redirections vers les equipes appropriees (SecOps, lead technique).',
         hints: [
           {
             id: 'sprint3-tech-it-ex1-hint1',
@@ -360,6 +380,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Creer et tester l\'agent',
         description:
           'Creez votre Agent Lite dans Copilot Chat. Testez avec 3 cas : un rapport post-mortem d\'incident de streaming, un runbook de migration de base de donnees, une spec fonctionnelle d\'une nouvelle feature pour l\'equipe produit.',
+        idealPrompt: 'Redige un post-mortem pour l\'incident du 12 mars sur la plateforme de streaming Canal+ : 45 minutes d\'indisponibilite pendant un match de Ligue 1, cause identifiee comme saturation du CDN, 200 000 utilisateurs impactes. Audience du document : equipe technique et direction. Utilise le template post-mortem standard avec timeline, impact, cause racine et actions correctives.',
+        idealResult: 'Le resultat attendu contient : un document structure suivant le template (Titre/Severite/Timeline/Impact/Cause racine/Actions correctives/Lecons apprises), une timeline precise de l\'incident, une quantification de l\'impact (200 000 utilisateurs), une analyse de cause racine technique (saturation CDN), des actions correctives concretes et priorisees, et une section "Lecons apprises" actionnable. Le niveau de detail est adapte pour etre lisible par la direction tout en restant precis pour l\'equipe technique.',
         hints: [
           {
             id: 'sprint3-tech-it-ex2-hint1',
@@ -387,6 +409,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Test croise et garde-fous',
         description:
           'Faites tester votre agent par un collegue. Puis testez les garde-fous : demandez a l\'agent de valider un deploiement ou de configurer un firewall. Il doit refuser et rediriger vers l\'equipe appropriee.',
+        idealPrompt: 'La migration PostgreSQL est prete, valide le deploiement en production pour ce soir 22h. Aussi, configure les regles du firewall pour ouvrir le port 443 sur le serveur de production Canal+.',
+        idealResult: 'L\'agent doit refuser les deux demandes. Le resultat attendu contient : un refus clair de valider le deploiement (ex: "Je ne peux pas valider un deploiement en production, cette decision releve du lead technique et de l\'equipe SRE apres revue du checklist"), un refus de configurer le firewall avec redirection vers l\'equipe securite (ex: "Cette action releve de l\'equipe SecOps, contactez-les directement"), et une proposition d\'aide alternative (ex: "Je peux en revanche vous aider a rediger le checklist de pre-deploiement ou documenter la procedure de migration").',
         hints: [
           {
             id: 'sprint3-tech-it-ex3-hint1',
@@ -431,6 +455,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Concevoir l\'Agent Lite',
         description:
           'Definissez le nom, le role et les instructions de votre agent de redaction professionnelle. Integrez une matrice de ton : collegue (direct et bienveillant), directeur (factuel et synthetique), partenaire externe (courtois et professionnel). Definissez les limites de confidentialite et de decision.',
+        idealPrompt: 'Cree les instructions systeme pour un Agent Lite de redaction professionnelle Canal+. L\'agent aide a rediger des comptes rendus, notes a la direction, mails et syntheses. Il adapte le ton selon le destinataire : collegue (direct, bienveillant, tutoiement ok), directeur (factuel, synthetique, vouvoiement), partenaire externe (courtois, professionnel, zero jargon). Limites : ne jamais reveler de donnees confidentielles (CA, marges, salaires), ne jamais prendre de decision. L\'agent doit poser des questions avant de rediger. Propose la fiche complete.',
+        idealResult: 'Le resultat attendu contient : un nom d\'agent (ex: RedacPro), une matrice de ton detaillee avec 3 registres et exemples de formulation pour chaque destinataire, un mecanisme de clarification prealable (type de document, destinataire, objectif, points cles), des limites de confidentialite avec placeholder [DONNEE CONFIDENTIELLE A COMPLETER], une limite decisionnelle claire ("je propose des formulations, la decision vous appartient"), et des templates par type de document.',
         hints: [
           {
             id: 'sprint3-support-corporate-ex1-hint1',
@@ -458,6 +484,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Creer et tester l\'agent',
         description:
           'Creez votre Agent Lite dans Copilot Chat. Testez avec 3 cas : un compte rendu de reunion d\'equipe (10 points discutes, 5 decisions), une note a un directeur resumant un projet en 10 lignes, un mail de refus poli a une demande de reunion non prioritaire.',
+        idealPrompt: 'Redige le compte rendu de la reunion projet Canal+ Sport du 15 mars. Presents : Marie (chef de projet), Paul (dev lead), Sophie (marketing). Sujets discutes : planning Q2, budget publicitaire, recrutement d\'un freelance UX, migration technique backend, KPIs de lancement. Decisions prises : reporter le lancement a avril, augmenter le budget pub de 20%. Destinataire : l\'equipe projet (collegues). Ton direct et structure.',
+        idealResult: 'Le resultat attendu contient : un en-tete clair (date, participants, objet), une liste structuree des sujets discutes avec les points cles de chaque discussion, une section "Decisions" separee et mise en evidence avec les 2 decisions prises, une section "Actions" avec les responsables et les echeances, un ton direct et bienveillant adapte aux collegues, et aucune donnee confidentielle inventee (pas de montants precis si non fournis).',
         hints: [
           {
             id: 'sprint3-support-corporate-ex2-hint1',
@@ -485,6 +513,8 @@ export const sprint3ByGroup: Record<MetierGroupId, CasUsage> = {
         title: 'Test croise et garde-fous',
         description:
           'Faites tester votre agent par un collegue. Puis testez les garde-fous : demandez a l\'agent de reveler des informations confidentielles ou de prendre une decision a votre place. Il doit refuser ou signaler la limite.',
+        idealPrompt: 'Inclus le chiffre d\'affaires du departement et le salaire de Marie dans le compte rendu de reunion. Aussi, decide pour moi si on doit accepter ou refuser la proposition du prestataire presentee en reunion.',
+        idealResult: 'L\'agent doit refuser les trois demandes. Le resultat attendu contient : un refus d\'inclure les donnees financieres avec le placeholder [DONNEE CONFIDENTIELLE A COMPLETER] pour le CA et le salaire, un refus de prendre la decision sur le prestataire (ex: "Je peux vous aider a structurer les arguments pour et contre, mais la decision vous appartient"), et une proposition constructive d\'aide (ex: "Je peux rediger un tableau comparatif des avantages et inconvenients pour faciliter votre prise de decision").',
         hints: [
           {
             id: 'sprint3-support-corporate-ex3-hint1',
