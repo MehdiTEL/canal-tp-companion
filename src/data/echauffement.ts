@@ -4,6 +4,8 @@ interface EchauffementGroupData {
   description: string;
   thematiques: { id: string; label: string }[];
   hints: { id: string; exercice_id: string; index: number; text: string }[];
+  idealPrompt: string;
+  idealResult: string;
 }
 
 export const echauffementMeta = {
@@ -17,6 +19,8 @@ export const echauffementByGroup: Record<MetierGroupId, EchauffementGroupData> =
   'contenu-creation': {
     description:
       'Vous travaillez dans la creation de contenus chez Canal+. En 5 minutes, utilisez Copilot Chat pour explorer un sujet lie a votre quotidien et produire une synthese exploitable (brief, note editoriale, pitch...).',
+    idealPrompt: "Tu es un directeur editorial specialise en contenus premium pour une chaine comme Canal+. Prepare-moi un brief structure en 5 points cles sur les tendances narratives des series a succes en 2025. Pour chaque point, indique le fait cle, son impact sur la creation de contenus Canal+ Originals, et un exemple concret de serie.",
+    idealResult: "Voici un brief editorial structure sur les tendances narratives 2025 :\n\n1. Le retour des anthologies thematiques — Impact : opportunite pour Canal+ de capitaliser sur des mini-series evenementielles. Ex : The White Lotus.\n2. Les recits non-lineaires et interactifs — Impact : differenciation par l'innovation narrative. Ex : Black Mirror.\n3. L'hyper-localisme a portee universelle — Impact : valoriser les histoires francaises a l'international. Ex : Engrenages.\n4. L'integration de l'IA dans le processus creatif — Impact : accelerer le developpement de projets. Ex : outils de pre-ecriture.\n5. Le format court premium (20-30 min) — Impact : capter l'audience mobile et jeune. Ex : Fleabag.",
     thematiques: [
       { id: 'cc-theme-1', label: 'Comment l\'IA generative transforme l\'ecriture de scenarios de series' },
       { id: 'cc-theme-2', label: 'Les tendances narratives des series a succes en 2025' },
@@ -50,6 +54,8 @@ export const echauffementByGroup: Record<MetierGroupId, EchauffementGroupData> =
   'diffusion-programmation': {
     description:
       'Vous travaillez dans la diffusion ou la programmation chez Canal+. En 5 minutes, utilisez Copilot Chat pour explorer un sujet lie a votre quotidien et produire une synthese exploitable (note de programmation, analyse d\'audience...).',
+    idealPrompt: "Tu es responsable de programmation chez Canal+. Prepare-moi une note structuree sur l'impact du streaming sur les grilles de programmation lineaire. Presente sous forme de tableau avec 5 lignes : Tendance | Impact sur la grille Canal+ | Action recommandee. Appuie-toi sur des donnees d'audience recentes.",
+    idealResult: "Voici une note de programmation structuree :\n\n| Tendance | Impact sur la grille Canal+ | Action recommandee |\n|---|---|---|\n| Baisse du lineaire chez les 18-35 | Erosion du prime time classique | Renforcer le simulcast et le replay immediat |\n| Binge watching dominant | Les rendez-vous hebdomadaires perdent en attractivite | Tester des drops de 3 episodes au lancement |\n| Sport en direct comme ancrage | Le live reste le pilier d'audience (+15% en 2024) | Securiser les droits premium et etendre le pre/post match |\n| Contenus courts viraux | Les 18-25 decouvrent les programmes via les reseaux sociaux | Creer des extraits optimises TikTok/Instagram en amont |\n| Personnalisation algorithmique | L'audience attend une experience sur-mesure | Investir dans la recommandation sur myCanal |",
     thematiques: [
       { id: 'dp-theme-1', label: 'L\'impact du streaming sur les grilles de programmation lineaire' },
       { id: 'dp-theme-2', label: 'Comment optimiser le prime time face a la concurrence SVOD' },
@@ -83,6 +89,8 @@ export const echauffementByGroup: Record<MetierGroupId, EchauffementGroupData> =
   'commercial-marketing': {
     description:
       'Vous travaillez dans le marketing, la vente ou la relation client chez Canal+. En 5 minutes, utilisez Copilot Chat pour explorer un sujet lie a votre quotidien et produire une synthese exploitable (brief marketing, analyse marche...).',
+    idealPrompt: "Tu es directeur marketing de Canal+ France, segment 25-45 ans. Analyse-moi les 5 principaux leviers d'acquisition d'abonnes face a Netflix et Disney+. Pour chaque levier, indique : le constat marche, l'opportunite specifique pour Canal+, et une action concrete a mettre en place au prochain trimestre.",
+    idealResult: "Voici l'analyse des leviers d'acquisition Canal+ vs. concurrence SVOD :\n\n1. Le sport exclusif comme porte d'entree — Constat : 38% des nouveaux abonnes citent le sport comme motif principal. Opportunite : Canal+ est le seul a combiner Ligue 1, Top 14 et Premier League. Action : lancer une offre d'essai sport de 7 jours avant chaque temps fort.\n2. Le bundling contenus + telecom — Constat : les offres groupees representent 45% des acquisitions. Opportunite : partenariats exclusifs avec Free et Bouygues. Action : creer une offre Canal+ Essentiel a prix reduit en bundle operateur.\n3. Les Canal+ Originals comme differenciant — Constat : les exclusivites locales fidelisent mieux (+20% de retention). Opportunite : capitaliser sur le savoir-faire fiction francaise. Action : promouvoir 2 Originals phares par trimestre via campagne digitale ciblee.\n4. L'experience myCanal premium — Constat : la qualite de l'app influence la perception de valeur. Opportunite : UX superieure a la concurrence sur Smart TV. Action : mettre en avant les fonctionnalites exclusives (multi-ecrans, telechargement, 4K).\n5. Le parrainage et la recommandation — Constat : le bouche-a-oreille reste le canal le plus credible. Opportunite : base d'abonnes fideles et engages. Action : relancer un programme de parrainage avec 1 mois offert pour le parrain et le filleul.",
     thematiques: [
       { id: 'cm-theme-1', label: 'Les leviers d\'acquisition d\'abonnes face a Netflix et Disney+' },
       { id: 'cm-theme-2', label: 'L\'evolution du parcours client digital dans le secteur SVOD' },
@@ -116,6 +124,8 @@ export const echauffementByGroup: Record<MetierGroupId, EchauffementGroupData> =
   'tech-it': {
     description:
       'Vous travaillez dans la tech, l\'IT ou les telecoms chez Canal+. En 5 minutes, utilisez Copilot Chat pour explorer un sujet lie a votre quotidien et produire une synthese exploitable (veille techno, note d\'architecture...).',
+    idealPrompt: "Tu es CTO d'un groupe media international comme Canal+. Prepare-moi une veille technologique structuree sur l'impact de l'IA sur les infrastructures de streaming a grande echelle. Pour chaque point, indique : la technologie concernee, son niveau de maturite (emergent/adopte/mature), l'impact potentiel pour Canal+, et une action recommandee. Format tableau.",
+    idealResult: "Voici la veille technologique IA x Streaming :\n\n| Technologie | Maturite | Impact Canal+ | Action recommandee |\n|---|---|---|---|\n| Encodage video par IA (per-title encoding) | Adopte | Reduction de 30% de la bande passante sans perte de qualite | Deployer Netflix-style per-title sur myCanal d'ici Q3 |\n| CDN predictif par ML | Emergent | Pre-cacher les contenus populaires en edge, reduire la latence | POC avec Akamai/Cloudflare sur les directs sport |\n| Moderation automatique des contenus live | Adopte | Securiser les chats et commentaires en direct | Integrer un modele de moderation temps reel sur les flux live |\n| Recommandation hybride (collaborative + contenu) | Mature | +15% d'engagement sur la plateforme myCanal | Migrer vers un modele hybride avec embeddings de contenu |\n| Transcription et sous-titrage automatique | Adopte | Accessibilite et referencement des catalogues | Generaliser Whisper/equivalent sur 100% du catalogue |",
     thematiques: [
       { id: 'ti-theme-1', label: 'L\'impact de l\'IA sur les infrastructures de streaming a grande echelle' },
       { id: 'ti-theme-2', label: 'La cybersecurite dans le secteur des medias et du divertissement' },
@@ -149,6 +159,8 @@ export const echauffementByGroup: Record<MetierGroupId, EchauffementGroupData> =
   'support-corporate': {
     description:
       'Vous travaillez dans les fonctions support ou corporate chez Canal+ (RH, finance, juridique, logistique...). En 5 minutes, utilisez Copilot Chat pour explorer un sujet lie a votre quotidien et produire une synthese exploitable.',
+    idealPrompt: "Tu es directeur des ressources humaines d'un groupe media comme Canal+. Redige-moi une note executive sur l'impact de l'IA sur la gestion des talents dans le secteur des medias. Structure : contexte (3 lignes), 5 points cles avec pour chacun un exemple concret du secteur (Canal+, Netflix, Disney, Warner), et une recommandation finale en 2 lignes. Ton synthetique et factuel.",
+    idealResult: "Note executive — IA et gestion des talents dans les medias\n\nContexte : L'intelligence artificielle transforme en profondeur les metiers du media et du divertissement. Les fonctions RH doivent anticiper l'evolution des competences, accompagner la transformation et attirer les nouveaux profils hybrides tech/creatif.\n\n1. Emergence de nouveaux metiers hybrides — Les postes de 'prompt designer' et 'AI content producer' se multiplient. Ex : Netflix a cree une equipe dediee ML for Creative en 2024.\n2. Upskilling massif des equipes existantes — 60% des collaborateurs medias devront monter en competence IA d'ici 2027. Ex : Disney a lance un programme interne 'AI Academy' pour 5000 employes.\n3. Automatisation des taches repetitives RH — Le tri de CV, la planification et le reporting sont les premiers impactes. Ex : Warner Bros utilise un assistant IA pour le pre-screening des candidatures.\n4. Risque de fracture numerique interne — Les equipes les moins digitalisees risquent d'etre marginalisees. Ex : Canal+ doit porter une attention particuliere aux equipes techniques legacy.\n5. Attractivite employeur et marque tech — Les talents tech privilegient les entreprises perçues comme innovantes. Ex : Canal+ peut valoriser myCanal et ses projets IA pour recruter.\n\nRecommandation : Lancer un plan 'IA & Talents Canal+ 2026' combinant formation interne, recrutement cible de profils IA, et creation d'un lab interne d'experimentation pour les fonctions support.",
     thematiques: [
       { id: 'sc-theme-1', label: 'L\'impact de l\'IA sur la gestion des talents dans les medias' },
       { id: 'sc-theme-2', label: 'Les enjeux juridiques du droit d\'auteur face a l\'IA generative' },
