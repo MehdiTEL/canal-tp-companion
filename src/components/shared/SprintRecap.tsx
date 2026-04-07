@@ -32,7 +32,7 @@ export function SprintRecap({
           className="px-6 py-8 text-center relative overflow-hidden"
           style={{ backgroundColor: sprintColor }}
         >
-          {/* Decorative sparkles */}
+          {/* Decorative sparkles & confetti */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-12 translate-x-12" />
           <div className="absolute bottom-0 left-0 w-20 h-20 bg-black/5 rounded-full translate-y-8 -translate-x-8" />
           <Sparkles
@@ -40,6 +40,20 @@ export function SprintRecap({
             className="absolute top-3 right-6 text-white/10 animate-pulse-soft"
             strokeWidth={1}
           />
+          {/* Confetti particles */}
+          {[...Array(12)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 rounded-full animate-confetti"
+              style={{
+                left: `${10 + (i * 7) % 80}%`,
+                top: '-8px',
+                backgroundColor: ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'][i % 6],
+                animationDelay: `${i * 0.15}s`,
+                animationDuration: `${1.5 + (i % 3) * 0.5}s`,
+              }}
+            />
+          ))}
 
           <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm mb-4 animate-recap-trophy">
             <Trophy size={32} className="text-white" />

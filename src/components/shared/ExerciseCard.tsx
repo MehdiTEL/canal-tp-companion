@@ -58,7 +58,9 @@ export function ExerciseCard({
       hints_used: hintsUsed,
       completed: true,
     });
-    showToast(`${exercise.title} — ${t('exercise.completed')}`);
+    showToast(isLastStep
+      ? `🎉 ${exercise.title} — ${t('exercise.completed')}`
+      : `✅ ${exercise.title} — ${t('exercise.nextStep')}`);
     onComplete?.();
   };
 

@@ -229,6 +229,9 @@
     "title": "Working documents",
     "download": "Download"
   },
+  "stepper": {
+    "current": "In progress"
+  },
   "lang": {
     "fr": "Francais",
     "en": "English"

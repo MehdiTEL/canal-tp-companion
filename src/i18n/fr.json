@@ -229,6 +229,9 @@
     "title": "Documents de travail",
     "download": "Telecharger"
   },
+  "stepper": {
+    "current": "En cours"
+  },
   "lang": {
     "fr": "Francais",
     "en": "English"

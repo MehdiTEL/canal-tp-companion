@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Check, Lock } from 'lucide-react';
 
 interface StepperProps {
@@ -10,6 +11,7 @@ interface StepperProps {
 }
 
 export function Stepper({ steps, currentIndex, completedIndexes, color, onStepClick }: StepperProps) {
+  const { t } = useTranslation();
   const [shakenIndex, setShakenIndex] = useState<number | null>(null);
 
   const handleClick = (i: number, isClickable: boolean) => {
@@ -84,7 +86,7 @@ export function Stepper({ steps, currentIndex, completedIndexes, color, onStepCl
                 className="text-[10px] font-display font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white"
                 style={{ backgroundColor: color }}
               >
-                En cours
+                {t('stepper.current')}
               </span>
             )}
           </button>
