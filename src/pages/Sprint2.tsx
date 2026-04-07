@@ -44,9 +44,7 @@ export function Sprint2({ participantId, metier }: Sprint2Props) {
   }, [completedIndexes, cu.exercises.length]);
 
   const allCompleted = completedIndexes.size === cu.exercises.length;
-  const [showRecap, setShowRecap] = useState(false);
-
-  if (showRecap || allCompleted) {
+  if (allCompleted) {
     return (
       <div className="max-w-3xl mx-auto py-8">
         <SprintRecap
@@ -99,8 +97,6 @@ export function Sprint2({ participantId, metier }: Sprint2Props) {
           onComplete={() => {
             if (activeExercise < cu.exercises.length - 1) {
               setActiveExercise(activeExercise + 1);
-            } else {
-              setShowRecap(true);
             }
           }}
           showRating={true}

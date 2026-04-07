@@ -48,9 +48,7 @@ export function Sprint1({ participantId, metier }: Sprint1Props) {
   }, [completedIndexes, scenario.steps.length]);
 
   const allCompleted = completedIndexes.size === scenario.steps.length;
-  const [showRecap, setShowRecap] = useState(false);
-
-  if (showRecap || allCompleted) {
+  if (allCompleted) {
     return (
       <div className="max-w-3xl mx-auto py-8">
         <SprintRecap
@@ -106,8 +104,6 @@ export function Sprint1({ participantId, metier }: Sprint1Props) {
             onComplete={() => {
               if (currentStep < scenario.steps.length - 1) {
                 setCurrentStep(currentStep + 1);
-              } else {
-                setShowRecap(true);
               }
             }}
             saving={saving}

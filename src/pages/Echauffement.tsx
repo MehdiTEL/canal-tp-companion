@@ -35,9 +35,8 @@ export function Echauffement({ participantId, metier }: EchauffementProps) {
 
   const localData = getLocalData('echauffement-ex1');
   const completed = localData?.completed || false;
-  const [showRecap, setShowRecap] = useState(false);
 
-  if (showRecap || (completed && !selectedTheme)) {
+  if (completed && !selectedTheme) {
     return (
       <div className="max-w-3xl mx-auto py-8">
         <SprintRecap
@@ -103,7 +102,7 @@ export function Echauffement({ participantId, metier }: EchauffementProps) {
           sprintColor="#06B6D4"
           initialData={localData}
           onSave={saveSubmission}
-          onComplete={() => setShowRecap(true)}
+          onComplete={() => {}}
           showRating={false}
           saving={saving}
         />
