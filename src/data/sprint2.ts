@@ -33,6 +33,18 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'Le ton doit etre premium, digne de Canal+. Le communique doit contenir : un titre accrocheur, ' +
           'un chapeau de 3 lignes, le synopsis sans spoiler, la presentation du casting et de l\'equipe artistique, ' +
           'les informations pratiques (date de diffusion, nombre d\'episodes, disponibilite sur myCANAL).',
+        idealPrompt:
+          'Tu es attache de presse senior chez Canal+, specialise dans les series originales premium. ' +
+          'Redige un communique de presse de 500 mots pour annoncer "Les Ombres du Fleuve", thriller dramatique en 8 episodes tourne entre Paris et Dakar. ' +
+          'Casting principal : Omar Sy, Lea Seydoux. Realisateur : Jacques Audiard. Diffusion : janvier 2026 sur Canal+ et myCANAL. ' +
+          'Structure : titre accrocheur, chapeau de 3 lignes, synopsis sans spoiler (100 mots), casting et equipe artistique, informations pratiques. Ton : premium, cinematographique, digne des grandes series Canal+.',
+        idealResult:
+          'Un communique structure en 5 sections clairement separees. ' +
+          'Un titre percutant qui evoque l\'ambiance du thriller (ex : "Canal+ plonge dans les ombres de deux continents"). ' +
+          'Un chapeau de 3 lignes qui donne immediatement envie de lire la suite. ' +
+          'Un synopsis qui installe le mystere sans reveler les rebondissements. ' +
+          'Une presentation du casting valorisante avec les filmographies recentes. ' +
+          'Les informations pratiques completes : date, nombre d\'episodes, plateformes de diffusion.',
         hints: [
           {
             id: 'sprint2-contenu-creation-ex1-hint1',
@@ -61,6 +73,17 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'Produisez les fiches personnages des 4 protagonistes de la serie pour le kit presse. ' +
           'Chaque fiche doit contenir : nom du personnage, interprete, description physique et psychologique en 5 lignes, ' +
           'arc narratif en 2 lignes (sans spoiler), et une citation emblematique du personnage.',
+        idealPrompt:
+          'Produis 4 fiches personnages pour le kit presse de la serie "Les Ombres du Fleuve" (Canal+). ' +
+          'Pour chaque personnage, utilise ce format : Nom | Interprete | Description physique et psychologique (5 lignes) | Arc narratif (2 lignes, sans spoiler) | Citation emblematique entre guillemets. ' +
+          'Les personnages doivent etre contrastes et complementaires. Le protagoniste est un ancien reporter de guerre reconverti, l\'antagoniste a des motivations ambigues. ' +
+          'Chaque personnage doit avoir une faille humaine credible. Ton : dossier de presse professionnel Canal+.',
+        idealResult:
+          '4 fiches au format homogene, avec des personnages aux personnalites distinctes et complementaires. ' +
+          'Des descriptions psychologiques nuancees qui evitent les cliches de genre. ' +
+          'Des arcs narratifs qui suggerent la complexite sans reveler l\'intrigue. ' +
+          'Des citations emblematiques au ton different pour chaque personnage, revelant leur personnalite. ' +
+          'Une coherence narrative entre les 4 fiches qui donne envie de decouvrir leurs interactions.',
         hints: [
           {
             id: 'sprint2-contenu-creation-ex2-hint1',
@@ -89,6 +112,17 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'Soumettez votre communique de presse et vos fiches personnages a un "redacteur en chef exigeant" ' +
           'incarne par Copilot Chat. Il doit identifier les faiblesses, les cliches, les passages trop generiques, ' +
           'et proposer des ameliorations concretes pour atteindre le niveau d\'exigence Canal+.',
+        idealPrompt:
+          'Tu es redacteur en chef de Telerama avec 25 ans d\'experience. Tu es repute pour ton exigence et ta plume acerbe. ' +
+          'Lis ce dossier de presse complet [coller le communique et les fiches personnages]. ' +
+          'Pour chaque section, identifie : les 2 points forts a conserver, les 3 faiblesses principales avec explication, et une reformulation concrete pour chaque faiblesse. ' +
+          'Puis compare avec ce que ferait HBO ou Netflix pour une serie equivalente. Propose 3 elements differenciants pour Canal+.',
+        idealResult:
+          'Une critique structuree section par section, avec des points forts clairement identifies. ' +
+          'Des faiblesses precises et argumentees (passages generiques, cliches, manque de singularite). ' +
+          'Des reformulations concretes directement utilisables, pas de commentaires vagues. ' +
+          'Une comparaison pertinente avec les codes de communication HBO/Netflix. ' +
+          'Trois propositions differenciantes ancrees dans l\'identite editoriale Canal+ (ton, positionnement, heritage cinematographique).',
         hints: [
           {
             id: 'sprint2-contenu-creation-ex3-hint1',
@@ -143,6 +177,17 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'A partir des donnees d\'audience fournies dans la description du cas d\'usage, produisez une synthese analytique : ' +
           'tableau recapitulatif, identification des points forts et des points faibles, ' +
           'comparaison jour par jour par rapport a l\'objectif de PdA 5.5%, et tendances cles.',
+        idealPrompt:
+          'Tu es analyste audiences senior chez Canal+. Voici les donnees d\'audience prime time de la semaine : ' +
+          'Lundi — "Traque a Marseille" : 1.2M, PdA 5.8% / Mardi — "Engrenages S9" : 980K, PdA 4.9% / Mercredi — Doc "Ocean" : 650K, PdA 3.2% / ' +
+          'Jeudi — "Le Grand Bain" (rediff) : 1.4M, PdA 6.5% / Vendredi — "Les Sauvages S2" : 870K, PdA 4.3% / Samedi — "Inception" (rediff) : 1.6M, PdA 7.1% / Dimanche — "Anatomie d\'une chute" : 2.1M, PdA 9.2%. ' +
+          'Objectif : PdA moyenne > 5.5%. Produis : 1) Tableau recapitulatif avec ecart vs objectif 2) Classement par type de programme 3) Les 3 enseignements cles.',
+        idealResult:
+          'Un tableau clair avec colonnes Jour, Programme, Type, Telespectateurs, PdA, Ecart vs 5.5%, Verdict (+/-). ' +
+          'Une analyse par categorie (film inedit, serie, doc, rediffusion, premiere) avec PdA moyenne par type. ' +
+          'L\'identification que le documentaire du mercredi et la serie du vendredi sous-performent significativement. ' +
+          'La mise en evidence que les rediffusions de films porteurs et les premieres surperforment. ' +
+          'Trois enseignements actionnables lies aux choix de programmation.',
         hints: [
           {
             id: 'sprint2-diffusion-programmation-ex1-hint1',
@@ -171,6 +216,17 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'Sur la base de votre analyse, proposez des ajustements concrets pour la semaine suivante. ' +
           'Chaque changement doit etre argumente : quel programme deplacer, pourquoi, quel resultat attendu. ' +
           'Presentez au moins 3 ajustements avec un impact estime sur la PdA.',
+        idealPrompt:
+          'A partir de cette analyse d\'audience [coller la synthese], propose 3 ajustements concrets pour la grille prime time de la semaine prochaine. ' +
+          'Pour chaque ajustement : Programme concerne | Changement propose | Justification basee sur les donnees | Impact estime sur la PdA. ' +
+          'Pour le mercredi qui sous-performe a 3.2%, propose 3 scenarios : option safe, option audacieuse, option mixte avec PdA estimee pour chaque. ' +
+          'Contrainte : les ajustements doivent rester coherents avec le positionnement premium Canal+ (cinema et series de reference).',
+        idealResult:
+          'Trois ajustements argumentes avec des justifications chiffrees basees sur l\'analyse precedente. ' +
+          'Des estimations de PdA realistes et prudentes, pas des previsions trop optimistes. ' +
+          'Trois scenarios pour le mercredi avec une analyse risque/benefice pour chaque option. ' +
+          'Une coherence globale avec le positionnement editorial Canal+ (pas de suggestion de programme de tele-realite). ' +
+          'Un calcul de la PdA moyenne projetee pour la semaine avec les ajustements proposes.',
         hints: [
           {
             id: 'sprint2-diffusion-programmation-ex2-hint1',
@@ -199,6 +255,17 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'Soumettez vos ajustements a un "directeur des programmes" incarne par Copilot Chat. ' +
           'Il doit challenger chaque proposition : est-ce realiste ? Les estimations sont-elles credibles ? ' +
           'Y a-t-il des effets de bord non anticipes ?',
+        idealPrompt:
+          'Tu es directeur des programmes de Canal+ depuis 12 ans. Tu as vu des dizaines de propositions d\'ajustement de grille. ' +
+          'Lis ces recommandations [coller les ajustements]. Evalue chaque ajustement sur 5 criteres : faisabilite operationnelle, impact audience estime, ' +
+          'coherence editoriale, risque de cannibalisation, cout de mise en oeuvre. Note chaque critere de 1 a 5. ' +
+          'Puis redige ta decision finale comme un mail de validation a ton equipe : quels ajustements tu valides, lesquels tu refuses, lesquels necessitent une etude complementaire.',
+        idealResult:
+          'Une grille d\'evaluation structuree avec des notes argumentees pour chaque ajustement sur les 5 criteres. ' +
+          'L\'identification de risques de cannibalisation entre programmes non anticipes dans les propositions. ' +
+          'Un questionnement realiste sur la faisabilite operationnelle (droits de diffusion, disponibilite des contenus). ' +
+          'Un mail de validation au ton professionnel et direct, avec des decisions claires. ' +
+          'Des demandes d\'information complementaire sur les points flous, comme le ferait un vrai directeur des programmes.',
         hints: [
           {
             id: 'sprint2-diffusion-programmation-ex3-hint1',
@@ -250,6 +317,18 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'A partir des donnees de churn fournies dans la description, produisez une analyse structuree : ' +
           'segmentation des motifs, croisement avec les profils des desabonnes, et 5 insights actionnables ' +
           'qui orienteront la strategie de fidelisation.',
+        idealPrompt:
+          'Tu es analyste CRM senior chez Canal+. Voici les donnees de churn Q4 : taux 8.2% (vs 6.1% Q3). ' +
+          'Motifs : prix (34%), contenus (28%), concurrence (22%), technique (10%), autres (6%). ' +
+          'Profil desabonnes : 45% entre 25-34 ans, 60% abonnes < 12 mois, 70% usage myCANAL uniquement. ' +
+          'Produis : 1) Tableau de segmentation motifs x profils 2) Les 3 correlations les plus frappantes ' +
+          '3) 5 insights actionnables classes par impact potentiel. Pour chaque insight, precise le segment concerne, la taille estimee et l\'action possible.',
+        idealResult:
+          'Un tableau croisant les motifs de desabonnement avec les profils demographiques et comportementaux. ' +
+          'Trois correlations significatives (ex : les 25-34 ans sur myCANAL partent pour la concurrence). ' +
+          'Cinq insights numerotes, classes du plus impactant au moins impactant. ' +
+          'Pour chaque insight : le segment cible, une estimation du nombre d\'abonnes concernes, et une piste d\'action concrete. ' +
+          'Une comparaison avec les tendances du marche SVoD francais pour contextualiser le taux de 8.2%.',
         hints: [
           {
             id: 'sprint2-commercial-marketing-ex1-hint1',
@@ -278,6 +357,17 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'Sur la base de vos insights, proposez 3 actions de fidelisation concretes et differenciantes. ' +
           'Pour chaque action : description, cible, canal d\'activation, calendrier de mise en oeuvre, ' +
           'KPI de suivi, et estimation de l\'impact sur le churn.',
+        idealPrompt:
+          'A partir de ces insights [coller l\'analyse], propose 3 actions de fidelisation complementaires pour Canal+. ' +
+          'Pour chaque action, remplis ce template : Nom | Segment cible | Description (5 lignes) | Canal d\'activation (email, push, tel, in-app) | ' +
+          'Calendrier semaine par semaine sur 1 mois | KPI principal | Impact estime sur le churn | Cout estimatif et ROI a 6 mois. ' +
+          'Les 3 actions doivent couvrir : retention immediate, engagement long terme, reconquete. Propose une version pilote a moindre cout pour chaque action.',
+        idealResult:
+          'Trois actions clairement differenciees couvrant les trois temporalites (immediat, long terme, reconquete). ' +
+          'Des templates remplis de maniere homogene avec tous les champs demandes. ' +
+          'Des canaux d\'activation adaptes a chaque segment (in-app pour les digital natives, tel pour les abonnes historiques). ' +
+          'Un calendrier realiste avec des jalons semaine par semaine. ' +
+          'Des estimations de cout et ROI en fourchette, avec une version pilote pour chaque action permettant de tester avant de generaliser.',
         hints: [
           {
             id: 'sprint2-commercial-marketing-ex2-hint1',
@@ -306,6 +396,17 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'Soumettez votre strategie complete (insights + 3 actions) a un "directeur general exigeant" ' +
           'incarne par Copilot Chat. Il doit tester la solidite de votre raisonnement, ' +
           'la credibilite de vos estimations et la faisabilite operationnelle.',
+        idealPrompt:
+          'Tu es le DG de Canal+ International, responsable d\'un P&L de 2 milliards d\'euros. Tu as 5 minutes pour evaluer cette strategie de fidelisation [coller insights + 3 actions]. ' +
+          'Tu es connu pour poser des questions derangeantes. Donne ton verdict : ce qui te convainc, ce qui ne te convainc pas, les 3 questions auxquelles l\'equipe doit repondre. ' +
+          'Fais un stress-test : si l\'action 1 ne reduit le churn que de 0.5% au lieu de 2%, le plan est-il encore rentable ? ' +
+          'Si tu ne devais valider qu\'une seule action, laquelle et pourquoi ? Redige ta decision comme un mail de 5 lignes a l\'equipe marketing.',
+        idealResult:
+          'Un verdict structure avec points forts et points faibles identifies pour chaque action. ' +
+          'Trois questions derangeantes mais pertinentes qui revelent les angles morts de la strategie. ' +
+          'Un stress-test chiffre montrant le scenario pessimiste et le seuil de rentabilite. ' +
+          'Un choix argumente d\'une seule action prioritaire, revelant la proposition de valeur la plus forte. ' +
+          'Un mail de decision concis au ton de DG : direct, factuel, avec un engagement clair et un calendrier de suivi.',
         hints: [
           {
             id: 'sprint2-commercial-marketing-ex3-hint1',
@@ -355,6 +456,18 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'Transformez le besoin business ("Pour vous ce soir" sur myCANAL) en specifications fonctionnelles detaillees. ' +
           'Incluez : les user stories principales, les regles metier, les contraintes techniques ' +
           '(performance, volumetrie, compatibilite), et les criteres d\'acceptance.',
+        idealPrompt:
+          'Tu es Product Owner senior chez Canal+. Voici le brief produit : nouvelle fonctionnalite "Pour vous ce soir" sur myCANAL, ' +
+          'proposant 3 contenus personnalises chaque soir a 19h selon l\'historique de visionnage, les preferences declarees et la grille du soir. ' +
+          'Transforme ce besoin en specs fonctionnelles : 1) 5 user stories au format "En tant que [role], je veux [action], afin de [benefice]" ' +
+          '2) Regles metier avec cas particuliers 3) Contraintes non fonctionnelles (temps de reponse < 200ms, 8M utilisateurs actifs) ' +
+          '4) Pour chaque user story, 2 edge cases avec regle de fallback et 3 criteres d\'acceptance au format GIVEN/WHEN/THEN.',
+        idealResult:
+          'Cinq user stories couvrant les principaux parcours utilisateur (decouverte, personnalisation, notification, feedback, partage). ' +
+          'Des regles metier precises : gestion des profils multiples, contenus deja vus, controle parental. ' +
+          'Des contraintes non fonctionnelles chiffrees : temps de reponse, volumetrie, compatibilite multi-devices. ' +
+          'Des edge cases realistes pour chaque user story (nouvel utilisateur sans historique, preferences contradictoires). ' +
+          'Des criteres d\'acceptance au format GIVEN/WHEN/THEN directement testables par une equipe QA.',
         hints: [
           {
             id: 'sprint2-tech-it-ex1-hint1',
@@ -383,6 +496,18 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'Elaborez un planning de realisation en 4 phases (cadrage, developpement, recette, deploiement) ' +
           'avec pour chaque phase : duree estimee, livrables, equipe necessaire, dependances. ' +
           'Identifiez les 5 principaux risques du projet avec leur probabilite, impact et mitigation.',
+        idealPrompt:
+          'A partir de ces specifications [coller les specs], propose un planning de realisation en 4 phases pour le projet "Pour vous ce soir". ' +
+          'Format tableau : Phase | Duree | Livrables | Equipe (roles + nombre) | Dependances | Jalons cles. ' +
+          'Hypotheses : equipe de 5 developpeurs, 1 PO, 1 QA. Duree totale cible : 3 mois. ' +
+          'Identifie les 5 risques principaux specifiques a ce projet (pas generiques). Pour chaque risque : description, probabilite (1-5), impact (1-5), score, mitigation concrete, signal d\'alerte. ' +
+          'Identifie le chemin critique et les taches parallelisables.',
+        idealResult:
+          'Un planning en 4 phases avec des durees realistes et des jalons concrets. ' +
+          'Une allocation d\'equipe coherente avec les competences necessaires (data scientist pour le moteur de recommandation, front pour l\'UI). ' +
+          'Cinq risques specifiques au projet de recommandation (qualite des donnees d\'historique, cold start, performance temps reel). ' +
+          'Une matrice de risques avec scores et mitigations actionnables. ' +
+          'L\'identification claire du chemin critique et des possibilites de parallelisation pour optimiser le calendrier.',
         hints: [
           {
             id: 'sprint2-tech-it-ex2-hint1',
@@ -411,6 +536,18 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'Soumettez votre cahier des charges complet a un "architecte senior sceptique" ' +
           'incarne par Copilot Chat. Il doit questionner vos choix techniques, ' +
           'pointer les zones de flou et les hypotheses non validees.',
+        idealPrompt:
+          'Tu es architecte senior chez Canal+ depuis 10 ans. Tu as vu des dizaines de projets de recommandation echouer. Tu es sceptique par nature. ' +
+          'Lis ce cahier des charges complet [coller specs + planning + risques]. Pose tes 5 questions les plus derangeantes. ' +
+          'Evalue sur 6 criteres : completude des specs, realisme du planning, adequation des ressources, gestion des risques, scalabilite, maintenabilite. ' +
+          'Note chaque critere /5 avec justification. Puis donne ton verdict : go ou no-go, et les 3 pre-requis non negociables avant de demarrer. ' +
+          'Redige ton avis comme un commentaire de pull request : direct, factuel, constructif.',
+        idealResult:
+          'Cinq questions derangeantes et techniques revelant les hypotheses non validees (acces aux donnees, RGPD, performance du modele de recommandation). ' +
+          'Une grille d\'evaluation sur 6 criteres avec des notes justifiees et des recommandations d\'amelioration. ' +
+          'Un verdict argumente de type go conditionnel avec des pre-requis clairs et mesurables. ' +
+          'Le tout au format "PR review" : concis, direct, avec des action items identifies. ' +
+          'Des remarques specifiques au contexte Canal+ (contraintes myCANAL, volumetrie, multi-devices, ecosysteme technique existant).',
         hints: [
           {
             id: 'sprint2-tech-it-ex3-hint1',
@@ -463,6 +600,18 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'A partir des donnees budgetaires fournies dans la description du cas d\'usage, produisez une synthese executive ' +
           'd\'une page maximum : chiffres cles, tendances preoccupantes, postes a cibler en priorite ' +
           'pour atteindre l\'objectif de 800K EUR d\'economies, et une recommandation argumentee.',
+        idealPrompt:
+          'Tu es controleur de gestion senior chez Canal+. Voici les donnees budgetaires operationnelles Q4 : budget total 12.4M EUR. ' +
+          'Postes : locaux 3.8M (31%, +2% vs Q3), prestataires 3.1M (25%, +12%), deplacements 2.2M (18%, -5%), fournitures/IT 1.9M (15%, +8%), autres 1.4M (11%, +3%). ' +
+          'Objectif : identifier 800K EUR d\'economies. Produis une synthese executive d\'1 page : ' +
+          '1) 3 chiffres cles 2) 2 alertes (postes en hausse anormale) 3) 3 postes prioritaires pour les 800K d\'economies ' +
+          '4) Matrice effort/impact des leviers 5) Recommandation en 3 lignes. Ton : factuel, direct, sans jargon.',
+        idealResult:
+          'Trois chiffres cles percutants qui cadrent immediatement la situation pour le COMEX. ' +
+          'Deux alertes chiffrees en euros (prestataires +12% = +332K EUR, fournitures +8% = +140K EUR). ' +
+          'Trois postes prioritaires avec le montant d\'economie potentiel pour chaque, totalisant au moins 800K EUR. ' +
+          'Une matrice 2x2 classant les leviers par facilite de mise en oeuvre et montant d\'economie. ' +
+          'Une recommandation synthetique orientee decision, pas descriptive.',
         hints: [
           {
             id: 'sprint2-support-corporate-ex1-hint1',
@@ -491,6 +640,19 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'Transformez votre synthese en un argumentaire structure de 15 lignes pour le COMEX. ' +
           'Format : constat factuel, diagnostic, 3 leviers d\'action avec impact chiffre, ' +
           'calendrier de mise en oeuvre, et phrase de conclusion engageante.',
+        idealPrompt:
+          'A partir de cette synthese [coller], redige un argumentaire de 15 lignes pour le COMEX Canal+. ' +
+          'Structure pyramide inversee : Constat (2 lignes, chiffres choc) | Diagnostic (3 lignes, causes identifiees) | ' +
+          '3 leviers d\'action avec impact chiffre en EUR | Calendrier (quick wins 1 mois, moyen terme 3 mois) | Conclusion engageante (1 ligne). ' +
+          'Pour chaque levier, ajoute un benchmark sectoriel. Integre 2 anticipations d\'objections au format "on pourrait objecter que... mais en realite...". ' +
+          'Ton : assertif, responsable, oriente decision.',
+        idealResult:
+          'Un argumentaire de 15 lignes exactement, dense et structure selon le format demande. ' +
+          'Des chiffres choc en ouverture qui captent l\'attention du COMEX. ' +
+          'Trois leviers d\'action chiffres en euros avec des benchmarks sectoriels credibles. ' +
+          'Un calendrier realiste distinguant les quick wins des actions moyen terme. ' +
+          'Deux anticipations d\'objections qui montrent la maturite de la reflexion. ' +
+          'Une conclusion en une phrase engageante qui appelle a la decision.',
         hints: [
           {
             id: 'sprint2-support-corporate-ex2-hint1',
@@ -519,6 +681,17 @@ export const sprint2ByGroup: Record<MetierGroupId, CasUsage> = {
           'Demandez a Copilot Chat d\'anticiper les 5 questions les plus difficiles que le COMEX ' +
           'pourrait poser sur votre rapport. Pour chaque question, preparez une reponse argumentee ' +
           'de 3 lignes avec des donnees a l\'appui.',
+        idealPrompt:
+          'Tu es le DAF de Canal+. Tu lis ce rapport d\'optimisation des couts [coller l\'argumentaire complet]. ' +
+          'Pose les 5 questions les plus derangeantes que tu poserais en COMEX. Pour chaque question : formule-la telle qu\'elle serait posee en reunion, ' +
+          'explique pourquoi elle est critique. Puis pour chaque question, prepare une reponse en 3 lignes max : fait cle, explication, engagement concret. ' +
+          'Compile le tout en une fiche de preparation : tableau Question | Qui la posera | Reponse | Donnee d\'appui. La fiche doit tenir sur une page.',
+        idealResult:
+          'Cinq questions formulees de maniere realiste comme en reunion de COMEX (ton direct, exigent). ' +
+          'Des questions couvrant differents angles : financier (DAF), operationnel (DG), RH (DRH), strategique. ' +
+          'Des reponses de 3 lignes maximum, factuelles, avec un engagement mesurable et date. ' +
+          'Un tableau synthetique consultable rapidement pendant la reunion. ' +
+          'L\'identification de qui est susceptible de poser chaque question, permettant de se preparer a chaque interlocuteur.',
         hints: [
           {
             id: 'sprint2-support-corporate-ex3-hint1',
