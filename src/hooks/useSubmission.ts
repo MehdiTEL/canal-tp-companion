@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { supabase } from '../supabase';
 import { showToast } from '../components/shared/Toast';
+import { notifyProgressUpdate } from './useProgress';
 import type { LocalSubmission } from '../types';
 
 const SUBMISSIONS_KEY = 'canal-tp-submissions';
@@ -33,6 +34,7 @@ export function useSubmission(participantId: string | undefined) {
     }) => {
       // Toujours sauvegarder en local
       saveLocalSubmission(data.exercice_id, { ...data });
+      notifyProgressUpdate();
 
       if (!participantId || !supabase) return;
 

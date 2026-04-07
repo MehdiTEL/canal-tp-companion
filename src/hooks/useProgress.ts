@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useSyncExternalStore } from 'react';
 import type { LocalSubmission } from '../types';
 
 const SUBMISSIONS_KEY = 'canal-tp-submissions';
@@ -29,6 +29,38 @@ function computeProgress(submissions: Record<string, LocalSubmission>) {
   return sprints;
 }
 
+// Shared external store — all useProgress consumers share ONE subscription
+let listeners: Array<() => void> = [];
+let cachedSnapshot = getLocalSubmissions();
+
+function subscribe(listener: () => void) {
+  listeners.push(listener);
+  return () => {
+    listeners = listeners.filter((l) => l !== listener);
+  };
+}
+
+function getSnapshot() {
+  return cachedSnapshot;
+}
+
+function notifyListeners() {
+  cachedSnapshot = getLocalSubmissions();
+  listeners.forEach((l) => l());
+}
+
+// Listen for cross-tab storage events
+if (typeof window !== 'undefined') {
+  window.addEventListener('storage', (e) => {
+    if (e.key === SUBMISSIONS_KEY) notifyListeners();
+  });
+}
+
+// Custom event dispatched by useSubmission when saving locally
+export function notifyProgressUpdate() {
+  notifyListeners();
+}
+
 const UNLOCK_CHAIN: Record<string, string> = {
   echauffement: 'sprint-1',
   'sprint-1': 'sprint-2',
@@ -36,33 +68,17 @@ const UNLOCK_CHAIN: Record<string, string> = {
 };
 
 export function useProgress() {
-  const [submissions, setSubmissions] = useState(getLocalSubmissions);
-  const [sprintProgress, setSprintProgress] = useState(() => computeProgress(getLocalSubmissions()));
+  const submissions = useSyncExternalStore(subscribe, getSnapshot);
+  const [sprintProgress, setSprintProgress] = useState(() => computeProgress(submissions));
   const [justUnlocked, setJustUnlocked] = useState<string | null>(null);
 
   // Track previously unlocked sprints to detect new unlocks
   const prevUnlockedRef = useRef<Set<string>>(new Set());
 
-  // Refresh from localStorage periodically (2s) and on cross-tab storage events
+  // Recompute progress when submissions change
   useEffect(() => {
-    const refresh = () => {
-      const subs = getLocalSubmissions();
-      setSubmissions(subs);
-      setSprintProgress(computeProgress(subs));
-    };
-
-    const interval = setInterval(refresh, 2000);
-
-    const onStorage = (e: StorageEvent) => {
-      if (e.key === SUBMISSIONS_KEY) refresh();
-    };
-    window.addEventListener('storage', onStorage);
-
-    return () => {
-      clearInterval(interval);
-      window.removeEventListener('storage', onStorage);
-    };
-  }, []);
+    setSprintProgress(computeProgress(submissions));
+  }, [submissions]);
 
   const totalCompleted = Object.values(sprintProgress).reduce(
     (sum, s) => sum + s.completed,
@@ -115,7 +131,6 @@ export function useProgress() {
         const prevSprint = Object.entries(UNLOCK_CHAIN).find(([, next]) => next === id)?.[0];
         if (prevSprint && isSprintCompleted(prevSprint)) {
           setJustUnlocked(id);
-          // Clear after animation duration
           setTimeout(() => setJustUnlocked(null), 1500);
         }
       }
