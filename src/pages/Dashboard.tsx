@@ -70,61 +70,64 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Hero card — explains the tool */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl shadow-elevated text-white animate-slide-up">
-        {/* Decorative background shapes */}
-        <div className="absolute top-0 right-0 w-48 h-48 bg-lecko-blue/10 rounded-full blur-3xl -translate-y-12 translate-x-12" />
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-sprint-warmup/10 rounded-full blur-2xl translate-y-8 -translate-x-8" />
+      <div className="relative overflow-hidden bg-white rounded-2xl shadow-elevated border border-border-default animate-slide-up">
+        {/* Decorative colored accent at top */}
+        <div className="h-1.5 bg-gradient-to-r from-sprint-warmup via-lecko-blue to-sprint-3" />
 
-        <div className="relative px-5 py-6 sm:px-7 sm:py-8">
-          {/* Top badge */}
-          <div className="flex items-center justify-between gap-3 mb-4">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-display font-bold uppercase tracking-wider bg-white/10 text-white/80">
+        {/* Subtle decorative blurs */}
+        <div className="absolute top-0 right-0 w-48 h-48 bg-lecko-blue/5 rounded-full blur-3xl -translate-y-12 translate-x-12" />
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-sprint-warmup/5 rounded-full blur-2xl translate-y-8 -translate-x-8" />
+
+        <div className="relative px-5 py-5 sm:px-7 sm:py-6">
+          {/* Top badge + change metier */}
+          <div className="flex items-center justify-between gap-3 mb-3">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-display font-bold uppercase tracking-wider bg-lecko-blue/8 text-lecko-blue">
               <BookOpen size={12} />
               {t('dashboard.subtitle')}
             </span>
             {onChangeMetier && (
               <button
                 onClick={onChangeMetier}
-                className="text-[12px] font-body text-white/50 hover:text-white/80 transition-colors"
+                className="text-[12px] font-body text-text-muted hover:text-text-body transition-colors"
               >
                 {t('dashboard.changeMetier')}
               </button>
             )}
           </div>
 
-          <h1 className="font-display font-extrabold text-[22px] sm:text-[26px] tracking-tight leading-tight mb-3">
+          <h1 className="font-display font-extrabold text-[22px] sm:text-[26px] text-text-on-light tracking-tight leading-tight mb-2">
             {t('dashboard.title')}
           </h1>
 
-          <p className="text-[14px] sm:text-[15px] text-white/70 font-body leading-relaxed mb-5 max-w-lg">
+          <p className="text-[14px] sm:text-[15px] text-text-muted font-body leading-relaxed mb-5 max-w-lg">
             {t('dashboard.description')}
           </p>
 
           {/* 3 key points */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-5">
             {[
               { icon: Flame, text: t('dashboard.heroPoint1'), color: '#06B6D4' },
               { icon: FolderOpen, text: t('dashboard.heroPoint2'), color: '#2563EB' },
               { icon: Lightbulb, text: t('dashboard.heroPoint3'), color: '#F59E0B' },
             ].map((point) => (
-              <div key={point.text} className="flex items-start gap-2.5 bg-white/5 rounded-lg px-3 py-2.5">
-                <div className="shrink-0 w-7 h-7 rounded-md flex items-center justify-center" style={{ backgroundColor: `${point.color}20` }}>
-                  <point.icon size={14} style={{ color: point.color }} />
+              <div key={point.text} className="flex items-start gap-2.5 bg-surface-elevated/70 rounded-xl px-3 py-2.5 border border-border-subtle">
+                <div className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${point.color}12` }}>
+                  <point.icon size={15} style={{ color: point.color }} />
                 </div>
-                <span className="text-[12px] sm:text-[13px] text-white/80 font-body leading-snug">{point.text}</span>
+                <span className="text-[12px] sm:text-[13px] text-text-body font-body leading-snug">{point.text}</span>
               </div>
             ))}
           </div>
 
           {/* Progress + CTA */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-4 border-t border-border-subtle">
             {/* Progress bar */}
             <div className="flex-1">
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[12px] font-body text-white/50">{t('dashboard.yourProgress')}</span>
-                <span className="text-[13px] font-display font-bold text-white">{progressPercent}%</span>
+                <span className="text-[12px] font-body text-text-muted">{t('dashboard.yourProgress')}</span>
+                <span className="text-[13px] font-display font-bold text-text-on-light">{progressPercent}%</span>
               </div>
-              <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+              <div className="h-2 rounded-full bg-surface-elevated overflow-hidden">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-sprint-warmup via-lecko-blue to-sprint-3 transition-all duration-slow animate-progress-fill"
                   style={{ width: `${progressPercent}%` }}
@@ -136,7 +139,7 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
             {nextSprint && (
               <button
                 onClick={() => navigate(nextSprint.path)}
-                className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-slate-900 font-display font-bold text-[14px] hover:bg-white/90 active:scale-[0.97] transition-all duration-fast shadow-lg"
+                className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-lecko-blue text-white font-display font-bold text-[14px] hover:bg-lecko-blue/90 active:scale-[0.97] transition-all duration-fast shadow-elevated"
               >
                 {progressPercent > 0 ? t('dashboard.continue') : t('dashboard.letsGo')}
                 <ChevronRight size={16} />

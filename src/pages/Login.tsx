@@ -95,31 +95,35 @@ export function Login({ onLogin, loading }: LoginProps) {
         </div>
 
         {/* Hero card */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl shadow-floating text-white mb-5">
-          <div className="absolute top-0 right-0 w-40 h-40 bg-lecko-blue/15 rounded-full blur-3xl -translate-y-8 translate-x-8" />
-          <div className="absolute bottom-0 left-0 w-28 h-28 bg-sprint-3/10 rounded-full blur-2xl translate-y-6 -translate-x-6" />
+        <div className="relative overflow-hidden bg-white rounded-2xl shadow-elevated border border-border-default mb-5">
+          {/* Colored accent bar */}
+          <div className="h-1.5 bg-gradient-to-r from-sprint-warmup via-lecko-blue to-sprint-3" />
+
+          {/* Subtle decorative blurs */}
+          <div className="absolute top-0 right-0 w-40 h-40 bg-lecko-blue/5 rounded-full blur-3xl -translate-y-8 translate-x-8" />
+          <div className="absolute bottom-0 left-0 w-28 h-28 bg-sprint-3/5 rounded-full blur-2xl translate-y-6 -translate-x-6" />
 
           <div className="relative px-5 py-5 sm:px-6">
             <div className="flex items-center gap-2 mb-2">
-              <Sparkles size={16} className="text-amber-400" />
-              <span className="text-[11px] font-display font-bold uppercase tracking-wider text-white/60">{t('login.subtitle')}</span>
+              <Sparkles size={16} className="text-lecko-orange" />
+              <span className="text-[11px] font-display font-bold uppercase tracking-wider text-text-muted">{t('login.subtitle')}</span>
             </div>
-            <h1 className="font-display font-extrabold text-[20px] sm:text-[22px] tracking-tight leading-snug mb-3">
+            <h1 className="font-display font-extrabold text-[20px] sm:text-[22px] text-text-on-light tracking-tight leading-snug mb-3">
               {t('login.title')}
             </h1>
-            <p className="text-[13px] sm:text-[14px] text-white/60 font-body leading-relaxed mb-4">
+            <p className="text-[13px] sm:text-[14px] text-text-muted font-body leading-relaxed mb-4">
               {t('login.description')}
             </p>
 
             {/* 3 highlights */}
             <div className="flex flex-wrap gap-2">
               {[
-                { icon: BookOpen, label: '4 sprints' },
-                { icon: Users, label: '150 participants' },
-                { icon: Zap, label: 'Copilot Chat' },
+                { icon: BookOpen, label: '4 sprints', color: '#06B6D4' },
+                { icon: Users, label: '150 participants', color: '#2563EB' },
+                { icon: Zap, label: 'Copilot Chat', color: '#8B5CF6' },
               ].map((item) => (
-                <span key={item.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/8 text-[11px] font-body font-medium text-white/70">
-                  <item.icon size={11} />
+                <span key={item.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border-default text-[11px] font-body font-semibold text-text-body bg-surface-elevated/50">
+                  <item.icon size={12} style={{ color: item.color }} />
                   {item.label}
                 </span>
               ))}
