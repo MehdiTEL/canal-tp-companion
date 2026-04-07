@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
-export function useTimer(durationMinutes: number) {
+export function useTimer(durationMinutes: number, autoStart = false) {
   const [totalSeconds, setTotalSeconds] = useState(durationMinutes * 60);
-  const [isRunning, setIsRunning] = useState(false);
-  const [hasStarted, setHasStarted] = useState(false);
+  const [isRunning, setIsRunning] = useState(autoStart);
+  const [hasStarted, setHasStarted] = useState(autoStart);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const minutes = Math.floor(totalSeconds / 60);

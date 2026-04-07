@@ -1,6 +1,7 @@
-import { ArrowLeft, Clock } from 'lucide-react';
+import { ArrowLeft, Clock, Pause, Play, RotateCcw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useTimer } from '../../hooks/useTimer';
 
 interface SprintHeaderProps {
   title: string;
@@ -25,6 +26,10 @@ export function SprintHeader({
 }: SprintHeaderProps) {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { minutes, seconds, isRunning, hasStarted, isWarning, isExpired, start, pause, reset } =
+    useTimer(duration, true);
+
+  const displayTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
   const progress = currentStep !== undefined && totalSteps !== undefined && totalSteps > 0
     ? Math.round((currentStep / totalSteps) * 100)
@@ -53,9 +58,31 @@ export function SprintHeader({
             <h1 className="text-xl sm:text-2xl font-display font-extrabold text-white tracking-[-0.02em]">
               {title}
             </h1>
-            <div className="shrink-0 flex items-center gap-1.5 bg-white/15 backdrop-blur-sm rounded-lg px-2.5 py-1.5">
-              <Clock size={13} className="text-white/70" />
-              <span className="text-[13px] font-display font-bold text-white tabular-nums">{duration} min</span>
+            <div className={`shrink-0 flex items-center gap-1.5 backdrop-blur-sm rounded-lg px-2.5 py-1.5 transition-colors ${
+              isExpired ? 'bg-red-500/30' : isWarning ? 'bg-amber-500/25' : 'bg-white/15'
+            }`}>
+              <Clock size={13} className={isExpired ? 'text-red-200' : isWarning ? 'text-amber-200' : 'text-white/70'} />
+              <span className={`text-[14px] font-mono font-bold tabular-nums ${
+                isExpired ? 'text-red-100 animate-pulse-soft' : isWarning ? 'text-amber-100' : 'text-white'
+              }`}>
+                {displayTime}
+              </span>
+              <div className="flex gap-0.5 ml-0.5">
+                {isRunning ? (
+                  <button onClick={pause} className="p-1 rounded hover:bg-white/15 transition-colors" aria-label={t('timer.pause')}>
+                    <Pause size={12} className="text-white/80" />
+                  </button>
+                ) : !isExpired ? (
+                  <button onClick={start} className="p-1 rounded hover:bg-white/15 transition-colors" aria-label={t('timer.start')}>
+                    <Play size={12} className="text-white/80" />
+                  </button>
+                ) : null}
+                {hasStarted && (
+                  <button onClick={reset} className="p-1 rounded hover:bg-white/15 transition-colors" aria-label={t('timer.reset')}>
+                    <RotateCcw size={12} className="text-white/80" />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
 
