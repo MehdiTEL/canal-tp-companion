@@ -115,20 +115,21 @@ export function SprintRecap({
           <div className="flex flex-col gap-2.5 pt-2">
             <button
               onClick={() => navigate('/dashboard')}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl text-white font-display font-bold text-[15px] hover:opacity-90 active:scale-[0.97] transition-all duration-base shadow-elevated"
+              className="w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl text-white font-display font-bold text-[15px] hover:opacity-90 hover:shadow-glow active:scale-[0.97] transition-all duration-base shadow-elevated relative overflow-hidden group/recap"
               style={{ backgroundColor: sprintColor }}
             >
-              <Home size={16} />
-              {t('recap.backDashboard')}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover/recap:translate-x-[100%] transition-transform duration-700" />
+              <Home size={16} className="relative" />
+              <span className="relative">{t('recap.backDashboard')}</span>
             </button>
             {nextSprintLabel && (
               <button
                 onClick={() => navigate('/dashboard')}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border font-display font-semibold text-[14px] hover:bg-surface-elevated active:scale-[0.98] transition-all duration-base"
+                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border font-display font-semibold text-[14px] hover:bg-surface-elevated hover:shadow-card active:scale-[0.98] transition-all duration-base group/next"
                 style={{ borderColor: `${sprintColor}25`, color: sprintColor }}
               >
                 {t('recap.seeProgress')}
-                <ArrowRight size={15} />
+                <ArrowRight size={15} className="group-hover/next:translate-x-1 transition-transform duration-base" />
               </button>
             )}
           </div>

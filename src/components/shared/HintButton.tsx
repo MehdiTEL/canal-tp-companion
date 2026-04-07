@@ -42,7 +42,7 @@ export function HintButton({ hints, unlockedCount, onUnlock }: HintButtonProps) 
           onClick={onUnlock}
           className="group flex items-center gap-2.5 w-full px-4 py-3.5 rounded-lg border border-amber-200/70 bg-amber-50/50 hover:bg-amber-50 hover:border-amber-300 transition-all duration-base"
         >
-          <div className="w-7 h-7 rounded-full bg-amber-100 group-hover:bg-amber-200 flex items-center justify-center shrink-0 transition-colors">
+          <div className="w-7 h-7 rounded-full bg-amber-100 group-hover:bg-amber-200 flex items-center justify-center shrink-0 transition-all duration-base group-hover:scale-110 group-hover:shadow-[0_0_12px_rgba(245,158,11,0.3)]">
             <Lightbulb size={15} className="text-amber-500" />
           </div>
           <span className="text-[14px] text-amber-700 font-body font-medium">

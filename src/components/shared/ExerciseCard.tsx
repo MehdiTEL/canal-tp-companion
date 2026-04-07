@@ -84,7 +84,7 @@ export function ExerciseCard({
 
   return (
     <div
-      className={`animate-slide-up bg-white rounded-2xl shadow-card border transition-all duration-base ${
+      className={`animate-slide-up bg-white rounded-2xl shadow-card border transition-all duration-base hover-lift ${
         completed ? 'border-success/30 shadow-[0_0_0_1px_rgba(16,185,129,0.08)]' : 'border-border-default'
       }`}
     >
@@ -147,10 +147,11 @@ export function ExerciseCard({
           {!completed ? (
             <button
               onClick={handleComplete}
-              className="flex items-center gap-2 px-6 py-3 rounded-xl bg-lecko-blue text-white text-[14px] font-display font-bold tracking-[0.01em] hover:bg-lecko-blue/90 active:scale-[0.97] transition-all duration-base ml-auto shadow-elevated"
+              className="flex items-center gap-2 px-6 py-3 rounded-xl bg-lecko-blue text-white text-[14px] font-display font-bold tracking-[0.01em] hover:bg-lecko-blue/90 hover:shadow-glow active:scale-[0.97] transition-all duration-base ml-auto shadow-elevated relative overflow-hidden group/complete"
             >
-              {t('exercise.complete')}
-              <ChevronRight size={16} />
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover/complete:translate-x-[100%] transition-transform duration-700" />
+              <span className="relative">{t('exercise.complete')}</span>
+              <ChevronRight size={16} className="relative group-hover/complete:translate-x-0.5 transition-transform duration-base" />
             </button>
           ) : (
             <span className="text-[13px] text-success font-semibold ml-auto flex items-center gap-1.5 font-body">
@@ -166,10 +167,10 @@ export function ExerciseCard({
             {!showAnswer ? (
               <button
                 onClick={() => setShowAnswer(true)}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl border-2 border-dashed transition-all duration-base active:scale-[0.98] hover:bg-surface-elevated/50"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl border-2 border-dashed transition-all duration-base active:scale-[0.98] hover:border-solid hover:shadow-card group/answer"
                 style={{ borderColor: `${sprintColor}35`, color: sprintColor }}
               >
-                <Eye size={18} />
+                <Eye size={18} className="group-hover/answer:scale-110 transition-transform duration-base" />
                 <span className="font-display font-bold text-[14px]">{t('exercise.discoverAnswer')}</span>
               </button>
             ) : (

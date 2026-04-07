@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, Search, Check, Sparkles, BookOpen, Users, Zap } from 'lucide-react';
+import { ArrowRight, Search, Check, Sparkles, BookOpen, Zap } from 'lucide-react';
 import i18n from '../i18n';
 import { LanguageSelector } from '../components/shared/LanguageSelector';
 
@@ -95,13 +95,13 @@ export function Login({ onLogin, loading }: LoginProps) {
         </div>
 
         {/* Hero card */}
-        <div className="relative overflow-hidden bg-white rounded-2xl shadow-elevated border border-border-default mb-5">
+        <div className="relative overflow-hidden bg-white rounded-2xl shadow-elevated border border-border-default mb-5 hover-lift">
           {/* Colored accent bar */}
           <div className="h-1.5 bg-gradient-to-r from-sprint-warmup via-lecko-blue to-sprint-3" />
 
           {/* Subtle decorative blurs */}
-          <div className="absolute top-0 right-0 w-40 h-40 bg-lecko-blue/5 rounded-full blur-3xl -translate-y-8 translate-x-8" />
-          <div className="absolute bottom-0 left-0 w-28 h-28 bg-sprint-3/5 rounded-full blur-2xl translate-y-6 -translate-x-6" />
+          <div className="absolute top-0 right-0 w-40 h-40 bg-lecko-blue/5 rounded-full blur-3xl -translate-y-8 translate-x-8 animate-gentle-float" />
+          <div className="absolute bottom-0 left-0 w-28 h-28 bg-sprint-3/5 rounded-full blur-2xl translate-y-6 -translate-x-6 animate-gentle-float" style={{ animationDelay: '3s' }} />
 
           <div className="relative px-5 py-5 sm:px-6">
             <div className="flex items-center gap-2 mb-2">
@@ -119,11 +119,10 @@ export function Login({ onLogin, loading }: LoginProps) {
             <div className="flex flex-wrap gap-2">
               {[
                 { icon: BookOpen, label: '4 sprints', color: '#06B6D4' },
-                { icon: Users, label: '150 participants', color: '#2563EB' },
                 { icon: Zap, label: 'Copilot Chat', color: '#8B5CF6' },
               ].map((item) => (
-                <span key={item.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border-default text-[11px] font-body font-semibold text-text-body bg-surface-elevated/50">
-                  <item.icon size={12} style={{ color: item.color }} />
+                <span key={item.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border-default text-[11px] font-body font-semibold text-text-body bg-surface-elevated/50 hover:border-border-strong hover:shadow-card transition-all duration-base cursor-default group/badge">
+                  <item.icon size={12} style={{ color: item.color }} className="group-hover/badge:scale-110 transition-transform duration-base" />
                   {item.label}
                 </span>
               ))}
@@ -187,10 +186,10 @@ export function Login({ onLogin, loading }: LoginProps) {
                         key={m}
                         type="button"
                         onClick={() => handleSelect(m)}
-                        className={`w-full text-left px-4 py-2.5 text-[14px] font-body flex items-center justify-between gap-2 transition-colors first:rounded-t-xl last:rounded-b-xl ${
+                        className={`w-full text-left px-4 py-2.5 text-[14px] font-body flex items-center justify-between gap-2 transition-all duration-fast first:rounded-t-xl last:rounded-b-xl border-l-2 ${
                           selectedMetier === m
-                            ? 'bg-lecko-blue/8 text-lecko-blue font-semibold'
-                            : 'text-text-body hover:bg-surface-elevated'
+                            ? 'bg-lecko-blue/8 text-lecko-blue font-semibold border-l-lecko-blue'
+                            : 'text-text-body hover:bg-surface-elevated hover:pl-5 border-l-transparent hover:border-l-lecko-blue/40'
                         }`}
                       >
                         {m}
@@ -206,14 +205,17 @@ export function Login({ onLogin, loading }: LoginProps) {
           <button
             type="submit"
             disabled={!selectedMetier || loading}
-            className={`w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl font-display font-bold text-[15px] tracking-[0.01em] transition-all duration-base ${
+            className={`w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl font-display font-bold text-[15px] tracking-[0.01em] transition-all duration-base relative overflow-hidden group/btn ${
               !selectedMetier && !loading
                 ? 'bg-surface-elevated text-text-muted cursor-not-allowed border border-border-default'
-                : 'bg-lecko-blue text-white hover:bg-lecko-blue/90 active:scale-[0.98] shadow-elevated'
+                : 'bg-lecko-blue text-white hover:bg-lecko-blue/90 hover:shadow-glow active:scale-[0.97] shadow-elevated'
             }`}
           >
-            {loading ? t('login.loading') : t('login.start')}
-            {!loading && selectedMetier && <ArrowRight size={18} />}
+            {selectedMetier && !loading && (
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
+            )}
+            <span className="relative">{loading ? t('login.loading') : t('login.start')}</span>
+            {!loading && selectedMetier && <ArrowRight size={18} className="relative group-hover/btn:translate-x-0.5 transition-transform duration-base" />}
           </button>
         </form>
       </div>

@@ -48,10 +48,10 @@ export function DocumentDownload({ documents, color = '#2563EB' }: DocumentDownl
               key={doc.path}
               href={href}
               download={doc.name}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-border-subtle bg-white hover:bg-surface-elevated transition-colors group"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-border-subtle bg-white hover:bg-surface-elevated hover:border-border-default hover:shadow-card hover:-translate-y-px transition-all duration-base group"
             >
               <div
-                className="w-8 h-8 rounded-md flex items-center justify-center shrink-0"
+                className="w-8 h-8 rounded-md flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-base"
                 style={{ backgroundColor: `${iconColor}12` }}
               >
                 <Icon size={16} style={{ color: iconColor }} />
@@ -65,7 +65,7 @@ export function DocumentDownload({ documents, color = '#2563EB' }: DocumentDownl
                 </p>
               </div>
               <div
-                className="shrink-0 w-7 h-7 rounded-md flex items-center justify-center opacity-60 group-hover:opacity-100 transition-opacity"
+                className="shrink-0 w-7 h-7 rounded-md flex items-center justify-center opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-base"
                 style={{ backgroundColor: `${color}10` }}
               >
                 <Download size={13} style={{ color }} />

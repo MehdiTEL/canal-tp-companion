@@ -33,7 +33,7 @@ export function ProgressBar() {
               style={{ width: `${segWidth}%` }}
             >
               <div
-                className="absolute inset-0 transition-all duration-slow"
+                className="absolute inset-0 transition-all duration-slow progress-shimmer"
                 style={{
                   width: `${fillWidth}%`,
                   backgroundColor: seg.color,

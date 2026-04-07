@@ -75,8 +75,8 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
         <div className="h-1.5 bg-gradient-to-r from-sprint-warmup via-lecko-blue to-sprint-3" />
 
         {/* Subtle decorative blurs */}
-        <div className="absolute top-0 right-0 w-48 h-48 bg-lecko-blue/5 rounded-full blur-3xl -translate-y-12 translate-x-12" />
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-sprint-warmup/5 rounded-full blur-2xl translate-y-8 -translate-x-8" />
+        <div className="absolute top-0 right-0 w-48 h-48 bg-lecko-blue/5 rounded-full blur-3xl -translate-y-12 translate-x-12 animate-gentle-float" />
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-sprint-warmup/5 rounded-full blur-2xl translate-y-8 -translate-x-8 animate-gentle-float" style={{ animationDelay: '3s' }} />
 
         <div className="relative px-5 py-5 sm:px-7 sm:py-6">
           {/* Top badge + change metier */}
@@ -110,8 +110,8 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
               { icon: FolderOpen, text: t('dashboard.heroPoint2'), color: '#2563EB' },
               { icon: Lightbulb, text: t('dashboard.heroPoint3'), color: '#F59E0B' },
             ].map((point) => (
-              <div key={point.text} className="flex items-start gap-2.5 bg-surface-elevated/70 rounded-xl px-3 py-2.5 border border-border-subtle">
-                <div className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${point.color}12` }}>
+              <div key={point.text} className="flex items-start gap-2.5 bg-surface-elevated/70 rounded-xl px-3 py-2.5 border border-border-subtle hover:border-border-default hover:bg-white hover:shadow-card transition-all duration-base cursor-default group/point">
+                <div className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center group-hover/point:scale-110 transition-transform duration-base" style={{ backgroundColor: `${point.color}12` }}>
                   <point.icon size={15} style={{ color: point.color }} />
                 </div>
                 <span className="text-[12px] sm:text-[13px] text-text-body font-body leading-snug">{point.text}</span>
@@ -129,7 +129,7 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
               </div>
               <div className="h-2 rounded-full bg-surface-elevated overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-sprint-warmup via-lecko-blue to-sprint-3 transition-all duration-slow animate-progress-fill"
+                  className="h-full rounded-full bg-gradient-to-r from-sprint-warmup via-lecko-blue to-sprint-3 transition-all duration-slow animate-progress-fill progress-shimmer"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
@@ -139,10 +139,11 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
             {nextSprint && (
               <button
                 onClick={() => navigate(nextSprint.path)}
-                className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-lecko-blue text-white font-display font-bold text-[14px] hover:bg-lecko-blue/90 active:scale-[0.97] transition-all duration-fast shadow-elevated"
+                className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-lecko-blue text-white font-display font-bold text-[14px] hover:bg-lecko-blue/90 hover:shadow-glow active:scale-[0.97] transition-all duration-base shadow-elevated relative overflow-hidden group/cta"
               >
-                {progressPercent > 0 ? t('dashboard.continue') : t('dashboard.letsGo')}
-                <ChevronRight size={16} />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover/cta:translate-x-[100%] transition-transform duration-700" />
+                <span className="relative">{progressPercent > 0 ? t('dashboard.continue') : t('dashboard.letsGo')}</span>
+                <ChevronRight size={16} className="relative group-hover/cta:translate-x-0.5 transition-transform duration-base" />
               </button>
             )}
           </div>
@@ -165,7 +166,7 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
               disabled={!unlocked && !isJustUnlocked}
               className={`animate-slide-up w-full bg-white rounded-xl border p-4 flex items-center gap-4 transition-all duration-base text-left group ${
                 unlocked || isJustUnlocked
-                  ? 'shadow-card hover:shadow-elevated hover:border-border-strong active:scale-[0.995] cursor-pointer border-border-default'
+                  ? 'shadow-card hover:shadow-elevated hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.995] cursor-pointer border-border-default hover:border-border-strong'
                   : 'opacity-45 cursor-not-allowed border-border-subtle'
               }`}
               style={{
