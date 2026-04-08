@@ -145,7 +145,7 @@ export function ExerciseCard({
             <StarRating
               value={selfRating}
               onChange={setSelfRating}
-              label="Auto-evaluation :"
+              label={t('rating.label')}
             />
           )}
           {!completed ? (

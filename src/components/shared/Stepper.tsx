@@ -34,12 +34,14 @@ export function Stepper({ steps, currentIndex, completedIndexes, color, onStepCl
           <button
             key={step.id}
             onClick={() => handleClick(i, isClickable)}
+            aria-disabled={!isClickable}
+            aria-current={isCurrent ? 'step' : undefined}
             className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-all duration-fast border-l-3 ${
               isCurrent
                 ? 'bg-surface-elevated/80'
                 : isCompleted
                   ? 'hover:bg-surface-elevated/50'
-                  : 'opacity-50'
+                  : 'opacity-60'
             } ${i > 0 ? 'border-t border-border-subtle' : ''} ${
               isClickable ? 'cursor-pointer' : 'cursor-default'
             } ${shakenIndex === i ? 'animate-shake' : ''}`}

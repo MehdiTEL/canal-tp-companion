@@ -177,7 +177,7 @@ export function Login({ onLogin, loading }: LoginProps) {
             </div>
 
             {/* Search / Select */}
-            <div ref={dropdownRef} className="relative">
+            <div ref={dropdownRef} className="relative" role="combobox" aria-expanded={isOpen} aria-haspopup="listbox" aria-owns="metier-listbox">
               <div
                 className={`flex items-center gap-2.5 border-2 rounded-xl px-4 py-4 bg-surface-app/50 transition-all duration-base cursor-text ${
                   isOpen
@@ -191,7 +191,7 @@ export function Login({ onLogin, loading }: LoginProps) {
                 <div className={`shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-base ${
                   isOpen ? 'bg-lecko-blue/10' : selectedMetier ? 'bg-success/10' : 'bg-surface-elevated'
                 }`}>
-                  <Search size={16} className={`transition-colors duration-base ${isOpen ? 'text-lecko-blue' : selectedMetier ? 'text-success' : 'text-text-muted'}`} />
+                  <Search size={16} className={`transition-colors duration-base ${isOpen ? 'text-lecko-blue' : selectedMetier ? 'text-success' : 'text-text-muted'}`} aria-hidden="true" />
                 </div>
                 {selectedMetier && !isOpen ? (
                   <div className="flex items-center gap-2 flex-1">
@@ -212,6 +212,9 @@ export function Login({ onLogin, loading }: LoginProps) {
                     onChange={(e) => { setSearch(e.target.value); setIsOpen(true); }}
                     onFocus={() => setIsOpen(true)}
                     placeholder={t('login.metierPlaceholder')}
+                    aria-label={t('login.metierLabel')}
+                    aria-autocomplete="list"
+                    aria-controls="metier-listbox"
                     className="flex-1 text-[15px] font-body text-text-on-light placeholder:text-text-muted/50 bg-transparent outline-none"
                   />
                 )}
@@ -224,29 +227,30 @@ export function Login({ onLogin, loading }: LoginProps) {
               )}
 
               {isOpen && (
-                <div className="absolute z-20 w-full mt-2 bg-white border border-border-default rounded-xl shadow-floating max-h-[280px] overflow-y-auto animate-slide-up">
+                <ul id="metier-listbox" role="listbox" aria-label={t('login.metierLabel')} className="absolute z-20 w-full mt-2 bg-white border border-border-default rounded-xl shadow-floating max-h-[280px] overflow-y-auto animate-slide-up">
                   {filtered.length === 0 ? (
-                    <div className="px-4 py-3 text-[13px] text-text-muted font-body">
+                    <li className="px-4 py-3 text-[13px] text-text-muted font-body" role="option" aria-selected={false}>
                       {t('login.noResult')}
-                    </div>
+                    </li>
                   ) : (
                     filtered.map((m) => (
-                      <button
+                      <li
                         key={m}
-                        type="button"
+                        role="option"
+                        aria-selected={selectedMetier === m}
                         onClick={() => handleSelect(m)}
-                        className={`w-full text-left px-4 py-2.5 text-[14px] font-body flex items-center justify-between gap-2 transition-all duration-fast first:rounded-t-xl last:rounded-b-xl border-l-2 ${
+                        className={`w-full text-left px-4 py-2.5 text-[14px] font-body flex items-center justify-between gap-2 transition-all duration-fast first:rounded-t-xl last:rounded-b-xl border-l-2 cursor-pointer ${
                           selectedMetier === m
                             ? 'bg-lecko-blue/8 text-lecko-blue font-semibold border-l-lecko-blue'
                             : 'text-text-body hover:bg-surface-elevated hover:pl-5 border-l-transparent hover:border-l-lecko-blue/40'
                         }`}
                       >
                         {m}
-                        {selectedMetier === m && <Check size={15} className="text-lecko-blue shrink-0" />}
-                      </button>
+                        {selectedMetier === m && <Check size={15} className="text-lecko-blue shrink-0" aria-hidden="true" />}
+                      </li>
                     ))
                   )}
-                </div>
+                </ul>
               )}
             </div>
 
