@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CheckCircle2, ChevronRight, Eye, Copy, Check } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { CheckCircle2, ChevronRight, Eye, Copy, Check, Home } from 'lucide-react';
 import { HintButton } from './HintButton';
 import { DocumentDownload } from './DocumentDownload';
 import { StarRating } from './StarRating';
@@ -37,6 +38,7 @@ export function ExerciseCard({
   isLastStep = false,
 }: ExerciseCardProps) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [selfRating, setSelfRating] = useState<number | null>(initialData?.self_rating ?? null);
   const [hintsUsed, setHintsUsed] = useState(initialData?.hints_used || 0);
   const [completed, setCompleted] = useState(initialData?.completed || false);
@@ -233,6 +235,15 @@ export function ExerciseCard({
                     </div>
                   </div>
                 )}
+
+                {/* Back to dashboard */}
+                <button
+                  onClick={() => navigate('/dashboard')}
+                  className="w-full flex items-center justify-center gap-2 mt-2 px-4 py-3 rounded-xl border border-border-default text-text-muted hover:text-lecko-blue hover:border-lecko-blue/40 hover:bg-surface-elevated transition-all duration-base font-display font-bold text-[14px]"
+                >
+                  <Home size={16} />
+                  {t('recap.backDashboard')}
+                </button>
               </div>
             )}
           </div>
