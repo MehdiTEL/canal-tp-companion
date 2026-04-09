@@ -9,6 +9,7 @@ interface SprintRecapProps {
   exercisesCompleted: number;
   nextSprintLabel?: string | null;
   message?: string;
+  timerExpired?: boolean;
 }
 
 export function SprintRecap({
@@ -17,6 +18,7 @@ export function SprintRecap({
   exercisesCompleted,
   nextSprintLabel,
   message,
+  timerExpired,
 }: SprintRecapProps) {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -108,6 +110,22 @@ export function SprintRecap({
               </p>
             </div>
           </div>
+
+          {/* Medal badge */}
+          {timerExpired !== undefined && (
+            <div className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl animate-fade-in ${
+              timerExpired
+                ? 'bg-amber-50 border border-amber-200'
+                : 'bg-emerald-50 border border-emerald-200'
+            }`}>
+              <span className="text-[20px]">{timerExpired ? '⏰' : '🥇'}</span>
+              <span className={`text-[13px] font-display font-bold ${
+                timerExpired ? 'text-amber-700' : 'text-emerald-700'
+              }`}>
+                {timerExpired ? t('recap.medalOver') : t('recap.medalGold')}
+              </span>
+            </div>
+          )}
 
           {nextSprintLabel && (
             <div

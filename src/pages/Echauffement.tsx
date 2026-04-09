@@ -1,3 +1,4 @@
+import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SprintHeader } from '../components/shared/SprintHeader';
 import { ExerciseCard } from '../components/shared/ExerciseCard';
@@ -17,6 +18,8 @@ interface EchauffementProps {
 export function Echauffement({ participantId }: EchauffementProps) {
   const { t } = useTranslation();
   const { saveSubmission, getLocalData } = useSubmission(participantId);
+  const [timerExpired, setTimerExpired] = useState(false);
+  const handleTimerState = useCallback((expired: boolean) => setTimerExpired(expired), []);
 
   const localData = getLocalData('echauffement-ex1');
   const completed = localData?.completed || false;
@@ -30,6 +33,7 @@ export function Echauffement({ participantId }: EchauffementProps) {
           exercisesCompleted={1}
           nextSprintLabel={t('sprints.sprint1')}
           message={t('echauffement.completedMessage')}
+          timerExpired={timerExpired}
         />
       </div>
     );
@@ -44,6 +48,7 @@ export function Echauffement({ participantId }: EchauffementProps) {
         currentStep={completed ? 1 : 0}
         totalSteps={1}
         subtitle={echauffementDescription}
+        onTimerStateChange={handleTimerState}
       />
 
       {/* Step 1 — Open Copilot */}

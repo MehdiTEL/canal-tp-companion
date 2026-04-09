@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SprintHeader } from '../components/shared/SprintHeader';
 import { ExerciseCard } from '../components/shared/ExerciseCard';
@@ -15,6 +15,8 @@ interface Sprint1Props {
 export function Sprint1({ participantId }: Sprint1Props) {
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(0);
+  const [timerExpired, setTimerExpired] = useState(false);
+  const handleTimerState = useCallback((expired: boolean) => setTimerExpired(expired), []);
   const { saveSubmission, getLocalData } = useSubmission(participantId);
 
   const scenario = sprint1Scenario;
@@ -50,6 +52,7 @@ export function Sprint1({ participantId }: Sprint1Props) {
           sprintColor="#2563EB"
           exercisesCompleted={scenario.steps.length}
           nextSprintLabel={t('sprints.sprint2')}
+          timerExpired={timerExpired}
         />
       </div>
     );
@@ -64,6 +67,7 @@ export function Sprint1({ participantId }: Sprint1Props) {
         currentStep={completedIndexes.size}
         totalSteps={scenario.steps.length}
         subtitle={scenario.description}
+        onTimerStateChange={handleTimerState}
       />
 
       <CopilotLink color="#2563EB" />

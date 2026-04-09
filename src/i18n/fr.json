@@ -38,7 +38,13 @@
     "letsGo": "C'est parti !",
     "continue": "Continuer",
     "goToNext": "Passer au",
-    "allComplete": "Formation terminée !"
+    "allComplete": "Formation terminée !",
+    "finalTitle": "Parcours complété !",
+    "finalSubtitle": "Vous avez terminé l'ensemble de la formation IA / Copilot Chat.",
+    "finalStat1": "sprints terminés",
+    "finalStat2": "exercices complétés",
+    "finalMessage": "Vous maîtrisez désormais les fondamentaux de Copilot Chat. Continuez à pratiquer au quotidien pour ancrer ces réflexes !",
+    "finalReset": "Recommencer la formation"
   },
   "sprints": {
     "echauffement": "Échauffement",
@@ -134,6 +140,8 @@
     "allDoneMessage": "Félicitations, vous avez complété l'ensemble du parcours IA / Copilot Chat.",
     "backDashboard": "Retour au tableau de bord",
     "seeProgress": "Voir ma progression",
+    "medalGold": "Terminé dans les temps !",
+    "medalOver": "Temps dépassé, mais terminé !",
     "encouragements": ["Excellent travail !", "Bravo, bien joué !", "Très beau parcours !", "Vous gérez !"]
   },
   "timer": {
@@ -201,31 +209,6 @@
       "Créatif": "Créatif",
       "Pédagogique": "Pédagogique"
     }
-  },
-  "formateur": {
-    "title": "Espace formateur",
-    "codePlaceholder": "Code d'accès",
-    "submit": "Accéder",
-    "wrongCode": "Code incorrect",
-    "noSupabase": "Supabase n'est pas configuré. Configurez les variables VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY dans le fichier .env.",
-    "back": "Retour à la liste",
-    "noSubmissions": "Aucune soumission.",
-    "prompt": "Prompt :",
-    "result": "Résultat :",
-    "participants": "{{count}} participant(s)",
-    "submissions": "{{count}} soumission(s)",
-    "refresh": "Actualiser",
-    "loading": "Chargement...",
-    "exportCsv": "Export CSV",
-    "allSprints": "Tous les sprints",
-    "allMetiers": "Tous les métiers",
-    "colMetier": "Métier",
-    "colSprints": "Sprints",
-    "colExercises": "Exercices",
-    "colHints": "Astuces",
-    "colActions": "Actions",
-    "noParticipants": "Aucun participant.",
-    "view": "Voir"
   },
   "documentDownload": {
     "title": "Documents de travail",

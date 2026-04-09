@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ArrowLeft, Clock, Pause, Play, RotateCcw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +13,7 @@ interface SprintHeaderProps {
   subtitle?: string;
   onBack?: () => void;
   backLabel?: string;
+  onTimerStateChange?: (expired: boolean) => void;
 }
 
 export function SprintHeader({
@@ -23,11 +25,16 @@ export function SprintHeader({
   subtitle,
   onBack,
   backLabel,
+  onTimerStateChange,
 }: SprintHeaderProps) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { minutes, seconds, isRunning, hasStarted, isWarning, isExpired, start, pause, reset } =
     useTimer(duration, true);
+
+  useEffect(() => {
+    onTimerStateChange?.(isExpired);
+  }, [isExpired, onTimerStateChange]);
 
   const displayTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 

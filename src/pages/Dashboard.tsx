@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Flame, FileText, Zap, Bot, ChevronRight, CheckCircle2, Lock, RotateCcw, BookOpen, FolderOpen, Lightbulb } from 'lucide-react';
+import { Flame, FileText, Zap, Bot, ChevronRight, CheckCircle2, Lock, RotateCcw, BookOpen, FolderOpen, Lightbulb, Sparkles, GraduationCap } from 'lucide-react';
 import { useProgress } from '../hooks/useProgress';
 
 interface DashboardProps {
@@ -10,7 +10,7 @@ interface DashboardProps {
 export function Dashboard({ onChangeMetier }: DashboardProps) {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { globalProgress, getSprintCompletion, isSprintStarted, isSprintUnlocked, justUnlocked } = useProgress();
+  const { globalProgress, totalCompleted, getSprintCompletion, isSprintStarted, isSprintUnlocked, justUnlocked } = useProgress();
 
   const sprints = [
     {
@@ -162,6 +162,64 @@ export function Dashboard({ onChangeMetier }: DashboardProps) {
           </div>
         </div>
       </div>
+
+      {/* Final celebration — shown when all sprints are 100% complete */}
+      {progressPercent === 100 && (
+        <div className="relative overflow-hidden bg-gradient-to-br from-[#1e3a5f] via-[#1a2e4a] to-[#0f1d33] rounded-2xl shadow-elevated animate-slide-up">
+          {/* Decorative shapes */}
+          <div className="absolute top-0 right-0 w-48 h-48 bg-sprint-warmup/10 rounded-full blur-[80px] -translate-y-12 translate-x-12" />
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-sprint-3/10 rounded-full blur-[60px] translate-y-8 -translate-x-8" />
+          <Sparkles size={80} className="absolute top-2 right-4 text-white/5" strokeWidth={1} />
+
+          {/* Confetti burst */}
+          {[...Array(24)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full animate-confetti"
+              style={{
+                width: `${5 + (i % 4) * 2}px`,
+                height: `${5 + (i % 4) * 2}px`,
+                left: `${3 + (i * 4.1) % 94}%`,
+                top: '-8px',
+                backgroundColor: ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#E879F9', '#34D399'][i % 8],
+                animationDelay: `${i * 0.1}s`,
+                animationDuration: `${1.6 + (i % 5) * 0.3}s`,
+              }}
+            />
+          ))}
+
+          <div className="relative px-6 py-8 text-center">
+            {/* Trophy icon */}
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/15 backdrop-blur-sm mb-4 animate-recap-trophy">
+              <GraduationCap size={40} className="text-white drop-shadow-lg" />
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl font-display font-extrabold text-white tracking-tight mb-1">
+              🎉 {t('dashboard.finalTitle')} 🎉
+            </h2>
+            <p className="text-[15px] text-white/70 font-body mb-6">
+              {t('dashboard.finalSubtitle')}
+            </p>
+
+            {/* Stats */}
+            <div className="flex items-center justify-center gap-8 mb-6">
+              <div className="text-center">
+                <span className="text-[36px] font-display font-extrabold text-white leading-none">4</span>
+                <p className="text-[12px] text-white/50 font-body mt-1">{t('dashboard.finalStat1')}</p>
+              </div>
+              <div className="w-px h-12 bg-white/15" />
+              <div className="text-center">
+                <span className="text-[36px] font-display font-extrabold text-white leading-none">{totalCompleted}</span>
+                <p className="text-[12px] text-white/50 font-body mt-1">{t('dashboard.finalStat2')}</p>
+              </div>
+            </div>
+
+            <p className="text-[14px] text-white/60 font-body leading-relaxed max-w-md mx-auto">
+              {t('dashboard.finalMessage')}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Sprint cards */}
       <div className="space-y-3">
